@@ -24,3 +24,5 @@ production:
   database: rails_project_production
   username: rails
   password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+
+#8102sogre
