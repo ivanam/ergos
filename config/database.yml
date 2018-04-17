@@ -6,8 +6,8 @@ default: &default
   pool: 5
   host: localhost
   username: root
-  password: 8102sogre
-  #password: root
+  #password: 8102sogre
+  password: root
 
 development:
   <<: *default
