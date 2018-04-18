@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @reunion.fecha %>
+</p>
+
+<p>
+  <strong>Semana:</strong>
+  <%= @reunion.semana %>
+</p>
+
+<p>
+  <strong>Lugar fisico:</strong>
+  <%= @reunion.lugar_fisico %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @reunion.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_reunion_path(@reunion) %> |
+<%= link_to 'Back', reunions_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reunion:</strong>
+  <%= @reunion_participante.reunion_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @reunion_participante.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_reunion_participante_path(@reunion_participante) %> |
+<%= link_to 'Back', reunion_participantes_path %>

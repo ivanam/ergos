@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Punto Venta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Punto venta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_punto_venta.each do |user_punto_ventum| %>
+      <tr>
+        <td><%= user_punto_ventum.user_id %></td>
+        <td><%= user_punto_ventum.punto_venta_id %></td>
+        <td><%= link_to 'Show', user_punto_ventum %></td>
+        <td><%= link_to 'Edit', edit_user_punto_ventum_path(user_punto_ventum) %></td>
+        <td><%= link_to 'Destroy', user_punto_ventum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Punto Ventum', new_user_punto_ventum_path %>

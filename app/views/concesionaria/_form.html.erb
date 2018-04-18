@@ -1,0 +1,47 @@
+<%= form_for(concesionarium) do |f| %>
+  <% if concesionarium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(concesionarium.errors.count, "error") %> prohibited this concesionarium from being saved:</h2>
+
+      <ul>
+      <% concesionarium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :icono %>
+    <%= f.text_field :icono %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fecha_alta %>
+    <%= f.date_select :fecha_alta %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fecha_baja %>
+    <%= f.date_select :fecha_baja %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empresa_id %>
+    <%= f.number_field :empresa_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

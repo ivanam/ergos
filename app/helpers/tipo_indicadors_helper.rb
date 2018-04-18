@@ -1,0 +1,2 @@
+module TipoIndicadorsHelper
+end

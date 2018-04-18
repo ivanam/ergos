@@ -1,0 +1,62 @@
+<%= form_for(objetivo) do |f| %>
+  <% if objetivo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(objetivo.errors.count, "error") %> prohibited this objetivo from being saved:</h2>
+
+      <ul>
+      <% objetivo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fecha_creacion %>
+    <%= f.date_select :fecha_creacion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_indicador_id %>
+    <%= f.number_field :tipo_indicador_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cantidad_propuesta %>
+    <%= f.number_field :cantidad_propuesta %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mes %>
+    <%= f.number_field :mes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :anio %>
+    <%= f.number_field :anio %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

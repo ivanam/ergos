@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numero documento:</strong>
+  <%= @persona.numero_documento %>
+</p>
+
+<p>
+  <strong>Cuit:</strong>
+  <%= @persona.cuit %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @persona.apellido %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @persona.nombre %>
+</p>
+
+<p>
+  <strong>Domicilio:</strong>
+  <%= @persona.domicilio %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @persona.telefono %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @persona.email %>
+</p>
+
+<p>
+  <strong>Fecha nacimineto:</strong>
+  <%= @persona.fecha_nacimineto %>
+</p>
+
+<p>
+  <strong>Tipo documento:</strong>
+  <%= @persona.tipo_documento_id %>
+</p>
+
+<%= link_to 'Edit', edit_persona_path(@persona) %> |
+<%= link_to 'Back', personas_path %>

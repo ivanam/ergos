@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reunion Participantes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reunion</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reunion_participantes.each do |reunion_participante| %>
+      <tr>
+        <td><%= reunion_participante.reunion_id %></td>
+        <td><%= reunion_participante.user_id %></td>
+        <td><%= link_to 'Show', reunion_participante %></td>
+        <td><%= link_to 'Edit', edit_reunion_participante_path(reunion_participante) %></td>
+        <td><%= link_to 'Destroy', reunion_participante, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reunion Participante', new_reunion_participante_path %>

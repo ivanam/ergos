@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_punto_ventum.user_id %>
+</p>
+
+<p>
+  <strong>Punto venta:</strong>
+  <%= @user_punto_ventum.punto_venta_id %>
+</p>
+
+<%= link_to 'Edit', edit_user_punto_ventum_path(@user_punto_ventum) %> |
+<%= link_to 'Back', user_punto_venta_path %>

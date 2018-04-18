@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2018-04-18
+  semana: 1
+  lugar_fisico: MyString
+  user_id: 1
+
+two:
+  fecha: 2018-04-18
+  semana: 1
+  lugar_fisico: MyString
+  user_id: 1

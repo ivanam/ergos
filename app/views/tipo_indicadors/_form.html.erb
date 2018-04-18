@@ -1,0 +1,22 @@
+<%= form_for(tipo_indicador) do |f| %>
+  <% if tipo_indicador.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tipo_indicador.errors.count, "error") %> prohibited this tipo_indicador from being saved:</h2>
+
+      <ul>
+      <% tipo_indicador.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

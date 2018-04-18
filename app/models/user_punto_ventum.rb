@@ -1,0 +1,2 @@
+class UserPuntoVentum < ApplicationRecord
+end

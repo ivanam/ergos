@@ -1,0 +1,27 @@
+<%= form_for(user_punto_ventum) do |f| %>
+  <% if user_punto_ventum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_punto_ventum.errors.count, "error") %> prohibited this user_punto_ventum from being saved:</h2>
+
+      <ul>
+      <% user_punto_ventum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :punto_venta_id %>
+    <%= f.number_field :punto_venta_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

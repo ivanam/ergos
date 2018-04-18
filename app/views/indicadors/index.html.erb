@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Indicadors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Tipo indicador</th>
+      <th>Cantidad completa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @indicadors.each do |indicador| %>
+      <tr>
+        <td><%= indicador.fecha %></td>
+        <td><%= indicador.tipo_indicador_id %></td>
+        <td><%= indicador.cantidad_completa %></td>
+        <td><%= link_to 'Show', indicador %></td>
+        <td><%= link_to 'Edit', edit_indicador_path(indicador) %></td>
+        <td><%= link_to 'Destroy', indicador, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Indicador', new_indicador_path %>
