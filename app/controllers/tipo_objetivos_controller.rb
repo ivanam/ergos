@@ -13,6 +13,10 @@ class TipoObjetivosController < ApplicationController
     end
   end
 
+  def index
+    @tipo_objetivos = TipoObjetivo.all
+  end
+
 
   # GET /tipo_objetivos/1
   # GET /tipo_objetivos/1.json
