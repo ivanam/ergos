@@ -1,2 +1,0 @@
-class PuntoVentum < ApplicationRecord
-end

@@ -1,2 +1,0 @@
-class UserPuntoVentum < ApplicationRecord
-end

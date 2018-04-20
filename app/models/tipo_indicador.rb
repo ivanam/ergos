@@ -1,2 +1,0 @@
-class TipoIndicador < ApplicationRecord
-end
