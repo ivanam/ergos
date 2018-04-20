@@ -10,85 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418164610) do
-
-  create_table "concesionaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.binary   "icono",      limit: 65535
-    t.string   "nombre"
-    t.date     "fecha_alta"
-    t.date     "fecha_baja"
-    t.integer  "user_id"
-    t.integer  "empresa_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "equipos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nombre"
-    t.date     "fecha_alta"
-    t.date     "fecha_baja"
-    t.integer  "punto_venta_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  create_table "indicadors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "fecha"
-    t.integer  "tipo_indicador_id"
-    t.integer  "cantidad_completa"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
-  create_table "objetivos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "fecha_creacion"
-    t.string   "descripcion"
-    t.integer  "tipo_indicador_id"
-    t.integer  "cantidad_propuesta"
-    t.integer  "mes"
-    t.integer  "anio"
-    t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
-  create_table "personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "numero_documento"
-    t.bigint   "cuit"
-    t.string   "apellido"
-    t.string   "nombre"
-    t.string   "domicilio"
-    t.string   "telefono"
-    t.string   "email"
-    t.date     "fecha_nacimineto"
-    t.integer  "tipo_documento_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
-  create_table "punto_venta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nombre"
-    t.string   "domicilio"
-    t.integer  "concesionaria_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  create_table "reunion_participantes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "reunion_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "reunions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "fecha"
-    t.integer  "semana"
-    t.string   "lugar_fisico"
-    t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
+ActiveRecord::Schema.define(version: 20180417173739) do
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -99,25 +21,6 @@ ActiveRecord::Schema.define(version: 20180418164610) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
-  end
-
-  create_table "tipo_documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "descripcion"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "tipo_indicadors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "descripcion"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "user_punto_venta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "punto_venta_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -143,17 +46,6 @@ ActiveRecord::Schema.define(version: 20180418164610) do
     t.index ["role_id"], name: "index_users_roles_on_role_id", using: :btree
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
     t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
-  end
-
-  create_table "vendedors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.binary   "foto",       limit: 65535
-    t.integer  "numero"
-    t.date     "fecha_alta"
-    t.date     "fecha_baja"
-    t.integer  "persona_id"
-    t.integer  "equipo_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
   end
 
 end
