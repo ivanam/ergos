@@ -17,7 +17,7 @@ class PuntoVentaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create punto_ventum" do
     assert_difference('PuntoVentum.count') do
-      post punto_venta_url, params: { punto_ventum: { concesionaria_id: @punto_ventum.concesionaria_id, domicilio: @punto_ventum.domicilio, nombre: @punto_ventum.nombre } }
+      post punto_venta_url, params: { punto_ventum: { concesionaria_id: @punto_ventum.concesionaria_id, domicilio: @punto_ventum.domicilio, nombre: @punto_ventum.nombre, persona_id: @punto_ventum.persona_id } }
     end
 
     assert_redirected_to punto_ventum_url(PuntoVentum.last)
@@ -34,7 +34,7 @@ class PuntoVentaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update punto_ventum" do
-    patch punto_ventum_url(@punto_ventum), params: { punto_ventum: { concesionaria_id: @punto_ventum.concesionaria_id, domicilio: @punto_ventum.domicilio, nombre: @punto_ventum.nombre } }
+    patch punto_ventum_url(@punto_ventum), params: { punto_ventum: { concesionaria_id: @punto_ventum.concesionaria_id, domicilio: @punto_ventum.domicilio, nombre: @punto_ventum.nombre, persona_id: @punto_ventum.persona_id } }
     assert_redirected_to punto_ventum_url(@punto_ventum)
   end
 

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :objetivo_mensuals
+  resources :objetivo_semanals
+  resources :carga_diaria
+  resources :tipo_objetivos
   resources :reunion_participantes
   resources :reunions
   resources :user_punto_venta

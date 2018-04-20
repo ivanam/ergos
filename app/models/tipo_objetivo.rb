@@ -1,0 +1,2 @@
+class TipoObjetivo < ApplicationRecord
+end

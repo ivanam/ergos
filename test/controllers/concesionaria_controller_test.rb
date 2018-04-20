@@ -17,7 +17,7 @@ class ConcesionariaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create concesionarium" do
     assert_difference('Concesionarium.count') do
-      post concesionaria_url, params: { concesionarium: { empresa_id: @concesionarium.empresa_id, fecha_alta: @concesionarium.fecha_alta, fecha_baja: @concesionarium.fecha_baja, icono: @concesionarium.icono, nombre: @concesionarium.nombre, user_id: @concesionarium.user_id } }
+      post concesionaria_url, params: { concesionarium: { empresa_id: @concesionarium.empresa_id, fecha_alta: @concesionarium.fecha_alta, fecha_baja: @concesionarium.fecha_baja, icono: @concesionarium.icono, nombre: @concesionarium.nombre, persona_id: @concesionarium.persona_id, user_id: @concesionarium.user_id } }
     end
 
     assert_redirected_to concesionarium_url(Concesionarium.last)
@@ -34,7 +34,7 @@ class ConcesionariaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update concesionarium" do
-    patch concesionarium_url(@concesionarium), params: { concesionarium: { empresa_id: @concesionarium.empresa_id, fecha_alta: @concesionarium.fecha_alta, fecha_baja: @concesionarium.fecha_baja, icono: @concesionarium.icono, nombre: @concesionarium.nombre, user_id: @concesionarium.user_id } }
+    patch concesionarium_url(@concesionarium), params: { concesionarium: { empresa_id: @concesionarium.empresa_id, fecha_alta: @concesionarium.fecha_alta, fecha_baja: @concesionarium.fecha_baja, icono: @concesionarium.icono, nombre: @concesionarium.nombre, persona_id: @concesionarium.persona_id, user_id: @concesionarium.user_id } }
     assert_redirected_to concesionarium_url(@concesionarium)
   end
 

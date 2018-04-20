@@ -17,7 +17,7 @@ class ReunionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create reunion" do
     assert_difference('Reunion.count') do
-      post reunions_url, params: { reunion: { fecha: @reunion.fecha, lugar_fisico: @reunion.lugar_fisico, semana: @reunion.semana, user_id: @reunion.user_id } }
+      post reunions_url, params: { reunion: { fecha: @reunion.fecha, lugar_fisico: @reunion.lugar_fisico, persona_id: @reunion.persona_id, semana: @reunion.semana } }
     end
 
     assert_redirected_to reunion_url(Reunion.last)
@@ -34,7 +34,7 @@ class ReunionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update reunion" do
-    patch reunion_url(@reunion), params: { reunion: { fecha: @reunion.fecha, lugar_fisico: @reunion.lugar_fisico, semana: @reunion.semana, user_id: @reunion.user_id } }
+    patch reunion_url(@reunion), params: { reunion: { fecha: @reunion.fecha, lugar_fisico: @reunion.lugar_fisico, persona_id: @reunion.persona_id, semana: @reunion.semana } }
     assert_redirected_to reunion_url(@reunion)
   end
 

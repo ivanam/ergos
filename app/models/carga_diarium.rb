@@ -1,0 +1,2 @@
+class CargaDiarium < ApplicationRecord
+end

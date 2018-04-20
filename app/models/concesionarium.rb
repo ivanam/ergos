@@ -1,0 +1,2 @@
+class Concesionarium < ApplicationRecord
+end

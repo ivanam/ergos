@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tipo Objetivos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipo_objetivos.each do |tipo_objetivo| %>
+      <tr>
+        <td><%= tipo_objetivo.descripcion %></td>
+        <td><%= link_to 'Show', tipo_objetivo %></td>
+        <td><%= link_to 'Edit', edit_tipo_objetivo_path(tipo_objetivo) %></td>
+        <td><%= link_to 'Destroy', tipo_objetivo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tipo Objetivo', new_tipo_objetivo_path %>

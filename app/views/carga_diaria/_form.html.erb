@@ -1,0 +1,37 @@
+<%= form_for(carga_diarium) do |f| %>
+  <% if carga_diarium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(carga_diarium.errors.count, "error") %> prohibited this carga_diarium from being saved:</h2>
+
+      <ul>
+      <% carga_diarium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fecha %>
+    <%= f.date_select :fecha %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cantidad %>
+    <%= f.number_field :cantidad %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_objetivo_id %>
+    <%= f.number_field :tipo_objetivo_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendedor_id %>
+    <%= f.number_field :vendedor_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

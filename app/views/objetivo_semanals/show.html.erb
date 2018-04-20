@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Objetivo mensual:</strong>
+  <%= @objetivo_semanal.objetivo_mensual_id %>
+</p>
+
+<p>
+  <strong>Fecha creacion:</strong>
+  <%= @objetivo_semanal.fecha_creacion %>
+</p>
+
+<p>
+  <strong>Cantidad propuesta:</strong>
+  <%= @objetivo_semanal.cantidad_propuesta %>
+</p>
+
+<p>
+  <strong>Numero semana:</strong>
+  <%= @objetivo_semanal.numero_semana %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @objetivo_semanal.user_id %>
+</p>
+
+<p>
+  <strong>Vendedor:</strong>
+  <%= @objetivo_semanal.vendedor_id %>
+</p>
+
+<p>
+  <strong>Punto venta:</strong>
+  <%= @objetivo_semanal.punto_venta_id %>
+</p>
+
+<%= link_to 'Edit', edit_objetivo_semanal_path(@objetivo_semanal) %> |
+<%= link_to 'Back', objetivo_semanals_path %>

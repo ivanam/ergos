@@ -1,0 +1,52 @@
+<%= form_for(objetivo_semanal) do |f| %>
+  <% if objetivo_semanal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(objetivo_semanal.errors.count, "error") %> prohibited this objetivo_semanal from being saved:</h2>
+
+      <ul>
+      <% objetivo_semanal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :objetivo_mensual_id %>
+    <%= f.number_field :objetivo_mensual_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fecha_creacion %>
+    <%= f.date_select :fecha_creacion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cantidad_propuesta %>
+    <%= f.number_field :cantidad_propuesta %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numero_semana %>
+    <%= f.number_field :numero_semana %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendedor_id %>
+    <%= f.number_field :vendedor_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :punto_venta_id %>
+    <%= f.number_field :punto_venta_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @objetivo_mensual.descripcion %>
+</p>
+
+<p>
+  <strong>Fecha creacion:</strong>
+  <%= @objetivo_mensual.fecha_creacion %>
+</p>
+
+<p>
+  <strong>Tipo objetivo:</strong>
+  <%= @objetivo_mensual.tipo_objetivo_id %>
+</p>
+
+<p>
+  <strong>Cantidad propuesta:</strong>
+  <%= @objetivo_mensual.cantidad_propuesta %>
+</p>
+
+<p>
+  <strong>Mes:</strong>
+  <%= @objetivo_mensual.mes %>
+</p>
+
+<p>
+  <strong>Anio:</strong>
+  <%= @objetivo_mensual.anio %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @objetivo_mensual.user_id %>
+</p>
+
+<p>
+  <strong>Vendedor:</strong>
+  <%= @objetivo_mensual.vendedor_id %>
+</p>
+
+<p>
+  <strong>Punto venta:</strong>
+  <%= @objetivo_mensual.punto_venta_id %>
+</p>
+
+<%= link_to 'Edit', edit_objetivo_mensual_path(@objetivo_mensual) %> |
+<%= link_to 'Back', objetivo_mensuals_path %>

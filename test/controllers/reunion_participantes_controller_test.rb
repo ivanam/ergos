@@ -17,7 +17,7 @@ class ReunionParticipantesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create reunion_participante" do
     assert_difference('ReunionParticipante.count') do
-      post reunion_participantes_url, params: { reunion_participante: { reunion_id: @reunion_participante.reunion_id, user_id: @reunion_participante.user_id } }
+      post reunion_participantes_url, params: { reunion_participante: { persona_id: @reunion_participante.persona_id, reunion_id: @reunion_participante.reunion_id } }
     end
 
     assert_redirected_to reunion_participante_url(ReunionParticipante.last)
@@ -34,7 +34,7 @@ class ReunionParticipantesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update reunion_participante" do
-    patch reunion_participante_url(@reunion_participante), params: { reunion_participante: { reunion_id: @reunion_participante.reunion_id, user_id: @reunion_participante.user_id } }
+    patch reunion_participante_url(@reunion_participante), params: { reunion_participante: { persona_id: @reunion_participante.persona_id, reunion_id: @reunion_participante.reunion_id } }
     assert_redirected_to reunion_participante_url(@reunion_participante)
   end
 

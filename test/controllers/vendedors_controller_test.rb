@@ -17,7 +17,7 @@ class VendedorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create vendedor" do
     assert_difference('Vendedor.count') do
-      post vendedors_url, params: { vendedor: { equipo_id: @vendedor.equipo_id, fecha_alta: @vendedor.fecha_alta, fecha_baja: @vendedor.fecha_baja, foto: @vendedor.foto, numero: @vendedor.numero, persona_id: @vendedor.persona_id } }
+      post vendedors_url, params: { vendedor: { fecha_alta: @vendedor.fecha_alta, fecha_baja: @vendedor.fecha_baja, foto: @vendedor.foto, numero: @vendedor.numero, persona_id: @vendedor.persona_id } }
     end
 
     assert_redirected_to vendedor_url(Vendedor.last)
@@ -34,7 +34,7 @@ class VendedorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update vendedor" do
-    patch vendedor_url(@vendedor), params: { vendedor: { equipo_id: @vendedor.equipo_id, fecha_alta: @vendedor.fecha_alta, fecha_baja: @vendedor.fecha_baja, foto: @vendedor.foto, numero: @vendedor.numero, persona_id: @vendedor.persona_id } }
+    patch vendedor_url(@vendedor), params: { vendedor: { fecha_alta: @vendedor.fecha_alta, fecha_baja: @vendedor.fecha_baja, foto: @vendedor.foto, numero: @vendedor.numero, persona_id: @vendedor.persona_id } }
     assert_redirected_to vendedor_url(@vendedor)
   end
 

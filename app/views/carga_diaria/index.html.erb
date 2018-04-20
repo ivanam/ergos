@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Carga Diaria</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Cantidad</th>
+      <th>Tipo objetivo</th>
+      <th>Vendedor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carga_diaria.each do |carga_diarium| %>
+      <tr>
+        <td><%= carga_diarium.fecha %></td>
+        <td><%= carga_diarium.cantidad %></td>
+        <td><%= carga_diarium.tipo_objetivo_id %></td>
+        <td><%= carga_diarium.vendedor_id %></td>
+        <td><%= link_to 'Show', carga_diarium %></td>
+        <td><%= link_to 'Edit', edit_carga_diarium_path(carga_diarium) %></td>
+        <td><%= link_to 'Destroy', carga_diarium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Carga Diarium', new_carga_diarium_path %>

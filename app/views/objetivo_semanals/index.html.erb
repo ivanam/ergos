@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Objetivo Semanals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Objetivo mensual</th>
+      <th>Fecha creacion</th>
+      <th>Cantidad propuesta</th>
+      <th>Numero semana</th>
+      <th>User</th>
+      <th>Vendedor</th>
+      <th>Punto venta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @objetivo_semanals.each do |objetivo_semanal| %>
+      <tr>
+        <td><%= objetivo_semanal.objetivo_mensual_id %></td>
+        <td><%= objetivo_semanal.fecha_creacion %></td>
+        <td><%= objetivo_semanal.cantidad_propuesta %></td>
+        <td><%= objetivo_semanal.numero_semana %></td>
+        <td><%= objetivo_semanal.user_id %></td>
+        <td><%= objetivo_semanal.vendedor_id %></td>
+        <td><%= objetivo_semanal.punto_venta_id %></td>
+        <td><%= link_to 'Show', objetivo_semanal %></td>
+        <td><%= link_to 'Edit', edit_objetivo_semanal_path(objetivo_semanal) %></td>
+        <td><%= link_to 'Destroy', objetivo_semanal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Objetivo Semanal', new_objetivo_semanal_path %>

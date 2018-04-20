@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Objetivo Mensuals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th>Fecha creacion</th>
+      <th>Tipo objetivo</th>
+      <th>Cantidad propuesta</th>
+      <th>Mes</th>
+      <th>Anio</th>
+      <th>User</th>
+      <th>Vendedor</th>
+      <th>Punto venta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @objetivo_mensuals.each do |objetivo_mensual| %>
+      <tr>
+        <td><%= objetivo_mensual.descripcion %></td>
+        <td><%= objetivo_mensual.fecha_creacion %></td>
+        <td><%= objetivo_mensual.tipo_objetivo_id %></td>
+        <td><%= objetivo_mensual.cantidad_propuesta %></td>
+        <td><%= objetivo_mensual.mes %></td>
+        <td><%= objetivo_mensual.anio %></td>
+        <td><%= objetivo_mensual.user_id %></td>
+        <td><%= objetivo_mensual.vendedor_id %></td>
+        <td><%= objetivo_mensual.punto_venta_id %></td>
+        <td><%= link_to 'Show', objetivo_mensual %></td>
+        <td><%= link_to 'Edit', edit_objetivo_mensual_path(objetivo_mensual) %></td>
+        <td><%= link_to 'Destroy', objetivo_mensual, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Objetivo Mensual', new_objetivo_mensual_path %>

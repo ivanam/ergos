@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  tipo_documento_id: 1
   numero_documento: 1
   cuit: 
   apellido: MyString
@@ -8,10 +9,10 @@ one:
   domicilio: MyString
   telefono: MyString
   email: MyString
-  fecha_nacimineto: 2018-04-18
-  tipo_documento_id: 1
+  fecha_nacimiento: 2018-04-20
 
 two:
+  tipo_documento_id: 1
   numero_documento: 1
   cuit: 
   apellido: MyString
@@ -19,5 +20,4 @@ two:
   domicilio: MyString
   telefono: MyString
   email: MyString
-  fecha_nacimineto: 2018-04-18
-  tipo_documento_id: 1
+  fecha_nacimiento: 2018-04-20

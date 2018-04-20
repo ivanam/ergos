@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2018-04-20
+  cantidad: 1
+  tipo_objetivo_id: 1
+  vendedor_id: 1
+
+two:
+  fecha: 2018-04-20
+  cantidad: 1
+  tipo_objetivo_id: 1
+  vendedor_id: 1

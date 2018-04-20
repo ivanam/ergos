@@ -3,15 +3,17 @@
 one:
   icono: 
   nombre: MyString
-  fecha_alta: 2018-04-18
-  fecha_baja: 2018-04-18
+  fecha_alta: 2018-04-20
+  fecha_baja: 2018-04-20
   user_id: 1
   empresa_id: 1
+  persona_id: 1
 
 two:
   icono: 
   nombre: MyString
-  fecha_alta: 2018-04-18
-  fecha_baja: 2018-04-18
+  fecha_alta: 2018-04-20
+  fecha_baja: 2018-04-20
   user_id: 1
   empresa_id: 1
+  persona_id: 1

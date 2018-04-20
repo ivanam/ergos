@@ -1,0 +1,2 @@
+class ObjetivoMensual < ApplicationRecord
+end

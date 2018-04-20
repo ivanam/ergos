@@ -3,15 +3,13 @@
 one:
   foto: 
   numero: 1
-  fecha_alta: 2018-04-18
-  fecha_baja: 2018-04-18
+  fecha_alta: 2018-04-20
+  fecha_baja: 2018-04-20
   persona_id: 1
-  equipo_id: 1
 
 two:
   foto: 
   numero: 1
-  fecha_alta: 2018-04-18
-  fecha_baja: 2018-04-18
+  fecha_alta: 2018-04-20
+  fecha_baja: 2018-04-20
   persona_id: 1
-  equipo_id: 1
