@@ -3,9 +3,16 @@ class TipoObjetivosController < ApplicationController
 
   # GET /tipo_objetivos
   # GET /tipo_objetivos.json
+
+  respond_to :html
+
   def index
-    @tipo_objetivos = TipoObjetivo.all
+    respond_to do |format|
+      format.html
+      format.json { render json: TipoObjetivo.new(view_context, { query: TipoObjetivo.all }) }
+    end
   end
+
 
   # GET /tipo_objetivos/1
   # GET /tipo_objetivos/1.json

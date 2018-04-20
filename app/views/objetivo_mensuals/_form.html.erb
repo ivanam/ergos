@@ -1,29 +1,19 @@
-<%= form_for(objetivo_mensual) do |f| %>
+<%= form_for(objetivo_mensual, :html => { :class => "form-horizontal" }) do |f| %>
   <% if objetivo_mensual.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(objetivo_mensual.errors.count, "error") %> prohibited this objetivo_mensual from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
       <ul>
-      <% objetivo_mensual.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% @objetivo_mensual.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :descripcion %>
-    <%= f.text_field :descripcion %>
-  </div>
-
-  <div class="field">
-    <%= f.label :fecha_creacion %>
-    <%= f.date_select :fecha_creacion %>
-  </div>
-
-  <div class="field">
     <%= f.label :tipo_objetivo_id %>
-    <%= f.number_field :tipo_objetivo_id %>
+     <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.all.order(:descripcion), :id, :descripcion, {:prompt => true},:style=>"width:100%") %>
   </div>
 
   <div class="field">
@@ -33,12 +23,12 @@
 
   <div class="field">
     <%= f.label :mes %>
-    <%= f.number_field :mes %>
+    <%= f.select :mes, ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Noviembre', 'Diciembre'] %>
   </div>
 
   <div class="field">
     <%= f.label :anio %>
-    <%= f.number_field :anio %>
+    <%= f.select :anio, ['2018', '2017', '2016', '2015', '2014', '2013', '2012']%>
   </div>
 
   <div class="field">
@@ -48,15 +38,23 @@
 
   <div class="field">
     <%= f.label :vendedor_id %>
-    <%= f.number_field :vendedor_id %>
+     <%= f.collection_select(:vendedor_id, Vendedor.all.order(:numero), :id, :numero, {:prompt => true},:style=>"width:100%") %>
   </div>
 
   <div class="field">
     <%= f.label :punto_venta_id %>
-    <%= f.number_field :punto_venta_id %>
+    <%= f.collection_select(:punto_venta_id, PuntoVentum.all.order(:nombre), :id, :nombre, {:prompt => true},:style=>"width:100%") %> 
   </div>
 
+  <div class="form-group">
+    <%= f.label :descripcion, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :descripcion, :class => "form-control" %>
+    </div>
+  </div>
+  </br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-primary", :value => "Guardar"%>
   </div>
 <% end %>
+
