@@ -23,7 +23,9 @@ gem 'coffee-rails', '~> 4.2'
 gem 'paperclip', '~> 4.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'bootstrap-sass', '~> 3.3.6'
 
+gem 'autoprefixer-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
