@@ -1,37 +1,45 @@
-<%= form_for(carga_diarium) do |f| %>
+<%= form_for(carga_diarium, html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if carga_diarium.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(carga_diarium.errors.count, "error") %> prohibited this carga_diarium from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
       <ul>
-      <% carga_diarium.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% carga_diarium.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :fecha %>
-    <%= f.date_select :fecha %>
+  <div class="form-group">
+    <%= f.label :fecha, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :fecha, class: "form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :cantidad %>
-    <%= f.number_field :cantidad %>
+  <div class="form-group">
+    <%= f.label :cantidad, "Cantidad", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :cantidad, class: "form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :tipo_objetivo_id %>
-    <%= f.number_field :tipo_objetivo_id %>
+  <div class="form-group">
+    <%= f.label :tipo_objetivo_id, "Tipo de objetivo", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :tipo_objetivo_id, TipoObjetivo.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :vendedor_id %>
-    <%= f.number_field :vendedor_id %>
+  <div class="form-group">
+    <%= f.label :vendedor_id, "Vendedor", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :vendedor_id, Vendedor.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+    </div>
   </div>
 <% end %>

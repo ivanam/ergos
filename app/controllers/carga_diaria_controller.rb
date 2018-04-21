@@ -5,6 +5,48 @@ class CargaDiariaController < ApplicationController
   # GET /carga_diaria.json
   def index
     @carga_diaria = CargaDiarium.all
+    @data_personal = {
+        datasets: [{
+          data: [
+            10,
+            20,
+            30
+          ],
+          backgroundColor: [
+            'red',
+            'orange',
+            'green'
+          ],
+          label: 'Dataset 1'
+        }],
+        labels: [
+          'PROSPECTOS',
+          'VENTAS',
+          'PRUEBAS DE MANEJO'
+        ]
+    }
+    @options_personal = { responsive: true }
+    @data_equipo = {
+        datasets: [{
+          data: [
+            10,
+            20,
+            30
+          ],
+          backgroundColor: [
+            'red',
+            'orange',
+            'green'
+          ],
+          label: 'Dataset 1'
+        }],
+        labels: [
+          'PROSPECTOS',
+          'VENTAS',
+          'PRUEBAS DE MANEJO'
+        ]
+    }
+    @options_equipo = { responsive: true }
   end
 
   # GET /carga_diaria/1
@@ -28,7 +70,7 @@ class CargaDiariaController < ApplicationController
 
     respond_to do |format|
       if @carga_diarium.save
-        format.html { redirect_to @carga_diarium, notice: 'Carga diarium was successfully created.' }
+        format.html { redirect_to @carga_diarium, notice: 'Se ha cargado una nueva carga diaria' }
         format.json { render :show, status: :created, location: @carga_diarium }
       else
         format.html { render :new }
@@ -42,7 +84,7 @@ class CargaDiariaController < ApplicationController
   def update
     respond_to do |format|
       if @carga_diarium.update(carga_diarium_params)
-        format.html { redirect_to @carga_diarium, notice: 'Carga diarium was successfully updated.' }
+        format.html { redirect_to @carga_diarium, notice: 'Se ha actualizado la carga diaria.' }
         format.json { render :show, status: :ok, location: @carga_diarium }
       else
         format.html { render :edit }
@@ -56,7 +98,7 @@ class CargaDiariaController < ApplicationController
   def destroy
     @carga_diarium.destroy
     respond_to do |format|
-      format.html { redirect_to carga_diaria_url, notice: 'Carga diarium was successfully destroyed.' }
+      format.html { redirect_to carga_diaria_url, notice: 'Se ha eliminado la carga diaria.' }
       format.json { head :no_content }
     end
   end

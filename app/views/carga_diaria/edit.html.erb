@@ -1,6 +1,13 @@
-<h1>Editing Carga Diarium</h1>
+<div class="page-header">
+  <%= link_to carga_diaria_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <%= link_to @carga_diarium, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Ver
+  <% end %>
+  <h4>Editar Carga Diaria</h4>
+</div>
 
 <%= render 'form', carga_diarium: @carga_diarium %>
-
-<%= link_to 'Show', @carga_diarium %> |
-<%= link_to 'Back', carga_diaria_path %>
