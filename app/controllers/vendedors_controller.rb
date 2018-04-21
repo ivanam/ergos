@@ -10,6 +10,7 @@ class VendedorsController < ApplicationController
   # GET /vendedors/1
   # GET /vendedors/1.json
   def show
+    
   end
 
   # GET /vendedors/new
@@ -19,15 +20,17 @@ class VendedorsController < ApplicationController
 
   # GET /vendedors/1/edit
   def edit
+    
   end
 
   # POST /vendedors
   # POST /vendedors.json
   def create
-
+    
     @vendedor = Vendedor.new(vendedor_params)
-    if  Persona.where(:numero_documento => params[:numero_documento].first == nil
-      @persona = Persona.new(persona_params)
+    
+    if  Persona.where(:numero_documento => params[:numero_documento]).first == nil
+      @persona = Persona.new()
       @persona.numero_documento=params[:numero_documento]
       @persona.tipo_documento=params[:tipo_documento_id]
       @persona.cuit=params[:cuit]
@@ -37,7 +40,7 @@ class VendedorsController < ApplicationController
       @persona.telefono=params[:telefono]
       @persona.fecha_nacimiento=params[:fecha_nacimiento]
     else
-      @persona= Persona.where(:numero_documento => params[:numero_documento].first
+      @persona= Persona.where(:numero_documento => params[:numero_documento]).first
       @persona.tipo_documento=params[:tipo_documento_id]
       @persona.cuit=params[:cuit]
       @persona.apellido=params[:apellido]
