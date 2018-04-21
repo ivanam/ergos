@@ -28,7 +28,7 @@ class VendedorsController < ApplicationController
   def create
     
     @vendedor = Vendedor.new(vendedor_params)
-    
+    debugger
     if  Persona.where(:numero_documento => params[:numero_documento]).first == nil
       @persona = Persona.new()
       @persona.numero_documento=params[:numero_documento]
