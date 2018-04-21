@@ -1,3 +1,26 @@
+<div class="page-header">
+
+<dl class="dl-horizontal">
+  <dt>Descripcion:</dt>
+  <dd><%= @objetivo_mensual.descripcion %></dd>
+
+  <br/><br/>
+  <%= link_to objetivo_mensual_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Atrás
+  <% end %>
+  <%= link_to edit_objetivo_mensual_path(@estado_civil), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <%= link_to objetivo_mensual_path(@objetivo_mensual), method: :delete, data: { confirm: '¿Seguro desea eliminar?' }, :class => 'btn btn-danger' do%>
+    <span class="glyphicon glyphicon-trash"></span>
+    Eliminar
+  <% end %>
+</dl>
+
+
+
 <p id="notice"><%= notice %></p>
 
 <p>

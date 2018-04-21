@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+
   <div class="form-group">
   <label class="col-sm-2 control-label">Tipo de objetivo</label>  
     <div class="col-sm-10">
@@ -18,45 +19,66 @@
       </div>
   </div>
   </br>
-  <div class="field">
-    <%= f.label :cantidad_propuesta %>
+
+  <div class="form-group">
+  <label class="col-sm-2 control-label">Cantidad Objetivo</label>  
+    <div class="col-sm-10">
     <%= f.number_field :cantidad_propuesta %>
+   </div>
   </div>
    </br>
-  <div class="field">
-    <%= f.label :mes %>
-    <%= f.select :mes, ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Noviembre', 'Diciembre'] %>
-  </div>
-  </br>
-  <div class="field">
-    <%= f.label :anio %>
-    <%= f.select :anio, ['2018', '2017', '2016', '2015', '2014', '2013', '2012']%>
-  </div>
-  </br>
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-  </br>
-  <div class="field">
-    <%= f.label :vendedor_id %>
-     <%= f.collection_select(:vendedor_id, Vendedor.all.order(:numero), :id, :numero, {:prompt => true},:style=>"width:50%") %>
-  </div>
-  </br>
-  <div class="field">
-    <%= f.label :punto_venta_id %>
-    <%= f.collection_select(:punto_venta_id, PuntoVentum.all.order(:nombre), :id, :nombre, {:prompt => true},:style=>"width:50%") %> 
-  </div>
-  </br>
+
   <div class="form-group">
-    <%= f.label :descripcion, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :descripcion, :class => "form-control" %>
+    <label class="col-sm-2 control-label">Mes de objetivo</label>
+    <div class="col-sm-10"> 
+    <%= f.select :mes, ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Noviembre', 'Diciembre'] %>
+   </div>
+  </div>
+  </br>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Año de objetivo</label>
+    <div class="col-sm-10"> 
+    <%= f.select :anio, ['2018', '2017', '2016', '2015', '2014', '2013', '2012']%>
     </div>
   </div>
+  </br>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Usuario</label>
+    <div class="col-sm-10"> 
+    <%= f.text_field :user_id %>
+  </div>
+  </div>
+  </br>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Vendedor asignado al objetivo</label>
+    <div class="col-sm-10"> 
+     <%= f.collection_select(:vendedor_id, Vendedor.all.order(:numero), :id, :numero, {:prompt => true},:style=>"width:50%") %>
+    </div>
+  </div>
+  </br>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Punto de Venta del objetivo</label>
+    <div class="col-sm-10"> 
+    <%= f.collection_select(:punto_venta_id, PuntoVentum.all.order(:nombre), :id, :nombre, {:prompt => true},:style=>"width:50%") %> 
+  </div>
+  </div>
+  </br>
+
+ <div class="form-group">
+    <label class="col-sm-2 control-label">Descripción del objetivo</label>
+    <div class="col-sm-10">
+      <%= f.text_field :descripcion, :class => "form-control" ,:style=>"width:50%"%>
+    </div>
+  </div>
+
   </br>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary", :value => "Guardar"%>
   </div>
+  
 <% end %>
 
