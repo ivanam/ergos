@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420133045) do
+ActiveRecord::Schema.define(version: 20180420222728) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -147,13 +147,14 @@ ActiveRecord::Schema.define(version: 20180420133045) do
   end
 
   create_table "vendedors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.binary   "foto",       limit: 65535
+    t.binary   "foto",           limit: 65535
     t.integer  "numero"
     t.date     "fecha_alta"
     t.date     "fecha_baja"
     t.integer  "persona_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "punto_venta_id"
   end
 
 end

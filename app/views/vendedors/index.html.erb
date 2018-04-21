@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Vendedors</h1>
+<h1>Una lista de vendedores por punto de venta??</h1>
 
 <table>
   <thead>
@@ -22,6 +23,7 @@
         <td><%= vendedor.fecha_alta %></td>
         <td><%= vendedor.fecha_baja %></td>
         <td><%= vendedor.persona_id %></td>
+        <td><%= vendedor.punto_venta_id %></td>
         <td><%= link_to 'Show', vendedor %></td>
         <td><%= link_to 'Edit', edit_vendedor_path(vendedor) %></td>
         <td><%= link_to 'Destroy', vendedor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
