@@ -1,52 +1,64 @@
-<%= form_for(objetivo_semanal) do |f| %>
+<%= form_for(objetivo_semanal, html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if objetivo_semanal.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(objetivo_semanal.errors.count, "error") %> prohibited this objetivo_semanal from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
       <ul>
-      <% objetivo_semanal.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% objetivo_semanal.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :objetivo_mensual_id %>
-    <%= f.number_field :objetivo_mensual_id %>
+  <div class="form-group">
+    <%= f.label :objetivo_mensual_id, "Objetivo Mensual", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :objetivo_mensual_id, ObjetivoMensual.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :fecha_creacion %>
-    <%= f.date_select :fecha_creacion %>
+  <div class="form-group">
+    <%= f.label :fecha_creacion, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :fecha_creacion, class: "form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :cantidad_propuesta %>
-    <%= f.number_field :cantidad_propuesta %>
+  <div class="form-group">
+    <%= f.label :cantidad_propuesta, "Cantidad propuesta", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :cantidad_propuesta, class: "form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :numero_semana %>
-    <%= f.number_field :numero_semana %>
+  <div class="form-group">
+    <%= f.label :numero_semana, "Número semana", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :numero_semana, class: "form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.number_field :user_id %>
+  <div class="form-group">
+    <%= f.label :vendedor_id, "Vendedor", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :vendedor_id, Vendedor.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :vendedor_id %>
-    <%= f.number_field :vendedor_id %>
+  <div class="form-group">
+    <%= f.label :user_id, "User", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :user_id, User.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :punto_venta_id %>
-    <%= f.number_field :punto_venta_id %>
+  <div class="form-group">
+    <%= f.label :punto_venta_id, "Punto de venta", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :punto_venta_id, PuntoVentum.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+    </div>
   </div>
 <% end %>
+
