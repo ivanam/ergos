@@ -1,4 +1,6 @@
 class ObjetivoMensualsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_objetivo_mensual, only: [:show, :edit, :update, :destroy]
 
   # GET /objetivo_mensuals
