@@ -28,7 +28,7 @@ class ObjetivoMensualsController < ApplicationController
 
     respond_to do |format|
       if @objetivo_mensual.save
-        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual was successfully created.' }
+        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
         format.json { render :show, status: :created, location: @objetivo_mensual }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ObjetivoMensualsController < ApplicationController
   def update
     respond_to do |format|
       if @objetivo_mensual.update(objetivo_mensual_params)
-        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual was successfully updated.' }
+        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual modificado con exito.' }
         format.json { render :show, status: :ok, location: @objetivo_mensual }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ObjetivoMensualsController < ApplicationController
   def destroy
     @objetivo_mensual.destroy
     respond_to do |format|
-      format.html { redirect_to objetivo_mensuals_url, notice: 'Objetivo mensual was successfully destroyed.' }
+      format.html { redirect_to objetivo_mensuals_url, notice: 'Objetivo mensual eliminado con exito.' }
       format.json { head :no_content }
     end
   end

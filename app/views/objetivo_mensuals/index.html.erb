@@ -1,9 +1,4 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Objetivo Mensual</h1>
-
-<p id="notice"><%= notice %></p>
-
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -25,8 +20,11 @@
       <% @objetivo_mensuals.each do |objetivo_mensual| %>
         <tr>
         <td><%= objetivo_mensual.descripcion %></td>
-        <td><%= objetivo_mensual.fecha_creacion %></td>
-        <td><%= objetivo_mensual.tipo_objetivo_id.to_s %></td>
+        <td><%= objetivo_mensual.created_at %></td>
+        <% TipoObjetivo.where(:id => objetivo_mensual.tipo_objetivo_id).each do |r| %>
+        <% @tobj = r.descripcion  %>
+        <td><%= @tobj %></td>
+        <% end %>
         <td><%= objetivo_mensual.cantidad_propuesta %></td>
         <td><%= objetivo_mensual.mes %></td>
         <td><%= objetivo_mensual.anio %></td>
@@ -51,6 +49,7 @@
 </div>
 
 <br>
+
 <div class="page-header">
   <%= link_to new_objetivo_mensual_path, class: 'btn btn-primary' do %>
     <%= fa_icon "plus", text: "Nuevo Objetivo" %>

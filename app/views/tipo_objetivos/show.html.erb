@@ -1,9 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Descripcion:</strong>
   <%= @tipo_objetivo.descripcion %>
 </p>
-
-<%= link_to 'Edit', edit_tipo_objetivo_path(@tipo_objetivo) %> |
-<%= link_to 'Back', tipo_objetivos_path %>
+ </div>
+    <%= link_to tipo_objetivos_path, class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Atras" %>
+  <% end %>
+  </div>
+  </div>
+    <%= link_to edit_tipo_objetivo_path(@tipo_objetivo), class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Editar" %>
+  <% end %>
+  </div>
