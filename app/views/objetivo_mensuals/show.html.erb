@@ -7,7 +7,6 @@
   <dd><%= @objetivo_mensual.descripcion %></dd>
   <dt><strong>Fecha creacion:</strong></dt>
   <dd><%= @objetivo_mensual.fecha_creacion %></dd>
-  <dt><strong>Tipo objetivo:</strong></dt>
   <dt>Tipo objetivo:</dt>
   <% TipoObjetivo.where(:id => @objetivo_mensual.tipo_objetivo_id).each do |r| %>
   <% @tobj = r.descripcion  %>
