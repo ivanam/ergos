@@ -62,3 +62,128 @@ body {
   width: 100%;
 }
 
+/*MODIFICA EL NAVBAR*/
+
+.navbar-default {
+  background-color: #19070B;
+  border: none;
+  /* border-color: #dfdfdf; */
+}
+
+.navbar-default .navbar-brand {
+  color: #5355bf;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #38397f;
+  background-color: #DFDFDF;
+  /*
+    aquí se modifica el hover del brand
+  */
+}
+
+.navbar-default .navbar-text {
+  color: #5355bf;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #5355bf;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+  color: #38397f;
+  background-color: #DFDFDF;
+}
+
+.navbar-default .navbar-nav>li>.dropdown-menu {
+  background-color: #f4f4f4;
+}
+
+.navbar-default .navbar-nav>li>.dropdown-menu>li>a {
+  color: #5355bf;
+}
+
+.navbar-default .navbar-nav>li>.dropdown-menu>li>a:hover,
+.navbar-default .navbar-nav>li>.dropdown-menu>li>a:focus {
+  color: #38397f;
+  background-color: #dfdfdf;
+}
+
+.navbar-default .navbar-nav>li>.dropdown-menu>li.divider {
+  background-color: #dfdfdf;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+  color: #38397f;
+  background-color: #dfdfdf;
+}
+
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+  color: #38397f;
+  background-color: #dfdfdf;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #dfdfdf;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #dfdfdf;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #5355bf;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #5355bf;
+}
+
+.navbar-default .navbar-link {
+  color: #5355bf;
+}
+
+.navbar-default .navbar-link:hover {
+  color: #38397f;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #5355bf;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #38397f;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu>.active>a,
+  .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
+    color: #38397f;
+    background-color: #dfdfdf;
+  }
+}
+
+
+/*MODIFICA LOS BADGES*/
+
+.badge {
+  background-color: #5355bf;
+}
+
+/* Encuadrando imagen a 40px */
+.navbar-brand{
+  position: relative;
+}
+.navbar-brand img{
+    position: absolute;
+    top: 15px;
+    left: 85px;
+}
