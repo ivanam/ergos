@@ -16,6 +16,7 @@ class VendedorsController < ApplicationController
   # GET /vendedors/new
   def new
     @vendedor = Vendedor.new
+    @persona = Persona.new
   end
 
   # GET /vendedors/1/edit

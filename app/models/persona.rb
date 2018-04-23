@@ -1,7 +1,7 @@
 class Persona < ApplicationRecord
 
-	has_many :vendedors 
-	belongs_to :tipo_documentos
+	has_many :vendedor
+	belongs_to :tipo_documento
 
   	validates :numero_documento, :presence => { :message => "Debe completar el campo Número de documento" }
   	validates :numero_documento, numericality: { only_integer: true, :message => "El campo Número de documento debe ser un valor entero"}
@@ -15,5 +15,6 @@ class Persona < ApplicationRecord
   	validates :telefono, length: {minimum: 11, maximum: 13, :message => "El campo Teléfono debe tener entre 11 y 13 dígitos"}
   	validates :email, :presence => { :message => "Debe completar el campo Email" }
   	validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
-	
+	  validates :fecha_nacimiento, :presence => { :message => "Debe completar el campo Fecha" }
+
 end
