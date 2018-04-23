@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <%= link_to objetivo_semanals_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <%= link_to edit_objetivo_semanal_path(@objetivo_semanal), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h4>Ver Objetivo Semanal</h4>
+</div>
 
 <p>
-  <strong>Objetivo mensual:</strong>
-  <%= @objetivo_semanal.objetivo_mensual_id %>
+  <strong>Fecha:</strong>
+  <%= @objetivo_semanal.objetivo_mensual.to_s %>
 </p>
 
 <p>
-  <strong>Fecha creacion:</strong>
-  <%= @objetivo_semanal.fecha_creacion %>
-</p>
-
-<p>
-  <strong>Cantidad propuesta:</strong>
+  <strong>Cantidad Propuesta:</strong>
   <%= @objetivo_semanal.cantidad_propuesta %>
 </p>
 
 <p>
-  <strong>Numero semana:</strong>
+  <strong>Número de semana:</strong>
   <%= @objetivo_semanal.numero_semana %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @objetivo_semanal.user_id %>
+  <%= @objetivo_semanal.user.to_s %>
 </p>
 
 <p>
   <strong>Vendedor:</strong>
-  <%= @objetivo_semanal.vendedor_id %>
+  <%= @objetivo_semanal.vendedor.to_s %>
 </p>
 
 <p>
-  <strong>Punto venta:</strong>
-  <%= @objetivo_semanal.punto_venta_id %>
+  <strong>Punto de venta:</strong>
+  <%= @objetivo_semanal.punto_ventum.to_s %>
 </p>
-
-<%= link_to 'Edit', edit_objetivo_semanal_path(@objetivo_semanal) %> |
-<%= link_to 'Back', objetivo_semanals_path %>
