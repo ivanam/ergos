@@ -9,46 +9,32 @@ class CargaDiariaController < ApplicationController
     @carga_diaria = CargaDiarium.all
     @data_personal = {
         datasets: [{
-          data: [
-            10,
-            20,
-            30
-          ],
-          backgroundColor: [
-            'red',
-            'orange',
-            'green'
-          ],
-          label: 'Dataset 1'
+          data: [10, 20, 30],
+          backgroundColor: ['blue', 'purple', 'orange']
         }],
-        labels: [
-          'PROSPECTOS',
-          'VENTAS',
-          'PRUEBAS DE MANEJO'
-        ]
+        labels: ['PROSPECTOS','VENTAS','PRUEBAS DE MANEJO']
     }
-    @options_personal = { responsive: true }
+    @options_personal = {
+      title: {
+        display: true,
+        text: 'Yo'
+      },
+      responsive: true
+    }
     @data_equipo = {
         datasets: [{
-          data: [
-            10,
-            20,
-            30
-          ],
-          backgroundColor: [
-            'red',
-            'orange',
-            'green'
-          ],
-          label: 'Dataset 1'
+          data: [10, 20, 30],
+          backgroundColor: ['blue', 'purple', 'orange']
         }],
-        labels: [
-          'PROSPECTOS',
-          'VENTAS',
-          'PRUEBAS DE MANEJO'
-        ]
+        labels: ['PROSPECTOS', 'VENTAS', 'PRUEBAS DE MANEJO']
     }
-    @options_equipo = { responsive: true }
+    @options_equipo = { 
+      title: {
+        display: true,
+        text: 'Equipo'
+      }, 
+      responsive: true 
+    }
   end
 
   # GET /carga_diaria/1

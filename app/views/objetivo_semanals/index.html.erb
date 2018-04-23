@@ -1,39 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <%= link_to new_objetivo_semanal_path, class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Nueva Carga" %>
+  <% end %>
+  <h4>Objetivos semanales</h4>
+</div>
 
-<h1>Objetivo Semanals</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Objetivo mensual</th>
-      <th>Fecha creacion</th>
-      <th>Cantidad propuesta</th>
-      <th>Numero semana</th>
-      <th>User</th>
-      <th>Vendedor</th>
-      <th>Punto venta</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @objetivo_semanals.each do |objetivo_semanal| %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
       <tr>
-        <td><%= objetivo_semanal.objetivo_mensual_id %></td>
-        <td><%= objetivo_semanal.fecha_creacion %></td>
-        <td><%= objetivo_semanal.cantidad_propuesta %></td>
-        <td><%= objetivo_semanal.numero_semana %></td>
-        <td><%= objetivo_semanal.user_id %></td>
-        <td><%= objetivo_semanal.vendedor_id %></td>
-        <td><%= objetivo_semanal.punto_venta_id %></td>
-        <td><%= link_to 'Show', objetivo_semanal %></td>
-        <td><%= link_to 'Edit', edit_objetivo_semanal_path(objetivo_semanal) %></td>
-        <td><%= link_to 'Destroy', objetivo_semanal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Objetivo mensual</th>
+        <th>Fecha de creacion</th>
+        <th>Cantidad propuesta</th>
+        <th>Numero semana</th>
+        <th>User</th>
+        <th>Vendedor</th>
+        <th>Punto venta</th>
+        <th class="col-md-2">&nbsp;</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Objetivo Semanal', new_objetivo_semanal_path %>
+    <tbody>
+      <% @objetivo_semanals.each do |objetivo_semanal| %>
+        <tr>
+          <td><%= objetivo_semanal.objetivo_mensual_id %></td>
+          <td><%= objetivo_semanal.fecha_creacion %></td>
+          <td><%= objetivo_semanal.cantidad_propuesta %></td>
+          <td><%= objetivo_semanal.numero_semana %></td>
+          <td><%= objetivo_semanal.user.to_s %></td>
+          <td><%= objetivo_semanal.vendedor.to_s %></td>
+          <td><%= objetivo_semanal.punto_ventum.to_s %></td>
+          <td class="text-center">
+            <%= link_to objetivo_semanal, class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-search"></span>
+            <% end %>
+            <%= link_to edit_objetivo_semanal_path(objetivo_semanal), class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to objetivo_semanal, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,91 +1,155 @@
-<%= form_for(vendedor) do |f| %>
+<%= form_for(vendedor, :html => { :class => "form-horizontal" }) do |f| %>
   <% if vendedor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(vendedor.errors.count, "error") %> prohibited this vendedor from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
       <ul>
-      <% vendedor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% @vendedor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :tipo_documento_id %>
-    <%= text_field_tag (:tipo_documento_id) %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"  align="center" >Nuevo Vendedor</h3>
+</div>
+<div class="panel-body">
+   <div class="form-group">
+   <label class="col-sm-2 control-label">Tipo de Documento</label>  
+    <div class="col-sm-10">
+
+      <%= select_tag 'tipo_documento', options_from_collection_for_select(TipoDocumento.all, "id", "descripcion", TipoDocumento.where(descripcion: "DNI").first.id), {:id => "select_tipo_documento", :class=>"form-control form-select form-doc form-alta" } %>
+    </div>
   </div>
+  </br>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Número de Documento</label>  
+      <div class="col-sm-10">
+  <%= text_field_tag 'dni', "", {:class => "text-field form-doc form-alta form-control solo_numerico", :id => "input_dni", :placeholder =>"N° Documento", :maxlength=>"8", :value => @persona.numero_documento} %>
+   </div>
+  </div>
+  </br>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Cuit</label>  
+      <div class="col-sm-10">
+  <%= text_field_tag 'cuit', "", {:data =>{:toggle=>"tooltip", :placement=>"top"},:title=>"cuit - ej: 27319233815", :class => "form-alta text-field form-control solo_numerico", :id => "input_cuit", :placeholder => "cuit", :maxlength=>"11", :pattern=>"[0-9]{11}", :oninvalid=>"setCustomValidity('Por favor respete el formato')", :value => @persona.cuit} %> 
+     </div>
+  </div>
+  </br>
 
   <div class="form-group">
-    <%= f.label :numero_documento %>
-    <%= text_field_tag (:numero_documento) %>
+    <label class="col-sm-2 control-label">Apellido</label>  
+      <div class="col-sm-10">
+  <div class="form-group">
+     <%= text_field_tag 'apellido', "", {:class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_apellidos", :placeholder => "Apellido", :value => @persona.apellido } %>
+     </div>
   </div>
+  </br>
 
   <div class="form-group">
-    <%= f.label :cuit %>
-    <%= text_field_tag (:cuit) %>
+    <label class="col-sm-2 control-label">Nombre</label>  
+      <div class="col-sm-10">
+  <div class="form-group">
+     <%= text_field_tag 'Nombre', "", {:class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_nombre", :placeholder => "Nombre", :value => @persona.nombre } %>
+     </div>
   </div>
+  </br>
 
   <div class="form-group">
-    <%= f.label :apellido %>
-    <%= text_field_tag (:apellido) %>
+    <label class="col-sm-2 control-label">Domicilio</label>  
+      <div class="col-sm-10">
+  <div class="form-group">
+     <%= text_field_tag 'Domicilio', "", {:class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_domicilio", :placeholder => "Domicilio", :value => @persona.domicilio } %>
+     </div>
   </div>
+  </br>
 
   <div class="form-group">
-    <%= f.label :nombre %>
-    <%= text_field_tag (:nombre) %>
+    <label class="col-sm-2 control-label">Telefono</label>  
+      <div class="col-sm-10">
+  <div class="form-group">
+     <%= text_field_tag 'Telefono', "", {:class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_telefono", :placeholder => "Telefono", :value => @persona.telefono } %>
+     </div>
   </div>
+  </br>
+  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Fecha Nacimiento</label>  
+      <div class="col-sm-10">
+  <div class="form-group">
+  <%= f.text_field :fecha_nacimiento, :id => "datepicker1", :placeholder => "Fecha Nacimiento", :class => "form-fecha form-alta form-control", :value => @persona.fecha_nacimiento%>
+     </div>
+  </div>
+  </br>
+  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Foto</label>  
+      <div class="col-sm-10">
+        <%= f.file_field :foto %>
+   </div>
+  </div>
+  </br>
+  
+ <div class="form-group">
+    <label class="col-sm-2 control-label">Número</label>  
+      <div class="col-sm-10">
+          <%= f.text_field :numero, autofocus: true, class: 'form-control'  %>
+      </div>
+  </div>
+  </br>
+
+ <div class="form-group">
+    <label class="col-sm-2 control-label">Fecha Alta</label>  
+      <div class="col-sm-10">
+          <%= f.text_field :fecha_alta, :id => "datepicker2", :placeholder => "Fecha Alta", :class => "form-fecha form-alta form-control"%>
+   </div>
+  </div>
+  </br>
+
 
   <div class="form-group">
-    <%= f.label :domicilio %>
-    <%= text_field_tag (:domicilio) %>
+    <label class="col-sm-2 control-label">Fecha Baja</label>  
+      <div class="col-sm-10">
+          <%= f.text_field :fecha_baja, :id => "datepicker3", :placeholder => "Fecha Baja", :class => "form-fecha form-alta form-control"%>
+   </div>
   </div>
+  </br>
 
-  <div class="form-group">
-    <%= f.label :telefono %>
-    <%= text_field_tag (:telefono) %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :fecha_nacimiento %>
-    <%= date_field_tag(:fecha_nacimiento) %>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+    </div>
   </div>
   
-    <div class="form-group">
-        <%= f.label :foto, class: 'col-sm-2 control-label'  %>
-        <div class="col-sm-6">
-            <%= f.file_field :foto %>
-        </div>
-    </div>
+  <%= link_to vendedors_path, class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Atras" %>
+  <% end %>
+  <% end %>
+</div>
 
+<% @listado_de_datepickers = ['datepicker', 'datepicker2', 'datepicker3'] %>
 
+<% @listado_de_datepickers.each do |l| %>
 
-    <div class="form-group">
-        <%= f.label :numero, class: 'col-sm-2 control-label'  %>
-        <div class="col-sm-6">
-            <%= f.text_field :numero, autofocus: true, class: 'form-control'  %>
-        </div>
-    </div>
+  <script type="text/javascript">
+      
+        $("#<%=l%>").datepicker({dateFormat:"dd-mm-yy",
+        dayNamesMin: ["Do", "Lu", "Ma", "Mie", "Jue", "Vie", "Sa"],
+        changeYear: true,
+        yearRange: "1910:<%= Date.today.year + 10 %>", 
+        monthNames: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+        monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+        navigationAsDateFormat: true,
+        nextText: "Sig", 
+        prevText: "Ant", 
+        showAnim: "explode"
+          });
 
-    <div class="form-group">
-        <%= f.label :fecha_alta, class: 'col-sm-2 control-label'  %>
-        <div class="col-sm-6">
-            <%= f.date_select :fecha_alta, start_year: 1920, end_year: 2000, class: 'form-control'  %>
-        </div>
-    </div>
+  </script>
 
-
-    <div class="form-group">
-        <%= f.label :fecha_baja, class: 'col-sm-2 control-label'  %>
-        <div class="col-sm-6">
-            <%= f.date_select :fecha_baja, start_year: 1920, end_year: 2000, class: 'form-control'  %>
-        </div>
-    </div>
-
-
-
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+

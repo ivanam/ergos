@@ -1,6 +1,13 @@
-<h1>Editing Objetivo Semanal</h1>
+<div class="page-header">
+  <%= link_to objetivo_semanal_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <%= link_to @objetivo_semanal, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Ver
+  <% end %>
+  <h4>Editar Objetivo Semanal</h4>
+</div>
 
 <%= render 'form', objetivo_semanal: @objetivo_semanal %>
-
-<%= link_to 'Show', @objetivo_semanal %> |
-<%= link_to 'Back', objetivo_semanals_path %>
