@@ -31,6 +31,10 @@
         <td><%= objetivo_mensual.user_id %></td>
         <td><%= objetivo_mensual.vendedor_id.to_s %></td>
         <td><%= objetivo_mensual.punto_venta_id %></td>
+         <% PuntoVentum.where(:id => objetivo_mensual.punto_venta_id).each do |pv| %>
+        <% @puventa = pv.nombre  %>
+        <td><%= @puventa %></td>
+        <% end %>
           <td class="text-center">
             <%= link_to objetivo_mensual, class: 'btn btn-sm btn-default' do %>
               <span class="glyphicon glyphicon-search"></span>
