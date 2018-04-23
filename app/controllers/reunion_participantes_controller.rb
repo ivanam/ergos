@@ -1,4 +1,6 @@
 class ReunionParticipantesController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_reunion_participante, only: [:show, :edit, :update, :destroy]
 
   # GET /reunion_participantes

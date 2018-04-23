@@ -1,4 +1,6 @@
 class TipoObjetivosController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_tipo_objetivo, only: [:show, :edit, :update, :destroy]
 
   # GET /tipo_objetivos

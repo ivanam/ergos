@@ -1,4 +1,6 @@
 class ConcesionariaController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_concesionarium, only: [:show, :edit, :update, :destroy]
 
   # GET /concesionaria
