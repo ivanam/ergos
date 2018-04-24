@@ -24,6 +24,8 @@ gem 'paperclip', '~> 4.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'bootstrap-sass', '~> 3.3.7'
+#font-awesome
+gem 'font-awesome-sass', '~> 5.0.9'
 
 gem 'autoprefixer-rails'
 # Use jquery as the JavaScript library
