@@ -2,17 +2,18 @@
     <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
     <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
     <p id="profile-name" class="profile-name-card"></p>
-    <form class="form-signin">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-signin"}) do |f| %>
         <span id="reauth-email" class="reauth-email"></span>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de Email" required autofocus>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+        <%= f.email_field :email, autofocus: true, placeholder: "Dirección de Email", :class => "form-control", :type => "email", :id => "inputEmail"  %>
+        
+        <%= f.password_field :password, autocomplete: "off", :class => "form-control", :id => "inputPassword", :placeholder => "Contraseña"  %>
         <div id="remember" class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Recordarme
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
-    </form><!-- /form -->
+        <%= f.submit "Entrar", :class => "btn btn-lg btn-primary btn-block btn-signin" %>
+    <% end %>
     <a href="#" class="forgot-password">
         Olvido su Contraseña?
     </a>
