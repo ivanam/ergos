@@ -1,68 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ergos - Inicio</title>
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <a class="navbar-brand" href="#">
-         <%=image_tag("logoErgos.png")%>
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#"><i class="fa fa-bell" aria-hidden="true">&nbsp;</i><li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li><</span></a></li>
-          <li>
-            <a href="#"><i class="fa fa-envelope" aria-hidden="true">&nbsp;</i><li><%= link_to "Sign Up", new_user_registration_path %></li><span class="badge"></span></a></li>
-             <li>
-            <a href="#"><i class="fa fa-envelope" aria-hidden="true">&nbsp;</i><li><%= link_to "Login", new_user_session_path %></li><span class="badge"></span></a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle negrita" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          </a>
-            <!-- <span class="caret"></span> Agrega un indicador de flecha abajo -->
-          </li>
-        </ul>
-      </div>
-      <% if user_signed_in? %>
-        <= link_to current_user.email, edit_user_registration_path >
-        <= link_to "Logout", destroy_user_session_path, method: :delete >
-      <% else %>
-        <= link_to "Sign Up", new_user_registration_path >
-        <= link_to "Login", new_user_session_path >
-      <% end %>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-  </nav>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</body>
-
-</html>
-
+<html>
+  <head>
+    <title>ergos</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <link rel="shortcut icon" href="http://www.chubut.gov.ar/favicon.ico" type="image/vnd.microsoft.icon">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,300" rel="stylesheet" type="text/css">
+    
+  </head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <body>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
-    <%= yield %>
+  <body style="padding-bottom: 15px;" class="<%= controller_name %> <%= action_name %>">
+    <div class="container">
+      <%= render "layouts/navbar"%>
+      <%= yield %>
+    </div>
   </body>
 </html>
-
-
