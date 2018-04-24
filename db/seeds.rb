@@ -21,3 +21,32 @@ TipoDocumento.create(descripcion: 'CI')#5
 TipoObjetivo.create(descripcion: 'PROSPECTOS') #1
 TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO')#2
 TipoObjetivo.create(descripcion: 'VENTAS')#2
+
+# Personas
+# ========
+
+Persona.create(tipo_documento_id: 1, numero_documento: 31343209,apellido: "Litterio", nombre: "Marcos", telefono: "0280154336704", email: "marcos0@gmail.com")
+Persona.create(tipo_documento_id: 1, numero_documento: 32343209,apellido: "Moyano", nombre: "Ivana", telefono: "0280154336457", email: "ivana@gmail.com")
+Persona.create(tipo_documento_id: 1, numero_documento: 33343209,apellido: "Pritzkler", nombre: "Gonzalo", telefono: "0280154336367", email: "gonzalo@gmail.com")
+
+
+# Usuarios
+# ========
+
+User.create(email: 'vendedor@vendedor.com', password: 'sumbudrule', persona_id: 1)#1
+User.create(email: 'jefe@jefe.com', password: 'sumbudrule', persona_id: 2)#2
+User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
+
+
+# Roles
+# ========
+
+Role.create(name: 'vendedor')
+Role.create(name: 'jefe_ventas')
+Role.create(name: 'admin')
+
+# UserRoles
+# ========
+UserRole.create(user_id: 1, role_id: 1)#vendedor
+UserRole.create(user_id: 1, role_id: 1)#jefe_ventas
+UserRole.create(user_id: 1, role_id: 1)#admin
