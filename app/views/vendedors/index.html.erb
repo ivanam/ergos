@@ -25,13 +25,13 @@
         <td><%= vendedor.persona_id %></td>
         <td><%= vendedor.punto_venta_id %></td>
         <td class="text-center">
-              <%= link_to objetivo_mensual, class: 'btn btn-sm btn-default' do %>
+              <%= link_to vendedor, class: 'btn btn-sm btn-default' do %>
                 <span class="glyphicon glyphicon-search"></span>
               <% end %>
-              <%= link_to edit_objetivo_mensual_path(objetivo_mensual), class: 'btn btn-sm btn-default' do %>
+              <%= link_to edit_vendedor_path(vendedor), class: 'btn btn-sm btn-default' do %>
                 <span class="glyphicon glyphicon-pencil"></span>
               <% end %>
-              <%= link_to objetivo_mensual, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
+              <%= link_to vendedor, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
                 <span class="glyphicon glyphicon-trash"></span>
               <% end %>
             </td>
