@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/foodforarabbit/jquery_datepicker.git
+  revision: 317b1dbd77377b79d9e955ac442aeeca52fe4513
+  specs:
+    jquery_datepicker (0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -209,6 +215,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5.0.9)
   jbuilder (~> 2.5)
   jquery-rails
+  jquery_datepicker!
   listen (~> 3.0.5)
   mysql2
   paperclip (~> 4.1)

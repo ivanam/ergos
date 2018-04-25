@@ -430,6 +430,14 @@ body {
   font-size: 12px;
 }
 
+.form-alta-vendedor{
+  padding: 1px 2px !important;
+  float:left;
+  margin:2px 1px !important;
+  text-align: center;
+  font-size: 12px;
+}
+
 .form-select{
   min-height: 34px !important;    
 }
@@ -439,8 +447,17 @@ body {
 
 }
 
+.form-fecha-nac{
+  max-width: 150px;
+
+}
+
 #select_tipo_documento{
-  max-width: 56px;
+  max-width: 100px;
+}
+
+.select_foto{
+  max-width: 250px;
 }
 
 
@@ -451,14 +468,17 @@ body {
 
 
 #input_cuil{
-  max-width: 100px;
+  max-width: 120px;
 }
 
 
 #input_apellidos{
-  max-width: 170px;
+  max-width: 250px;
 }
 
+#input_telefono{
+  max-width: 250px;
+}
 
 #ciclo-carrera{
   max-width: 56px;
