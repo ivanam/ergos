@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :persona_concesionaria
   resources :objetivo_mensuals
   resources :objetivo_semanals
   resources :carga_diaria
