@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require_tree .

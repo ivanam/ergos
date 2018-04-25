@@ -39,6 +39,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jquery_datepicker', github: 'foodforarabbit/jquery_datepicker'
+
+gem 'bootstrap-datepicker-rails'
+
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
+
+gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
+
+gem 'bootstrap-editable-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

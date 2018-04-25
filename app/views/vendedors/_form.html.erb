@@ -131,20 +131,22 @@
 
 <% @listado_de_datepickers.each do |l| %>
 
-  <script type="text/javascript">
-      
-        $("#<%=l%>").datepicker({dateFormat:"dd-mm-yy",
-        dayNamesMin: ["Do", "Lu", "Ma", "Mie", "Jue", "Vie", "Sa"],
-        changeYear: true,
-        yearRange: "1910:<%= Date.today.year + 10 %>", 
-        monthNames: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
-        monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
-        navigationAsDateFormat: true,
-        nextText: "Sig", 
-        prevText: "Ant", 
-        showAnim: "explode"
-          });
+<script type="text/javascript">
+        
+    $("#<%=l%>").datepicker({
+    format: 'dd/mm/yyyy',
+    dayNamesMin: ["Do", "Lu", "Ma", "Mie", "Jue", "Vie", "Sa"],
+    changeYear: true,
+    changeMonth: true,
+    yearRange: "1910:<%= Date.today.year + 10 %>", 
+    monthNames: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+    navigationAsDateFormat: true,
+    nextText: "Sig", 
+    prevText: "Ant", 
+    
+      });
 
-  </script>
+</script>
 
 <% end %>

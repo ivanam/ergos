@@ -29,18 +29,10 @@ class VendedorsController < ApplicationController
   # POST /vendedors
   # POST /vendedors.json
   def create
-    
-    @vendedor = Vendedor.new(vendedor_params)
+
+    @vendedor = Vendedor.new()
     if  Persona.where(:numero_documento => params[:dni]).first == nil
-      @persona = Persona.new()
-      @persona.numero_documento=params[:dni].to_i
-      @persona.tipo_documento_id=params[:tipo_documento].to_i
-      @persona.cuit=params[:cuit].to_i
-      @persona.apellido=params[:apellido]
-      @persona.nombre=params[:Nombre]
-      @persona.domicilio=params[:Domicilio]
-      @persona.telefono=params[:telefono]
-      @persona.fecha_nacimiento=params[:fecha_nacimiento]
+      @persona = Persona.create(:numero_documento => params[:dni], :tipo_documento_id => params[:tipo_documento], :cuit => params[:cuit], :apellido => params[:apellido], :nombre => params[:Nombre], :domicilio => params[:Domicilio], :telefono => params[:telefono], :fecha_nacimiento =>params[:vendedor][:fecha_nacimiento])
     else
       @persona= Persona.where(:numero_documento => params[:dni]).first
       @persona.tipo_documento=params[:tipo_documento_id]
@@ -50,18 +42,31 @@ class VendedorsController < ApplicationController
       @persona.domicilio=params[:domicilio]
       @persona.telefono=params[:telefono]
       @persona.fecha_nacimiento=params[:vendedor][:fecha_nacimiento]
+      
     end
-    @vendedor.numero=params[:vendedor][:numero].to_i
-    @vendedor.fecha_alta=params[:vendedor][:fecha_alta]
-    @vendedor.fecha_alta=params[:vendedor][:fecha_baja]
-    respond_to do |format|
-      if @vendedor.save and @persona.save
-        format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
-        format.json { render :show, status: :created, location: @vendedor }
-      else
-        format.html { render :new }
-        format.json { render json: @vendedor.errors, status: :unprocessable_entity }
-      end
+    #el numero de vendedor debe ser unico
+    if Vendedor.where(:numero => params[:vendedor][:numero]).first == nil
+
+        @vendedor.numero=params[:vendedor][:numero].to_i
+        @vendedor.fecha_alta=params[:vendedor][:fecha_alta]
+        @vendedor.fecha_alta=params[:vendedor][:fecha_baja]
+
+        respond_to do |format|
+          if @persona.save
+             @vendedor.persona_id=@persona.id
+             if @vendedor.save
+                format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
+                format.json { render :show, status: :created, location: @vendedor }
+             else
+                format.html { render :new }
+                format.json { render json: @vendedor.errors, status: :unprocessable_entity }
+             end
+          else
+             format.json { render json: @persona.errors, status: :unprocessable_entity }
+             format.html { redirect_to @vendedor }
+          end
+
+        end
     end
   end
 
