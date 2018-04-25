@@ -28,7 +28,7 @@
         <td><%= concesionarium.persona_id %></td>
         <td><%= link_to 'Show', concesionarium %></td>
         <td><%= link_to 'Edit', edit_concesionarium_path(concesionarium) %></td>
-        <td><%= link_to 'Destroy', concesionarium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Agregar User', new_persona_concesionarium_path(concesionaria: concesionarium.id) %></td>
       </tr>
     <% end %>
   </tbody>

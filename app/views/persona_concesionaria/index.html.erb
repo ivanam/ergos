@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Persona Concesionaria</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Persona</th>
+      <th>Concesionaria</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @persona_concesionaria.each do |persona_concesionarium| %>
+      <tr>
+        <td><%= persona_concesionarium.persona %></td>
+        <td><%= persona_concesionarium.concesionaria %></td>
+        <td><%= link_to 'Show', persona_concesionarium %></td>
+        <td><%= link_to 'Edit', edit_persona_concesionarium_path(persona_concesionarium) %></td>
+        <td><%= link_to 'Destroy', persona_concesionarium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Persona Concesionarium', new_persona_concesionarium_path %>

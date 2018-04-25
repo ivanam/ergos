@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422214907) do
+ActiveRecord::Schema.define(version: 20180425221514) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20180422214907) do
     t.integer  "punto_venta_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "persona_concesionaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "persona_id"
+    t.integer  "concesionaria_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["concesionaria_id"], name: "index_persona_concesionaria_on_concesionaria_id", using: :btree
+    t.index ["persona_id"], name: "index_persona_concesionaria_on_persona_id", using: :btree
   end
 
   create_table "personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -158,4 +167,6 @@ ActiveRecord::Schema.define(version: 20180422214907) do
     t.integer  "punto_venta_id"
   end
 
+  add_foreign_key "persona_concesionaria", "concesionaria", column: "concesionaria_id"
+  add_foreign_key "persona_concesionaria", "personas"
 end
