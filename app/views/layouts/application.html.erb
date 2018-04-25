@@ -5,17 +5,16 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    "bootstrap-editable" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag :defaults, "nested_form" %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
     
   </head>
 
 
-  <body style="padding-bottom: 15px;" class="<%= controller_name %> <%= action_name %>">
-    <div class="container">
-      <%= render "layouts/navbar"%>
-      <%= yield %>
-    </div>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= render "layouts/navbar"%>
+    <%= yield %>
   </body>
 </html>
 

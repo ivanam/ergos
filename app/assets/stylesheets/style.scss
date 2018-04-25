@@ -1,7 +1,7 @@
 html {height: 100%;}
 body { 
-  padding-top: 60px; 
-  padding-bottom: 55px;
+  padding-top: 50px; 
+  padding-bottom: 50px;
   height: 100%;
   background-color: #aeaeae;
 }
@@ -11,7 +11,6 @@ body {
 
 /* --------------------- NAVBAR ---------------------------- */
 .navbar-default {
-  padding: 10px;
   background-color: $ergosgray;
   border-bottom: 1.5px solid white;
   
@@ -23,7 +22,7 @@ body {
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #38397f;
+  color: white;
   background-color: #DFDFDF;
   /*
     aquí se modifica el hover del brand
@@ -40,7 +39,7 @@ body {
 
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
-  color: #38397f;
+  color: white;
   background-color: #DFDFDF;
 }
 
@@ -49,13 +48,13 @@ body {
 }
 
 .navbar-default .navbar-nav>li>.dropdown-menu>li>a {
-  color: #5355bf;
+  color: white;
 }
 
 .navbar-default .navbar-nav>li>.dropdown-menu>li>a:hover,
 .navbar-default .navbar-nav>li>.dropdown-menu>li>a:focus {
-  color: #38397f;
-  background-color: #dfdfdf;
+  color: $ergosgray;
+  background-color: white;
 }
 
 .navbar-default .navbar-nav>li>.dropdown-menu>li.divider {
@@ -381,10 +380,6 @@ body {
 
 /*********************/
 /*EX Applicattion.css*/
-body { 
-  padding-top: 60px; 
-  padding-bottom: 55px;
-}
 
 .logo {
   margin-top: 25px;

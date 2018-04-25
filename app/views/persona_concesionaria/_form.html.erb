@@ -1,0 +1,26 @@
+<%= form_for(persona_concesionarium) do |f| %>
+  <% if persona_concesionarium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(persona_concesionarium.errors.count, "error") %> prohibited this persona_concesionarium from being saved:</h2>
+
+      <ul>
+      <% persona_concesionarium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h1><%= Concesionarium.find(persona_concesionarium.concesionaria_id) %></h1>
+  <div class="field">
+    <%= f.label :persona_id %>
+    <%= f.text_field :persona_id %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :concesionaria_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

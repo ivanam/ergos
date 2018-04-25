@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Persona:</strong>
+  <%= @persona_concesionarium.persona %>
+</p>
+
+<p>
+  <strong>Concesionaria:</strong>
+  <%= @persona_concesionarium.concesionaria %>
+</p>
+
+<%= link_to 'Edit', edit_persona_concesionarium_path(@persona_concesionarium) %> |
+<%= link_to 'Back', persona_concesionaria_path %>

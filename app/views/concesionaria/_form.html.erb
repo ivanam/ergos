@@ -1,4 +1,4 @@
-<%= form_for(concesionarium) do |f| %>
+<%= nested_form_for(@concesionarium,multipart: true, :html => { :class => "form-horizontal" }) do |f| %>
   <% if concesionarium.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(concesionarium.errors.count, "error") %> prohibited this concesionarium from being saved:</h2>
@@ -39,11 +39,6 @@
   <div class="field">
     <%= f.label :empresa_id %>
     <%= f.number_field :empresa_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :persona_id %>
-    <%= f.number_field :persona_id %>
   </div>
 
   <div class="actions">
