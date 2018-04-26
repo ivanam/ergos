@@ -1,6 +1,6 @@
 class ObjetivoSemanal < ApplicationRecord
 	belongs_to :user
-	belongs_to :punto_ventum
+	#belongs_to :punto_ventum
 	belongs_to :vendedor
 	belongs_to :objetivo_mensual
 
