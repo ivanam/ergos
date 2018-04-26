@@ -38,7 +38,15 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'jquery_datepicker', github: 'foodforarabbit/jquery_datepicker'
 
+gem 'bootstrap-datepicker-rails'
+
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
+
+#gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
+
+gem 'bootstrap-editable-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -62,6 +70,13 @@ gem 'chartjs-ror'
 gem 'font-awesome-rails'
 
 #-------------------------------------------------------------------------
+#-------------------------------- Formularios ----------------------------
+
+gem "nested_form"
+
+
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,85 @@
+<nav class="navbar navbar-default sidebar" role="navigation" style="z-index: 300; position:absolute;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>      
+    </div>
+    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Organización<span class="caret"></span><span class="pull-right hidden-xs showopacity fa fa-home"></span></a>
+          <ul class="dropdown-menu forAnimate" role="menu">
+            <li><a href="#">Concesionario</a></li>
+            <li><a href="#">Puntos de Venta</a></li>
+            <li><a href="#">Vendedores</a></li>
+          </ul>
+        </li>          
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Historial<span class="caret"></span><span class="pull-right hidden-xs showopacity fa fa-clock-o"></span></a>
+          <ul class="dropdown-menu forAnimate" role="menu">
+            <li><a href="#">Indicadores</a></li>
+            <li><a href="#">Reunión Semanal</a></li>
+            <li><a href="#">Reunión Mensual</a></li>
+            <li><a href="#">Pizarra</a></li>
+          </ul>
+        <li ><a href="#">Template<span class="pull-right hidden-xs showopacity fa fa-file-text-o"></span></a></li>
+        <li ><a href="#">Reportes<span class="pull-right hidden-xs showopacity fa fa-bar-chart"></span></a></li>
+        <li ><a href="#">Configuración<span class="pull-right hidden-xs showopacity fa fa-gear"></span></a></li>
+        <li ><a href="#">Notificaciones<span class="pull-right hidden-xs showopacity fa fa-bell"></span></a></li>
+        <li ><a href="#">Tablero<span class="pull-right hidden-xs showopacity fa fa-tablet"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="admin-container">
+    <div class="col-sm-12 h-6">
+      <ol class="breadcrumb">
+        <li><a href="#">Organización: BMW</a></li>
+        <li><a href="#">Concecionario: Bremen</a></li>
+        <li><a href="#">Punto de Venta: Libertador 1</a></li>
+        <li class="active">Vendedores</li>
+      </ol>
+
+    </div>
+      <div class="col-sm-3 admin-box h-46">
+        <div class="content-box">
+          <%=image_tag "profile-img.png", :class=>"img-fluid", :style=>"width: 100%; padding: 0px 65px;"%>
+          <div class="description">
+            <h3>Juan Carlos Perez</h3> 
+            <h4>Vendedor</h4>
+            <p>Estado: Activo</p>
+            <p>Ultima Carga: Ayer 17:54</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-9 admin-box h-46">
+        <div class="content-box">
+          <div class="btn-group w-100" role="group" aria-label="...">
+            <button type="button" class="btn btn-default w-20">Vendedores</button>
+            <button type="button" class="btn btn-default w-60">Middle</button>
+            <button type="button" class="btn btn-default w-20">Right</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-4 admin-box h-46">
+        <div class="content-box">
+          
+        </div>
+
+      </div>
+      <div class="col-sm-8 admin-box h-46">
+        <div class="content-box">
+          
+        </div>
+
+      </div>
+    </div>
+  
+</div>

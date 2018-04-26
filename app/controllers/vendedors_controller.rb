@@ -29,37 +29,63 @@ class VendedorsController < ApplicationController
   # POST /vendedors
   # POST /vendedors.json
   def create
-    
-    @vendedor = Vendedor.new(vendedor_params)
-    debugger
-    if  Persona.where(:numero_documento => params[:numero_documento]).first == nil
-      @persona = Persona.new()
-      @persona.numero_documento=params[:numero_documento]
-      @persona.tipo_documento=params[:tipo_documento_id]
-      @persona.cuit=params[:cuit]
-      @persona.apellido=params[:apellido]
-      @persona.nombre=params[:nombre]
-      @persona.domicilio=params[:domicilio]
-      @persona.telefono=params[:telefono]
-      @persona.fecha_nacimiento=params[:fecha_nacimiento]
+
+    @vendedor = Vendedor.new()
+    if  Persona.where(:numero_documento => params[:dni]).first == nil
+      @persona = Persona.create(:numero_documento => params[:dni], :tipo_documento_id => params[:tipo_documento], :cuit => params[:cuit], :apellido => params[:apellido], :nombre => params[:Nombre], :domicilio => params[:Domicilio], :telefono => params[:telefono], :fecha_nacimiento =>params[:vendedor][:fecha_nacimiento], email: params[:email])
+      @persona.save
     else
-      @persona= Persona.where(:numero_documento => params[:numero_documento]).first
-      @persona.tipo_documento=params[:tipo_documento_id]
+      @persona= Persona.where(:numero_documento => params[:dni]).first
+      @persona.tipo_documento_id=params[:tipo_documento]
       @persona.cuit=params[:cuit]
       @persona.apellido=params[:apellido]
-      @persona.nombre=params[:nombre]
-      @persona.domicilio=params[:domicilio]
+      @persona.nombre=params[:Nombre]
+      @persona.domicilio=params[:Domicilio]
       @persona.telefono=params[:telefono]
-      @persona.fecha_nacimiento=params[:fecha_nacimiento]
+      @persona.fecha_nacimiento=params[:vendedor][:fecha_nacimiento]
+      @persona.email= params[:email]
+      @persona.save
     end
-    debugger
-    respond_to do |format|
-      if @vendedor.save and @persona.save
-        format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
-        format.json { render :show, status: :created, location: @vendedor }
-      else
+    if User.where(:email => params[:email]).first == nil
+      @usuario =User.create(email: params[:email], password: params[:pass])
+      @usuario.add_role "vendedor"
+      @usuario.persona_id=@persona.id
+    else
+       @usuario = User.create(:email => params[:email])
+       @usuario.email = params[:email]
+       @usuario.password = params[:pass]
+    end
+    #el numero de vendedor debe ser unico
+    if Vendedor.where(:numero => params[:vendedor][:numero]).first == nil
+
+        @vendedor.numero=params[:vendedor][:numero].to_i
+        @vendedor.fecha_alta=params[:vendedor][:fecha_alta]
+        @vendedor.fecha_alta=params[:vendedor][:fecha_baja]
+
+        respond_to do |format|
+             @vendedor.persona_id=@persona.id
+             @usuario.persona_id=@persona.id
+             if @usuario.save
+                 if @vendedor.save!
+                    format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
+                    format.json { render :show, status: :created, location: @vendedor }
+                 else
+                    @vendedor.errors[:messages]<< "Errores en el formulario"
+                    format.html { render :new }
+                    format.json { render json: @vendedor.errors, status: :unprocessable_entity }
+                 end
+            else
+               @usuario.errors[:messages]<< "Ya existe el correo electrónico"
+               format.json { render json: @usuario.errors, status: :unprocessable_entity }
+               format.html { render :new  }
+            end
+
+        end
+    else
+      respond_to do |format|
+        @vendedor.errors[:messages]<< "Ya existe un vendedor con ese número"
         format.html { render :new }
-        format.json { render json: @vendedor.errors, status: :unprocessable_entity }
+        format.json { render json: @vendedor.errors, status: :unprocessable_entity, message: "El vendedor ya existe" }
       end
     end
   end
