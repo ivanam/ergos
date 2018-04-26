@@ -13,7 +13,7 @@ class Persona < ApplicationRecord
   validates :telefono, :presence => { :message => "Debe completar el campo Teléfono" }
   validates :telefono, numericality: { only_integer: true, :message => "El campo Teléfono debe ser un valor entero"}
   validates :telefono, length: {minimum: 11, maximum: 13, :message => "El campo Teléfono debe tener entre 11 y 13 dígitos"}
-  #validates :email, :presence => { :message => "Debe completar el campo Email" }
-  #validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
+  validates :email, :presence => { :message => "Debe completar el campo Email" }
+  validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
 
 end
