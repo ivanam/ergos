@@ -1,4 +1,18 @@
 class PersonaConcesionarium < ApplicationRecord
   belongs_to :persona
-  belongs_to :concesionaria, :foreign_key => 'concesionaria', :class_name => 'Concesionarium'
+  belongs_to :concesionaria, :foreign_key => 'concesionaria_id', :class_name => 'Concesionarium'
+
+  validates :persona_id, uniqueness: { message: "ya existe usuario para esa persona" }
+
+  before_create :habilitar_user
+
+  def habilitar_user
+  	usuario = User.new(email: self.persona.email, password: "12345678", persona_id: self.persona.id)
+  	if usuario.save
+  		usuario.add_role("punto_venta")
+  	else
+  		usuario = User.where(email: self.persona.email).first
+  		usuario.add_role("punto_venta")
+  	end
+  end
 end
