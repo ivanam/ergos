@@ -37,5 +37,5 @@
 
 <p>
   <strong>Punto de venta:</strong>
-  <%= @objetivo_semanal.punto_ventum.to_s %>
+  <%= PuntoVentum.where(:id => @objetivo_semanal.punto_venta_id ).to_s %>
 </p>
