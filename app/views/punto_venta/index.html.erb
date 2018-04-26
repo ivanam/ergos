@@ -1,33 +1,48 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Punto Venta</h1>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Concesionaria</th>
+        <th>Nombre</th>
+        <th>Domicilio</th>
+        <th>Persona</th>
+        <th class="col-md-2">Acciones&nbsp;</th>
+      </tr>
+    </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Domicilio</th>
-      <th>Concesionaria</th>
-      <th>Persona</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @punto_venta.each do |punto_ventum| %>
       <tr>
+        <% Concesionarium.where(:id => punto_ventum.concesionaria_id).each do |c| %>
+        <% @con = c.nombre  %>
+        <td><%= @con %></td>
+        <% end %>
         <td><%= punto_ventum.nombre %></td>
         <td><%= punto_ventum.domicilio %></td>
-        <td><%= punto_ventum.concesionaria_id %></td>
         <td><%= punto_ventum.persona_id %></td>
-        <td><%= link_to 'Show', punto_ventum %></td>
-        <td><%= link_to 'Edit', edit_punto_ventum_path(punto_ventum) %></td>
-        <td><%= link_to 'Destroy', punto_ventum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="text-center">
+            <%= link_to punto_ventum, class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-search"></span>
+            <% end %>
+            <%= link_to edit_punto_ventum_path(punto_ventum), class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to punto_ventum, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
-<%= link_to 'New Punto Ventum', new_punto_ventum_path %>
+<div class="page-header">
+  <%= link_to new_punto_ventum_path, class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Nuevo punto de venta" %>
+  <% end %>
+</div>
