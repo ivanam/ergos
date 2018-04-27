@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'admin', to: 'home#admin', as:'admin_index'
 
 
+  post "/util/buscar_persona/:dni", to: 'util#buscar_persona'
+
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
