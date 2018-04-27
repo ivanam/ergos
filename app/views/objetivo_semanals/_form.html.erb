@@ -13,52 +13,117 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :objetivo_mensual_id, "Objetivo Mensual", class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <%= f.collection_select :objetivo_mensual_id, ObjetivoMensual.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"  align="center" >Nuevo Objetivo semanal</h3>
+</div>
+</br>
+
+
+
+   <div class="form-group">
+    <label class="col-sm-2 control-label">Objetivo Mensual</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+      <%= select_tag 'objetivo_mensual_id', options_from_collection_for_select(ObjetivoMensual.all, :id , :descripcion, ""), :id => "select_objetivo_mensual", :class => "form-alta-vendedor text-field form-control" %>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :fecha_creacion, class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :fecha_creacion, class: "form-control" %>
-    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :cantidad_propuesta, "Cantidad propuesta", class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :cantidad_propuesta, class: "form-control" %>
+   <div class="form-group">
+    <label class="col-sm-2 control-label">Fecha Creación</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+        <%= f.text_field :fecha_creacion, :id => "datepicker1", :placeholder => "dd/mm/aaaa", :class => "form-fecha-nac form-control"%>
+         </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :numero_semana, "Número semana", class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :numero_semana, class: "form-control" %>
     </div>
-  </div>
+  </br>
+
   <div class="form-group">
-    <%= f.label :vendedor_id, "Vendedor", class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <%= f.collection_select :vendedor_id, Vendedor.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    <label class="col-sm-2 control-label">Cantidad propuesta</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+        <%= f.text_field :cantidad_propuesta, class: "form-alta-vendedor text-field form-control" %>
+         </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :user_id, "User", class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <%= f.collection_select :user_id, User.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
     </div>
-  </div>
+  </br>
   <div class="form-group">
-    <%= f.label :punto_venta_id, "Punto de venta", class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <%= f.collection_select :punto_venta_id, PuntoVentum.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    <label class="col-sm-2 control-label">Número semana</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+          <%= f.text_field :numero_semana, class: "form-alta-vendedor text-field form-control" %>
+            </div>
+        </div>
     </div>
-  </div>
+  </br>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Vendedor</label>  
+      <div class="col-sm-3">
+      <div class="form-group">
+      <%= select_tag 'vendedor_id', options_from_collection_for_select(Vendedor.all, :id , :numero, ""), :id => "select_vendedor", :class => "form-alta-vendedor text-field form-control" %>
+           </div>
+    </div>
+    </div>
+  </br>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Usuario</label>  
+      <div class="col-sm-3">
+      <div class="form-group">
+      <%= select_tag 'user_id', options_from_collection_for_select(User.all, :id , :email, ""), :id => "select_user", :class => "form-alta-vendedor text-field form-control" %>
+         </div>
+    </div>
+    </div>
+  </br>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Punto de venta</label>  
+      <div class="col-sm-3">
+      <div class="form-group">
+      <%= select_tag 'punto_venta_id', options_from_collection_for_select(PuntoVentum.all, :id , :nombre, ""), :id => "select_punto_venta", :class => "form-alta-vendedor text-field form-control" %>
+         </div>
+    </div>
+    </div>
+  </br>
+
+
+<div class="form-group">
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-2 col-sm-3">
       <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
-    </div>
+      <% end %>
+    </div>  
+    </div>   
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-3">
+     <%= link_to objetivo_semanals_path, class: 'btn btn-primary' do %>
+     <%= fa_icon "plus", text: "Atras" %>
+     <% end %>
+     </div>
   </div>
-<% end %>
+  </div>
+  </div>
+
+
+
+<script type="text/javascript">
+        
+    $("#datepicker1").datepicker({
+    format: 'dd/mm/yyyy',
+    dayNamesMin: ["Do", "Lu", "Ma", "Mie", "Jue", "Vie", "Sa"],
+    changeYear: true,
+    changeMonth: true,
+    yearRange: "1910:<%= Date.today.year + 10 %>", 
+    monthNames: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+    navigationAsDateFormat: true,
+    nextText: "Sig", 
+    prevText: "Ant", 
+    
+      });
+
+</script>
 

@@ -36,11 +36,12 @@
     </div>
   </br>
 
+  <fieldset id="datos_persona">
   <div class="form-group">
     <label class="col-sm-2 control-label">Cuit</label>  
       <div class="col-sm-2">
        <div class="form-group">
-      <%= text_field_tag 'cuit', "", {:data =>{:toggle=>"tooltip", :placement=>"top"},:title=>"cuit - ej: 27319233815", :class => " form-alta-vendedor  input_cuiltext-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit", :maxlength=>"11", :pattern=>"[0-9]{11}", :oninvalid=>"setCustomValidity('Por favor respete el formato')", :value => @persona.cuit} %> 
+      <%= text_field_tag 'cuit', "", {:data =>{:toggle=>"tooltip", :placement=>"top"},:title=>"cuit - ej: 27319233815", :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit", :maxlength=>"11", :pattern=>"[0-9]{11}", :oninvalid=>"setCustomValidity('Por favor respete el formato')", :value => @persona.cuit} %> 
            </div>
     </div>
     </div>
@@ -109,12 +110,13 @@
     </div>
     </div>
   </br>
+  </fieldset>
   
  <div class="form-group">
     <label class="col-sm-2 control-label">Número</label>  
       <div class="col-sm-2">
        <div class="form-group">
-          <%= f.text_field :numero, autofocus: true, class: 'form-control', :style=>"width:50%"  %>
+          <%= f.text_field :numero, autofocus: true, class: 'form-control solo_numerico', :style=>"width:50%"  %>
         </div>
     </div>
     </div>

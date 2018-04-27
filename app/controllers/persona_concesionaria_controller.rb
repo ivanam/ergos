@@ -25,11 +25,10 @@ class PersonaConcesionariaController < ApplicationController
   # POST /persona_concesionaria.json
   def create
     @persona_concesionarium = PersonaConcesionarium.new(persona_concesionarium_params)
-
     respond_to do |format|
       if @persona_concesionarium.save
-        format.html { redirect_to @persona_concesionarium, notice: 'Persona concesionarium was successfully created.' }
-        format.json { render :show, status: :created, location: @persona_concesionarium }
+        format.html { redirect_to @persona_concesionarium, notice: 'Usuario creado correctamente' }
+        format.json { render :show, status: :created, location: @persona_concesionarium.concesionaria }
       else
         format.html { render :new }
         format.json { render json: @persona_concesionarium.errors, status: :unprocessable_entity }
