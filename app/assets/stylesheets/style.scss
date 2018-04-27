@@ -9,6 +9,10 @@ body {
   background-color: #aeaeae;
 }
 
+.font-weight-bold {
+  font-weight:600;
+}
+
 /* --------------------- NAVBAR ---------------------------- */
 
 .navbar {
@@ -332,6 +336,20 @@ nav.sidebar, .main{
   height: 46%;
 }
 
+.h-100{
+  height: 100%;
+}
+
+.bg-gray{
+  background-color: gray;
+  color: white;
+}
+
+.bg-ergosgray{
+  background-color: $ergosgray;
+  color: white;
+}
+
 .admin-box {
   padding-bottom: 15px;  
 }
@@ -342,6 +360,58 @@ nav.sidebar, .main{
   height: 100%;
   width: 100%;
 }
+
+.title-box {
+  position: relative;
+  float: left;
+  font-weight: 700;
+  height: 36px;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.title-box a{
+  color: white;
+}
+
+.image-box {
+
+}
+
+.image-box div{
+  position: absolute;
+  min-width: 125px;
+  text-align: right;
+}
+
+
+.legend-1 {
+  bottom: 110px;
+  left: 60px;
+}
+
+.legend-2 {
+  bottom: 62px;
+  left: 60px;
+}
+
+.legend-3 {
+  bottom: 8px;
+  left: 60px;
+}
+
 
 @media (min-width: 765px) {
 

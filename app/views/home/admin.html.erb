@@ -50,24 +50,58 @@
         <div class="content-box">
           <%=image_tag "profile-img.png", :class=>"img-fluid", :style=>"width: 100%; padding: 0px 65px;"%>
           <div class="description">
-            <h3>Juan Carlos Perez</h3> 
-            <h4>Vendedor</h4>
-            <p>Estado: Activo</p>
-            <p>Ultima Carga: Ayer 17:54</p>
+            <h3 style="font-size:2vw;">Juan Carlos Perez</h3> 
+            <h4 style="font-size:1vw;">Vendedor</h4>
+            <p style="font-size:0.8vw;">Estado: Activo</p>
+            <p style="font-size:0.8vw;">Ultima Carga: Ayer 17:54</p>
           </div>
         </div>
       </div>
       <div class="col-sm-9 admin-box h-46">
-        <div class="content-box">
-          <div class="btn-group w-100" role="group" aria-label="...">
-            <button type="button" class="btn btn-default w-20">Vendedores</button>
-            <button type="button" class="btn btn-default w-60">Middle</button>
-            <button type="button" class="btn btn-default w-20">Right</button>
+        <div class="content-box h-100">
+          <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
+            <div class="title-box w-20 bg-gray">Vendedores</div>
+            <div class="title-box w-60 bg-ergosgray"></div>
+            <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> 1 de 5 <a href="">></a> <a href="">>></a></div>
           </div>
+          <div class="col-sm-6 row">
+            <div class="col-sm-6">
+              <p class="text-right font-weight-bold" style="font-size:1vmax;">Identificación:</p>
+              <p class="text-right font-weight-bold" style="font-size:1vmax;">Edad:</p>
+              <p class="text-right font-weight-bold" style="font-size:1vmax;">Fecha de Ingreso:</p>
+              <p class="text-right font-weight-bold" style="font-size:1vmax;">Interno:</p>
+              <p class="text-right font-weight-bold" style="font-size:1vmax;">Teléfono Móvil:</p>
+              <p class="text-right font-weight-bold" style="font-size:1vmax;">E-Mail:</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="text-left" style="font-size:1vmax;">20-319233801-5</p>
+              <p class="text-left" style="font-size:1vmax;">32 años</p>
+              <p class="text-left" style="font-size:1vmax;">01/01/2017</p>
+              <p class="text-left" style="font-size:1vmax;">123</p>
+              <p class="text-left" style="font-size:1vmax;">011 - 123456789</p>
+              <p class="text-left" style="font-size:1vmax;">vendedor@ergos.com</p>
+            </div>
+          </div>
+          <div class="col-sm-6 row">
+            <h4 class="text-center">Último Trimestre</h4>
+            <div class="image-box h-100">
+              <%=image_tag "grafico-embudo.png", :class=>"img-fluid", :style=>"width: auto; max-height:150px; padding: 0px 0px;"%>
+              <div class="legend-1">Prospecto</div>
+              <div class="legend-2">Pruebas de Manejo</div>
+              <div class="legend-3">Ventas</div>
+            </div>
+            <!--p class="text-right font-weight-bold" style="font-size:0.8vmax;">Prospecto:</p>
+            <p class="text-right font-weight-bold" style="font-size:0.8vmax;">Pruebas de Manejo:</p>
+            <p class="text-right font-weight-bold" style="font-size:0.8vmax;">Ventas:</p-->
+            
+          </div>
+          <div class="col-sm-12">
+            <p class="text-center"><a href="">más..</a></p>
+          </div>
+
         </div>
-
+        
       </div>
-
       <div class="col-sm-4 admin-box h-46">
         <div class="content-box">
           
@@ -80,6 +114,7 @@
         </div>
 
       </div>
+      
     </div>
   
 </div>
