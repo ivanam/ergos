@@ -7,5 +7,8 @@ class User < ApplicationRecord
   def admin?
 		has_role?(:admin)
 	end
-	
+
+	def concesionaria?
+		has_role?(:admin) or has_role?(:concesionaria)
+	end
 end
