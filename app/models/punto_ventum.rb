@@ -5,8 +5,10 @@ class PuntoVentum < ApplicationRecord
   validates :concesionaria_id, :presence => { :message => "Debe completar la concesionaria donde pertenece el punto de venta" }
   validates :nombre, :presence => { :message => "Debe completar el nombre del P. Venta" }
   validates :domicilio, :presence => { :message => "Debe completar el  campo domicilio" }
-end
+
 
 	def to_s
 		"#{self.nombre}"
 	end
+
+end
