@@ -14,7 +14,14 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render "layouts/navbar"%>
     <%= render "layouts/sidebar"%>
-    <%= yield %>
+    <% if current_user.concesionaria? %>
+      <div class="admin-container">
+    <% else %>
+      <div class="container">
+    <% end %>
+        <%= yield %>
+      </div>
+    
     <%= render "layouts/footer"%>
   </body>
 </html>
