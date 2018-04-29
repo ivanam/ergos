@@ -16,6 +16,8 @@
 //= require jquery_nested_form	
 //= require Chart.min
 //= require turbolinks
+//= require select2-full
+//= require select2_locale_es
 //= require bootstrap-sprockets
 //= require bootstrap-editable
 //= require bootstrap-editable-rails

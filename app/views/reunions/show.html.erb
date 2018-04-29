@@ -1,4 +1,14 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <%= link_to reunions_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <%= link_to edit_reunion_path(@reunion), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h4>Reunion</h4>
+</div>
 
 <p>
   <strong>Fecha:</strong>
@@ -11,14 +21,11 @@
 </p>
 
 <p>
-  <strong>Lugar fisico:</strong>
+  <strong>Lugar Físico:</strong>
   <%= @reunion.lugar_fisico %>
 </p>
 
 <p>
-  <strong>Persona:</strong>
-  <%= @reunion.persona_id %>
+  <strong>Organizador:</strong>
+  <%= @reunion.persona.to_s %>
 </p>
-
-<%= link_to 'Edit', edit_reunion_path(@reunion) %> |
-<%= link_to 'Back', reunions_path %>

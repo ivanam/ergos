@@ -36,3 +36,17 @@ Persona.create(tipo_documento_id: 1, numero_documento: 33343209,apellido: "Pritz
 User.create(email: 'vendedor@vendedor.com', password: 'sumbudrule', persona_id: 1)#1
 User.create(email: 'jefe@jefe.com', password: 'sumbudrule', persona_id: 2)#2
 User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
+
+# Roles
+# ========
+
+Role.create(name: 'vendedor')
+Role.create(name: 'jefe')
+Role.create(name: 'admin')
+
+# Asignando Roles
+# ================
+
+User.find(1).add_role :vendedor
+User.find(2).add_role :jefe
+User.find(3).add_role :admin

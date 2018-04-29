@@ -1,8 +1,15 @@
-<%= form_for(reunion) do |f| %>
+<%= nested_form_for(reunion, html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if reunion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(reunion.errors.count, "error") %> prohibited this reunion from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
+      <ul>
+      <% reunion.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
+      <% end %>
+      </ul>
       <ul>
       <% reunion.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,27 +18,65 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :fecha %>
-    <%= f.date_select :fecha %>
+  <div class="form-group">
+    <%= f.label :fecha, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :fecha, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :semana, "Semana", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :semana, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :lugar_fisico, "Lugar Físico", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :lugar_fisico, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :persona_id, "Organizador", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%= f.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :semana %>
-    <%= f.number_field :semana %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= fa_icon "users" %> Participantes Asignados</h3>
+    </div>
+    <div class="panel-body">  
+
+      <%= f.fields_for :reunion_participantes do |p| %>
+        <div class="row">
+          <%= p.label :persona_id, "Participante", class: "col-sm-2 control-label" %>
+          <div class="col-sm-7">
+            <%= p.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control select"} %>
+          </div>
+          <%= p.link_to_remove "", :class => "btn btn-sm btn-danger glyphicon glyphicon-trash pull-right" %>
+        </div>
+      <% end %>
+      <%= f.link_to_add "Asignar un Participante", :reunion_participantes , :class => "btn btn-xs btn-success" %>
+
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :lugar_fisico %>
-    <%= f.text_field :lugar_fisico %>
-  </div>
-
-  <div class="field">
-    <%= f.label :persona_id %>
-    <%= f.number_field :persona_id %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+    </div>
   </div>
 <% end %>
+<script type="text/javascript">  
+  $('document').ready(function(){
+    $('form').on('nested:fieldAdded', function() {
+    /* apply select2 styling */ 
+      $('select').select2({
+        theme: "bootstrap",
+        language: "es"
+      }); 
+    });
+  };
+</script>

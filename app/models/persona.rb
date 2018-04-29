@@ -2,6 +2,8 @@ class Persona < ApplicationRecord
 
 	has_many :vendedor
 	belongs_to :tipo_documento
+  has_many :reunion_participantes, :foreign_key => 'persona_id', :class_name => 'ReunionParticipante'
+  has_many :reunions, :through => :reunion_participantes
 
   validates :numero_documento, :presence => { :message => "Debe completar el campo Número de documento" }
   validates :numero_documento, numericality: { only_integer: true, :message => "El campo Número de documento debe ser un valor entero"}

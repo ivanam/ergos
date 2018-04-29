@@ -1,5 +1,9 @@
-<h1>New Reunion</h1>
+<div class="page-header">
+  <%= link_to reunions_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <h4>Nueva Reunión</h4>
+</div>
 
 <%= render 'form', reunion: @reunion %>
-
-<%= link_to 'Back', reunions_path %>

@@ -1,6 +1,13 @@
-<h1>Editing Reunion</h1>
+<div class="page-header">
+  <%= link_to reunions_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <%= link_to @reunion, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Ver
+  <% end %>
+  <h4>Editar Reunion</h4>
+</div>
 
 <%= render 'form', reunion: @reunion %>
-
-<%= link_to 'Show', @reunion %> |
-<%= link_to 'Back', reunions_path %>
