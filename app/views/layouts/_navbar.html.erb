@@ -11,13 +11,10 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">opcion 1</a></li>
-        <li><a href="#">opcion 2</a></li>
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, edit_user_registration_path %></li>
-          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to (fa_icon "sign-out", text: "Salir"), destroy_user_session_path, method: :delete %></li>
         <% else %>
-          <li><%= link_to (fa_icon "user-plus", text: "Registrarse"), new_user_registration_path %></li>
           <li><%= link_to (fa_icon "sign-in", text: "Entrar"), new_user_session_path %></li>
         <% end %>
       </ul>

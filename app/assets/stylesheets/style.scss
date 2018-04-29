@@ -226,10 +226,12 @@ nav.sidebar, .main{
 
     nav.sidebar{
       width: 200px;
-      height: 90%;
+      height: 100%;
       margin-left: -160px;
-      float: left;
+      left: 0;
       margin-bottom: 0px;
+      z-index: 1000;
+      position:fixed;
     }
 
     nav.sidebar li {
@@ -284,6 +286,28 @@ nav.sidebar, .main{
   margin-left: 5px;
 }
 
+/* --------------------- FOOTER ---------------------------- */
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  width: 100%;
+  background-color: $ergosgray;
+  border-top: 1.5px solid white;
+  height: 47px; 
+}
+
+.footer a{
+    
+}
+
+.footer-text{
+    
+
+}
+
+
 /* --------------------------------------------------------- */
 /* ---------------------- HOME ----------------------------- */
 
@@ -315,6 +339,11 @@ nav.sidebar, .main{
 /* --------------------------------------------------------- */
 /* ---------------------- ADMIN ---------------------------- */
 
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
 
 .w-100{
   width: 100%;
@@ -332,12 +361,40 @@ nav.sidebar, .main{
   height: 8%;
 }
 
+
 .h-46{
   height: 46%;
 }
 
+
+@media (max-height: 840px) {
+
+  .h-46{
+    height: 52%;
+  }
+}
+
+@media (max-height: 760px) {
+
+  .h-46{
+    height: 68%;
+  }
+}
+
+@media (max-height: 620px) {
+
+  .h-46{
+    height: 84%;
+  }
+}
+
 .h-100{
   height: 100%;
+}
+
+
+.bg-light-gray{
+  background-color: #555;
 }
 
 .bg-gray{
@@ -394,22 +451,24 @@ nav.sidebar, .main{
   position: absolute;
   min-width: 125px;
   text-align: right;
+  right: 200px;
+  font-size:0.8vmax;
 }
 
 
 .legend-1 {
   bottom: 110px;
-  left: 60px;
+  
 }
 
 .legend-2 {
   bottom: 62px;
-  left: 60px;
+  
 }
 
 .legend-3 {
   bottom: 8px;
-  left: 60px;
+  
 }
 
 
@@ -954,19 +1013,7 @@ nav.sidebar, .main{
   min-height: 460px;
 }
 
-.footer{
-    height: 51px;
-    color: white;
-}
 
-.footer a{
-    color:white;
-}
-
-.footer-text{
-    margin-top: 15px;
-
-}
 
 .btn-acciones > .btn{
   margin: 0.5px;
