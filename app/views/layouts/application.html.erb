@@ -14,7 +14,8 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render "layouts/navbar"%>
     <%= render "layouts/sidebar"%>
-    <% if current_user.concesionaria? %>
+
+    <% if !current_user.nil? && current_user.concesionaria? %>
       <div class="admin-container">
     <% else %>
       <div class="container">
