@@ -1,6 +1,11 @@
 class Ability
   include CanCan::Ability
 
+
+  # admin = Rol general para dministrar todo el sistema (debe permitir moverse entre concesionarias)
+  # concesionaria = Administracion general de la concesionaria
+  # punto_venta = Adminitracion general del punto de venta (jefe de ventas)
+  # vendedor
   def initialize(user)
 
     unless user.nil?
@@ -39,3 +44,4 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end
+
