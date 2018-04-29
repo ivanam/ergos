@@ -12,7 +12,11 @@ class Ability
 
         if user.has_role? :admin
           can :manage, :all
+        elsif user.has_role? :concesionaria
+          can :manage, :all
         elsif user.has_role? :punto_venta
+          can :read, [PuntoVentum]
+        elsif user.has_role? :vendedor
           can :read, [PuntoVentum]
         end
     end
