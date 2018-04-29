@@ -10,16 +10,16 @@ class PersonaConcesionarium < ApplicationRecord
   def habilitar_user
   	usuario = User.new(email: self.persona.email, password: "12345678", persona_id: self.persona.id)
   	if usuario.save
-  		usuario.add_role("punto_venta")
+  		usuario.add_role("concesionaria")
   	else
   		usuario = User.where(email: self.persona.email).first
-  		usuario.add_role("punto_venta")
+  		usuario.add_role("concesionaria")
   	end
   end
 
   def deshabilitar_user
     usuario = User.where(email: self.persona.email).first
-    usuario.remove_role("punto_venta")
+    usuario.remove_role("concesionaria")
   end
 
 end
