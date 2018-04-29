@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180429135559) do
+ActiveRecord::Schema.define(version: 20180429163629) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20180429135559) do
     t.integer  "punto_venta_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.string   "porceCLI"
   end
 
   create_table "objetivo_semanals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -58,7 +57,6 @@ ActiveRecord::Schema.define(version: 20180429135559) do
     t.integer  "punto_venta_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.string   "porceCLI"
   end
 
   create_table "persona_concesionaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -68,6 +66,15 @@ ActiveRecord::Schema.define(version: 20180429135559) do
     t.datetime "updated_at",       null: false
     t.index ["concesionaria_id"], name: "index_persona_concesionaria_on_concesionaria_id", using: :btree
     t.index ["persona_id"], name: "index_persona_concesionaria_on_persona_id", using: :btree
+  end
+
+  create_table "persona_punto_venta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "persona_id"
+    t.integer  "punto_venta_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["persona_id"], name: "index_persona_punto_venta_on_persona_id", using: :btree
+    t.index ["punto_venta_id"], name: "index_persona_punto_venta_on_punto_venta_id", using: :btree
   end
 
   create_table "personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -171,4 +178,6 @@ ActiveRecord::Schema.define(version: 20180429135559) do
 
   add_foreign_key "persona_concesionaria", "concesionaria", column: "concesionaria_id"
   add_foreign_key "persona_concesionaria", "personas"
+  add_foreign_key "persona_punto_venta", "personas"
+  add_foreign_key "persona_punto_venta", "punto_venta", column: "punto_venta_id"
 end
