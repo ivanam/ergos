@@ -1,0 +1,28 @@
+<%= form_for(persona_punto_ventum) do |f| %>
+  <% if persona_punto_ventum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(persona_punto_ventum.errors.count, "error") %> prohibited this persona_punto_ventum from being saved:</h2>
+
+      <ul>
+      <% persona_punto_ventum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h1><%= PuntoVentum.find(persona_punto_ventum.punto_venta_id) %></h1>
+  <div class="field">
+    <%= f.label "Buscar Persona" %>
+    <%= text_field_tag 'buscar_cuil'%>
+    <label id="bot_buscar" onclick="buscar_persona()" > buscar </label>     
+    <%= f.hidden_field :persona_id, id: "persona_id"%>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :punto_venta_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona: one
+  punto_venta: one
+
+two:
+  persona: two
+  punto_venta: two

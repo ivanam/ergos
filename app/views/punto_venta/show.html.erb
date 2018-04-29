@@ -1,28 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @punto_ventum.nombre %>
-</p>
-
-<p>
-  <strong>Domicilio:</strong>
-  <%= @punto_ventum.domicilio %>
-</p>
-
-<p>
-  <strong>Concesionaria:</strong>
-  <%= @punto_ventum.concesionaria_id %>
-</p>
-
-<p>
-  <strong>Persona:</strong>
-  <%= @punto_ventum.persona_id %>
-</p>
-
-<%= link_to 'Edit', edit_punto_ventum_path(@punto_ventum) %> |
-<%= link_to 'Back', punto_venta_path %>
-
 <div class="page-header">
 
 <dl class="dl-horizontal">
@@ -35,14 +12,23 @@
   <% @conc = r.nombre  %>
   <dd><%= @conc %></dd>
   <% end %>
-  <dt><strong>Persona:</strong></dt>
-  <dd><%= @punto_ventum.persona_id  %></dd>
+  <% if current_user.concesionaria? %>
+  <h4>Usuarios administradores</h4>
+  <% PersonaPuntoVentum.where(punto_venta_id: @punto_ventum.id).each do |ppv|%>
+    <p>
+      <strong>Persona:</strong>
+      <%= ppv.persona %>
+    </p>
+    <p><td><%= link_to 'Destroy', ppv, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?' } %></td>
+    </p>
+  <% end %>
+<% end %>
   <br/><br/>
   <%= link_to punto_ventum_path, :class => 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Atrás
   <% end %>
-  <%= link_to edit_punto_ventum_path(@objetivo_mensual), :class => 'btn btn-primary' do %>
+  <%= link_to edit_punto_ventum_path(@punto_ventum), :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
     Editar
   <% end %>

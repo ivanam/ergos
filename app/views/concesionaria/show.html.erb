@@ -30,14 +30,18 @@
   <%= @concesionarium.empresa_id %>
 </p>
 
-<% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>
-  <p>
-    <strong>Persona:</strong>
-    <%= pc.persona %>
-  </p>
-  <p><td><%= link_to 'Destroy', pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?' } %></td>
-  </p>
+<% if current_user.admin? %>
+  <h4>Usuarios administradores</h4>
+  <% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>
+    <p>
+      <strong>Persona:</strong>
+      <%= pc.persona %>
+    </p>
+    <p><td><%= link_to 'Destroy', pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?' } %></td>
+    </p>
+  <% end %>
 <% end %>
+
 
 <%= link_to 'Edit', edit_concesionarium_path(@concesionarium) %> |
 <%= link_to 'Back', concesionaria_path %>

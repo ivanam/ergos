@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Persona:</strong>
+  <%= @persona_punto_ventum.persona %>
+</p>
+
+<p>
+  <strong>Punto venta:</strong>
+  <%= @persona_punto_ventum.punto_venta %>
+</p>
+
+<%= link_to 'Edit', edit_persona_punto_ventum_path(@persona_punto_ventum) %> |
+<%= link_to 'Back', persona_punto_venta_path %>

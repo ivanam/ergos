@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Persona Punto Venta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Persona</th>
+      <th>Punto venta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @persona_punto_venta.each do |persona_punto_ventum| %>
+      <tr>
+        <td><%= persona_punto_ventum.persona %></td>
+        <td><%= persona_punto_ventum.punto_venta %></td>
+        <td><%= link_to 'Show', persona_punto_ventum %></td>
+        <td><%= link_to 'Edit', edit_persona_punto_ventum_path(persona_punto_ventum) %></td>
+        <td><%= link_to 'Destroy', persona_punto_ventum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Persona Punto Ventum', new_persona_punto_ventum_path %>
