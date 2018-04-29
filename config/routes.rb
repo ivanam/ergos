@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
 
   post "/util/buscar_persona/:dni", to: 'util#buscar_persona'
+  post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona
 
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

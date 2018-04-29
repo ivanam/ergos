@@ -63,6 +63,18 @@ class PersonasController < ApplicationController
     end
   end
 
+
+  def buscar_persona
+    persona = Persona.where(:cuit => params[:cuit]).first
+    if persona != nil
+      datos = {nombre: persona.nombre, apellido: persona.apellido, fecha_nacimiento: persona.fecha_nacimiento,
+      tipo_documento_id: persona.tipo_documento_id, telefono: persona.telefono, id: persona.id}
+    else
+      datos = nil
+    end
+    render json: datos
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_persona

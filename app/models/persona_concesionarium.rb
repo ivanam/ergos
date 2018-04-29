@@ -5,6 +5,7 @@ class PersonaConcesionarium < ApplicationRecord
   validates :persona_id, uniqueness: { message: "ya existe usuario para esa persona" }
 
   before_create :habilitar_user
+  before_destroy :deshabilitar_user
 
   def habilitar_user
   	usuario = User.new(email: self.persona.email, password: "12345678", persona_id: self.persona.id)
@@ -15,4 +16,10 @@ class PersonaConcesionarium < ApplicationRecord
   		usuario.add_role("punto_venta")
   	end
   end
+
+  def deshabilitar_user
+    usuario = User.where(email: self.persona.email).first
+    usuario.remove_role("punto_venta")
+  end
+
 end

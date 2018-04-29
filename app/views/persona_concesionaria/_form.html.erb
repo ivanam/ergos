@@ -13,8 +13,10 @@
   <% end %>
   <h1><%= Concesionarium.find(persona_concesionarium.concesionaria_id) %></h1>
   <div class="field">
-    <%= f.label :persona_id %>
-    <%= f.text_field :persona_id %>
+    <%= f.label "Buscar Persona" %>
+    <%= text_field_tag 'buscar_cuil'%>
+    <label id="bot_buscar" onclick="buscar_persona()" > buscar </label>     
+    <%= f.hidden_field :persona_id, id: "persona_id"%>
   </div>
 
   <div class="field">

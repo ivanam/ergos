@@ -16,4 +16,8 @@ class Persona < ApplicationRecord
   validates :email, :presence => { :message => "Debe completar el campo Email" }
   validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
 
+
+  def to_s
+    "#{self.apellido}, #{self.nombre}"
+  end
 end
