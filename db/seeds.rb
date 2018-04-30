@@ -41,12 +41,13 @@ User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
 # ========
 
 Role.create(name: 'vendedor')
-Role.create(name: 'jefe')
+Role.create(name: 'punto_venta')
+Role.create(name: 'concesionaria')
 Role.create(name: 'admin')
 
 # Asignando Roles
 # ================
 
 User.find(1).add_role :vendedor
-User.find(2).add_role :jefe
+User.find(2).add_role :punto_venta
 User.find(3).add_role :admin
