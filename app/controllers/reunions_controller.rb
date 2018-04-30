@@ -56,6 +56,7 @@ class ReunionsController < ApplicationController
   # DELETE /reunions/1
   # DELETE /reunions/1.json
   def destroy
+    @reunion.reunion_participantes.destroy_all
     @reunion.destroy
     respond_to do |format|
       format.html { redirect_to reunions_url, notice: 'Se ha eliminado la Reunion.' }

@@ -10,11 +10,6 @@
         <%end %>
       <% end %>
       </ul>
-      <ul>
-      <% reunion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
     </div>
   <% end %>
 
@@ -45,7 +40,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= fa_icon "users" %> Participantes Asignados</h3>
+      <h3 class="panel-title"><%= fa_icon "users" %> Participantes</h3>
     </div>
     <div class="panel-body">  
 
@@ -69,6 +64,7 @@
     </div>
   </div>
 <% end %>
+
 <script type="text/javascript">  
   $('document').ready(function(){
     $('form').on('nested:fieldAdded', function() {

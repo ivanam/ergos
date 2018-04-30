@@ -29,3 +29,25 @@
   <strong>Organizador:</strong>
   <%= @reunion.persona.to_s %>
 </p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= fa_icon "users" %> Participantes</h3>
+  </div>
+  <div class="panel-body">  
+    <dl class="dl-horizontal">
+      <% if !@reunion.personas.empty? %>
+        <% @reunion.personas.each do |p| %>
+          <dt>Participante:</dt>
+          <dd><%= p.to_s %></dd>
+        <% end %>
+      <% else %>
+        <div class="alert alert-warning" role="alert">
+          <b><%= fa_icon "exclamation-circle" %></b>
+          Aún no se han asignado Participantes!
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>
+
