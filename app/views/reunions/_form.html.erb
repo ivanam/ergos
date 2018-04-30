@@ -47,13 +47,15 @@
       <%= f.fields_for :reunion_participantes do |p| %>
         <div class="row">
           <%= p.label :persona_id, "Participante", class: "col-sm-2 control-label" %>
-          <div class="col-sm-7">
+          <div class="col-sm-4">
             <%= p.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control select"} %>
           </div>
-          <%= p.link_to_remove "", :class => "btn btn-sm btn-danger glyphicon glyphicon-trash pull-right" %>
+          <div class="col-sm-2">
+            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger glyphicon glyphicon-trash pull-right" %>
+          </div>
         </div>
       <% end %>
-      <%= f.link_to_add "Asignar un Participante", :reunion_participantes , :class => "btn btn-xs btn-success" %>
+      <%= f.link_to_add "Agregar un Participante", :reunion_participantes , :class => "btn btn-xs btn-success" %>
 
     </div>
   </div>
@@ -65,14 +67,14 @@
   </div>
 <% end %>
 
-<script type="text/javascript">  
+<script type="text/javascript">    
   $('document').ready(function(){
     $('form').on('nested:fieldAdded', function() {
-    /* apply select2 styling */ 
+      /* apply select2 styling */ 
       $('select').select2({
         theme: "bootstrap",
         language: "es"
       }); 
     });
-  };
+  });
 </script>
