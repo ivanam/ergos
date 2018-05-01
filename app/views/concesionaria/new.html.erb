@@ -1,5 +1,9 @@
-<h1>New Concesionarium</h1>
+<div class="page-header">
+  <%= link_to concesionaria_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Volver
+  <% end %>
+  <h4>Nueva Concesionaria</h4>
+</div>
 
 <%= render 'form', concesionarium: @concesionarium %>
-
-<%= link_to 'Back', concesionaria_path %>

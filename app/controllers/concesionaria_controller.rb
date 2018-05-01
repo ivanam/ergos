@@ -27,6 +27,8 @@ class ConcesionariaController < ApplicationController
   # POST /concesionaria.json
   def create
     @concesionarium = Concesionarium.new(concesionarium_params)
+    @concesionarium.fecha_alta = DateTime.now
+    @concesionarium.user_id = current_user.id
 
     respond_to do |format|
       if @concesionarium.save
@@ -56,6 +58,7 @@ class ConcesionariaController < ApplicationController
   # DELETE /concesionaria/1
   # DELETE /concesionaria/1.json
   def destroy
+    @concesionarium.persona_concesionaria.destroy_all
     @concesionarium.destroy
     respond_to do |format|
       format.html { redirect_to concesionaria_url, notice: 'Concesionarium was successfully destroyed.' }
@@ -71,6 +74,6 @@ class ConcesionariaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concesionarium_params
-      params.require(:concesionarium).permit(:icono, :nombre, :fecha_alta, :fecha_baja, :user_id, :empresa_id, :persona_id)
+      params.require(:concesionarium).permit(:icono, :nombre, :fecha_alta, :fecha_baja, :user_id, :empresa_id, :persona_id, persona_concesionaria_attributes: [:id, :persona_id, :_destroy])
     end
 end

@@ -1,6 +1,6 @@
 class PersonaConcesionarium < ApplicationRecord
-  belongs_to :persona
-  belongs_to :concesionaria, :foreign_key => 'concesionaria_id', :class_name => 'Concesionarium'
+  belongs_to :persona, :foreign_key => 'persona_id', :class_name => 'Persona'
+  #belongs_to :concesionarium, :foreign_key => 'concesionaria_id', :class_name => 'Concesionarium'
 
   validates :persona_id, uniqueness: { message: "ya existe usuario para esa persona" }
 

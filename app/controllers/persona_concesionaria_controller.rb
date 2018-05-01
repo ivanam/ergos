@@ -53,9 +53,10 @@ class PersonaConcesionariaController < ApplicationController
   # DELETE /persona_concesionaria/1
   # DELETE /persona_concesionaria/1.json
   def destroy
+    @concesionarium = Concesionarium.find(@persona_concesionarium.concesionaria_id)
     @persona_concesionarium.destroy
     respond_to do |format|
-      format.html { redirect_to persona_concesionaria_url, notice: 'Persona concesionarium was successfully destroyed.' }
+      format.html { redirect_to @concesionarium, notice: 'Se ha eliminado el Administrador de la Concesionaria.' }
       format.json { head :no_content }
     end
   end
