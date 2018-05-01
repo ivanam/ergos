@@ -17,6 +17,7 @@ class Ability
         elsif user.has_role? :punto_venta
           can :read, [PuntoVentum]
         elsif user.has_role? :vendedor
+          can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
         end
     end

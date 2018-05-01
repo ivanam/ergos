@@ -1,6 +1,6 @@
 class CargaDiarium < ApplicationRecord
 	belongs_to :tipo_objetivo
-	belongs_to :vendedor
+	belongs_to :user, :foreign_key => 'vendedor_id'
 
 	validates :fecha, :presence => { :message => "Debe completar el campo Fecha" }
 	validates :cantidad, :presence => { :message => "Debe completar el campo Cantidad" }

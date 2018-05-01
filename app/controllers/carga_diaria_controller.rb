@@ -1,4 +1,5 @@
 class CargaDiariaController < ApplicationController
+  include CargaDiariaHelper
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_carga_diarium, only: [:show, :edit, :update, :destroy]
@@ -6,35 +7,19 @@ class CargaDiariaController < ApplicationController
   # GET /carga_diaria
   # GET /carga_diaria.json
   def index
-    @carga_diaria = CargaDiarium.all
-    @data_personal = {
-        datasets: [{
-          data: [10, 20, 30],
-          backgroundColor: ['blue', 'purple', 'orange']
-        }],
-        labels: ['PROSPECTOS','VENTAS','PRUEBAS DE MANEJO']
-    }
-    @options_personal = {
-      title: {
-        display: true,
-        text: 'Yo'
-      },
-      responsive: true
-    }
-    @data_equipo = {
-        datasets: [{
-          data: [10, 20, 30],
-          backgroundColor: ['blue', 'purple', 'orange']
-        }],
-        labels: ['PROSPECTOS', 'VENTAS', 'PRUEBAS DE MANEJO']
-    }
-    @options_equipo = { 
-      title: {
-        display: true,
-        text: 'Equipo'
-      }, 
-      responsive: true 
-    }
+    @carga_diaria = CargaDiarium.where(vendedor_id: current_user.id)
+
+    carga_personal = CargaDiarium.select('tipo_objetivos.descripcion as descripcion, SUM(carga_diaria.cantidad) as cantidad').joins(:tipo_objetivo).where(vendedor_id: current_user.id).group('tipo_objetivos.descripcion')
+    @data_personal = chart_data(carga_personal)
+    @options_personal = chart_options('Yo')
+
+    persona = Persona.find(current_user.persona_id)
+    vendedor = Vendedor.find_by(persona_id: persona.id)
+    personas_id = Vendedor.where(punto_venta_id: vendedor.punto_venta_id).map(&:persona_id)
+    users_id = User.where(persona_id: personas_id)
+    carga_equipo = CargaDiarium.select('tipo_objetivos.descripcion as descripcion, SUM(carga_diaria.cantidad) as cantidad').joins(:tipo_objetivo).where(vendedor_id: users_id).group('tipo_objetivos.descripcion')
+    @data_equipo = chart_data(carga_equipo)
+    @options_equipo = chart_options('Equipo')
   end
 
   # GET /carga_diaria/1
@@ -55,6 +40,7 @@ class CargaDiariaController < ApplicationController
   # POST /carga_diaria.json
   def create
     @carga_diarium = CargaDiarium.new(carga_diarium_params)
+    @carga_diarium.vendedor_id = current_user.id
 
     respond_to do |format|
       if @carga_diarium.save
