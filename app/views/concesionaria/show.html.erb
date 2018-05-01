@@ -35,11 +35,6 @@
   <%= @concesionarium.user.email %>
 </p>
 
-<p>
-  <strong>Empresa:</strong>
-  <%= @concesionarium.empresa_id %>
-</p>
-
 <% if current_user.admin? %>
   <h4>Usuarios administradores</h4>
   <% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>

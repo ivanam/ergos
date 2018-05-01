@@ -13,9 +13,7 @@
         <th>Nombre</th>
         <th>Fecha alta</th>
         <th>Fecha baja</th>
-        <th>User</th>
-        <th>Empresa</th>
-        <th>Persona</th>
+        <th>Usuario creador</th>
         <th class="col-md-2">&nbsp;</th>
       </tr>
     </thead>
@@ -28,8 +26,6 @@
           <td><%= concesionarium.fecha_alta %></td>
           <td><%= concesionarium.fecha_baja %></td>
           <td><%= concesionarium.user.email %></td>
-          <td><%= concesionarium.empresa_id %></td>
-          <td><%= concesionarium.persona_id %></td>
           <td class="text-center">
             <%= link_to concesionarium, class: 'btn btn-sm btn-default' do %>
               <span class="glyphicon glyphicon-search"></span>

@@ -10,11 +10,6 @@
         <%end %>
       <% end %>
       </ul>
-      <ul>
-      <% concesionarium.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
     </div>
   <% end %>
 
@@ -28,12 +23,6 @@
     <%= f.label :nombre, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.text_field :nombre, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :fecha_baja, class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :fecha_baja, class: "form-control" %>
     </div>
   </div>
   <div class="panel panel-default">
