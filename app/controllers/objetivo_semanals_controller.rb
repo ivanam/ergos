@@ -32,9 +32,8 @@ class ObjetivoSemanalsController < ApplicationController
     @objetivo_semanal.cantidad_propuesta = params[:objetivo_semanal][:cantidad_propuesta]
     @objetivo_semanal.numero_semana = params[:objetivo_semanal][:numero_semana]
     @objetivo_semanal.vendedor_id=params[:vendedor_id]
-    @objetivo_semanal.user_id=params[:user_id]
+    #@objetivo_semanal.user_id=params[:user_id]
     @objetivo_semanal.punto_venta_id=params[:punto_venta_id]
-    debugger
     respond_to do |format|
       if @objetivo_semanal.save
         format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal was successfully created.' }
