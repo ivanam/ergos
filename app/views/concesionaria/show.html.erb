@@ -45,4 +45,5 @@
     <p><td><%= link_to 'Eliminar', pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?' } %></td>
     </p>
   <% end %>
+  <p><td><%= link_to 'Agregar', new_persona_concesionarium_path(concesionaria: @concesionarium.id) %></td>
 <% end %>
