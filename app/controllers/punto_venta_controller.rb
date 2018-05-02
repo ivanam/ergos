@@ -2,6 +2,7 @@ class PuntoVentaController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_punto_ventum, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /punto_venta
   # GET /punto_venta.json
@@ -61,6 +62,13 @@ class PuntoVentaController < ApplicationController
       format.html { redirect_to punto_venta_url, notice: 'Punto ventum was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def dashboard
+    @sidebar = false
+    @footer = false
+
   end
 
   private
