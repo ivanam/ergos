@@ -12,7 +12,7 @@
 
 <p>
   <strong>Fecha:</strong>
-  <%= @objetivo_semanal.objetivo_mensual.to_s %>
+  <%= @objetivo_semanal.objetivo_mensual.tipo_objetivo_id.to_s %>
 </p>
 
 <p>
@@ -26,13 +26,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @objetivo_semanal.user.to_s %>
-</p>
-
-<p>
   <strong>Vendedor:</strong>
-  <%= @objetivo_semanal.vendedor.to_s %>
+  <%= @objetivo_semanal.vendedor.persona_id.to_s %>
 </p>
 
 <p>
