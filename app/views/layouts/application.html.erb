@@ -16,15 +16,30 @@
     <%= render "layouts/sidebar"%>
 
     <% if !current_user.nil? && current_user.concesionaria? %>
-      <div class="admin-container">
+      
+      <% if !@sidebar.nil? %>
+        <% if @sidebar == true %>
+        <div class="admin-container">
+        <% else %>
+        <div class="container">
+        <% end %>
+      <% else %>
+        <div class="admin-container">
+      <% end %>
+
     <% else %>
-      <div class="container">
+        <div class="container">
     <% end %>
         <%= bootstrap_flash %>
         <%= yield %>
-      </div>
-    
-    <%= render "layouts/footer"%>
+        </div>
+    <% if !@footer.nil? %>
+        <% if @footer == true %>
+          <%= render "layouts/footer"%>
+        <% end %>
+    <% else %>
+      <%= render "layouts/footer"%>
+    <% end %>
   </body>
   <script type="text/javascript">
     $('document').ready(function() { 

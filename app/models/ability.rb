@@ -16,9 +16,12 @@ class Ability
           can :manage, :all
         elsif user.has_role? :punto_venta
           can :read, [PuntoVentum]
+          can :dashboard, [PuntoVentum]
         elsif user.has_role? :vendedor
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
+          can :dashboard, [PuntoVentum]
+
         end
     end
     # Define abilities for the passed in user here. For example:

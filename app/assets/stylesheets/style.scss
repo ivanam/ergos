@@ -296,6 +296,7 @@ nav.sidebar, .main{
   background-color: $ergosgray;
   border-top: 1.5px solid white;
   height: 47px; 
+  display: block;
 }
 
 .footer a{
@@ -471,6 +472,10 @@ nav.sidebar, .main{
   
 }
 
+
+.container {
+  
+}
 
 @media (min-width: 765px) {
 
@@ -1082,11 +1087,48 @@ nav.sidebar, .main{
 .dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 
 
-.table > thead:first-child > tr:first-child > th {
-  font-size: small;
-  padding: 2px 4px;
+.table > thead > tr > th {
+  text-align: center;
+  vertical-align: middle;
+  background-color: #0d64a4;
+  color: white;
 }
 
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+  border-bottom-width: 1px;
+}
+
+.table > tbody > tr > td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 1px;
+}
+
+.table-left > tbody > tr > td {
+  height: 69px;
+}
+
+.table > tfoot > tr > th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 1px;
+  background-color: #666;
+  color:white;
+  
+
+}
+
+.table-left > tfoot > tr > th {
+  height: 69px;
+}
+
+  
+.dashboard-logo {
+  position: relative;
+  left: 40px;
+  top: 20px;
+  max-height: 70px;
+}
 
 
 /*LOGIN CSS*/
