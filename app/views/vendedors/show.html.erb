@@ -11,10 +11,39 @@
   
 
   <%v= @vendedor%>
-  <%@index= @vendedor.id%>
-  <%cant = Vendedor.all.count%>
-  <%primero = Vendedor.all.first%>
-  <%ultimo = Vendedor.all.last%>
+  <%if @vendedor.next != nil 
+    @next= @vendedor.next.id
+  else
+    @next= nil
+  end
+
+  if @vendedor.previous != nil 
+    @previous= @vendedor.previous.id
+  else
+    @previous= nil
+  end
+
+
+  if @vendedor != nil
+    @index= @vendedor.id
+  else
+    @index=0
+  end
+
+  cant = Vendedor.all.count
+
+  if Vendedor.all.first != nil
+      @primero = Vendedor.all.first.id
+  else
+    @primero = 0
+  end
+
+  if Vendedor.all.last != nil
+      @ultimo = Vendedor.all.last.id
+  else
+    @ultimo = 0
+  end%>
+
 
 
 <div class="col-sm-3 admin-box h-46">
@@ -33,7 +62,7 @@
     <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
       <div class="title-box w-20 bg-gray">Vendedores</div>
       <div class="title-box w-60 bg-ergosgray"></div>
-      <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> <%=@index%> de <%=cant%> <a href="">></a> <a href="">>></a></div>
+      <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
     </div>
     <div class="col-sm-6 row">
       <div class="col-sm-6">
@@ -86,7 +115,7 @@
     <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
       <div class="title-box w-20 bg-gray">Objetivos</div>
       <div class="title-box w-60 bg-ergosgray"></div>
-      <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> <%=@index%> de <%=cant%> <a href="">></a> <a href="">>></a></div>
+      <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
     </div>
     <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
       <div class="title-box w-100 bg-light-gray"></div>
