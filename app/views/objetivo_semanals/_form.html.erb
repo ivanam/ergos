@@ -30,6 +30,16 @@
     </div>
   </br>
 
+    <div class="form-group">
+    <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id", :class => "form-alta-vendedor text-field form-control" %>
+         </div>
+    </div>
+    </div>
+  </br>
+
   <div class="form-group">
     <label class="col-sm-2 control-label">Cantidad propuesta</label>  
       <div class="col-sm-3">

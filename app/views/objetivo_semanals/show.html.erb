@@ -12,7 +12,12 @@
 
 <p>
   <strong>Fecha:</strong>
-  <%= @objetivo_semanal.objetivo_mensual.tipo_objetivo_id.to_s %>
+  <%= @objetivo_semanal.fecha_creacion %>
+</p>
+
+<p>
+  <strong>Tipo Objetivo Semanal:</strong>
+  <%= @objetivo_semanal.tipo_objetivo.descripcion %>
 </p>
 
 <p>
@@ -27,10 +32,10 @@
 
 <p>
   <strong>Vendedor:</strong>
-  <%= @objetivo_semanal.vendedor.persona_id.to_s %>
+  <%= @objetivo_semanal.vendedor.numero %>
 </p>
 
 <p>
   <strong>Punto de venta:</strong>
-  <%= PuntoVentum.where(:id => @objetivo_semanal.punto_venta_id ).to_s %>
+  <%=  @objetivo_semanal.punto_ventum.nombre %>
 </p>
