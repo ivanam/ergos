@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20180502211045) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "homes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.string   "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "objetivo_mensuals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "descripcion"
     t.date     "fecha_creacion"
