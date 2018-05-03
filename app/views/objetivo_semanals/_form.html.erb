@@ -20,21 +20,21 @@
 </div>
 </br>
 
-
-
-   <div class="form-group">
-    <label class="col-sm-2 control-label">Objetivo Mensual</label>  
-      <div class="col-sm-3">
-        <div class="form-group">
-      <%= select_tag 'objetivo_mensual_id', options_from_collection_for_select(ObjetivoMensual.all, :id , :descripcion, ""), :id => "select_objetivo_mensual", :class => "form-alta-vendedor text-field form-control" %>
-    </div>
-  </div>
-  </div>
    <div class="form-group">
     <label class="col-sm-2 control-label">Fecha Creación</label>  
       <div class="col-sm-3">
         <div class="form-group">
         <%= f.text_field :fecha_creacion, :id => "datepicker1", :placeholder => "dd/mm/aaaa", :class => "form-fecha-nac form-control"%>
+         </div>
+    </div>
+    </div>
+  </br>
+
+    <div class="form-group">
+    <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id", :class => "form-alta-vendedor text-field form-control" %>
          </div>
     </div>
     </div>
@@ -53,7 +53,7 @@
     <label class="col-sm-2 control-label">Número semana</label>  
       <div class="col-sm-3">
         <div class="form-group">
-          <%= f.text_field :numero_semana, class: "form-alta-vendedor text-field form-control" %>
+           <%= f.select :numero_semana, options_for_select(['1','2','3','4','5']) %>
             </div>
         </div>
     </div>
@@ -68,16 +68,6 @@
     </div>
     </div>
   </br>
-
-<!-- <div class="form-group">
-    <label class="col-sm-2 control-label">Usuario</label>  
-      <div class="col-sm-3">
-      <div class="form-group">
-      <%= select_tag 'user_id', options_from_collection_for_select(User.all, :id , :email, ""), :id => "select_user", :class => "form-alta-vendedor text-field form-control" %>
-         </div>
-    </div>
-    </div>
-  </br> -->
 
 <div class="form-group">
     <label class="col-sm-2 control-label">Punto de venta</label>  

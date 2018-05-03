@@ -1,43 +1,44 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Personas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tipo documento</th>
-      <th>Numero documento</th>
-      <th>Cuit</th>
-      <th>Apellido</th>
-      <th>Nombre</th>
-      <th>Domicilio</th>
-      <th>Telefono</th>
-      <th>Email</th>
-      <th>Fecha nacimiento</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @personas.each do |persona| %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
       <tr>
-        <td><%= persona.tipo_documento_id %></td>
-        <td><%= persona.numero_documento %></td>
-        <td><%= persona.cuit %></td>
+        <th>Apellido</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Email</th>
+        <th class="col-md-2">&nbsp;</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @personas.each do |persona| %>
+        <tr>
         <td><%= persona.apellido %></td>
         <td><%= persona.nombre %></td>
-        <td><%= persona.domicilio %></td>
-        <td><%= persona.telefono %></td>
-        <td><%= persona.email %></td>
-        <td><%= persona.fecha_nacimiento %></td>
-        <td><%= link_to 'Show', persona %></td>
-        <td><%= link_to 'Edit', edit_persona_path(persona) %></td>
-        <td><%= link_to 'Destroy', persona, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <td><%= persona.age(persona.fecha_nacimiento) %></td>
+        <td> ? </td>
+          <td class="text-center">
+            <%= link_to persona, class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-search"></span>
+            <% end %>
+            <%= link_to edit_persona_path(persona), class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to persona, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Persona', new_persona_path %>
+<div class="page-header">
+  <%= link_to new_persona_path, class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Nueva persona" %>
+  <% end %>
+</div>

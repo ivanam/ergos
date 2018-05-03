@@ -59,7 +59,7 @@ class VendedorsController < ApplicationController
              else
 
                 format.html { render :new }
-                format.json { render json: @persona.errors, status: :unprocessable_entity }
+                format.json { render json: @persona.errors.full_messages, status: :unprocessable_entity }
              end
   
     end
