@@ -13,6 +13,18 @@
     </div>
   <% end %>
 
+  <% if @persona.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
+      <ul>
+      <% @persona.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
 
 
 
@@ -20,12 +32,25 @@
   <div class="panel-heading">
     <h3 class="panel-title"  align="center" >Nuevo Vendedor</h3>
 </div>
-<div class="panel-body">
+
+
+  <fieldset id="datos_persona">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Cuit</label>  
+      <div class="col-sm-2">
+       <div class="form-group">
+      <%= p_form.text_field :cuit , :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit"%> 
+           </div>
+    </div>
+    </div>
+  </br>
+
+  <div class="panel-body">
    <div class="form-group">
    <label class="col-sm-2 control-label">Tipo de Documento</label>  
     <div class="col-sm-2">
      <div class="form-group">
-      <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all.order(:descripcion), :id, :descripcion, {prompt: false} ,:style=>"width:50%" , :class => "form-control select input_tipo_documento" %>
+      <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all.order(:descripcion), :id, :descripcion, {prompt: false} ,:style=>"width:50%" ,:id=> "select_tipo_documento", :class => "form-control select input_tipo_documento" %>
       </div>
       </div>
     </div>
@@ -37,17 +62,6 @@
      <div class="form-group">
         <%= p_form.text_field :numero_documento, :class => "form-alta-vendedor input_dni text-field form-control solo_numerico", :id => "input_dni" %>
          </div>
-    </div>
-    </div>
-  </br>
-
-  <fieldset id="datos_persona">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Cuit</label>  
-      <div class="col-sm-2">
-       <div class="form-group">
-      <%= p_form.text_field :cuit , :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit", :maxlength=>"11", :pattern=>"[0-9]{11}", :oninvalid=>"setCustomValidity('Por favor respete el formato')" %> 
-           </div>
     </div>
     </div>
   </br>

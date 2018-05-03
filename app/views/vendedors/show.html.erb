@@ -1,29 +1,109 @@
-<p id="notice"><%= notice %></p>
+<div class="col-sm-12 h-6">
+  <ol class="breadcrumb">
+    <li><a href="#">Organización: BMW</a></li>
+    <li><a href="#">Concecionario: Bremen</a></li>
+    <li><a href="#">Punto de Venta: Libertador 1</a></li>
+    <li class="active">Vendedores</li>
+  </ol>
 
-<p>
-  <strong>Foto:</strong>
-  <%= @vendedor.foto %>
-</p>
+</div>
 
-<p>
-  <strong>Numero:</strong>
-  <%= @vendedor.numero %>
-</p>
+  
 
-<p>
-  <strong>Fecha alta:</strong>
-  <%= @vendedor.fecha_alta %>
-</p>
+  <%v= @vendedor%>
+  <%@index= @vendedor.id%>
+  <%cant = Vendedor.all.count%>
+  <%primero = Vendedor.all.first%>
+  <%ultimo = Vendedor.all.last%>
 
-<p>
-  <strong>Fecha baja:</strong>
-  <%= @vendedor.fecha_baja %>
-</p>
 
-<p>
-  <strong>Persona:</strong>
-  <%= @vendedor.persona_id %>
-</p>
+<div class="col-sm-3 admin-box h-46">
+  <div class="content-box">
+    <center><%=image_tag "profile-img.png", :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%></center> 
+    <div class="description">
+      <h3 style="font-size:2vw;"><%=v.persona.apellido%> <%=v.persona.nombre %></h3> 
+      <h4 style="font-size:1vw;">Vendedor</h4>
+      <p style="font-size:0.8vw;">Estado: Activo</p>
+      <p style="font-size:0.8vw;">Última Carga: Ayer 17:54</p>
+    </div>
+  </div>
+</div>
+<div class="col-sm-9 admin-box h-46">
+  <div class="content-box h-100">
+    <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
+      <div class="title-box w-20 bg-gray">Vendedores</div>
+      <div class="title-box w-60 bg-ergosgray"></div>
+      <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> <%=@index%> de <%=cant%> <a href="">></a> <a href="">>></a></div>
+    </div>
+    <div class="col-sm-6 row">
+      <div class="col-sm-6">
+        <p class="text-right font-weight-bold" style="font-size:1vmax;">Identificación:</p>
+        <p class="text-right font-weight-bold" style="font-size:1vmax;">Edad:</p>
+        <p class="text-right font-weight-bold" style="font-size:1vmax;">Fecha de Ingreso:</p>
+        <p class="text-right font-weight-bold" style="font-size:1vmax;">Interno:</p>
+        <p class="text-right font-weight-bold" style="font-size:1vmax;">Teléfono Móvil:</p>
+        <p class="text-right font-weight-bold" style="font-size:1vmax;">E-Mail:</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="text-left" style="font-size:1vmax;"><%=v.persona.cuit%></p> 
 
-<%= link_to 'Edit', edit_vendedor_path(@vendedor) %> |
-<%= link_to 'Back', vendedors_path %>
+        <p class="text-left" style="font-size:1vmax;"><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
+        <p class="text-left" style="font-size:1vmax;"><%=v.fecha_alta%></p>
+        <p class="text-left" style="font-size:1vmax;">?</p>
+        <p class="text-left" style="font-size:1vmax;"><%=v.persona.telefono%></p>
+        <p class="text-left" style="font-size:1vmax;">? creamos user en form de vendedor?</p>
+      </div>
+    </div>
+    <div class="col-sm-6 row">
+      <h4 class="text-center font-weight-bold" style="font-size:1.5vmax;">Último Trimestre</h4>
+      <div class="image-box h-100">
+        <center>
+          <%=image_tag "grafico-embudo.png", :style=>"width: auto; max-height:150px; float:right;"%>
+        </center>
+        <div class="legend-1">Prospecto</div>
+        <div class="legend-2">Pruebas de Manejo</div>
+        <div class="legend-3">Ventas</div>
+        
+      </div>
+      
+      
+    </div>
+    <div class="" style="width:90%;position: absolute;bottom: 20px;">
+      <p class="text-center "><a href="">más..</a></p>
+    </div>
+
+  </div>
+  
+</div>
+<div class="col-sm-3 admin-box h-46">
+  <div class="content-box">
+    
+  </div>
+
+</div>
+<div class="col-sm-9 admin-box h-46">
+  <div class="content-box h-100">
+    <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
+      <div class="title-box w-20 bg-gray">Objetivos</div>
+      <div class="title-box w-60 bg-ergosgray"></div>
+      <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> <%=@index%> de <%=cant%> <a href="">></a> <a href="">>></a></div>
+    </div>
+    <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
+      <div class="title-box w-100 bg-light-gray"></div>
+      
+    </div>
+    <div class="col-sm-6 row">
+      <div class="col-sm-6">
+        
+      </div>
+    </div>
+    <div class="col-sm-6 row">
+        
+    </div>
+      
+  <div class="" style="width:90%;position: absolute;bottom: 20px;">
+    <p class="text-center "><a href="">más..</a></p>
+  </div>
+
+</div>
+

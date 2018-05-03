@@ -20,4 +20,6 @@ class Vendedor < ApplicationRecord
       errors.add("No se puede dar de alta , ya que existe un vendedor con ese Número")        
     end
   end
+
+
 end

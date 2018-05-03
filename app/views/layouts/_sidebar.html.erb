@@ -1,7 +1,6 @@
 <% if user_signed_in? %>
   <% if current_user.concesionaria? %>
     <% if @sidebar.nil? or @sidebar == true %>
-      
         <nav class="navbar navbar-default sidebar" role="navigation" style="">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -19,7 +18,12 @@
                   <ul class="dropdown-menu forAnimate" role="menu">
                     <li><a href="/concesionaria/1">Concesionaria</a></li>
                     <li><a href="/punto_venta">Puntos de Venta</a></li>
-                    <li><a href="/vendedors">Vendedores</a></li>
+                    <%if Vendedor.first != nil
+                      @v = Vendedor.first.id
+                    else
+                      @v = nil
+                      end%>
+                    <li><a href="/vendedors/"<%=@v%>>Vendedores</a></li>
                   </ul>
                 </li>          
                 <li class="dropdown">
@@ -39,7 +43,10 @@
             </div>
           </div>
         </nav>
+<<<<<<< HEAD
       
     <% end %>
   <% end %>
 <% end %>
+=======
+>>>>>>> 269447445077f324628d5c5d4b4d30890af6d382
