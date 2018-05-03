@@ -16,14 +16,13 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Organización<span class="caret"></span><span class="pull-right hidden-xs showopacity fa fa-home"></span></a>
                   <ul class="dropdown-menu forAnimate" role="menu">
-                    <li><a href="/concesionaria/1">Concesionaria</a></li>
-                    <li><a href="/punto_venta">Puntos de Venta</a></li>
-                    <%if Vendedor.first != nil
-                      @v = Vendedor.first.id
-                    else
-                      @v = nil
-                      end%>
-                    <li><a href="/vendedors/"<%=@v%>>Vendedores</a></li>
+                    <% if current_user.admin? %>
+                      <li><a href="<%= concesionaria_path %>" >Concesionaria</a></li>
+                    <% else %>
+                      <li><a href="<%= concesionaria_path%>/<%= current_user.concesionaria_id%>">Concesionaria</a></li>
+                    <% end %>
+                    <li><a href="<%= punto_venta_path %>">Puntos de Venta</a></li>
+                    <li><a href="/vendedors">Vendedores</a></li>
                   </ul>
                 </li>          
                 <li class="dropdown">

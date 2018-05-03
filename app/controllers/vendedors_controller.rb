@@ -6,7 +6,7 @@ class VendedorsController < ApplicationController
   # GET /vendedors
   # GET /vendedors.json
   def index
-    @vendedors = Vendedor.all
+    @vendedors = Vendedor.where(punto_venta_id: current_user.punto_venta_id)
   end
 
   # GET /vendedors/1
