@@ -1,28 +1,5 @@
 $(document).ready(function($) {
 
-  if ($("#datepicker1").val() != null) {
-
-    var fecha = $("#datepicker1").val().split("-")[0];
-    if (fecha.length == 4){      
-       $("#datepicker").val($("#datepicker").val().split("-")[2]+"-"+$("#datepicker").val().split("-")[1]+"-"+$("#datepicker").val().split("-")[0]);
-    } 
-  }   
-
-  if ($("#datepicker3").val() != null) {
-    var fecha3 = $("#datepicker2").val().split("-")[0];
-    
-    if (fecha3.length == 4){
-       $("#datepicker3").val($("#datepicker2").val().split("-")[2]+"-"+$("#datepicker3").val().split("-")[1]+"-"+$("#datepicker3").val().split("-")[0]);
-    }
-  }   
-
-  if ($("#datepicker4").val() != null) {
-    var fecha4 = $("#datepicker3").val().split("-")[0];
-    
-    if (fecha4.length == 4){
-       $("#datepicker4").val($("#datepicker3").val().split("-")[2]+"-"+$("#datepicker4").val().split("-")[1]+"-"+$("#datepicker4").val().split("-")[0]);
-    }
-  }  
 
   $(".solo_numerico").on("keypress keyup blur",function (event) {    
      $(this).val($(this).val().replace(/[^\d].+/, ""));
@@ -35,43 +12,24 @@ $(document).ready(function($) {
     }          
   });
 
-  $("#input_cuil").on("keypress keyup blur",function (event) {    
-     if (( event.which == 8 ) || ( event.which == 45)) {
-         
-     }else{
-      if (event.which < 48 || event.which > 57) {
-                event.preventDefault();
-           }
-    }
-          
-  });
 
-  $("#input_cuil").blur(function(){
-     var cuil = $("#input_cuil");
-     var dni = $("#input_dni");
-     /*validarCUIT(cuil,dni);     */
-  });
 
-   $("#input_dni").bind("propertychange change click keyup input paste",function(){
-      var elem = $(this);
-      elem.data('oldVal', elem.val());
-      if (elem.data('oldVal') != elem.val()) {alert("cambio");}
-       var dni = parseInt($("#input_cuil").val(),11);
-       if (!Number.isNaN(dni)) //Verifico que se haya ingresaod un dni 
-       { 
+
+   $("#input_cuil").bind("propertychange change click keyup input paste",function(){
+      var cuit = parseInt($("#input_cuil").val(),10);
          $("#datos_persona").show();
           $.ajax({
-            url: '/util/buscar_persona/'+dni,
+            url: '/personas/buscar_persona_completa/'+cuit,
             type: 'POST',
           })
           .done(function(data) {
-            console.log(data)
             if (data != null) {
+              console.log(data)
               /*$("#input_nombres").val(data.nombres); */ //Comentar para no repetir apellido y nombre al buscar y guardar
               $("#input_apellidos").val(data.apellido);
               $("#input_dni").val(data.numero_documento);
               $("#input_nombre").val(data.nombre);
-              $("#datepicker1").val(data.fecha_nacimiento.split("-")[2]+"-"+data.fecha_nacimiento.split("-")[1]+"-"+data.fecha_nacimiento.split("-")[0]);
+              $("#datepicker1").val(data.fecha_nacimiento);
               $("#select_tipo_documento").val(data.tipo_documento_id);
               $("#input_domicilio").val(data.domicilio);
               $("#input_telefono").val(data.telefono);
@@ -83,12 +41,11 @@ $(document).ready(function($) {
               $("#input_nombre").val("");
               $("#input_dni").val("");
               $("#datepicker1").val("");
-              $("#select_tipo_documento").val(5);
+              $("#select_tipo_documento").val(4);
               $("#input_domicilio").val("");
               $("#input_telefono").val(""); //ID 5, para tipo de documento DNI
             }
           })
-       } 
     });
 
 });

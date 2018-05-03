@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'punto_venta#dashboard', as:'punto_venta_dashboard'
 
-  post "/util/buscar_persona/:dni", to: 'util#buscar_persona'
+  post "/personas/buscar_persona_completa/:cuit", to: 'personas#buscar_persona_completa'
   post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona
 
   root 'home#index'
