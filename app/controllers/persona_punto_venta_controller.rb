@@ -28,7 +28,7 @@ class PersonaPuntoVentaController < ApplicationController
 
     respond_to do |format|
       if @persona_punto_ventum.save
-        format.html { redirect_to @persona_punto_ventum, notice: 'Persona punto ventum was successfully created.' }
+        format.html { redirect_to @persona_punto_ventum.punto_venta, notice: 'Persona punto ventum was successfully created.' }
         format.json { render :show, status: :created, location: @persona_punto_ventum }
       else
         format.html { render :new }
@@ -54,9 +54,10 @@ class PersonaPuntoVentaController < ApplicationController
   # DELETE /persona_punto_venta/1
   # DELETE /persona_punto_venta/1.json
   def destroy
+    @punto_venta = PuntoVentum.find(@persona_punto_ventum.punto_venta_id)
     @persona_punto_ventum.destroy
     respond_to do |format|
-      format.html { redirect_to persona_punto_venta_url, notice: 'Persona punto ventum was successfully destroyed.' }
+      format.html { redirect_to @punto_venta, notice: 'Persona punto ventum was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

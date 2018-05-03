@@ -32,9 +32,6 @@
             <%= link_to punto_ventum, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
               <span class="glyphicon glyphicon-trash"></span>
             <% end %>
-            <%= link_to new_persona_punto_ventum_path(punto_venta: punto_ventum.id), class: 'btn btn-sm btn-default' do %>
-              <span class="glyphicon glyphicon-plus"></span>
-            <% end %>
           </td>
       </tr>
     <% end %>
