@@ -9,13 +9,12 @@
 </div>
 
   
-<% @vendedores = Vendedor.where(:fecha_baja => nil) %>
-<%@index= 0%>
-<%@vendedores.each do |v| %>
-<%@index = @index + 1 %>
-<%cant = Vendedor.all.count%>
-<%primero = Vendedor.all.first%>
-<%ultimo = Vendedor.all.last%>
+
+  <%v= @vendedor%>
+  <%@index= @vendedor.id%>
+  <%cant = Vendedor.all.count%>
+  <%primero = Vendedor.all.first%>
+  <%ultimo = Vendedor.all.last%>
 
 
 <div class="col-sm-3 admin-box h-46">
@@ -108,4 +107,3 @@
 
 </div>
 
-<%end%>

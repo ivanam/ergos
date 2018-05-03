@@ -21,7 +21,5 @@ class Vendedor < ApplicationRecord
     end
   end
 
-    def next
-      Vendedor.next(self.id).first
-    end
+
 end

@@ -38,6 +38,7 @@ User.create(email: 'vendedor@vendedor.com', password: 'sumbudrule', persona_id: 
 User.create(email: 'jefe@jefe.com', password: 'sumbudrule', persona_id: 2)#2
 User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
 User.create(email: 'vendedor2@vendedor.com', password: 'sumbudrule', persona_id: 4)#4
+User.create(email: 'concesionaria@concesionaria.com', password: 'sumbudrule', persona_id: 5)#5
 
 # Roles
 # ========
@@ -54,3 +55,4 @@ User.find(1).add_role :vendedor
 User.find(2).add_role :punto_venta
 User.find(3).add_role :admin
 User.find(4).add_role :vendedor
+User.find(5).add_role :concesionaria
