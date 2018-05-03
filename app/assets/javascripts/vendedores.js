@@ -56,7 +56,7 @@ $(document).ready(function($) {
       var elem = $(this);
       elem.data('oldVal', elem.val());
       if (elem.data('oldVal') != elem.val()) {alert("cambio");}
-       var dni = parseInt($("#input_dni").val(),10);
+       var dni = parseInt($("#input_cuil").val(),11);
        if (!Number.isNaN(dni)) //Verifico que se haya ingresaod un dni 
        { 
          $("#datos_persona").show();
@@ -69,7 +69,7 @@ $(document).ready(function($) {
             if (data != null) {
               /*$("#input_nombres").val(data.nombres); */ //Comentar para no repetir apellido y nombre al buscar y guardar
               $("#input_apellidos").val(data.apellido);
-              $("#input_cuil").val(data.cuit);
+              $("#input_dni").val(data.numero_documento);
               $("#input_nombre").val(data.nombre);
               $("#datepicker1").val(data.fecha_nacimiento.split("-")[2]+"-"+data.fecha_nacimiento.split("-")[1]+"-"+data.fecha_nacimiento.split("-")[0]);
               $("#select_tipo_documento").val(data.tipo_documento_id);
@@ -81,7 +81,7 @@ $(document).ready(function($) {
               $("#input_nombres").val("");
               $("#input_apellidos").val("");
               $("#input_nombre").val("");
-              $("#input_cuil").val("");
+              $("#input_dni").val("");
               $("#datepicker1").val("");
               $("#select_tipo_documento").val(5);
               $("#input_domicilio").val("");
