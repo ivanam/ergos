@@ -50,7 +50,7 @@
    <label class="col-sm-2 control-label">Tipo de Documento</label>  
     <div class="col-sm-2">
      <div class="form-group">
-      <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all, :id, :descripcion, {prompt: false} ,:style=>"width:50%" ,:id=> "select_tipo_documento", :class => "form-control select input_tipo_documento" %>
+      <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all, :id, :descripcion, :style=>"width:50%" ,:id=> "select_tipo_documento", :class => "form-control select input_tipo_documento" %>
       </div>
       </div>
     </div>
