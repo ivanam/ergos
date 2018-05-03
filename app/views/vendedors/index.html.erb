@@ -14,6 +14,8 @@
 <%@vendedores.each do |v| %>
 <%@index = @index + 1 %>
 <%cant = Vendedor.all.count%>
+<%primero = Vendedor.all.first%>
+<%ultimo = Vendedor.all.last%>
 
 
 <div class="col-sm-3 admin-box h-46">
@@ -32,7 +34,7 @@
     <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
       <div class="title-box w-20 bg-gray">Vendedores</div>
       <div class="title-box w-60 bg-ergosgray"></div>
-      <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> 1 de 5 <a href="">></a> <a href="">>></a></div>
+      <div class="title-box w-20 bg-gray"><a href=""><<</a> <a href=""><</a> <%=@index%> de <%=cant%>  <a href="/vendedors/"+ <%v.next%> >>></a></div>
     </div>
     <div class="col-sm-6 row">
       <div class="col-sm-6">
