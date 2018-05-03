@@ -1,0 +1,22 @@
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= fa_icon "users" %> Administradores</h3>
+    </div>
+  </div>
+
+    <div class="panel-body">  
+
+      <%= f.fields_for :persona_concesionaria do |p| %>
+        <div class="row">
+          <%= p.label :persona_id, "Participante", class: "col-sm-2 control-label" %>
+          <div class="col-sm-4">
+            <%= p.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control select"} %>
+          </div>
+          <div class="col-sm-2">
+            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger glyphicon glyphicon-trash pull-right" %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.link_to_add "Agregar un Administrador", :persona_concesionaria , :class => "btn btn-xs btn-success" %>
+
+    </div>
