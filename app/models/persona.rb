@@ -13,8 +13,8 @@ class Persona < ApplicationRecord
   validates :nombre, :presence => { :message => "Debe completar el campo Nombre" }
   validates :nombre, :format => {:with => /\A[a-z ñáéíóúü'A-ZÑÁÉÍÓÚÜ]+\z/, :message => "El campo Nombre sólo debe contener letras" }
   validates :telefono, :presence => { :message => "Debe completar el campo Teléfono" }
-  validates :telefono, numericality: { only_integer: true, :message => "El campo Teléfono debe ser un valor entero"}
-  validates :telefono, length: {minimum: 11, maximum: 13, :message => "El campo Teléfono debe tener entre 11 y 13 dígitos"}
+  validates :fecha_nacimiento, presence: { :message => "Fecha nacimiento no puede estar vacio"}
+
   #validates :email, :presence => { :message => "Debe completar el campo Email" }
   #validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
 
@@ -22,4 +22,12 @@ class Persona < ApplicationRecord
   def to_s
     "#{self.apellido}, #{self.nombre}"
   end
+
+  def age(dob)
+    if dob != nil
+      now = Date.today
+      now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    end
+  end
 end
+  

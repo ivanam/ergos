@@ -9,11 +9,12 @@ class PersonaPuntoVentum < ApplicationRecord
   before_destroy :deshabilitar_user
 
   def habilitar_user
-  	usuario = User.new(email: self.persona.email, password: "12345678", persona_id: self.persona.id)
+  	usuario = User.new(email: self.persona.email, password: "12345678", persona_id: self.persona.id, punto_venta_id: self.punto_venta_id, concesionaria_id: self.punto_venta.concesionaria_id)
   	if usuario.save
   		usuario.add_role("punto_venta")
   	else
   		usuario = User.where(email: self.persona.email).first
+      usuario.update(punto_venta_id: self.punto_venta_id, concesionaria_id: self.punto_venta.concesionaria_id)
   		usuario.add_role("punto_venta")
   	end
   end

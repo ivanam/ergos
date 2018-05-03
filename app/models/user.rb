@@ -4,6 +4,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  belongs_to :concesionaria, :foreign_key => 'concesionaria_id', :class_name => 'Concesionarium'
+  belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
+  
   def admin?
 		has_role?(:admin)
 	end

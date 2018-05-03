@@ -16,6 +16,15 @@
     <%= text_field_tag 'buscar_cuil'%>
     <label id="bot_buscar" onclick="buscar_persona()" > buscar </label>     
     <%= f.hidden_field :persona_id, id: "persona_id"%>
+
+    <div id = "datos_persona" class="hide">
+      <label > Agente: </label> 
+      <%= text_field_tag 'nombre_persona'%>
+    </div>
+    <div  id = "crear_persona" class="hide">
+      <label > No se encontraron resultados </label> 
+      <%= link_to 'New Persona', new_persona_path %>
+    </div>
   </div>
 
   <div class="field">
