@@ -26,6 +26,11 @@ Rails.application.routes.draw do
   post "/personas/buscar_persona_completa/:cuit", to: 'personas#buscar_persona_completa'
   post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona
 
+
+  get "/punto_ventum/select", to: 'punto_venta#select',  as: :select_punto_venta
+
+  get "/concesionarium/select", to: 'concesionaria#select',  as: :select_concesionaria
+
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

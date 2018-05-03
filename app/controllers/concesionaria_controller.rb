@@ -1,7 +1,7 @@
 class ConcesionariaController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_concesionarium, only: [:show, :edit, :update, :destroy]
+  before_action :set_concesionarium, only: [:show, :edit, :update, :destroy, :select]
 
   # GET /concesionaria
   # GET /concesionaria.json
@@ -62,6 +62,14 @@ class ConcesionariaController < ApplicationController
     @concesionarium.destroy
     respond_to do |format|
       format.html { redirect_to concesionaria_url, notice: 'Concesionarium was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def select
+    current_user.update(concesionaria_id: @concesionarium.id)
+    respond_to do |format|
+      format.html { redirect_to @concesionarium, notice: 'Concesionaria seleccionada' }
       format.json { head :no_content }
     end
   end

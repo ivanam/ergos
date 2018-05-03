@@ -6,7 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :concesionaria, :foreign_key => 'concesionaria_id', :class_name => 'Concesionarium'
-  belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
+  
+  belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum', optional: true
   
   def admin?
 		has_role?(:admin)

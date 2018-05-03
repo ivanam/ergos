@@ -1,13 +1,13 @@
 class PuntoVentaController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_punto_ventum, only: [:show, :edit, :update, :destroy]
+  before_action :set_punto_ventum, only: [:show, :edit, :update, :destroy, :select]
   
 
   # GET /punto_venta
   # GET /punto_venta.json
   def index
-    @punto_venta = PuntoVentum.all
+    @punto_venta = PuntoVentum.where(concesionaria_id: current_user.concesionaria_id)
   end
 
   # GET /punto_venta/1
@@ -17,7 +17,7 @@ class PuntoVentaController < ApplicationController
 
   # GET /punto_venta/new
   def new
-    @punto_ventum = PuntoVentum.new
+    @punto_ventum = PuntoVentum.new(concesionaria_id: current_user.concesionaria_id)
   end
 
   # GET /punto_venta/1/edit
@@ -60,6 +60,14 @@ class PuntoVentaController < ApplicationController
     @punto_ventum.destroy
     respond_to do |format|
       format.html { redirect_to punto_venta_url, notice: 'Punto ventum was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def select
+    current_user.update(punto_venta_id: @punto_ventum.id)
+    respond_to do |format|
+      format.html { redirect_to @punto_ventum, notice: 'Punto de venta seleccionado' }
       format.json { head :no_content }
     end
   end
