@@ -1,6 +1,6 @@
 class Vendedor < ApplicationRecord
 
-  belongs_to :persona
+  belongs_to :persona, optional: true
 
   has_attached_file :foto, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   #validates_attachment_content_type :foto, :content_type => /\Aimage\/.*\Z/
@@ -16,9 +16,7 @@ class Vendedor < ApplicationRecord
   end
 
   def numero_unico
-    debugger
     if Vendedor.where(:numero => self.numero).first
-      
       errors.add("No se puede dar de alta , ya que existe un vendedor con ese Número")        
     end
   end
