@@ -11,8 +11,6 @@ class ObjetivoSemanal < ApplicationRecord
 	validates :numero_semana, :presence => { :message => "Debe completar el campo Numero de semana" }
 	validates :numero_semana, numericality: { only_integer: true, :message => "El campo Numero de semana debe ser un valor entero"}	
 	#validates :user_id, :presence => { :message => "Debe completar el campo User" }
-	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
-	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo tipo de objetivo semanal" }
 	#validates :objetivo_mensual_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" }
 
@@ -21,4 +19,14 @@ end
 
 def to_s
     "#{self.descipcion}"
+end
+
+
+def validaVendedor
+    if self.punto_venta_id == nil
+    	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
+     else
+     	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
+    end
+
 end

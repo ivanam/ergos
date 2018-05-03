@@ -59,24 +59,40 @@
     </div>
   </br>
 
-<div class="form-group">
+   
+<div class="form-group"> 
+<label class="col-sm-2 control-label">Vendedor o punto de venta</label>
+ <div class="col-sm-3">
+   <div class="form-group">
+    <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
+   </div>
+  </div>
+</div>
+</br>       
+     
+
+<div id="vendedor" style="display:none" >
+  <div class="form-group">
     <label class="col-sm-2 control-label">Vendedor</label>  
       <div class="col-sm-3">
       <div class="form-group">
-      <%= select_tag 'vendedor_id', options_from_collection_for_select(Vendedor.all, :id , :numero, ""), :id => "select_vendedor", :class => "form-alta-vendedor text-field form-control" %>
+      <%= select_tag 'vendedor_id', options_from_collection_for_select(Vendedor.all, :id , :numero, ""), :id => "select_vendedor", :class => "form-alta-vendedor text-field form-control", prompt: "Por favor seleccione" %>
            </div>
     </div>
     </div>
+ </div>   
   </br>
 
-<div class="form-group">
+<div id="pventa" >
+  <div class="form-group">
     <label class="col-sm-2 control-label">Punto de venta</label>  
       <div class="col-sm-3">
       <div class="form-group">
-      <%= select_tag 'punto_venta_id', options_from_collection_for_select(PuntoVentum.all, :id , :nombre, ""), :id => "select_punto_venta", :class => "form-alta-vendedor text-field form-control" %>
+      <%= select_tag   'punto_venta_id', options_from_collection_for_select(PuntoVentum.all, :id , :nombre, ""), :id => "select_punto_venta", :class => "form-alta-vendedor text-field form-control", prompt: "Por favor seleccione" %>
          </div>
     </div>
-    </div>
+  </div>
+</div>  
   </br>
 
 
@@ -117,3 +133,19 @@
 
 </script>
 
+<script>
+function myFunction() {
+  $("#vendedor").val("");
+  $("#pventa").val("");
+    var checkBox = document.getElementById("myCheck");
+    if (checkBox.checked == true){
+         $("#vendedor").show();
+         $("#pventa").hide();
+         $("#pventa").val("");
+    } else {
+       $("#vendedor").hide();
+        $("#pventa").show();
+
+    }
+}
+</script>

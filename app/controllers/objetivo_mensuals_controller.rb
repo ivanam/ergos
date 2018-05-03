@@ -27,9 +27,9 @@ class ObjetivoMensualsController < ApplicationController
   # POST /objetivo_mensuals.json
   def create
     @objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
+    @objetivo_mensual.user_id = current_user.id
     respond_to do |format|
       if @objetivo_mensual.save
-        debugger
         format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
         format.json { render :show, status: :created, location: @objetivo_mensual }
       else
