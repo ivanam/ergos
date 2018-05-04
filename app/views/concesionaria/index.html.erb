@@ -36,6 +36,9 @@
             <%= link_to concesionarium, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
               <span class="glyphicon glyphicon-trash"></span>
             <% end %>
+            <%= link_to select_concesionaria_path(id: concesionarium), class: 'btn btn-sm btn-default' do %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% end %>
           </td>
         </tr>
       <% end %>

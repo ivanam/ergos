@@ -32,10 +32,14 @@
 
 <p>
   <strong>Vendedor:</strong>
+  <% if @objetivo_semanal.punto_ventum == nil %>
   <%= @objetivo_semanal.vendedor.numero %>
+  <% end %>
 </p>
 
 <p>
   <strong>Punto de venta:</strong>
+  <% if @objetivo_semanal.vendedor == nil %>
   <%=  @objetivo_semanal.punto_ventum.nombre %>
+  <% end %>
 </p>

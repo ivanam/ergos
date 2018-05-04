@@ -26,7 +26,6 @@ class ObjetivoSemanalsController < ApplicationController
   # POST /objetivo_semanals
   # POST /objetivo_semanals.json
   def create
-    debugger
     @objetivo_semanal = ObjetivoSemanal.new(objetivo_semanal_params)
     #@objetivo_semanal.objetivo_mensual_id = params[:objetivo_mensual_id]
     @objetivo_semanal.punto_venta_id = params[:punto_venta_id]

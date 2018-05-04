@@ -8,9 +8,14 @@ function buscar_persona(){
   .done(function(data) {
     if (data != null) {
       $("#persona_id").val(data.id);
+      $("#datos_persona").removeClass("hide");
+      $("#crear_persona").addClass("hide");
+      $("#nombre_persona").val(data.nombre);
     }
     else{
       $("#persona_id").val("");
+      $("#crear_persona").removeClass("hide");
+      $("#datos_persona").addClass("hide");
     }
   })
 }

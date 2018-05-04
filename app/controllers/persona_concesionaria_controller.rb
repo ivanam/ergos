@@ -27,8 +27,8 @@ class PersonaConcesionariaController < ApplicationController
     @persona_concesionarium = PersonaConcesionarium.new(persona_concesionarium_params)
     respond_to do |format|
       if @persona_concesionarium.save
-        format.html { redirect_to @persona_concesionarium, notice: 'Usuario creado correctamente' }
-        format.json { render :show, status: :created, location: @persona_concesionarium.concesionaria }
+        format.html { redirect_to @persona_concesionarium.concesionaria, notice: 'Usuario creado correctamente' }
+        format.json { render :show, status: :created, location: @persona_concesionarium }
       else
         format.html { render :new }
         format.json { render json: @persona_concesionarium.errors, status: :unprocessable_entity }

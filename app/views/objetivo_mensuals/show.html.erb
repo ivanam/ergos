@@ -3,10 +3,8 @@
 <dl class="dl-horizontal">
   <dt>Descripcion:</dt>
   <dd><%= @objetivo_mensual.descripcion %></dd>
-  <dt><strong>Descripcion:</strong></dt>
-  <dd><%= @objetivo_mensual.descripcion %></dd>
   <dt><strong>Fecha creacion:</strong></dt>
-  <dd><%= @objetivo_mensual.fecha_creacion %></dd>
+  <dd><%= @objetivo_mensual.created_at %></dd>
   <dt>Tipo objetivo:</dt>
   <% TipoObjetivo.where(:id => @objetivo_mensual.tipo_objetivo_id).each do |r| %>
   <% @tobj = r.descripcion  %>
