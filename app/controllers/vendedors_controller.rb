@@ -32,6 +32,8 @@ class VendedorsController < ApplicationController
   def create
 
     @vendedor = Vendedor.new(vendedor_params)
+    @vendedor.punto_venta_id= current_user.punto_venta_id
+    
     if  Persona.where(:numero_documento => params[:cuil]).first == nil
       @persona = Persona.new(persona_params)
 
@@ -44,6 +46,7 @@ class VendedorsController < ApplicationController
       @persona.domicilio=params[:persona][:domicilio]
       @persona.telefono=params[:persona][:telefono]
       @persona.fecha_nacimiento=params[:persona][:fecha_nacimiento]
+      @persona.email=params[:persona][:email]
     end
    
     #el numero de vendedor debe ser unico
@@ -98,7 +101,7 @@ class VendedorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vendedor_params
-      params.require(:vendedor).permit(:foto, :numero, :fecha_alta, :fecha_baja, :persona_id)
+      params.require(:vendedor).permit(:foto, :numero, :fecha_alta, :fecha_baja, :persona_id, :punto_venta_id)
     end
 
     def persona_params
