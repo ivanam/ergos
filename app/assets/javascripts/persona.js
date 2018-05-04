@@ -61,6 +61,7 @@ $(document).ready(function($) {
               $("#select_tipo_documento").val(data.tipo_documento_id);
               $("#input_domicilio").val(data.domicilio);
               $("#input_telefono").val(data.telefono);
+              $("#input_email").val(data.email);
             }
             else{
               //alert("La persona no existe. Por favor cargue sus datos");
@@ -72,6 +73,7 @@ $(document).ready(function($) {
               $("#select_tipo_documento").val(4);
               $("#input_domicilio").val("");
               $("#input_telefono").val(""); //ID 5, para tipo de documento DNI
+              $("#input_email").val("");
             }
           })
     });
