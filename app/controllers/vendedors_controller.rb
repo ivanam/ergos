@@ -23,7 +23,8 @@ class VendedorsController < ApplicationController
 
   # GET /vendedors/1/edit
   def edit
-    
+   
+
   end
 
   # POST /vendedors
