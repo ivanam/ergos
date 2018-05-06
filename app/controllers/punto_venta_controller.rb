@@ -30,7 +30,6 @@ class PuntoVentaController < ApplicationController
     @punto_ventum = PuntoVentum.new(punto_ventum_params)
     @conc = Concesionarium.where(:id => @punto_ventum.concesionaria_id).first.cantPv
     @cantpuntoventa = PuntoVentum.where(:concesionaria_id => @punto_ventum.concesionaria_id).count
-    debugger
     if (@conc <= @cantpuntoventa)
       respond_to do |format|
         flash[:notice] = 'No puede crear mas Puntos de Venta'
