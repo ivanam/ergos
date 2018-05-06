@@ -25,6 +25,18 @@
       <%= f.text_field :nombre, class: "form-control" %>
     </div>
   </div>
+   <div class="form-group">
+    <%= f.label :cantidad_de_puntos_de_venta, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :cantPv, class: "form-control" %>
+    </div>
+  </div>
+   <div class="form-group">
+    <%= f.label :cantidad_de_vendedores, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :cantVend, class: "form-control" %>
+    </div>
+  </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>

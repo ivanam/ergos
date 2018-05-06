@@ -28,15 +28,24 @@ class PuntoVentaController < ApplicationController
   # POST /punto_venta.json
   def create
     @punto_ventum = PuntoVentum.new(punto_ventum_params)
-
-    respond_to do |format|
-      if @punto_ventum.save
-        format.html { redirect_to @punto_ventum, notice: 'Punto ventum was successfully created.' }
-        format.json { render :show, status: :created, location: @punto_ventum }
+    @conc = Concesionarium.where(:id => @punto_ventum.concesionaria_id).first.cantPv
+    @cantpuntoventa = PuntoVentum.where(:concesionaria_id => @punto_ventum.concesionaria_id).count
+    debugger
+    if (@conc <= @cantpuntoventa)
+      respond_to do |format|
+        flash[:notice] = 'No puede crear mas Puntos de Venta'
+        format.html {render :new, notice: 'No puede crear mas Puntos de Venta' }
+       end
       else
-        format.html { render :new }
-        format.json { render json: @punto_ventum.errors, status: :unprocessable_entity }
-      end
+        respond_to do |format|
+          if @punto_ventum.save
+            format.html { redirect_to @punto_ventum, notice: 'Punto ventum was successfully created.' }
+            format.json { render :show, status: :created, location: @punto_ventum }
+          else
+            format.html { render :new }
+            format.json { render json: @punto_ventum.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 

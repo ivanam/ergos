@@ -82,6 +82,6 @@ class ConcesionariaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concesionarium_params
-      params.require(:concesionarium).permit(:icono, :nombre, :fecha_alta, :fecha_baja, :user_id, :empresa_id, :persona_id, persona_concesionaria_attributes: [:id, :persona_id, :_destroy])
+      params.require(:concesionarium).permit(:icono, :nombre, :cantPv, :cantVend, :fecha_alta, :fecha_baja, :user_id, :empresa_id, :persona_id, persona_concesionaria_attributes: [:id, :persona_id, :_destroy])
     end
 end
