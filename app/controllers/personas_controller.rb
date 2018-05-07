@@ -76,6 +76,7 @@ class PersonasController < ApplicationController
   end
 
   def buscar_persona_completa
+    
     @persona = Persona.where(:cuit => params[:cuit]).first
     render json: @persona
   end
