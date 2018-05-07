@@ -33,5 +33,8 @@ Rails.application.routes.draw do
   get "/concesionarium/select", to: 'concesionaria#select',  as: :select_concesionaria
 
   root 'home#index'
+
+  get "/home_vendedor", to: 'vendedors#home',  as: :home_vendedor
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -93,6 +93,12 @@ class VendedorsController < ApplicationController
     end
   end
 
+  def home
+    @sidebar = false
+    @footer = false
+    @bg_white = true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_vendedor

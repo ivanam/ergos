@@ -11,7 +11,8 @@
   </head>
 
 
-  <body class="<%= controller_name %> <%= action_name %>">
+  <body class="<%= controller_name %> <%= action_name %> <%= 'bg_white' if @bg_white %>">
+  
     <%= render "layouts/navbar"%>
     <%= render "layouts/sidebar"%>
 
