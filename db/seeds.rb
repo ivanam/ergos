@@ -60,6 +60,6 @@ User.find(5).add_role :concesionaria
 # Creando Estados Personas
 # ================
 
-EstadoPersona.create(estado: 'L', descripcion: 'Libre/Franco')#1
+EstadoPersona.create(estado: 'L', descripcion: 'Libre-Franco')#1
 EstadoPersona.create(estado: 'V', descripcion: 'Vacaciones')#2
 EstadoPersona.create(estado: 'A', descripcion: 'Ausente')#3

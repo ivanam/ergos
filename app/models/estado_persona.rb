@@ -1,3 +1,3 @@
 class EstadoPersona < ApplicationRecord
-  belongs_to :persona
+  #belongs_to :persona
 end
