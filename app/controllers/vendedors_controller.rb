@@ -31,7 +31,6 @@ class VendedorsController < ApplicationController
   # POST /vendedors.json
   def create
     @vendedor = Vendedor.new(vendedor_params)
-    debugger
     @vendedor.punto_venta_id = current_user.punto_venta_id
     pv = @vendedor.punto_venta
     cantVend = pv.concesionaria.cantVend

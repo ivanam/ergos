@@ -27,6 +27,7 @@ class ObjetivoMensualsController < ApplicationController
   # POST /objetivo_mensuals.json
   def create
     @objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
+
     if (@objetivo_mensual.vendedor_id != nil)
        @obm = ObjetivoMensual.where(:tipo_objetivo_id => @objetivo_mensual.punto_venta_id, :tipo_objetivo_id => @objetivo_mensual.tipo_objetivo_id, :mes  => @objetivo_mensual.mes ,:anio=> @objetivo_mensual.anio,:tipo_objetivo_id => @objetivo_mensual.tipo_objetivo_id).first
       if (@obm.cantidad_propuesta <= @objetivo_mensual.cantidad_propuesta) && (@objetivo_mensual.punto_venta_id == @obm.punto_venta_id)
