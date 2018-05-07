@@ -30,13 +30,17 @@ class VendedorsController < ApplicationController
   # POST /vendedors
   # POST /vendedors.json
   def create
-
     @vendedor = Vendedor.new(vendedor_params)
-    @vendedor.punto_venta_id= current_user.punto_venta_id
-    
+    debugger
+    @vendedor.punto_venta_id = current_user.punto_venta_id
+    pv = @vendedor.punto_venta
+    cantVend = pv.concesionaria.cantVend
+    cantvendconc = Vendedor.where(:id => @vendedor.punto_venta_id).count
+    if (cantVend <= cantvendconc)
+      flash[:notice] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
+    end
     if  Persona.where(:numero_documento => params[:cuil]).first == nil
       @persona = Persona.new(persona_params)
-
     else
       @persona= Persona.where(:numero_documento => params[:cuil]).first
       @persona.tipo_documento_id=params[:persona][:tipo_documento_id]
