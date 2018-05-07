@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :estado_personas
   resources :persona_punto_venta
   resources :persona_concesionaria
   resources :objetivo_mensuals

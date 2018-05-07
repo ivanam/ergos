@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Estado Personas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estado</th>
+      <th>Persona</th>
+      <th>Fecha inicio</th>
+      <th>Fecha fin</th>
+      <th>Persona</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @estado_personas.each do |estado_persona| %>
+      <tr>
+        <td><%= estado_persona.estado %></td>
+        <td><%= estado_persona.persona_id %></td>
+        <td><%= estado_persona.fecha_inicio %></td>
+        <td><%= estado_persona.fecha_fin %></td>
+        <td><%= estado_persona.persona %></td>
+        <td><%= link_to 'Show', estado_persona %></td>
+        <td><%= link_to 'Edit', edit_estado_persona_path(estado_persona) %></td>
+        <td><%= link_to 'Destroy', estado_persona, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Estado Persona', new_estado_persona_path %>

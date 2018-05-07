@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180506141316) do
+ActiveRecord::Schema.define(version: 20180507001451) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20180506141316) do
     t.datetime "updated_at",               null: false
     t.integer  "cantPv"
     t.integer  "cantVend"
+  end
+
+  create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "estado"
+    t.integer  "persona_id"
+    t.datetime "fecha_inicio"
+    t.datetime "fecha_fin"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "descripcion"
+    t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 
   create_table "objetivo_mensuals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -183,6 +194,7 @@ ActiveRecord::Schema.define(version: 20180506141316) do
     t.integer  "punto_venta_id"
   end
 
+  add_foreign_key "estado_personas", "personas"
   add_foreign_key "persona_concesionaria", "concesionaria", column: "concesionaria_id"
   add_foreign_key "persona_concesionaria", "personas"
   add_foreign_key "persona_punto_venta", "personas"

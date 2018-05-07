@@ -1,0 +1,42 @@
+<%= form_for(estado_persona) do |f| %>
+  <% if estado_persona.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estado_persona.errors.count, "error") %> prohibited this estado_persona from being saved:</h2>
+
+      <ul>
+      <% estado_persona.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :estado %>
+    <%= f.text_field :estado %>
+  </div>
+
+  <div class="field">
+    <%= f.label :persona_id %>
+    <%= f.number_field :persona_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fecha_inicio %>
+    <%= f.datetime_select :fecha_inicio %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fecha_fin %>
+    <%= f.datetime_select :fecha_fin %>
+  </div>
+
+  <div class="field">
+    <%= f.label :persona_id %>
+    <%= f.text_field :persona_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

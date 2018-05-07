@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @estado_persona.estado %>
+</p>
+
+<p>
+  <strong>Persona:</strong>
+  <%= @estado_persona.persona_id %>
+</p>
+
+<p>
+  <strong>Fecha inicio:</strong>
+  <%= @estado_persona.fecha_inicio %>
+</p>
+
+<p>
+  <strong>Fecha fin:</strong>
+  <%= @estado_persona.fecha_fin %>
+</p>
+
+<p>
+  <strong>Persona:</strong>
+  <%= @estado_persona.persona %>
+</p>
+
+<%= link_to 'Edit', edit_estado_persona_path(@estado_persona) %> |
+<%= link_to 'Back', estado_personas_path %>

@@ -56,3 +56,10 @@ User.find(2).add_role :punto_venta
 User.find(3).add_role :admin
 User.find(4).add_role :vendedor
 User.find(5).add_role :concesionaria
+
+# Creando Estados Personas
+# ================
+
+EstadoPersona.create(estado: 'L', descripcion: 'Libre/Franco')#1
+EstadoPersona.create(estado: 'V', descripcion: 'Vacaciones')#2
+EstadoPersona.create(estado: 'A', descripcion: 'Ausente')#3
