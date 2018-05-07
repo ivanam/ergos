@@ -5,11 +5,12 @@ class Vendedor < ApplicationRecord
 
   has_attached_file :foto, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   #validates_attachment_content_type :foto, :content_type => /\Aimage\/.*\Z/
-
+  validates :numero, :uniqueness => {:message => "debe ser único"}
   validates :numero, :presence => { :message => "Debe completar el campo Número" }
   validates :numero, numericality: { only_integer: true, :message => "El campo Número debe ser un valor entero"}
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
-  validate :numero_unico
+ 
+
   before_create :habilitar_user
   before_destroy :deshabilitar_user
 
@@ -19,11 +20,6 @@ class Vendedor < ApplicationRecord
   	self.numero
   end
 
-  def numero_unico
-    if Vendedor.where(:numero => self.numero).first
-      errors.add("No se puede dar de alta , ya que existe un vendedor con ese Número")        
-    end
-  end
 
 
   def next
