@@ -19,8 +19,12 @@ Rails.application.routes.draw do
   resources :personas
   resources :tipo_documentos
   devise_for :users
+
   get 'home/index'
   get 'admin', to: 'home#admin', as:'admin_index'
+
+
+  get 'template', to: 'reunions#template', as:'reunion_template'
 
   get 'dashboard', to: 'punto_venta#dashboard', as:'punto_venta_dashboard'
 

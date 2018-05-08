@@ -23,6 +23,33 @@ class ReunionsController < ApplicationController
   def edit
   end
 
+  def template
+    @sidebar = false
+    @footer = false
+  end
+
+    def create_template
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'file_name',
+        #:template => 'salidas/show.html.erb',
+        :template => 'reunions/template.html.erb',
+        #:layout => 'application.html.erb',
+        :layout => 'reunions/template.html.erb',
+        #:header => {:content => render_to_string({:template => 'layouts/header.html.erb',:layout   => 'pdf.html.erb'})},
+        #:footer=> { :right => 'Page [page] of [topage]' },
+        #:margin => { :top => 60, :bottom => 50},
+        #:footer => { :html => { :template => 'layouts/footer.html.erb' } },
+        #:footer => {:content => render_to_string({:template => 'layouts/footer.html.erb',:layout   => 'pdf.html.erb'})}
+        #:footer => {:html => { :template => 'layouts/footer.html.erb', :layout   => 'pdf.html.erb',}}   
+        :show_as_html => params[:debug].present?
+      end
+    end
+
+  end
+
+
   # POST /reunions
   # POST /reunions.json
   def create
