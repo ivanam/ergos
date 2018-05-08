@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507001451) do
+ActiveRecord::Schema.define(version: 20180508003631) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -182,14 +182,18 @@ ActiveRecord::Schema.define(version: 20180507001451) do
   end
 
   create_table "vendedors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.binary   "foto",           limit: 65535
+    t.binary   "foto",              limit: 65535
     t.integer  "numero"
     t.date     "fecha_alta"
     t.date     "fecha_baja"
     t.integer  "persona_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "punto_venta_id"
+    t.string   "foto_file_name"
+    t.string   "foto_content_type"
+    t.integer  "foto_file_size"
+    t.datetime "foto_updated_at"
   end
 
   add_foreign_key "estado_personas", "personas"

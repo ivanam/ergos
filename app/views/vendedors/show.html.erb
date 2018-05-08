@@ -53,7 +53,8 @@ concesionaria_id = PuntoVentum.where(:id => punto_venta_id ).first.concesionaria
 
 <div class="col-sm-3 admin-box h-46">
   <div class="content-box">
-    <center><%=image_tag "profile-img.png", :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%></center> 
+    <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%></center> 
+
     <div class="description">
       <h3 style="font-size:2vw;"><%=v.persona.apellido%> <%=v.persona.nombre %></h3> 
       <h4 style="font-size:1vw;">Vendedor</h4>

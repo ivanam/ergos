@@ -38,7 +38,6 @@ class VendedorsController < ApplicationController
     if (cantVend <= cantvendconc)
       flash[:notice] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
     end
-    
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
       @persona = Persona.new(persona_params)
     else
@@ -56,6 +55,7 @@ class VendedorsController < ApplicationController
     #el numero de vendedor debe ser unico
     respond_to do |format|
              if @persona.save
+              
                  @vendedor.persona_id=@persona.id
                  if @vendedor.save
                     format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
