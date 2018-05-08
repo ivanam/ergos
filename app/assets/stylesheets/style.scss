@@ -159,7 +159,6 @@ body {
   height: 80px;
   position: absolute;
   left: 0px;
-  z-index: 1040;
   background-color: $ergosblue;
 }
 
@@ -1328,8 +1327,26 @@ nav.sidebar, .main{
   max-width: 1050px;
 }
 
+.modal {
+  padding: 20%;
+}
+
 .modal-header{
   text-align: center;
+  border-bottom: 0px;
+}
+
+.modal-content{
+  background-color: #e0e0e0;
+}
+
+.modal-footer{
+  border-top: 0px;
+}
+
+.modal h3 {
+  font-weight: 600;
+  color: #666666;
 }
 
 .centrar-todo { 
@@ -1357,4 +1374,50 @@ nav.sidebar, .main{
   font-weight: 600;
   color: #555;
   border-bottom: 1px solid #555;
+  font-size: 2rem;
+}
+
+.vendedors .content .table > tbody > tr > td {
+  padding: 3px;
+  vertical-align: middle;
+  border-top: 0px;
+  border-collapse: collapse;
+  font-size: 2rem;
+  font-weight:600;
+}
+
+.circle {
+  height: 25px;
+  border-radius:50% !important;
+  width: 25px;
+}
+
+.bg_red {
+  background-color:red;
+}
+
+.bg_green {
+  background-color:green;
+}
+
+.bg_yellow {
+  background-color:yellow;
+}
+
+.chart {
+  width:100%;
+  background-image:url('http://s15.postimg.org/ku83p3fvf/bars.png');
+  background-repeat:no-repeat;
+  background-size:contain;
+  position: relative;
+}
+.chart .bar-container {
+  width:100%;
+  background-color: #eee;
+}
+.chart .bar-container .bar {
+  background:#55565a;
+  margin-top:5px;
+  color:#fff;
+  font-size:16px;
 }
