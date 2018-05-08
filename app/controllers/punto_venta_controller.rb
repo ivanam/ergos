@@ -36,6 +36,13 @@ class PuntoVentaController < ApplicationController
       #   format.html {render :new, notice: 'No puede crear mas Puntos de Venta' }
       #  end
       #else
+  # =begin  debugger  
+  #   pv = @punto_ventum
+  #   cantPv = pv.concesionaria.cantPv
+  #   cantPvconc = PuntoVentum.where(:concesionaria_id => @punto_ventum.concesionaria_id).count
+  #   if (cantPv < cantPvconc)
+  #     flash[:notice] = 'No puede crear mas puntos de venta, solicite permiso'
+  #   end=end
         respond_to do |format|
           if @punto_ventum.save
             format.html { redirect_to @punto_ventum, notice: 'Punto ventum was successfully created.' }
