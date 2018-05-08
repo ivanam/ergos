@@ -11,8 +11,8 @@
 </div>
 
 <p>
-  <strong>Icono:</strong>
-  <%= @concesionarium.icono %>
+  <strong>Logo:</strong>
+  <%=image_tag @concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%>
 </p>
 
 <p>
