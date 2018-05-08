@@ -93,15 +93,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title" id="exampleModalLongTitle">Ingrese los valores del día</h3>
-
-      </div>
-      <div class="modal-body">
-      	<%= render 'form_modal' %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div>      
+      <%= render 'form_modal', carga_diarium: @carga_diarium %>
+      </div>      
     </div>
   </div>
 </div>

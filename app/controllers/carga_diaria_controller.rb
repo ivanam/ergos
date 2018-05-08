@@ -42,15 +42,20 @@ class CargaDiariaController < ApplicationController
     @carga_diarium = CargaDiarium.new(carga_diarium_params)
     @carga_diarium.vendedor_id = current_user.id
 
-    respond_to do |format|
-      if @carga_diarium.save
-        format.html { redirect_to @carga_diarium, notice: 'Se ha cargado una nueva carga diaria' }
-        format.json { render :show, status: :created, location: @carga_diarium }
-      else
-        format.html { render :new }
-        format.json { render json: @carga_diarium.errors, status: :unprocessable_entity }
-      end
+    if @carga_diarium.save
+      redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
+    else
+      render json: @carga_diarium.errors
     end
+    #respond_to do |format|
+    #  if @carga_diarium.save
+    #    format.html { redirect_to :home_vendedor, notice: 'Se ha cargado una nueva carga diaria' }
+    #    format.json { render :show, status: :created, location: @carga_diarium }
+    #  else
+    #    format.html { render :new }
+    #    format.json { render json: @carga_diarium.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /carga_diaria/1

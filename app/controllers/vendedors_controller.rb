@@ -101,6 +101,7 @@ class VendedorsController < ApplicationController
     @sidebar = false
     @footer = false
     @bg_white = true
+    @carga_diarium = CargaDiarium.new
   end
 
   private
