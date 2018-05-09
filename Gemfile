@@ -51,6 +51,12 @@ gem 'bootstrap-editable-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+gem 'wicked_pdf'
+
+gem 'responders'
+
+
 #--------------------------------- Users ---------------------------------
 
 gem 'devise'

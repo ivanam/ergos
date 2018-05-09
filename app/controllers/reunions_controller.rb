@@ -3,6 +3,8 @@ class ReunionsController < ApplicationController
   load_and_authorize_resource
   before_action :set_reunion, only: [:show, :edit, :update, :destroy]
 
+  skip_authorize_resource :only => [:temp_pdf]
+
   # GET /reunions
   # GET /reunions.json
   def index
@@ -23,30 +25,19 @@ class ReunionsController < ApplicationController
   def edit
   end
 
-  def template
-    @sidebar = false
-    @footer = false
-  end
 
-    def create_template
+   def template
     respond_to do |format|
-      format.html
-      format.pdf do
-        render :pdf => 'file_name',
-        #:template => 'salidas/show.html.erb',
-        :template => 'reunions/template.html.erb',
-        #:layout => 'application.html.erb',
-        :layout => 'reunions/template.html.erb',
-        #:header => {:content => render_to_string({:template => 'layouts/header.html.erb',:layout   => 'pdf.html.erb'})},
-        #:footer=> { :right => 'Page [page] of [topage]' },
-        #:margin => { :top => 60, :bottom => 50},
-        #:footer => { :html => { :template => 'layouts/footer.html.erb' } },
-        #:footer => {:content => render_to_string({:template => 'layouts/footer.html.erb',:layout   => 'pdf.html.erb'})}
-        #:footer => {:html => { :template => 'layouts/footer.html.erb', :layout   => 'pdf.html.erb',}}   
-        :show_as_html => params[:debug].present?
-      end
+    format.pdf do
+      render :pdf => 'template_pdf', 
+      :template => 'reunion/template_pdf.html.erb',
+      :layout => 'pdf.html.erb',
+      :orientation => 'Portrait',# default Portrait
+      :page_size => 'Legal', # default A4
+      :show_as_html => params[:debug].present?
     end
-
+    format.html 
+    end 
   end
 
 
@@ -54,7 +45,6 @@ class ReunionsController < ApplicationController
   # POST /reunions.json
   def create
     @reunion = Reunion.new(reunion_params)
-
     respond_to do |format|
       if @reunion.save
         format.html { redirect_to @reunion, notice: 'Se ha creado una nueva Reunion.' }

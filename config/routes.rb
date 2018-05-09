@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   get 'admin', to: 'home#admin', as:'admin_index'
 
 
-  get 'template', to: 'reunions#template', as:'reunion_template'
+  get 'reunion/template_pdf', to: 'reunions#template_pdf', as:'imprimir_template'
+
 
   get 'dashboard', to: 'punto_venta#dashboard', as:'punto_venta_dashboard'
 

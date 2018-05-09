@@ -1,9 +1,10 @@
+<div>
 <br> <br>
-  <div>
-    <%= link_to tipo_objetivos_path, class: 'btn btn-primary' do %>
-    <%= fa_icon "plus", text: "Imprimir Template" %>
-  <% end %>
-</div>
+<button id="btn-filtrar1" class="btn btn-danger">
+      <span class="glyphicon glyphicon-print"></span>
+      Imprimir Reunion
+  </button>
+
 <br> <br>  
 <table class="table table-bordered">
   <thead>
@@ -110,4 +111,11 @@
     </tr>
   </tbody>
 </table>
+</div>
 
+<script type="text/javascript">
+
+     $('#btn-filtrar1').on('click', function(){
+       window.location.href = '/reunion/template_pdf.pdf';
+      })
+</script>
