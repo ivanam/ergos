@@ -56,6 +56,8 @@ gem 'wicked_pdf'
 
 gem 'responders'
 
+gem 'wkhtmltopdf-binary'
+
 
 #--------------------------------- Users ---------------------------------
 
