@@ -1,144 +1,152 @@
-<%punto_venta_id = current_user.punto_venta_id
-@punto_venta= PuntoVentum.where(id: punto_venta_id).first.nombre
-concesionaria_id = PuntoVentum.where(:id => punto_venta_id ).first.concesionaria_id
-@concesionaria = Concesionarium.where(:id => concesionaria_id).first.nombre
-%>
-<div class="col-sm-12 h-6">
-  <ol class="breadcrumb">
-    <li><a href="/">Organización: Ergos</a></li>
-    <li><a href="/concesionaria">Concecionario: <%=@concesionaria%></a></li>
-    <li><a href="/punto_venta">Punto de Venta: <%=@punto_venta%></a></li>
-    <li class="active">Vendedores</li>
-  </ol>
-
-</div>
-
-  
-
-  <%v= @vendedor%>
-  <%if @vendedor.next != nil 
-    @next= @vendedor.next.id
-  else
-    @next= nil
-  end
-
-  if @vendedor.previous != nil 
-    @previous= @vendedor.previous.id
-  else
-    @previous= nil
-  end
-
-
-  if @vendedor != nil
-    @index= @vendedor.id
-  else
-    @index=0
-  end
-
-  cant = Vendedor.all.count
-
-  if Vendedor.all.first != nil
-      @primero = Vendedor.all.first.id
-  else
-    @primero = 0
-  end
-
-  if Vendedor.all.last != nil
-      @ultimo = Vendedor.all.last.id
-  else
-    @ultimo = 0
-  end%>
-
-
-
-<div class="col-sm-3 admin-box h-46">
-  <div class="content-box">
-    <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%></center> 
-
-    <div class="description">
-      <h3 style="font-size:2vw;"><%=v.persona.apellido%> <%=v.persona.nombre %></h3> 
-      <h4 style="font-size:1vw;">Vendedor</h4>
-      <p style="font-size:0.8vw;">Estado: Activo</p>
-      <p style="font-size:0.8vw;">Última Carga: Ayer 17:54</p>
-    </div>
-  </div>
-</div>
-<div class="col-sm-9 admin-box h-46">
-  <div class="content-box h-100">
-    <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
-      <div class="title-box w-20 bg-gray">Vendedores</div>
-      <div class="title-box w-60 bg-ergosgray"></div>
-      <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
-    </div>
-    <div class="col-sm-6 row">
-      <div class="col-sm-6">
-        <p class="text-right font-weight-bold" style="font-size:1vmax;">Identificación:</p>
-        <p class="text-right font-weight-bold" style="font-size:1vmax;">Edad:</p>
-        <p class="text-right font-weight-bold" style="font-size:1vmax;">Fecha de Ingreso:</p>
-        <p class="text-right font-weight-bold" style="font-size:1vmax;">Interno:</p>
-        <p class="text-right font-weight-bold" style="font-size:1vmax;">Teléfono Móvil:</p>
-        <p class="text-right font-weight-bold" style="font-size:1vmax;">E-Mail:</p>
-      </div>
-      <div class="col-sm-6">
-        <p class="text-left" style="font-size:1vmax;"><%=v.persona.cuit%></p> 
-
-        <p class="text-left" style="font-size:1vmax;"><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
-        <p class="text-left" style="font-size:1vmax;"><%=v.fecha_alta%></p>
-        <p class="text-left" style="font-size:1vmax;">?</p>
-        <p class="text-left" style="font-size:1vmax;"><%=v.persona.telefono%></p>
-        <p class="text-left" style="font-size:1vmax;"><%=v.persona.email%></p>
-      </div>
-    </div>
-    <div class="col-sm-6 row">
-      <h4 class="text-center font-weight-bold" style="font-size:1.5vmax;">Último Trimestre</h4>
-      <div class="image-box h-100">
-        <center>
-          <%=image_tag "grafico-embudo.png", :style=>"width: auto; max-height:150px; float:right;"%>
-        </center>
-        <div class="legend-1">Prospecto</div>
-        <div class="legend-2">Pruebas de Manejo</div>
-        <div class="legend-3">Ventas</div>
-        
-      </div>
-      
-      
-    </div>
-    <div class="" style="width:90%;position: absolute;bottom: 20px;">
-      <p class="text-center "><a href="">más..</a></p>
-    </div>
+  <%punto_venta_id = current_user.punto_venta_id
+  @punto_venta= PuntoVentum.where(id: punto_venta_id).first.nombre
+  concesionaria_id = PuntoVentum.where(:id => punto_venta_id ).first.concesionaria_id
+  @concesionaria = Concesionarium.where(:id => concesionaria_id).first.nombre
+  %>
+  <div class="col-sm-12 h-6">
+    <ol class="breadcrumb">
+      <li><a href="/">Organización: Ergos</a></li>
+      <li><a href="/concesionaria">Concecionario: <%=@concesionaria%></a></li>
+      <li><a href="/punto_venta">Punto de Venta: <%=@punto_venta%></a></li>
+      <li class="active">Vendedores</li>
+    </ol>
 
   </div>
-  
-</div>
-<div class="col-sm-3 admin-box h-46">
-  <div class="content-box">
+
+    
+
+    <% v= @vendedor %>
+    <%if @vendedor.next != nil 
+      @next= @vendedor.next.id
+    else
+      @next= nil
+    end
+
+    if @vendedor.previous != nil 
+      @previous= @vendedor.previous.id
+    else
+      @previous= nil
+    end
+
+
+    if @vendedor != nil
+      @index= @vendedor.id
+    else
+      @index=0
+    end
+
+    cant = Vendedor.all.count
+
+    if Vendedor.all.first != nil
+        @primero = Vendedor.all.first.id
+    else
+      @primero = 0
+    end
+
+    if Vendedor.all.last != nil
+        @ultimo = Vendedor.all.last.id
+    else
+      @ultimo = 0
+    end%>
+
+
+
+  <div class="col-sm-3 admin-box h-46">
+    <div class="content-box h-100">
+      
+      <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:400px;"%></center> 
+
+      <div class="description">
+        <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
+        <h4 style="">Vendedor</h4>
+        <p style="">Estado: Activo</p>
+        <p style="">Última Carga: Ayer 17:54</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9 admin-box h-46">
+    <div class="content-box h-100">
+      <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
+        <div class="title-box w-20 bg-gray">Vendedores</div>
+        <div class="title-box w-60 bg-ergosgray"></div>
+        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="">
+            <h3 class="text-center font-weight-bold" style="margin-top:0px;">Datos Personales</h3>
+            <p><span class="font-weight-bold">Identificación: </span><%=v.persona.cuit%></p>
+            <p><span class="font-weight-bold">Edad:</span><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
+            <p><span class="font-weight-bold">Fecha de Ingreso: </span><%=v.fecha_alta%></p>
+            <p><span class="font-weight-bold">Interno: </span> ? </p>
+            <p><span class="font-weight-bold">Teléfono Móvil: </span><%=v.persona.telefono%></p>
+            <p><span class="font-weight-bold">E-Mail: </span><%=v.persona.email%></p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <h3 class="text-center font-weight-bold" style="margin-top:0px;">Último Trimestre</h3>
+          <div class="image-box h-100">
+            <center>
+              <%=image_tag "grafico-embudo.png", :style=>"width: auto; max-height:150px; float:right;"%>
+            </center>
+            <div class="legend-1">Prospecto</div>
+            <div class="legend-2">Pruebas de Manejo</div>
+            <div class="legend-3">Ventas</div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="" style="width:90%;position: absolute;bottom: 20px;">
+        <p class="text-center "><a href="">más..</a></p>
+      </div>
+
+    </div>
     
   </div>
+  <div class="col-sm-3 admin-box h-46">
+    <div class="content-box">
+      <h4 style="">Información relacionada</h4>
+      <ul>
+        <li><%= link_to (fa_icon "user-circle", text: "Perfil Completo"), "#" %></li>
+        <li><%= link_to (fa_icon "list", text: "Historial de Carga"), "#" %></li>
+        <li><%= link_to (fa_icon "shopping-cart", text: "Oportunidades"), "#" %></li>
+        <li><%= link_to (fa_icon "line-chart", text: "Performance"), "#" %></li>
+    </ul>
+    </div>
 
-</div>
-<div class="col-sm-9 admin-box h-46">
-  <div class="content-box h-100">
-    <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
-      <div class="title-box w-20 bg-gray">Objetivos</div>
-      <div class="title-box w-60 bg-ergosgray"></div>
-      <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
-    </div>
-    <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
-      <div class="title-box w-100 bg-light-gray"></div>
-      
-    </div>
-    <div class="col-sm-6 row">
-      <div class="col-sm-6">
+  </div>
+  <div class="col-sm-9 admin-box h-46">
+    <div class="content-box h-100">
+      <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
+        <div class="title-box w-20 bg-gray">Objetivos</div>
+        <div class="title-box w-60 bg-ergosgray"></div>
+        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+      </div>
+      <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
+        <div class="title-box w-100 bg-light-gray"></div>
         
       </div>
-    </div>
-    <div class="col-sm-6 row">
+      <div class="col-sm-6 row">
+        <div class="col-sm-6">
+          
+        </div>
+      </div>
+      <div class="col-sm-6 row">
+          
+      </div>
         
+      <div class="" style="width:90%;position: absolute;bottom: 20px;">
+        <p class="text-center "><a href="">más..</a></p>
+      </div>
+
     </div>
-      
-  <div class="" style="width:90%;position: absolute;bottom: 20px;">
-    <p class="text-center "><a href="">más..</a></p>
   </div>
 
-</div>
-
+  <div class="col-sm-12 h-6">
+    <div class="btn-horizontal-list" style="">
+      <button type="button" class="btn btn-default btn-ergos">Preparar Reunión Semanal</button>
+      <button type="button" class="btn btn-default btn-ergos">Preparar Reunión Mensual</button>
+      <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Agregar Atajo</div></button>
+    </div>
+    
+  </div>

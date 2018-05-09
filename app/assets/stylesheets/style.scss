@@ -17,6 +17,10 @@ body {
   font-weight:600;
 }
 
+h4 {
+  font-weight: 600;
+}
+
 /* --------------------- NAVBAR ---------------------------- */
 
 .navbar {
@@ -475,7 +479,27 @@ nav.sidebar, .main{
   padding:15px;
   height: 100%;
   width: 100%;
+  
 }
+
+.h-46 .content-box {
+  min-height: 325px;
+}
+
+.content-box ul{
+  list-style:none;
+  padding-left:20px;
+}
+
+.content-box ul li{
+  margin-bottom: 8px;
+}
+
+.content-box ul li .fa{
+  font-size: 18px;
+}
+
+
 
 .title-box {
   position: relative;
@@ -511,7 +535,7 @@ nav.sidebar, .main{
   min-width: 125px;
   text-align: right;
   right: 200px;
-  font-size:0.8vmax;
+  
 }
 
 
@@ -538,14 +562,14 @@ nav.sidebar, .main{
 @media (min-width: 765px) {
 
   .admin-container {
-    padding: 0px 5px 0px 45px;
-    height: 100%;
+    padding: 0px 5px 47px 45px;
+    
   }
 }
 
 @media (min-width: 1330px) {
   .admin-container {
-    padding: 0px 5px 0px 205px;
+    padding: 0px 5px 47px 205px;
   }
 
 }
@@ -566,6 +590,52 @@ nav.sidebar, .main{
   -webkit-user-select: none;
   user-select: none;
   cursor: default;
+}
+
+.btn-ergos{
+  background-color: $ergosgray;
+  color: white;
+  border-radius: 0px;
+  cursor:pointer;
+}
+
+.btn-ergos:hover,
+.btn-ergos:active,
+.btn-ergos:focus {
+  
+}
+
+.btn-add-btns {
+  float: right;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  border: 0px;
+}
+
+.btn-add-btns .fa{
+  font-size: 35px;
+  margin-right: 15px;
+  float:left;
+}
+
+.btn-add-btns .text{
+  float: right;
+  margin: 7px auto;
+}
+
+.btn-add-btns:hover,
+.btn-add-btns:active,
+.btn-add-btns:focus {
+  background-color: gray;
+}
+
+
+.btn-horizontal-list {
+  padding: 8px 15px;
+  background-color: white;
+  width: 100% 
 }
 
 /*
