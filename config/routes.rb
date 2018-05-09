@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   post "/personas/buscar_persona_completa/:cuit", to: 'personas#buscar_persona_completa'
   post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona
+  get "/persona/persona_concesionaria", to: 'personas#new_persona_concesionaria',  as: :new_persona_concesionaria
 
 
   get "/punto_ventum/select", to: 'punto_venta#select',  as: :select_punto_venta

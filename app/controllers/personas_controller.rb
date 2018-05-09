@@ -19,6 +19,11 @@ class PersonasController < ApplicationController
     @persona = Persona.new
   end
 
+  def new_persona_concesionaria
+    @concesionaria_id = params[:concesionaria]
+    @persona = Persona.new
+  end
+
   # GET /personas/1/edit
   def edit
   end
@@ -27,14 +32,25 @@ class PersonasController < ApplicationController
   # POST /personas.json
   def create
     @persona = Persona.new(persona_params)
-
-    respond_to do |format|
-      if @persona.save
-        format.html { redirect_to @persona, notice: 'Persona was successfully created.' }
-        format.json { render :show, status: :created, location: @persona }
-      else
-        format.html { render :new }
-        format.json { render json: @persona.errors, status: :unprocessable_entity }
+    if params[:concesionaria].to_i > 0
+      respond_to do |format|
+        if @persona.save
+          format.html { redirect_to new_persona_concesionarium_path(concesionaria: params[:concesionaria]), notice: 'Persona creada correctamente.' }
+          format.json { render :show, status: :created, location: @persona }
+        else
+          format.html { redirect_to new_persona_concesionaria_path(concesionaria: params[:concesionaria]), alert: @persona.errors.full_messages  }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @persona.save
+          format.html { redirect_to @persona, notice: 'Persona was successfully created.' }
+          format.json { render :show, status: :created, location: @persona }
+        else
+          format.html { render :new }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -65,14 +81,8 @@ class PersonasController < ApplicationController
 
 
   def buscar_persona
-    persona = Persona.where(:cuit => params[:cuit]).first
-    if persona != nil
-      datos = {nombre: persona.nombre, apellido: persona.apellido, fecha_nacimiento: persona.fecha_nacimiento,
-      tipo_documento_id: persona.tipo_documento_id, telefono: persona.telefono, id: persona.id}
-    else
-      datos = nil
-    end
-    render json: datos
+    @persona = Persona.where(:cuit => params[:cuit]).first
+    render json: @persona
   end
 
   def buscar_persona_completa
