@@ -47,15 +47,6 @@ class CargaDiariaController < ApplicationController
     else
       render json: @carga_diarium.errors
     end
-    #respond_to do |format|
-    #  if @carga_diarium.save
-    #    format.html { redirect_to :home_vendedor, notice: 'Se ha cargado una nueva carga diaria' }
-    #    format.json { render :show, status: :created, location: @carga_diarium }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @carga_diarium.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # PATCH/PUT /carga_diaria/1
@@ -90,6 +81,7 @@ class CargaDiariaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carga_diarium_params
+      debugger
       params.require(:carga_diarium).permit(:fecha, :cantidad, :tipo_objetivo_id, :vendedor_id)
     end
 end

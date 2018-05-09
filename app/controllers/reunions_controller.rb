@@ -8,6 +8,16 @@ class ReunionsController < ApplicationController
   # GET /reunions.json
   def index
     @reunions = Reunion.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'template_pdf', 
+          :template => 'reunions/template_pdf.html.erb',
+          :layout => 'pdf.html.erb',
+          :orientation => 'Portrait',# default Portrait
+          :page_size => 'Legal'
+      end
+    end
   end
 
   # GET /reunions/1
@@ -23,22 +33,6 @@ class ReunionsController < ApplicationController
   # GET /reunions/1/edit
   def edit
   end
-
-
-   def template_pdf
-    debugger
-    respond_to do |format|
-    format.pdf do
-      render :pdf => 'template_pdf', 
-      :template => 'reunion/template_pdf.html.erb',
-      :layout => 'pdf.html.erb',
-      :orientation => 'Portrait',# default Portrait
-      :page_size => 'Legal'
-    end
-    format.html 
-    end 
-  end
-
 
   # POST /reunions
   # POST /reunions.json
