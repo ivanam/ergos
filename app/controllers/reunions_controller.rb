@@ -3,7 +3,6 @@ class ReunionsController < ApplicationController
   load_and_authorize_resource
   before_action :set_reunion, only: [:show, :edit, :update, :destroy]
 
-  skip_authorize_resource :only => [:temp_pdf]
 
   # GET /reunions
   # GET /reunions.json
@@ -26,15 +25,15 @@ class ReunionsController < ApplicationController
   end
 
 
-   def template
+   def template_pdf
+    debugger
     respond_to do |format|
     format.pdf do
       render :pdf => 'template_pdf', 
       :template => 'reunion/template_pdf.html.erb',
       :layout => 'pdf.html.erb',
       :orientation => 'Portrait',# default Portrait
-      :page_size => 'Legal', # default A4
-      :show_as_html => params[:debug].present?
+      :page_size => 'Legal'
     end
     format.html 
     end 
