@@ -3,13 +3,19 @@ class Vendedor < ApplicationRecord
   belongs_to :persona, optional: true
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
 
-  has_attached_file :foto, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
-  #validates_attachment_content_type :foto, :content_type => /\Aimage\/.*\Z/
+  #validates_attachment_presence :foto
+  has_attached_file :foto, styles: { medium: "100x325>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :foto, content_type: /\Aimage/
+  validates_attachment_file_name :foto, matches: [/png\Z/, /jpe?g\Z/]
+  validates_attachment_size :foto, less_than_or_equal_to: 4.megabytes
 
+
+  validates :numero, :uniqueness => {:message => "debe ser único"}
   validates :numero, :presence => { :message => "Debe completar el campo Número" }
   validates :numero, numericality: { only_integer: true, :message => "El campo Número debe ser un valor entero"}
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
-  validate :numero_unico
+ 
+
   before_create :habilitar_user
   before_destroy :deshabilitar_user
 
@@ -19,11 +25,6 @@ class Vendedor < ApplicationRecord
   	self.numero
   end
 
-  def numero_unico
-    if Vendedor.where(:numero => self.numero).first
-      errors.add("No se puede dar de alta , ya que existe un vendedor con ese Número")        
-    end
-  end
 
 
   def next

@@ -45,14 +45,13 @@ $(document).ready(function($) {
 
    $("#input_cuil").bind("propertychange change click keyup input paste",function(){
       var cuit = parseInt($("#input_cuil").val(),10);
-         $("#datos_persona").show();
           $.ajax({
             url: '/personas/buscar_persona_completa/'+cuit,
             type: 'POST',
           })
           .done(function(data) {
             if (data != null) {
-              console.log(data)
+             
               /*$("#input_nombres").val(data.nombres); */ //Comentar para no repetir apellido y nombre al buscar y guardar
               $("#input_apellidos").val(data.apellido);
               $("#input_dni").val(data.numero_documento);

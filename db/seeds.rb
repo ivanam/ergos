@@ -36,7 +36,7 @@ Persona.create(tipo_documento_id: 3, numero_documento: 33343209,apellido: "Moren
 
 User.create(email: 'vendedor@vendedor.com', password: 'sumbudrule', persona_id: 1)#1
 User.create(email: 'jefe@jefe.com', password: 'sumbudrule', persona_id: 2)#2
-User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
+User.create(email: 'admin@admin.command', password: 'sumbudrule', persona_id: 3)#3
 User.create(email: 'vendedor2@vendedor.com', password: 'sumbudrule', persona_id: 4)#4
 User.create(email: 'concesionaria@concesionaria.com', password: 'sumbudrule', persona_id: 5)#5
 
@@ -56,3 +56,10 @@ User.find(2).add_role :punto_venta
 User.find(3).add_role :admin
 User.find(4).add_role :vendedor
 User.find(5).add_role :concesionaria
+
+# Creando Estados Personas
+# ================
+
+EstadoPersona.create(estado: 'L', descripcion: 'Libre-Franco')#1
+EstadoPersona.create(estado: 'V', descripcion: 'Vacaciones')#2
+EstadoPersona.create(estado: 'A', descripcion: 'Ausente')#3

@@ -1,3 +1,7 @@
+.bg_white {
+  background-color:white;
+}
+
 html {
   height: 100%;
 }
@@ -11,6 +15,10 @@ body {
 
 .font-weight-bold {
   font-weight:600;
+}
+
+h4 {
+  font-weight: 600;
 }
 
 /* --------------------- NAVBAR ---------------------------- */
@@ -106,7 +114,7 @@ body {
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #5355bf;
+
 }
 
 .navbar-default .navbar-collapse,
@@ -145,6 +153,60 @@ body {
 
 .navbar-logo img{
   padding: 12px 5px 0px 0px;
+}
+
+
+/* ---------------------- NAVBAR TITTLE -----------------------*/
+
+.navbar-title {
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  left: 0px;
+  background-color: $ergosblue;
+}
+
+.navbar-title .details{
+  position: absolute;
+  color:white;
+  font-size:18px;
+  transform: translate(0%,25%);
+
+}
+
+.navbar-title .details span{
+
+  font-weight: 600;
+}
+.medal {
+  width: auto;
+  max-height:125px;
+  position: absolute;
+  text-align:center;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
+.medal-text {
+  width: auto;
+  position: absolute;
+  text-align:center;
+  left: 50%;
+  font-weight: 600;
+  font-size: 42px;
+  color: #876A3E;
+  transform: translate(-51%, 15%);
+}
+
+.buttons {
+  position: absolute;
+  right: 0px;
+  transform: translate(-51%, 44%);
+}
+
+.buttons a .fa{
+  color: white;
+  font-size: 42px;
 }
 
 
@@ -417,7 +479,27 @@ nav.sidebar, .main{
   padding:15px;
   height: 100%;
   width: 100%;
+  
 }
+
+.h-46 .content-box {
+  min-height: 325px;
+}
+
+.content-box ul{
+  list-style:none;
+  padding-left:20px;
+}
+
+.content-box ul li{
+  margin-bottom: 8px;
+}
+
+.content-box ul li .fa{
+  font-size: 18px;
+}
+
+
 
 .title-box {
   position: relative;
@@ -453,7 +535,7 @@ nav.sidebar, .main{
   min-width: 125px;
   text-align: right;
   right: 200px;
-  font-size:0.8vmax;
+  
 }
 
 
@@ -480,14 +562,14 @@ nav.sidebar, .main{
 @media (min-width: 765px) {
 
   .admin-container {
-    padding: 0px 5px 0px 45px;
-    height: 100%;
+    padding: 0px 5px 47px 45px;
+    
   }
 }
 
 @media (min-width: 1330px) {
   .admin-container {
-    padding: 0px 5px 0px 205px;
+    padding: 0px 5px 47px 205px;
   }
 
 }
@@ -508,6 +590,52 @@ nav.sidebar, .main{
   -webkit-user-select: none;
   user-select: none;
   cursor: default;
+}
+
+.btn-ergos{
+  background-color: $ergosgray;
+  color: white;
+  border-radius: 0px;
+  cursor:pointer;
+}
+
+.btn-ergos:hover,
+.btn-ergos:active,
+.btn-ergos:focus {
+  
+}
+
+.btn-add-btns {
+  float: right;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  border: 0px;
+}
+
+.btn-add-btns .fa{
+  font-size: 35px;
+  margin-right: 15px;
+  float:left;
+}
+
+.btn-add-btns .text{
+  float: right;
+  margin: 7px auto;
+}
+
+.btn-add-btns:hover,
+.btn-add-btns:active,
+.btn-add-btns:focus {
+  background-color: gray;
+}
+
+
+.btn-horizontal-list {
+  padding: 8px 15px;
+  background-color: white;
+  width: 100% 
 }
 
 /*
@@ -1269,8 +1397,26 @@ nav.sidebar, .main{
   max-width: 1050px;
 }
 
+.modal {
+  padding: 20%;
+}
+
 .modal-header{
   text-align: center;
+  border-bottom: 0px;
+}
+
+.modal-content{
+  background-color: #e0e0e0;
+}
+
+.modal-footer{
+  border-top: 0px;
+}
+
+.modal h3 {
+  font-weight: 600;
+  color: #666666;
 }
 
 .centrar-todo { 
@@ -1287,4 +1433,61 @@ nav.sidebar, .main{
   position: fixed;
   top: 50%;
   left: 50%;
+}
+
+.vendedors .content {
+  padding-top: 80px
+}
+
+.vendedors .content h1{
+  width: 100%;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 1px solid #555;
+  font-size: 2rem;
+}
+
+.vendedors .content .table > tbody > tr > td {
+  padding: 3px;
+  vertical-align: middle;
+  border-top: 0px;
+  border-collapse: collapse;
+  font-size: 2rem;
+  font-weight:600;
+}
+
+.circle {
+  height: 25px;
+  border-radius:50% !important;
+  width: 25px;
+}
+
+.bg_red {
+  background-color:red;
+}
+
+.bg_green {
+  background-color:green;
+}
+
+.bg_yellow {
+  background-color:yellow;
+}
+
+.chart {
+  width:100%;
+  background-image:url('http://s15.postimg.org/ku83p3fvf/bars.png');
+  background-repeat:no-repeat;
+  background-size:contain;
+  position: relative;
+}
+.chart .bar-container {
+  width:100%;
+  background-color: #eee;
+}
+.chart .bar-container .bar {
+  background:#55565a;
+  margin-top:5px;
+  color:#fff;
+  font-size:16px;
 }

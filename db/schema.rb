@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180506141316) do
+ActiveRecord::Schema.define(version: 20180508115858) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -22,17 +22,32 @@ ActiveRecord::Schema.define(version: 20180506141316) do
   end
 
   create_table "concesionaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.binary   "icono",      limit: 65535
+    t.binary   "icono",             limit: 65535
     t.string   "nombre"
     t.date     "fecha_alta"
     t.date     "fecha_baja"
     t.integer  "user_id"
     t.integer  "empresa_id"
     t.integer  "persona_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "cantPv"
     t.integer  "cantVend"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
+
+  create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "estado"
+    t.integer  "persona_id"
+    t.datetime "fecha_inicio"
+    t.datetime "fecha_fin"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "descripcion"
+    t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 
   create_table "objetivo_mensuals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -171,16 +186,21 @@ ActiveRecord::Schema.define(version: 20180506141316) do
   end
 
   create_table "vendedors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.binary   "foto",           limit: 65535
+    t.binary   "foto",              limit: 65535
     t.integer  "numero"
     t.date     "fecha_alta"
     t.date     "fecha_baja"
     t.integer  "persona_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "punto_venta_id"
+    t.string   "foto_file_name"
+    t.string   "foto_content_type"
+    t.integer  "foto_file_size"
+    t.datetime "foto_updated_at"
   end
 
+  add_foreign_key "estado_personas", "personas"
   add_foreign_key "persona_concesionaria", "concesionaria", column: "concesionaria_id"
   add_foreign_key "persona_concesionaria", "personas"
   add_foreign_key "persona_punto_venta", "personas"

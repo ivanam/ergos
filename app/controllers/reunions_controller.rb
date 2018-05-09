@@ -3,10 +3,21 @@ class ReunionsController < ApplicationController
   load_and_authorize_resource
   before_action :set_reunion, only: [:show, :edit, :update, :destroy]
 
+
   # GET /reunions
   # GET /reunions.json
   def index
     @reunions = Reunion.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'template_pdf', 
+          :template => 'reunions/template_pdf.html.erb',
+          :layout => 'pdf.html.erb',
+          :orientation => 'Portrait',# default Portrait
+          :page_size => 'Legal'
+      end
+    end
   end
 
   # GET /reunions/1
@@ -27,7 +38,6 @@ class ReunionsController < ApplicationController
   # POST /reunions.json
   def create
     @reunion = Reunion.new(reunion_params)
-
     respond_to do |format|
       if @reunion.save
         format.html { redirect_to @reunion, notice: 'Se ha creado una nueva Reunion.' }

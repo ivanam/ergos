@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :estado_personas
   resources :persona_punto_venta
   resources :persona_concesionaria
   resources :objetivo_mensuals
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   resources :personas
   resources :tipo_documentos
   devise_for :users
+
   get 'home/index'
   get 'admin', to: 'home#admin', as:'admin_index'
 
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
 
   post "/personas/buscar_persona_completa/:cuit", to: 'personas#buscar_persona_completa'
   post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona
+  get "/persona/persona_concesionaria", to: 'personas#new_persona_concesionaria',  as: :new_persona_concesionaria
 
 
   get "/punto_ventum/select", to: 'punto_venta#select',  as: :select_punto_venta
@@ -32,5 +35,8 @@ Rails.application.routes.draw do
   get "/concesionarium/select", to: 'concesionaria#select',  as: :select_concesionaria
 
   root 'home#index'
+
+  get "/home_vendedor", to: 'vendedors#home',  as: :home_vendedor
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

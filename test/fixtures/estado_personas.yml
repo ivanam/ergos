@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estado: MyString
+  persona_id: 1
+  fecha_inicio: 2018-05-06 21:11:06
+  fecha_fin: 2018-05-06 21:11:06
+  persona: one
+
+two:
+  estado: MyString
+  persona_id: 1
+  fecha_inicio: 2018-05-06 21:11:06
+  fecha_fin: 2018-05-06 21:11:06
+  persona: two

@@ -29,7 +29,6 @@ class ConcesionariaController < ApplicationController
     @concesionarium = Concesionarium.new(concesionarium_params)
     @concesionarium.fecha_alta = DateTime.now
     @concesionarium.user_id = current_user.id
-
     respond_to do |format|
       if @concesionarium.save
         format.html { redirect_to @concesionarium, notice: 'Concesionarium was successfully created.' }
