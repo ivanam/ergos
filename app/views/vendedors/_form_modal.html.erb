@@ -1,8 +1,9 @@
 <%= form_for(carga_diarium, html: { class: "form-horizontal", role: "form" }) do |f| %>
-  <div class="alert alert-danger alert-dismissable" role="alert">
+  <div id="errors" class="alert alert-danger alert-dismissable" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
     <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
-    <div id="errors"></div>
+    <ul id="error">      
+    </ul>
   </div>
   <div class="modal-body">
     <div class="form-group">
@@ -42,12 +43,13 @@ $('document').ready(function(){
         carga_diarium: {
           fecha: '10/01/2018', 
           cantidad: 3,
-          tipo_objetivo_id: 1
+          tipo_objetivo_id: undefined
         }
-      },
-      error: function(data){ 
-        $('#errors').append(data);
       }
+    }).done(function(response){
+      console.log(response);
+      $('#error').empty();
+      $('#error').append('<li>'+response+'</li>');      
     });
   });  
 });

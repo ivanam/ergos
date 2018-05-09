@@ -81,7 +81,6 @@ class CargaDiariaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carga_diarium_params
-      debugger
       params.require(:carga_diarium).permit(:fecha, :cantidad, :tipo_objetivo_id, :vendedor_id)
     end
 end
