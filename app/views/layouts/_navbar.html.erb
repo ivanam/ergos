@@ -10,7 +10,7 @@
       <a class="navbar-brand" href="/"><%=image_tag("logoErgos2.png")%></a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-ergos">
-      <ul class="nav navbar-nav navbar-right" style="width:100%;text-align: center;">
+      <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, edit_user_registration_path %></li>
           <li><%= link_to (fa_icon "sign-out", text: "Salir"), destroy_user_session_path, method: :delete %></li>

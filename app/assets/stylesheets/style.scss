@@ -13,7 +13,7 @@ html {
 
 body { 
   padding-top: 50px; 
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
   height: 100%;
   
 }
@@ -494,8 +494,12 @@ nav.sidebar, .main{
   
 }
 
-.h-46 .content-box {
-  min-height: 325px;
+.h-350 .content-box {
+  min-height: 350px;
+}
+
+.h-400 .content-box {
+  min-height: 400px;
 }
 
 .content-box ul{
@@ -517,11 +521,10 @@ nav.sidebar, .main{
   position: relative;
   float: left;
   font-weight: 700;
-  height: 36px;
+  min-height: 36px;
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
-  text-align: center;
   vertical-align: middle;
   border: 1px solid transparent;
   white-space: nowrap;
@@ -606,14 +609,14 @@ nav.sidebar, .main{
 @media (min-width: 765px) {
 
   .admin-container {
-    padding: 0px 5px 47px 45px;
+    padding: 0px 5px 0px 45px;
     
   }
 }
 
 @media (min-width: 1330px) {
   .admin-container {
-    padding: 0px 5px 47px 205px;
+    padding: 0px 5px 0px 205px;
   }
 
 }
@@ -627,10 +630,6 @@ nav.sidebar, .main{
   padding: 40px 40px;
 }
 
-.btn {
-  font-weight: 700;
-  
-}
 
 .btn-header-page{
   min-width: 125px;
@@ -685,7 +684,6 @@ nav.sidebar, .main{
 
 .btn-horizontal-list {
   padding: 8px 15px;
-  background-color: white;
   width: 100% 
 }
 
@@ -1273,6 +1271,15 @@ nav.sidebar, .main{
   color: white;
 }
 
+.cel-table > thead > tr > th {
+  text-align: center;
+  vertical-align: middle;
+  background-color: transparent;
+  color: black;
+  padding: 4px;
+}
+
+
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
   border-bottom-width: 1px;
 }
@@ -1566,8 +1573,10 @@ nav.sidebar, .main{
 
 }
 
-
-
-
+.divider-vertical {
+  width:5px;
+  border-right: 1px solid #ffffff;
+  
+}
 
 
