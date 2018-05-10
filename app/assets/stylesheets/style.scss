@@ -542,19 +542,51 @@ nav.sidebar, .main{
   
 }
 
+.select-vendedores {
+  padding: 50px 3px 3px;
+  vertical-align: middle;
+  border-top: 0px;
+  border-collapse: collapse;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.select-vendedores .select2-container--bootstrap {
+  display: inline-block;
+}
+
+
+.conversions-details {
+  padding-top: 30px;
+}
+
+.conversions-details p{
+  font-size:12px;
+  text-align: center;
+}
+
+.legend {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;  
+}
+
+
 
 .legend-1 {
-  bottom: 110px;
+  top: 30%
   
 }
 
 .legend-2 {
-  bottom: 62px;
+  bottom: 40%;
   
 }
 
 .legend-3 {
-  bottom: 8px;
+  bottom: 10%;
   
 }
 
@@ -1463,7 +1495,7 @@ nav.sidebar, .main{
   vertical-align: middle;
   border-top: 0px;
   border-collapse: collapse;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight:600;
 }
 
