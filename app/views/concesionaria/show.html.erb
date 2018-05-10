@@ -5,7 +5,7 @@
     <div class="page-header">
       <center>
         <h2 style="text-align: center;font-weight: 600;"><%= @concesionarium.nombre %></h2>
-        <%=image_tag "escudo-generico.png", :class=>"img-fluid", :style=>"width: auto; max-height:150px;"%>
+        <%=image_tag @concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: 300; max-height:300px;"%>
         <!-- Use la imagen del assets porque no me anda la del logo adomodar despues
         -->
         <!--%=image_tag @concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%-->
