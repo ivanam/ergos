@@ -7,21 +7,21 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <%= f.label :fecha, class: "col-sm-3 control-label" %>
+      <%= label_tag 'Fecha', nil, class: "col-sm-3 control-label" %>
       <div class="col-sm-2">
-        <%= f.text_field :fecha, class: "form-control" %>
+        <%= text_field_tag 'fecha', nil, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :cantidad, "Cantidad", class: "col-sm-3 control-label" %>
+      <%= label_tag 'Cantidad', nil, class: "col-sm-3 control-label" %>
       <div class="col-sm-2">
-        <%= f.text_field :cantidad, class: "form-control" %>
+        <%= text_field_tag 'cantidad', nil, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :tipo_objetivo_id, "Tipo de objetivo", class: "col-sm-3 control-label" %>
+      <%= label_tag 'tipo_objetivo_id', nil, class: "col-sm-3 control-label" %>
       <div class="col-sm-3">
-        <%= f.collection_select :tipo_objetivo_id, TipoObjetivo.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+        <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id", :class => "form-control" %>
       </div>
     </div>
   </div>
@@ -41,9 +41,9 @@ $('document').ready(function(){
       type: 'POST',
       data: {
         carga_diarium: {
-          fecha: '10/01/2018', 
-          cantidad: 3,
-          tipo_objetivo_id: undefined
+          fecha: $('#fecha').val(), 
+          cantidad: $('#cantidad').val(), 
+          tipo_objetivo_id: $('#tipo_objetivo_id').val(), 
         }
       }
     }).done(function(response){
