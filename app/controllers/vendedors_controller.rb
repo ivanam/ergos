@@ -108,6 +108,7 @@ class VendedorsController < ApplicationController
     @sidebar = false
     @footer = false
     @carga_diarium = CargaDiarium.new
+    @tipos_objetivos = TipoObjetivo.all
   end
 
   private

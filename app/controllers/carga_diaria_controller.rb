@@ -39,6 +39,7 @@ class CargaDiariaController < ApplicationController
   # POST /carga_diaria
   # POST /carga_diaria.json
   def create
+    debugger
     @carga_diarium = CargaDiarium.new(carga_diarium_params)
     @carga_diarium.vendedor_id = current_user.id
 

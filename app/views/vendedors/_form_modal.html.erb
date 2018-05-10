@@ -1,5 +1,5 @@
-<%= form_for(carga_diarium, html: { class: "form-horizontal", role: "form" }) do |f| %>
-  <div id="errors" class="alert alert-danger alert-dismissable" role="alert">
+<%= form_for(carga_diarium, html: { id: 'form', class: "form-horizontal", role: "form" }) do |f| %>
+  <div id="errors" style="display: none" class="alert alert-danger alert-dismissable" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
     <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
     <ul id="error">      
@@ -12,18 +12,14 @@
         <%= text_field_tag 'fecha', nil, class: 'form-control' %>
       </div>
     </div>
-    <div class="form-group">
-      <%= label_tag 'Cantidad', nil, class: "col-sm-3 control-label" %>
-      <div class="col-sm-2">
-        <%= text_field_tag 'cantidad', nil, class: 'form-control' %>
+    <% @tipos_objetivos.each do |t|%>
+      <div class="form-group">
+        <%= label_tag t.descripcion, nil, class: "col-sm-3 control-label" %>
+        <div class="col-sm-2">
+          <%= text_field_tag 'tipo_objetivo[]', nil, class: 'form-control' %>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <%= label_tag 'tipo_objetivo_id', nil, class: "col-sm-3 control-label" %>
-      <div class="col-sm-3">
-        <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id", :class => "form-control" %>
-      </div>
-    </div>
+    <% end %>
   </div>
   <div class="modal-footer">    
     <div class="col-sm-offset-2 col-sm-10">
@@ -34,7 +30,6 @@
 <% end %>
 
 <script type="text/javascript">
-$('document').ready(function(){
   $('#guardar').click(function(){
     $.ajax({
       url: '/carga_diaria',
@@ -43,14 +38,17 @@ $('document').ready(function(){
         carga_diarium: {
           fecha: $('#fecha').val(), 
           cantidad: $('#cantidad').val(), 
-          tipo_objetivo_id: $('#tipo_objetivo_id').val(), 
+          tipo_objetivo: $('#tipo_objetivo').val(), 
         }
       }
     }).done(function(response){
-      console.log(response);
-      $('#error').empty();
-      $('#error').append('<li>'+response+'</li>');      
+      if (response.length != 0) {
+        $('#errors').show();
+        $('#error').empty();
+        for (var item in response) {
+          $('#error').append('<li>'+response[item]+'</li>');      
+        }
+      }      
     });
-  });  
-});
+  });
 </script>
