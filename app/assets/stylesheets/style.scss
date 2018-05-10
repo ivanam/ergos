@@ -39,7 +39,7 @@ td a .fa{
 
 
 .navbar-default {
-  background-color: $ergosgray;
+  background-color: white;
   border-bottom: 1.5px solid white;
 }
 
@@ -1501,4 +1501,19 @@ nav.sidebar, .main{
   margin-top:5px;
   color:#fff;
   font-size:16px;
+}
+
+table {
+  background: white;
+}
+
+tbody {
+  background: white;
+}
+
+tr {
+ page-break-inside: avoid;
+ }
+thead{
+display: table-header-group;
 }
