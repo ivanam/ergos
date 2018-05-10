@@ -1,59 +1,63 @@
-<div class="page-header">
-  <%= link_to concesionaria_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Volver
-  <% end %>
-  <%= link_to edit_concesionarium_path(@concesionarium), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Editar
-  <% end %>
-  <h4>Concesionaria</h4>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+    
+
+    <div class="page-header">
+      <center>
+        <h2 style="text-align: center;font-weight: 600;"><%= @concesionarium.nombre %></h2>
+        <%=image_tag "escudo-generico.png", :class=>"img-fluid", :style=>"width: auto; max-height:150px;"%>
+        <!-- Use la imagen del assets porque no me anda la del logo adomodar despues
+        -->
+        <!--%=image_tag @concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%-->
+      </center> 
+      <%= link_to concesionaria_path, class: 'btn btn-default btn-header-page' do %>
+        <span class="fa fa-chevron-left"></span>
+        Volver
+      <% end %>
+      <%= link_to edit_concesionarium_path(@concesionarium), class: 'btn btn-primary btn-header-page' do %>
+        <span class="fa fa-pencil"></span>
+        Editar
+      <% end %>    
+    </div>
+
+    
+    <h4>Datos de la Conocesionaria</h4>
+    <p style="margin-left: 15px;">
+      <strong>Cantidad de Puntos de Venta:</strong>
+      <%= @concesionarium.cantPv %>
+    </p>
+
+    <p style="margin-left: 15px;">
+      <strong>Cantidad de Vendedores:</strong>
+      <%= @concesionarium.cantVend %>
+    </p>
+
+    <p style="margin-left: 15px;">
+      <strong>Fecha alta:</strong>
+      <%= @concesionarium.fecha_alta %>
+    </p>
+
+    <p style="margin-left: 15px;">
+      <strong>Fecha baja:</strong>
+      <%= @concesionarium.fecha_baja %>
+    </p>
+
+    <p style="margin-left: 15px;">
+      <strong>Usuario creador:</strong>
+      <%= @concesionarium.user.email %>
+    </p>
+
+    <% if current_user.admin? %>
+      <h4>Usuarios administradores <%= link_to fa_icon("plus"), new_persona_concesionarium_path(concesionaria: @concesionarium.id), style: "margin-left: 5px;" %></h4>
+      <% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>
+        <p style="margin-left: 15px;">
+          <strong><%=fa_icon("user")%></strong>
+          <%= pc.persona %><%= link_to fa_icon("trash"), pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?'}, :style=>"margin-left:15px;" %>
+        </p>
+      <% end %>
+    <% end %>
+    
+
+    
+  </div>
 </div>
-
-<p>
-  <strong>Logo:</strong>
-  <%=image_tag @concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%>
-</p>
-
-<p>
-  <strong>Nombre:</strong>
-  <%= @concesionarium.nombre %>
-</p>
-
-<p>
-  <strong>Cantidad de Puntos de Venta:</strong>
-  <%= @concesionarium.cantPv %>
-</p>
-
-<p>
-  <strong>Cantidad de Vendedores:</strong>
-  <%= @concesionarium.cantVend %>
-</p>
-
-<p>
-  <strong>Fecha alta:</strong>
-  <%= @concesionarium.fecha_alta %>
-</p>
-
-<p>
-  <strong>Fecha baja:</strong>
-  <%= @concesionarium.fecha_baja %>
-</p>
-
-<p>
-  <strong>Usuario creador:</strong>
-  <%= @concesionarium.user.email %>
-</p>
-
-<% if current_user.admin? %>
-  <h4>Usuarios administradores</h4>
-  <% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>
-    <p>
-      <strong>Persona:</strong>
-      <%= pc.persona %>
-    </p>
-    <p><td><%= link_to 'Eliminar', pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?' } %></td>
-    </p>
-  <% end %>
-  <p><td><%= link_to 'Agregar', new_persona_concesionarium_path(concesionaria: @concesionarium.id) %></td>
-<% end %>

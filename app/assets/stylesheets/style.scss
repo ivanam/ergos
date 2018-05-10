@@ -21,6 +21,10 @@ h4 {
   font-weight: 600;
 }
 
+td a .fa{
+  font-size: 16px;
+}
+
 /* --------------------- NAVBAR ---------------------------- */
 
 .navbar {
@@ -585,11 +589,17 @@ nav.sidebar, .main{
 
 .btn {
   font-weight: 700;
-  height: 36px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: default;
+  
+}
+
+.btn-header-page{
+  min-width: 125px;
+}
+
+
+
+.btn-default {
+
 }
 
 .btn-ergos{
@@ -602,7 +612,8 @@ nav.sidebar, .main{
 .btn-ergos:hover,
 .btn-ergos:active,
 .btn-ergos:focus {
-  
+  color: $ergosgray;
+  background-color: lightgray;
 }
 
 .btn-add-btns {

@@ -15,13 +15,13 @@
         <td><%= tipo_objetivo.descripcion %></td>
           <td class="text-center">
             <%= link_to tipo_objetivo, class: 'btn btn-sm btn-default' do %>
-              <span class="glyphicon glyphicon-search"></span>
+              <span class="fa fa-search"></span>
             <% end %>
             <%= link_to edit_tipo_objetivo_path(tipo_objetivo), class: 'btn btn-sm btn-default' do %>
-              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="fa fa-pencil"></span>
             <% end %>
             <%= link_to tipo_objetivo, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
-              <span class="glyphicon glyphicon-trash"></span>
+              <span class="fa fa-trash"></span>
             <% end %>
           </td>
         </tr>

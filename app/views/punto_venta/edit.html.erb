@@ -1,6 +1,17 @@
-<h1>Editar Punto de Venta</h1>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+		<div class="page-header">
+			<h2 style="text-align: center;font-weight: 600;">Editar Punto de Venta</h2>
+		  <%= link_to punto_venta_path, class: 'btn btn-default btn-header-page' do %>
+		    <span class="fa fa-chevron-left"></span>
+		    Volver
+		  <% end %>
+		  <%= link_to @punto_ventum, class: 'btn btn-primary btn-header-page' do %>
+		    <span class="fa fa-search"></span>
+		    Ver
+		  <% end %>
+		  
+		</div>
 
-<%= render 'form', punto_ventum: @punto_ventum %>
-
-<%= link_to 'Show', @punto_ventum %> |
-<%= link_to 'Back', punto_venta_path %>
+		<%= render 'form', punto_ventum: @punto_ventum %>
+</div>

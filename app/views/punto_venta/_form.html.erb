@@ -1,58 +1,35 @@
-<%= form_for(punto_ventum) do |f| %>
-  <% if punto_ventum.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(punto_ventum.errors.count, "error") %> prohibited this punto_ventum from being saved:</h2>
 
+<%= nested_form_for(punto_ventum, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if punto_ventum.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
       <ul>
-      <% punto_ventum.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% punto_ventum.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
       <% end %>
       </ul>
     </div>
   <% end %>
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h2 class="panel-title"  align="center" ><%= punto_ventum.concesionaria %></h3>
-      <h3 class="panel-title"  align="center" >Nuevo Punto de Venta</h3>
-     </div>
-  <div class="panel-body">
-
-    <div class="form-group"> 
-      <div class="col-sm-10">
-       <%= f.text_field :concesionaria_id, :class => "hidden" %>
-      </div> </br> 
-     </div>
-     </br></br> 
-  
-    <div class="form-group">
-      <label class="col-sm-4 control-label">Nombre del punto de venta</label>  
-      <div class="col-sm-10">
-      <%= f.text_field :nombre %>
-      </div> </br> 
+  <%= f.text_field :concesionaria_id, :class => "hidden" %>
+  <div class="form-group">
+    <%= f.label :nombre, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :nombre, class: "form-control" %>
     </div>
-    </br> </br> 
-
-    <div class="form-group">
-      <label class="col-sm-4 control-label">Domicilio P. Venta</label>  
-      <div class="col-sm-10">
-       <%= f.text_field :domicilio , :style=>"width:50%" %>
-      </div> </br> 
-    </div>
-    </br></br> 
-
-    <div class="form-group">
-      <div class="col-sm-offset-5 col-sm-10">
-      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
-      </div>
-    </div></br> 
-    </br> 
-    <div class="form-group">
-      <div class="col-sm-offset-5 col-sm-10">
-       <%= link_to punto_venta_path, class: 'btn btn-primary' do %>
-       <%= fa_icon "plus", text: "Atras" %>
-       <% end %>
-        <% end %>
-        </br> 
   </div>
-
+   <div class="form-group">
+    <%= f.label :domicilio, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :domicilio, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+    </div>
+  </div>
+<% end %>
 

@@ -1,2 +1,17 @@
-<%= render 'form', punto_ventum: @punto_ventum %>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+
+		<div class="page-header">
+			<h2 style="text-align: center;font-weight: 600;">Nueva Concesionaria</h2>
+		  <%= link_to punto_venta_path, class: 'btn btn-default btn-header-page' do %>
+		    <span class="fa fa-arrow-left"></span>
+		    Volver
+		  <% end %>
+		  
+		</div>
+
+		<%= render 'form', punto_ventum: @punto_ventum %>
+	</div>
+</div>
+
 

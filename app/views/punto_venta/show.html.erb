@@ -1,40 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
 
-<div class="page-header">
+    <div class="page-header">
+      <center>
+        <h2 style="text-align: center;font-weight: 600;"><%= @punto_ventum.nombre %></h2>
+      </center> 
+      <%= link_to punto_venta_path, class: 'btn btn-default btn-header-page' do %>
+        <span class="fa fa-chevron-left"></span>
+        Volver
+      <% end %>
+      <%= link_to edit_punto_ventum_path(@punto_ventum), class: 'btn btn-primary btn-header-page' do %>
+        <span class="fa fa-pencil"></span>
+        Editar
+      <% end %>    
+      <%= link_to punto_ventum_path(@punto_ventum), method: :delete, data: { confirm: '¿Seguro desea eliminar?' }, :class => 'btn btn-danger btn-header-page' do%>
+        <span class="fa fa-trash"></span>
+        Eliminar
+      <% end %>
+    </div>
 
-<dl class="dl-horizontal">
-  <dt>Nombre:</dt>
-  <dd><%= @punto_ventum.nombre %></dd>
-  <dt><strong>Domicilio:</strong></dt>
-  <dd><%= @punto_ventum.domicilio %></dd>
-  <dt>Concesionaria:</dt>
-  <% Concesionarium.where(:id => @punto_ventum.concesionaria_id).each do |r| %>
-  <% @conc = r.nombre  %>
-  <dd><%= @conc %></dd>
-  <% end %>
-  <% if current_user.concesionaria? %>
-    <h4>Usuarios administradores</h4>
-    <% PersonaPuntoVentum.where(punto_venta_id: @punto_ventum.id).each do |ppv|%>
-      <p>
-        <strong>Persona:</strong>
-        <%= ppv.persona %>
-      </p>
-      <p><td><%= link_to 'Destroy', ppv, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?' } %></td>
-      </p>
+    <h4>Datos del CPunto de Venta</h4>
+    <p style="margin-left: 15px;">
+      <strong>Domicilio:</strong>
+      <%= @punto_ventum.domicilio %>
+    </p>
+
+    <p style="margin-left: 15px;">
+      <strong>Concesionaria:</strong>
+      <%= @punto_ventum.concesionaria.nombre %>
+    </p>
+   
+     
+    <% if current_user.concesionaria? %>
+      <h4>Usuarios administradores <%= link_to fa_icon("plus"), new_persona_punto_ventum_path(punto_venta: @punto_ventum.id), style: "margin-left: 5px;" %></h4>
+      <% PersonaPuntoVentum.where(punto_venta_id: @punto_ventum.id).each do |ppv|%>
+        <p style="margin-left: 15px;">
+          <strong><%=fa_icon("user")%></strong>
+          <%= ppv.persona %><%= link_to fa_icon("trash"), ppv, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?'}, :style=>"margin-left:15px;" %>
+        </p>
+      <% end %>
     <% end %>
-    <p><td><%= link_to 'Agregar', new_persona_punto_ventum_path(punto_venta: @punto_ventum.id) %></td>
-  <% end %>
-  <br/><br/>
-  <%= link_to punto_venta_path, :class => 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Atrás
-  <% end %>
-  <%= link_to edit_punto_ventum_path(@punto_ventum), :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Editar
-  <% end %>
-  <%= link_to punto_ventum_path(@punto_ventum), method: :delete, data: { confirm: '¿Seguro desea eliminar?' }, :class => 'btn btn-danger' do%>
-    <span class="glyphicon glyphicon-trash"></span>
-    Eliminar
-  <% end %>
-</dl>
+
+    
+  </div>  
+</div>

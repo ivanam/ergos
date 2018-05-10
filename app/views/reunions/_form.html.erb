@@ -51,7 +51,7 @@
             <%= p.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control select"} %>
           </div>
           <div class="col-sm-2">
-            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger glyphicon glyphicon-trash pull-right" %>
+            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger fa fa-trash pull-right" %>
           </div>
         </div>
       <% end %>
