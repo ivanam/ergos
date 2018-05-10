@@ -1,5 +1,10 @@
 .bg_white {
-  background-color:gray;
+  background-color:white;
+}
+
+.bg_gray {
+  background-color:#aeaeae;
+
 }
 
 html {
@@ -10,7 +15,7 @@ body {
   padding-top: 50px; 
   padding-bottom: 20px;
   height: 100%;
-  background-color: #aeaeae;
+  
 }
 
 
@@ -1537,9 +1542,9 @@ nav.sidebar, .main{
 }
 
 
-.body body-pdf { 
+.body .body-pdf { 
   padding-top: 50px; 
   padding-bottom: 20px;
   height: 100%;
-  background-color: #aeaeae;
+  background-color: white;
 }
