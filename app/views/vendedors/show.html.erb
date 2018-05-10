@@ -15,12 +15,14 @@
 
     
 
-    <% v= @vendedor %>
-    <%if @vendedor.next != nil 
+    <% v= @vendedor
+
+    if @vendedor.next != nil 
       @next= @vendedor.next.id
     else
       @next= nil
     end
+
 
     if @vendedor.previous != nil 
       @previous= @vendedor.previous.id
