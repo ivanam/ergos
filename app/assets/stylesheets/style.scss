@@ -13,6 +13,7 @@ body {
   background-color: #aeaeae;
 }
 
+
 .font-weight-bold {
   font-weight:600;
 }
@@ -1501,4 +1502,12 @@ nav.sidebar, .main{
   margin-top:5px;
   color:#fff;
   font-size:16px;
+}
+
+
+.body body-pdf { 
+  padding-top: 50px; 
+  padding-bottom: 20px;
+  height: 100%;
+  background-color: #white;
 }
