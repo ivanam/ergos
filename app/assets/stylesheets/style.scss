@@ -124,12 +124,12 @@ td a .fa{
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-
+  background-color: white;
 }
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #5355bf;
+  border-color: white;
 }
 
 .navbar-default .navbar-link {
@@ -139,6 +139,8 @@ td a .fa{
 .navbar-default .navbar-link:hover {
   color: #38397f;
 }
+
+
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
@@ -577,6 +579,10 @@ nav.sidebar, .main{
   margin-right: auto;
   left: 0;
   right: 0;  
+  color: white;
+  font-weight: 600;
+
+
 }
 
 
@@ -587,7 +593,7 @@ nav.sidebar, .main{
 }
 
 .legend-2 {
-  bottom: 40%;
+  bottom: 35%;
   
 }
 
@@ -596,10 +602,6 @@ nav.sidebar, .main{
   
 }
 
-
-.container {
-  
-}
 
 @media (min-width: 765px) {
 
@@ -1548,3 +1550,24 @@ nav.sidebar, .main{
   height: 100%;
   background-color: white;
 }
+
+
+@media (min-width: 970px) {
+
+  .dashboard .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1330px) {
+  .dashboard .container {
+    width: 1110px;
+  }
+
+}
+
+
+
+
+
+
