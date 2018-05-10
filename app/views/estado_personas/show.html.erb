@@ -1,29 +1,44 @@
 <p id="notice"><%= notice %></p>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+    
 
-<p>
-  <strong>Estado:</strong>
-  <%= @estado_persona.estado %>
-</p>
+    <div class="page-header">
+      <%= link_to estado_personas_path, class: 'btn btn-default btn-header-page' do %>
+        <span class="fa fa-chevron-left"></span>
+        Volver
+      <% end %>
+      <%= link_to edit_estado_persona_path(@estado_persona), class: 'btn btn-primary btn-header-page' do %>
+        <span class="fa fa-pencil"></span>
+        Editar
+      <% end %>    
+    </div>
 
-<p>
-  <strong>Persona:</strong>
-  <%= @estado_persona.persona_id %>
-</p>
+    
+    <h4>Estado de la persona</h4>
+    <p style="margin-left: 15px;">
+     <strong>Estado:</strong>
+      <%= @estado_persona.estado %>
+    </p>
 
-<p>
-  <strong>Fecha inicio:</strong>
-  <%= @estado_persona.fecha_inicio %>
-</p>
+    <p style="margin-left: 15px;">
+        <strong>Persona:</strong>
+        <%= @estado_persona.persona_id %>
+    </p>
 
-<p>
-  <strong>Fecha fin:</strong>
-  <%= @estado_persona.fecha_fin %>
-</p>
+    <p style="margin-left: 15px;">
+      <strong>Fecha inicio:</strong>
+      <%= @estado_persona.fecha_inicio %>
+    </p>
 
-<p>
-  <strong>Persona:</strong>
-  <%= @estado_persona.persona %>
-</p>
+    <p style="margin-left: 15px;">
+      <strong>Fecha fin:</strong>
+      <%= @estado_persona.fecha_fin %>
+    </p>
 
-<%= link_to 'Edit', edit_estado_persona_path(@estado_persona) %> |
-<%= link_to 'Back', estado_personas_path %>
+    <p style="margin-left: 15px;">
+      <strong>Persona:</strong>
+      <%= @estado_persona.persona_id.to_s %>
+    </p>    
+  </div>
+</div>

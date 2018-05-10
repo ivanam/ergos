@@ -7,6 +7,7 @@ class ReunionsController < ApplicationController
   # GET /reunions
   # GET /reunions.json
   def index
+    @bg_white = true
     @reunions = Reunion.all
     respond_to do |format|
       format.html

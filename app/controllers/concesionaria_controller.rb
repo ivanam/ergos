@@ -7,20 +7,24 @@ class ConcesionariaController < ApplicationController
   # GET /concesionaria.json
   def index
     @concesionaria = Concesionarium.all
+    @bg_gray = true;
   end
 
   # GET /concesionaria/1
   # GET /concesionaria/1.json
   def show
+    @bg_gray = true;
   end
 
   # GET /concesionaria/new
   def new
+    @bg_gray = true;
     @concesionarium = Concesionarium.new
   end
 
   # GET /concesionaria/1/edit
   def edit
+    @bg_gray = true;
   end
 
   # POST /concesionaria

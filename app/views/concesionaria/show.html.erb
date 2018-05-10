@@ -10,9 +10,11 @@
         -->
         <!--%=image_tag @concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:325px;"%-->
       </center> 
-      <%= link_to concesionaria_path, class: 'btn btn-default btn-header-page' do %>
-        <span class="fa fa-chevron-left"></span>
-        Volver
+     <% if current_user.admin? %>
+         <%= link_to concesionaria_path, class: 'btn btn-default btn-header-page' do %>
+         <span class="fa fa-chevron-left"></span>
+         Volver
+         <% end %>
       <% end %>
       <%= link_to edit_concesionarium_path(@concesionarium), class: 'btn btn-primary btn-header-page' do %>
         <span class="fa fa-pencil"></span>

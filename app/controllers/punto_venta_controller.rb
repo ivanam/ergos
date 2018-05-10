@@ -7,21 +7,29 @@ class PuntoVentaController < ApplicationController
   # GET /punto_venta
   # GET /punto_venta.json
   def index
+    @bg_gray = true
+
     @punto_venta = PuntoVentum.where(concesionaria_id: current_user.concesionaria_id)
   end
 
   # GET /punto_venta/1
   # GET /punto_venta/1.json
   def show
+    @bg_gray = true
+
   end
 
   # GET /punto_venta/new
   def new
+    @bg_gray = true
+
     @punto_ventum = PuntoVentum.new(concesionaria_id: current_user.concesionaria_id)
   end
 
   # GET /punto_venta/1/edit
   def edit
+    @bg_gray = true
+
   end
 
   # POST /punto_venta
@@ -91,7 +99,7 @@ class PuntoVentaController < ApplicationController
   def dashboard
     @sidebar = false
     @footer = false
-
+    @bg_gray = true
   end
 
   private

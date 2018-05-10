@@ -3,7 +3,7 @@
     <div class="main-nav">
     	<div class="details">
     		<span>Juan Carlos Perez</span><br>
-    		Vendedor
+    		Jefe de Vendedores
     	</div>
       <%=image_tag "medalla.png", :class=>"medal img-fluid", :style=>""%>
       <div class="medal-text">1</div> <!-- variable con la posición que tiene en la tabla -->
@@ -16,6 +16,9 @@
   </div>
 </div>
 <div class="content">
+  <div class="select-vendedores">
+    Seleccione Vendedor: <%=select("post", "person_id", Vendedor.all.collect {|v| [ v.persona.nombre, v.id ] }, { include_blank: true })%>
+  </div>
 	<h1>Avance</h1>
 	<table class="table">
     <tbody>
@@ -73,9 +76,26 @@
 
 	<h1>Conversión</h1>
 	<div class="row">
-		<div class="col-xs-4"><center>YO</center></div>	
-		<div class="col-xs-4"></div>		
-		<div class="col-xs-4"><center>EQUIPO</center></div>	
+		<div class="col-xs-4">
+      <center>
+        <h4>YO</h4>
+        <%=image_tag "Funnel1.png", class:"img-responsive"%>
+        <div class="legend legend-1">158</div>
+        <div class="legend legend-2">52</div>
+        <div class="legend legend-3">36</div>
+      </center>
+    </div>	
+		<div class="col-xs-4">
+      <h4 style="color:white;">detalle</h4>
+      <%=image_tag "Funnel-details.png", class:"img-responsive"%>
+      
+    </div>		
+		<div class="col-xs-4">
+      <center>
+      <h4>EQUIPO</h4>
+      <%=image_tag "Funnel2.png", class:"img-responsive"%>
+      </center>
+    </div>	
 
 	</div>
 

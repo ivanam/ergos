@@ -6,17 +6,23 @@ class VendedorsController < ApplicationController
   # GET /vendedors
   # GET /vendedors.json
   def index
+    @bg_gray = true
+
     @vendedors = Vendedor.where(punto_venta_id: current_user.punto_venta_id)
   end
 
   # GET /vendedors/1
   # GET /vendedors/1.json
   def show
+    @bg_gray = true
+
     
   end
 
   # GET /vendedors/new
   def new
+    @bg_gray = true
+
     @vendedor = Vendedor.new
     @persona = Persona.new
   end
@@ -24,7 +30,7 @@ class VendedorsController < ApplicationController
   # GET /vendedors/1/edit
   def edit
     @vendedor = Vendedor.where(:id => params[:id]).first
-   
+    @bg_gray = true
 
   end
 
@@ -101,7 +107,6 @@ class VendedorsController < ApplicationController
   def home
     @sidebar = false
     @footer = false
-    @bg_white = true
     @carga_diarium = CargaDiarium.new
   end
 
