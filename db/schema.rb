@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508115858) do
+ActiveRecord::Schema.define(version: 20180510141651) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20180508115858) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "descripcion"
+    t.integer  "vendedor_id"
     t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 

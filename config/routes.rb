@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   get "/concesionarium/select", to: 'concesionaria#select',  as: :select_concesionaria
 
+  get "/estado_persona/select", to: 'estado_persona#select',  as: :select_estado_persona
+
   root 'home#index'
 
   get "/home_vendedor", to: 'vendedors#home',  as: :home_vendedor
