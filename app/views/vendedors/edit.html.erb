@@ -1,7 +1,13 @@
-<h1>Editar Vendedor</h1>
+<div class="page-header">
+  <%= link_to vendedors_path, class: 'btn btn-default' do %>
+    <span class="fa fa-list-alt"></span>
+    Volver
+  <% end %>
+  <%= link_to @vendedor, class: 'btn btn-primary' do %>
+    <span class="fa fa-info-sign"></span>
+    Ver
+  <% end %>
+  <h4>Editar vendedor</h4>
+</div>
 
-<%= render 'form', vendedor: @vendedor %>
-
-
-<%= link_to 'Show', @vendedor %> |
-<%= link_to 'Back', vendedors_path %>
+<%= render 'form', reunion: @vendedor %>

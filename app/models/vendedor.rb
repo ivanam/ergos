@@ -4,7 +4,7 @@ class Vendedor < ApplicationRecord
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
 
   #validates_attachment_presence :foto
-  has_attached_file :foto, styles: { medium: "100x325>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :foto, styles: { medium: "300x250>", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :foto, content_type: /\Aimage/
   validates_attachment_file_name :foto, matches: [/png\Z/, /jpe?g\Z/]
   validates_attachment_size :foto, less_than_or_equal_to: 4.megabytes
@@ -28,11 +28,11 @@ class Vendedor < ApplicationRecord
 
 
   def next
-    self.class.where("id > ?", id).first
+    self.class.where("id > ?", id).where(:punto_venta_id => self.punto_venta_id).first
   end
 
   def previous
-    self.class.where("id < ?", id).last
+    self.class.where("id < ?", id).where(:punto_venta_id => self.punto_venta_id).last
   end
 
 

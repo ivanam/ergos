@@ -25,9 +25,9 @@
 
 
     if @vendedor.previous != nil 
-      @previous= @vendedor.previous.id
+      previous= @vendedor.previous.id
     else
-      @previous= nil
+      previous= nil
     end
 
 
@@ -56,7 +56,7 @@
   <div class="col-sm-3 admin-box h-46">
     <div class="content-box h-100">
       
-      <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:400px;"%></center> 
+      <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: 250px; max-height:400px;"%></center> 
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
@@ -71,7 +71,7 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
         <div class="title-box w-20 bg-gray">Vendedores</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
       </div>
       <div class="row">
         <div class="col-sm-6">
