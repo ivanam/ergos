@@ -1,5 +1,15 @@
-<h1>New Estado Persona</h1>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
 
-<%= render 'form', estado_persona: @estado_persona %>
+		<div class="page-header">
+			<h2 style="text-align: center;font-weight: 600;">Nuevo Estado Persona</h2>
+		  <%= link_to estado_personas_path, class: 'btn btn-default btn-header-page' do %>
+		    <span class="fa fa-arrow-left"></span>
+		    Volver
+		  <% end %>
+		  
+		</div>
 
-<%= link_to 'Back', estado_personas_path %>
+		<%= render 'form', estado_persona: @estado_persona %>
+	</div>
+</div>
