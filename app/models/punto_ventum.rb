@@ -18,7 +18,7 @@ class PuntoVentum < ApplicationRecord
     def validarCantPV
      cantPv = Concesionarium.where(:id => self.concesionaria_id).first.cantPv
      cantPvconc = PuntoVentum.where(:concesionaria_id => self.concesionaria_id).count
-     if (cantPv <= cantPvconc)
+     if (cantPv.to_i <= cantPvconc.to_i)
       	errors.add(:base, "No puede generar mas puntos de venta para esta concesionaria")
      end
     end 
