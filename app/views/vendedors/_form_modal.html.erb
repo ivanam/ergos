@@ -9,14 +9,14 @@
     <div class="form-group">
       <%= label_tag 'Fecha', nil, class: "col-sm-3 control-label" %>
       <div class="col-sm-2">
-        <%= text_field_tag 'fecha', nil, class: 'form-control' %>
+        <%= text_field_tag 'fecha', nil, class: 'form-control required' %>
       </div>
     </div>
     <% @tipos_objetivos.each do |t|%>
       <div class="form-group">
         <%= label_tag t.descripcion, nil, class: "col-sm-3 control-label" %>
         <div class="col-sm-2">
-          <%= text_field_tag 'tipo_objetivo[]', nil, class: 'form-control' %>
+          <%= text_field_tag t.id, nil, class: 'form-control required' %>
         </div>
       </div>
     <% end %>
@@ -37,8 +37,11 @@
       data: {
         carga_diarium: {
           fecha: $('#fecha').val(), 
-          cantidad: $('#cantidad').val(), 
-          tipo_objetivo: $('#tipo_objetivo').val(), 
+          tipos_objetivos: {
+          <% @tipos_objetivos.each do |t|%>
+              <%= t.id %>: $('#<%= t.id %>').val(),
+          <% end %>
+          }
         }
       }
     }).done(function(response){
