@@ -16,6 +16,8 @@
         <th>Semana</th>
         <th>Lugar fisico</th>
         <th>Organizador</th>
+        <th>Plan de acción</th>
+        <th>Acción</th>
         <th class="col-md-2">&nbsp;</th>
       </tr>
     </thead>
@@ -27,6 +29,8 @@
           <td><%= reunion.semana %></td>
           <td><%= reunion.lugar_fisico %></td>
           <td><%= reunion.persona.to_s %></td>
+          <td><%= reunion.plan_accion %></td>
+          <td><%= reunion.accion %></td>
           <td class="text-center">
             <%= link_to reunion, class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-search"></span>
