@@ -15,6 +15,9 @@ class PuntoVentaController < ApplicationController
   # GET /punto_venta/1
   # GET /punto_venta/1.json
   def show
+    if  ((current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)) and (current_user.punto_venta_id.to_i != @punto_ventum.id)
+      redirect_to home_vendedor_path, :alert => "No esta autorizado"
+    end
     @bg_gray = true
 
   end

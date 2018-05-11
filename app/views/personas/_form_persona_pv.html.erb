@@ -114,7 +114,7 @@
     </div>
   </br>
   
-  <%= text_field_tag "concesionaria", nil, :class => "hidden", :value => @concesionaria_id %>
+  <%= text_field_tag "punto_venta", nil, :class => "hidden", :value => @punto_venta_id %>
 
   </fieldset>
   
@@ -129,7 +129,7 @@
     </div>   
     <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
-     <%= link_to new_persona_concesionarium_path(concesionaria: @concesionaria_id), class: 'btn btn-primary' do %>
+     <%= link_to new_persona_punto_ventum_path(punto_venta: @punto_venta_id ), class: 'btn btn-primary' do %>
      <%= fa_icon "plus", text: "Atras" %>
      <% end %>
      </div>
