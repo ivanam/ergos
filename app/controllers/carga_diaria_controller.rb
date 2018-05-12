@@ -39,14 +39,26 @@ class CargaDiariaController < ApplicationController
   # POST /carga_diaria
   # POST /carga_diaria.json
   def create
-    @carga_diarium = CargaDiarium.new(carga_diarium_params)
-    @carga_diarium.vendedor_id = current_user.id
-
-    if @carga_diarium.save
-      redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
-    else
-      render json: @carga_diarium.errors
+    fecha = params[:carga_diarium][:fecha]
+    tipos_objetivos = params[:carga_diarium][:tipos_objetivos]
+    tipos_objetivos.each do | id, value |
+      carga_diaria = CargaDiarium.new
+      carga_diaria.fecha = fecha
+      carga_diaria.tipo_objetivo_id = id
+      carga_diaria.cantidad = value
+      carga_diaria.vendedor_id = current_user.id
+      carga_diaria.save
     end
+    redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
+    
+    #@carga_diarium = CargaDiarium.new(carga_diarium_params)
+    #@carga_diarium.vendedor_id = current_user.id
+
+    #if @carga_diarium.save
+    #  redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
+    #else
+    #  render json: @carga_diarium.errors
+    #end
   end
 
   # PATCH/PUT /carga_diaria/1
