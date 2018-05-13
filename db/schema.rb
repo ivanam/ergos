@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180511195929) do
     t.integer  "punto_venta_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "porceCLI"
   end
 
   create_table "objetivo_semanals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180511195929) do
     t.integer  "punto_venta_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "porceCLI"
     t.integer  "tipo_objetivo_id"
   end
 
