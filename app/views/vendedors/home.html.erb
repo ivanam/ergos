@@ -16,9 +16,11 @@
   </div>
 </div>
 <div class="content">
+  <% if current_user.has_role? :punto_venta %>
   <div class="select-vendedores">
     Seleccione Vendedor: <%=select("post", "person_id", Vendedor.all.collect {|v| [ v.persona.nombre, v.id ] }, { include_blank: true })%>
   </div>
+  <% end %>
 	<h1>Avance</h1>
 	<table class="table">
     <tbody>
