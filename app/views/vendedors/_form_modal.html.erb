@@ -16,12 +16,12 @@
       <div class="form-group">
         <%= label_tag t.descripcion, nil, class: "col-sm-4 control-label" %>
         <div class="col-sm-4">
-          <%= text_field_tag t.id, 0, class: 'form-control' %>
+          <%= number_field_tag t.id, 0, class: 'form-control' %>
         </div>
-        <a class="btn btn-success">
+        <a data-field="<%= t.id %>" class="btn btn-success plus">
           <%= fa_icon "plus" %>
         </a>
-        <a class="btn btn-danger">
+        <a data-field="<%= t.id %>" class="btn btn-danger minus">
           <%= fa_icon "minus" %>
         </a>
       </div>
@@ -36,6 +36,20 @@
 <% end %>
 
 <script type="text/javascript">
+  $('.plus').click(function(){
+    input = $(this).attr('data-field');
+    $("input[name='"+input+"']").val(function(i, oldval) {
+      return ++oldval;
+    });
+  });
+  $('.minus').click(function(){
+    input = $(this).attr('data-field');
+    if ($("input[name='"+input+"']").val() >0) {
+      $("input[name='"+input+"']").val(function(i, oldval) {
+        return --oldval;
+      });
+    }
+  });
   $('#close_errors').click(function(){
     $('#errors').hide();
   });
