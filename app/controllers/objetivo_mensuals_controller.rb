@@ -6,7 +6,7 @@ class ObjetivoMensualsController < ApplicationController
   # GET /objetivo_mensuals
   # GET /objetivo_mensuals.json
   def index
-    @objetivo_mensuals = ObjetivoMensual.all
+    @objetivo_mensuals = ObjetivoMensual.where(punto_venta_id: current_user.punto_venta_id).order(:anio, :mes, :tipo_objetivo_id)
   end
 
   # GET /objetivo_mensuals/1

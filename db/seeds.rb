@@ -20,7 +20,7 @@ TipoDocumento.create(descripcion: 'CI')#4
 
 TipoObjetivo.create(descripcion: 'PROSPECTOS') #1
 TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO')#2
-TipoObjetivo.create(descripcion: 'VENTAS')#2
+TipoObjetivo.create(descripcion: 'VENTAS')#3
 
 # Personas
 # ========

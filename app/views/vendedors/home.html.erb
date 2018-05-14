@@ -2,8 +2,12 @@
   <div class="container">
     <div class="main-nav">
     	<div class="details">
-    		<span>Juan Carlos Perez</span><br>
-    		Jefe de Vendedores
+    		<span><%= current_user.persona.nombre %> <%= current_user.persona.apellido %></span><br>
+    		<% if current_user.has_role? :punto_venta %>
+          Jefe de Vendedores
+        <%elsif current_user.has_role? :vendedor %>
+          Vendedor
+        <% end %>
     	</div>
       <%=image_tag "medalla.png", :class=>"medal img-fluid", :style=>""%>
       <div class="medal-text">1</div> <!-- variable con la posición que tiene en la tabla -->
@@ -30,11 +34,11 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="66" class="bar">66%</div>
+        			<div data-percentage="<%= CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)*100/ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)%>" class="bar"><%= CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)*100/ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)%>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;">14/21</td>
+        <td style="text-align: right;"><%= CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor) %> /<%= ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)%></td>
       </tr>
       <tr>
       	<td>Ventas</td>
@@ -42,11 +46,11 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="10" class="bar">10%</div>
+        			<div data-percentage="<%= CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)*100/ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>" class="bar"><%= CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)*100/ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;">10/30</td>
+        <td style="text-align: right;"><%= CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)%>/<%=ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%></td>
       </tr>
       <tr>
         <td>Créditos</td>
