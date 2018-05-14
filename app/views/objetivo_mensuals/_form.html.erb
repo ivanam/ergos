@@ -56,7 +56,17 @@
   </div>
   </br> -->
 
- <div class="form-group">
+  <div class="form-group"> 
+  <label class="col-sm-2 control-label">Asignar a vendedor</label>
+   <div class="col-sm-3">
+     <div class="form-group">
+      <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
+     </div>
+    </div>
+  </div>
+  </br>
+ 
+ <div class="form-group" id="vendedor" hidden>
     <label class="col-sm-2 control-label">Vendedor asignado al objetivo</label>
     <div class="col-sm-10"> 
      <%punto_venta_id = current_user.punto_venta_id%>
@@ -64,12 +74,7 @@
     </div>
   </div>
   </br>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Punto de Venta del objetivo</label>
-    <div class="col-sm-10"> 
-    <%= f.collection_select(:punto_venta_id, PuntoVentum.where(:id => punto_venta_id), :id, :nombre, {:prompt => true},:style=>"width:50%") %> 
-  </div>
-  </div>
+  <%= f.hidden_field :punto_venta_id, value: @objetivo_mensual.punto_venta_id %> 
   </br>
 
  <div class="form-group">
@@ -91,3 +96,14 @@
 </div>
 
 
+<script>
+function myFunction() {
+  $("#pventa").val("");
+  var checkBox = document.getElementById("myCheck");
+  if (checkBox.checked == true){
+    $("#vendedor").show();
+  } else {
+    $("#vendedor").hide();
+  }
+}
+</script>
