@@ -8,10 +8,11 @@
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes"/>
   </head>
 
 
-  <body class="<%= controller_name %> <%= action_name %> <%= 'bg_white' if @bg_white %>">
+  <body class="<%= controller_name %> <%= action_name %> <%= 'bg_gray' if @bg_gray %>">
   
     <%= render "layouts/navbar"%>
     <%= render "layouts/sidebar"%>
@@ -34,13 +35,13 @@
         <%= bootstrap_flash %>
         <%= yield %>
         </div>
-    <% if !@footer.nil? %>
+    <!--% if !@footer.nil? %>
         <% if @footer == true %>
           <%= render "layouts/footer"%>
         <% end %>
     <% else %>
       <%= render "layouts/footer"%>
-    <% end %>
+    <% end %-->
   </body>
   <script type="text/javascript">
     $('document').ready(function() { 

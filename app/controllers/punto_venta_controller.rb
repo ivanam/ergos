@@ -7,21 +7,32 @@ class PuntoVentaController < ApplicationController
   # GET /punto_venta
   # GET /punto_venta.json
   def index
+    @bg_gray = true
+
     @punto_venta = PuntoVentum.where(concesionaria_id: current_user.concesionaria_id)
   end
 
   # GET /punto_venta/1
   # GET /punto_venta/1.json
   def show
+    if  ((current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)) and (current_user.punto_venta_id.to_i != @punto_ventum.id)
+      redirect_to home_vendedor_path, :alert => "No esta autorizado"
+    end
+    @bg_gray = true
+
   end
 
   # GET /punto_venta/new
   def new
+    @bg_gray = true
+
     @punto_ventum = PuntoVentum.new(concesionaria_id: current_user.concesionaria_id)
   end
 
   # GET /punto_venta/1/edit
   def edit
+    @bg_gray = true
+
   end
 
   # POST /punto_venta
@@ -91,7 +102,7 @@ class PuntoVentaController < ApplicationController
   def dashboard
     @sidebar = false
     @footer = false
-
+    @bg_gray = true
   end
 
   private

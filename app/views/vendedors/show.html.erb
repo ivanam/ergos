@@ -15,17 +15,19 @@
 
     
 
-    <% v= @vendedor %>
-    <%if @vendedor.next != nil 
+    <% v= @vendedor
+
+    if @vendedor.next != nil 
       @next= @vendedor.next.id
     else
       @next= nil
     end
 
+
     if @vendedor.previous != nil 
-      @previous= @vendedor.previous.id
+      previous= @vendedor.previous.id
     else
-      @previous= nil
+      previous= nil
     end
 
 
@@ -51,10 +53,10 @@
 
 
 
-  <div class="col-sm-3 admin-box h-46">
+  <div class="col-sm-3 admin-box h-400">
     <div class="content-box h-100">
       
-      <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:400px;"%></center> 
+      <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:250px;"%></center> 
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
@@ -64,17 +66,17 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-9 admin-box h-46">
+  <div class="col-sm-9 admin-box h-400">
     <div class="content-box h-100">
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
         <div class="title-box w-20 bg-gray">Vendedores</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
       </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-xs-6">
           <div class="">
-            <h3 class="text-center font-weight-bold" style="margin-top:0px;">Datos Personales</h3>
+            <h4 class="text-center font-weight-bold" style="margin-top:0px;">Datos Personales</h4>
             <p><span class="font-weight-bold">Identificación: </span><%=v.persona.cuit%></p>
             <p><span class="font-weight-bold">Edad:</span><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
             <p><span class="font-weight-bold">Fecha de Ingreso: </span><%=v.fecha_alta%></p>
@@ -83,17 +85,50 @@
             <p><span class="font-weight-bold">E-Mail: </span><%=v.persona.email%></p>
           </div>
         </div>
-        <div class="col-sm-6">
-          <h3 class="text-center font-weight-bold" style="margin-top:0px;">Último Trimestre</h3>
-          <div class="image-box h-100">
-            <center>
-              <%=image_tag "grafico-embudo.png", :style=>"width: auto; max-height:150px; float:right;"%>
-            </center>
-            <div class="legend-1">Prospecto</div>
-            <div class="legend-2">Pruebas de Manejo</div>
-            <div class="legend-3">Ventas</div>
+        <div class="col-xs-6 row">
+          <h4 class="text-center font-weight-bold" style="margin-top:0px;">Último Trimestre</h4>
+          <div class="col-xs-6">
+            <%=image_tag "Funnel-details.png", class:"img-responsive"%>
             
-          </div>
+          </div>    
+          <div class="col-xs-6">
+            <center>
+              <%=image_tag "Funnel2.png", class:"img-responsive"%>
+              <div class="legend legend-1" style="top:10%;">158</div>
+              <div class="legend legend-2" style="top:40%;">52</div>
+              <div class="legend legend-3" style="bottom:8%;">36</div>
+            </center>
+          </div>  
+          <div class="col-xs-12">
+            <table class="table cel-table" style="margin-top: 5px;">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Dic</th>
+                  <th scope="col">Ene</th>
+                  <th scope="col">Feb</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Compras</th>
+                  <td>7</td>
+                  <td>9</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <th scope="row">Ventas</th>
+                  <td>7</td>
+                  <td>9</td>
+                  <td>10</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>  
+
+
+
         </div>
       </div>
       <div class="" style="width:90%;position: absolute;bottom: 20px;">
@@ -103,7 +138,7 @@
     </div>
     
   </div>
-  <div class="col-sm-3 admin-box h-46">
+  <div class="col-sm-3 admin-box h-350">
     <div class="content-box">
       <h4 style="">Información relacionada</h4>
       <ul>
@@ -115,35 +150,143 @@
     </div>
 
   </div>
-  <div class="col-sm-9 admin-box h-46">
+  <div class="col-sm-9 admin-box h-350">
     <div class="content-box h-100">
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
         <div class="title-box w-20 bg-gray">Objetivos</div>
         <div class="title-box w-60 bg-ergosgray"></div>
         <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
       </div>
-      <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
-        <div class="title-box w-100 bg-light-gray"></div>
+      <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
+        <div style="padding-right: 10px; margin-right: 10px; border-right: 2px solid #fff; display:inline-block;">
+          <button type="button" class="btn btn-xs btn-default btn-ergos">Menu</button>
+        </div>
+        <button type="button" class="btn btn-xs btn-default btn-ergos">Guardar</button>
+        <button type="button" class="btn btn-xs btn-default btn-ergos">Cancelar</button>
+        <button type="button" class="btn btn-xs btn-default btn-ergos">Verificar</button>
         
       </div>
-      <div class="col-sm-6 row">
-        <div class="col-sm-6">
+      <div class="row">
+        <div class="col-xs-6 row">
+
+          <!-- SEMANA -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Semana:
+          </div>
+          <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+            </div>
+          </div> 
+          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
           
+          </div>
+          <br>
+          <br>
+          <br>
+          <!-- Prospecto -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Prospectos:
+          </div>
+          <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+            </div>
+          </div> 
+          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          de 50
+          </div>
+          <br>
+          <br>
+          <!-- Prueba de Manejo -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Prueba de Manejo:
+          </div>
+          <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+            </div>
+          </div> 
+          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          de 30
+          </div>
+          <br>
+          <br>
+          <!-- Ventas -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Ventas:
+          </div>
+          <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+            </div>
+          </div> 
+          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          de 16
+          </div>
+        </div>
+        <div class="col-xs-6 row">
+          <!-- Mes -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Mes:
+          </div>
+          <div class="col-sm-5">
+            <input type="text" class="btn btn-default"></input>
+          </div> 
+          
+          <br>
+          <br>
+          <br>
+          <!-- Financiaciones -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Financiaciones:
+          </div>
+          <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+            </div>
+          </div> 
+          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          de 50
+          </div>
+          <br>
+          <br>
+          <!-- Calidad -->
+          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          Calidad:
+          </div>
+          <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+            </div>
+          </div> 
+          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          de 30
+          </div>
+          <br>
+          <br>
+        </div>
+        <div class="" style="width:90%;position: absolute;bottom: 20px;">
+          <p class="text-center "><a href="">más..</a></p>
         </div>
       </div>
-      <div class="col-sm-6 row">
-          
-      </div>
-        
-      <div class="" style="width:90%;position: absolute;bottom: 20px;">
-        <p class="text-center "><a href="">más..</a></p>
-      </div>
-
     </div>
+      
   </div>
-
   <div class="col-sm-12 h-6">
-    <div class="btn-horizontal-list" style="">
+    <div class="btn-horizontal-list bg_white" style="">
       <button type="button" class="btn btn-default btn-ergos">Preparar Reunión Semanal</button>
       <button type="button" class="btn btn-default btn-ergos">Preparar Reunión Mensual</button>
       <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Agregar Atajo</div></button>

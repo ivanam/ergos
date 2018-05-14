@@ -15,14 +15,17 @@ class Ability
         elsif user.has_role? :concesionaria
           can :manage, :all
         elsif user.has_role? :punto_venta
-          can :read, [PuntoVentum]
+          can :show, [PuntoVentum]
           can :dashboard, [PuntoVentum]
           can :manage, [ObjetivoSemanal]
           can :manage, [ObjetivoMensual]
+          can :manage, [CargaDiarium]
+          can :home, [Vendedor]
         elsif user.has_role? :vendedor
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
           can :dashboard, [PuntoVentum]
+          can :manage, [Vendedor]
 
         end
     end

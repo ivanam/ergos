@@ -2,16 +2,22 @@
   background-color:white;
 }
 
+.bg_gray {
+  background-color:#aeaeae;
+
+}
+
 html {
   height: 100%;
 }
 
 body { 
   padding-top: 50px; 
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
   height: 100%;
-  background-color: #aeaeae;
+  
 }
+
 
 .font-weight-bold {
   font-weight:600;
@@ -19,6 +25,10 @@ body {
 
 h4 {
   font-weight: 600;
+}
+
+td a .fa{
+  font-size: 16px;
 }
 
 /* --------------------- NAVBAR ---------------------------- */
@@ -114,12 +124,12 @@ h4 {
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-
+  background-color: white;
 }
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #5355bf;
+  border-color: white;
 }
 
 .navbar-default .navbar-link {
@@ -129,6 +139,8 @@ h4 {
 .navbar-default .navbar-link:hover {
   color: #38397f;
 }
+
+
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
@@ -482,8 +494,12 @@ nav.sidebar, .main{
   
 }
 
-.h-46 .content-box {
-  min-height: 325px;
+.h-350 .content-box {
+  min-height: 350px;
+}
+
+.h-400 .content-box {
+  min-height: 400px;
 }
 
 .content-box ul{
@@ -505,11 +521,10 @@ nav.sidebar, .main{
   position: relative;
   float: left;
   font-weight: 700;
-  height: 36px;
+  min-height: 36px;
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
-  text-align: center;
   vertical-align: middle;
   border: 1px solid transparent;
   white-space: nowrap;
@@ -538,38 +553,70 @@ nav.sidebar, .main{
   
 }
 
+.select-vendedores {
+  padding: 50px 3px 3px;
+  vertical-align: middle;
+  border-top: 0px;
+  border-collapse: collapse;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.select-vendedores .select2-container--bootstrap {
+  display: inline-block;
+}
+
+
+.conversions-details {
+  padding-top: 30px;
+}
+
+.conversions-details p{
+  font-size:12px;
+  text-align: center;
+}
+
+.legend {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;  
+  color: white;
+  font-weight: 600;
+
+
+}
+
+
 
 .legend-1 {
-  bottom: 110px;
+  top: 30%
   
 }
 
 .legend-2 {
-  bottom: 62px;
+  bottom: 35%;
   
 }
 
 .legend-3 {
-  bottom: 8px;
+  bottom: 10%;
   
 }
 
-
-.container {
-  
-}
 
 @media (min-width: 765px) {
 
   .admin-container {
-    padding: 0px 5px 47px 45px;
+    padding: 0px 5px 0px 45px;
     
   }
 }
 
 @media (min-width: 1330px) {
   .admin-container {
-    padding: 0px 5px 47px 205px;
+    padding: 0px 5px 0px 205px;
   }
 
 }
@@ -583,13 +630,15 @@ nav.sidebar, .main{
   padding: 40px 40px;
 }
 
-.btn {
-  font-weight: 700;
-  height: 36px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: default;
+
+.btn-header-page{
+  min-width: 125px;
+}
+
+
+
+.btn-default {
+
 }
 
 .btn-ergos{
@@ -602,7 +651,8 @@ nav.sidebar, .main{
 .btn-ergos:hover,
 .btn-ergos:active,
 .btn-ergos:focus {
-  
+  color: $ergosgray;
+  background-color: lightgray;
 }
 
 .btn-add-btns {
@@ -634,7 +684,6 @@ nav.sidebar, .main{
 
 .btn-horizontal-list {
   padding: 8px 15px;
-  background-color: white;
   width: 100% 
 }
 
@@ -1222,6 +1271,15 @@ nav.sidebar, .main{
   color: white;
 }
 
+.cel-table > thead > tr > th {
+  text-align: center;
+  vertical-align: middle;
+  background-color: transparent;
+  color: black;
+  padding: 4px;
+}
+
+
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
   border-bottom-width: 1px;
 }
@@ -1452,7 +1510,7 @@ nav.sidebar, .main{
   vertical-align: middle;
   border-top: 0px;
   border-collapse: collapse;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight:600;
 }
 
@@ -1491,3 +1549,34 @@ nav.sidebar, .main{
   color:#fff;
   font-size:16px;
 }
+
+
+.body .body-pdf { 
+  padding-top: 50px; 
+  padding-bottom: 20px;
+  height: 100%;
+  background-color: white;
+}
+
+
+@media (min-width: 970px) {
+
+  .dashboard .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1330px) {
+  .dashboard .container {
+    width: 1110px;
+  }
+
+}
+
+.divider-vertical {
+  width:5px;
+  border-right: 1px solid #ffffff;
+  
+}
+
+

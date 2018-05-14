@@ -24,15 +24,15 @@
   <dd><%= @objetivo_mensual.punto_venta_id %></dd>
   <br/><br/>
   <%= link_to objetivo_mensuals_path, :class => 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
+    <span class="fa fa-list-alt"></span>
     Atrás
   <% end %>
   <%= link_to edit_objetivo_mensual_path(@objetivo_mensual), :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
+    <span class="fa fa-pencil"></span>
     Editar
   <% end %>
   <%= link_to objetivo_mensual_path(@objetivo_mensual), method: :delete, data: { confirm: '¿Seguro desea eliminar?' }, :class => 'btn btn-danger' do%>
-    <span class="glyphicon glyphicon-trash"></span>
+    <span class="fa fa-trash"></span>
     Eliminar
   <% end %>
 </dl>

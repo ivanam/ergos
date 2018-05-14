@@ -21,22 +21,24 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'home/index'
+  
   get 'admin', to: 'home#admin', as:'admin_index'
-
-
-  get 'reunion/template_pdf', to: 'reunions#template_pdf', as:'imprimir_template'
-
 
   get 'dashboard', to: 'punto_venta#dashboard', as:'punto_venta_dashboard'
 
   post "/personas/buscar_persona_completa/:cuit", to: 'personas#buscar_persona_completa'
+
   post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona
+
   get "/persona/persona_concesionaria", to: 'personas#new_persona_concesionaria',  as: :new_persona_concesionaria
 
+  get "/persona/persona_punto_venta", to: 'personas#new_persona_punto_venta',  as: :new_persona_punto_venta
 
   get "/punto_ventum/select", to: 'punto_venta#select',  as: :select_punto_venta
 
   get "/concesionarium/select", to: 'concesionaria#select',  as: :select_concesionaria
+
+  get "/estado_persona/select", to: 'estado_persona#select',  as: :select_estado_persona
 
   root 'home#index'
 

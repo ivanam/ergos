@@ -7,7 +7,18 @@ class ReunionsController < ApplicationController
   # GET /reunions
   # GET /reunions.json
   def index
+    @bg_white = true
     @reunions = Reunion.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'template_pdf', 
+          :template => 'reunions/template_pdf.html.erb',
+          :layout => 'pdf.html.erb',
+          :orientation => 'Portrait',# default Portrait
+          :page_size => 'Legal'
+      end
+    end
   end
 
   # GET /reunions/1
@@ -23,22 +34,6 @@ class ReunionsController < ApplicationController
   # GET /reunions/1/edit
   def edit
   end
-
-
-   def template_pdf
-    debugger
-    respond_to do |format|
-    format.pdf do
-      render :pdf => 'template_pdf', 
-      :template => 'reunion/template_pdf.html.erb',
-      :layout => 'pdf.html.erb',
-      :orientation => 'Portrait',# default Portrait
-      :page_size => 'Legal'
-    end
-    format.html 
-    end 
-  end
-
 
   # POST /reunions
   # POST /reunions.json
@@ -88,6 +83,6 @@ class ReunionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reunion_params
-      params.require(:reunion).permit(:fecha, :semana, :lugar_fisico, :persona_id, reunion_participantes_attributes: [:id, :persona_id, :_destroy])
+      params.require(:reunion).permit(:fecha, :semana, :lugar_fisico, :persona_id, :plan_accion, :accion, reunion_participantes_attributes: [:id, :persona_id, :_destroy])
     end
 end

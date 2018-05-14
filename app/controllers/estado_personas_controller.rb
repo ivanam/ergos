@@ -5,20 +5,26 @@ class EstadoPersonasController < ApplicationController
   # GET /estado_personas.json
   def index
     @estado_personas = EstadoPersona.all
+    @bg_gray = true
+
   end
 
   # GET /estado_personas/1
   # GET /estado_personas/1.json
   def show
+    @bg_gray = true
+
   end
 
   # GET /estado_personas/new
   def new
     @estado_persona = EstadoPersona.new
+    @bg_gray = true
   end
 
   # GET /estado_personas/1/edit
   def edit
+    @bg_gray = true
   end
 
   # POST /estado_personas
@@ -26,7 +32,7 @@ class EstadoPersonasController < ApplicationController
   def create
     @estado_persona = EstadoPersona.new(estado_persona_params)
 
-    respond_to do |format|
+    respond_to do | format|
       if @estado_persona.save
         format.html { redirect_to @estado_persona, notice: 'Estado persona was successfully created.' }
         format.json { render :show, status: :created, location: @estado_persona }

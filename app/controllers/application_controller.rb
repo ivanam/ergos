@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    if  (current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)
+      redirect_to home_vendedor_path, :alert => exception.message
+    else
+      redirect_to root_url, :alert => exception.message
+    end
   end  
 end

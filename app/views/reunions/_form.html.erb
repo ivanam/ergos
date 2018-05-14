@@ -38,6 +38,20 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <%= f.label :plan_accion, "Plan de Acción", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :plan_accion, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :accion, "Accion", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :accion, class: "form-control" %>
+    </div>
+  </div>
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title"><%= fa_icon "users" %> Participantes</h3>
@@ -51,7 +65,7 @@
             <%= p.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control select"} %>
           </div>
           <div class="col-sm-2">
-            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger glyphicon glyphicon-trash pull-right" %>
+            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger fa fa-trash pull-right" %>
           </div>
         </div>
       <% end %>

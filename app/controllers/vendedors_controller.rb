@@ -6,24 +6,31 @@ class VendedorsController < ApplicationController
   # GET /vendedors
   # GET /vendedors.json
   def index
+    @bg_gray = true
+
     @vendedors = Vendedor.where(punto_venta_id: current_user.punto_venta_id)
   end
 
   # GET /vendedors/1
   # GET /vendedors/1.json
   def show
+    @bg_gray = true
+
     
   end
 
   # GET /vendedors/new
   def new
+    @bg_gray = true
+
     @vendedor = Vendedor.new
     @persona = Persona.new
   end
 
   # GET /vendedors/1/edit
   def edit
-   
+    @vendedor = Vendedor.where(:id => params[:id]).first
+    @bg_gray = true
 
   end
 
@@ -35,7 +42,7 @@ class VendedorsController < ApplicationController
     pv = @vendedor.punto_venta
     cantVend = pv.concesionaria.cantVend
     cantvendconc = Vendedor.where(:id => @vendedor.punto_venta_id).count
-    if (cantVend <= cantvendconc)
+    if (cantVend.to_i <= cantvendconc.to_i + 1 )
       flash[:notice] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
     end
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
@@ -100,8 +107,8 @@ class VendedorsController < ApplicationController
   def home
     @sidebar = false
     @footer = false
-    @bg_white = true
     @carga_diarium = CargaDiarium.new
+    @tipos_objetivos = TipoObjetivo.all
   end
 
   private
