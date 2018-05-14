@@ -15,11 +15,17 @@
   <div class="field">
     <%= f.label "Buscar Persona" %>
     <%= text_field_tag 'buscar_cuil'%>
-    <label id="bot_buscar" onclick="buscar_persona()" > buscar </label>     
+    <label id="bot_buscar" onclick="buscar_persona()"  class="btn btn-primary"> buscar </label>     
     <%= f.hidden_field :persona_id, id: "persona_id"%>
     <div id = "datos_persona" class="hide">
       <label > Agente: </label> 
-      <%= text_field_tag 'nombre_persona'%>
+      <%= label_tag 'nombre_persona', nil, id: "nombre_persona"%>
+      <br>
+      <label > Correo: </label> 
+      <%= label_tag 'email_persona', nil, id: "email_persona"%>
+      <br>
+      <label > Contraseña por defecto: </label> 
+      <%= label_tag 'contra_persona', nil, id: "contra_persona"%>
     </div>
     <div  id = "crear_persona" class="hide">
       <label > No se encontraron resultados </label> 

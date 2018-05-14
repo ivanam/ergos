@@ -42,6 +42,16 @@ class PersonasController < ApplicationController
           format.json { render json: @persona.errors, status: :unprocessable_entity }
         end
       end
+    elsif params[:punto_venta].to_i > 0
+      respond_to do |format|
+        if @persona.save
+          format.html { redirect_to new_persona_concesionarium_path(concesionaria: params[:concesionaria]), notice: 'Persona creada correctamente.' }
+          format.json { render :show, status: :created, location: @persona }
+        else
+          format.html { redirect_to new_persona_concesionaria_path(concesionaria: params[:concesionaria]), alert: @persona.errors.full_messages  }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
+      end
     else
       respond_to do |format|
         if @persona.save
