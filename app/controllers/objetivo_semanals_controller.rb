@@ -16,7 +16,7 @@ class ObjetivoSemanalsController < ApplicationController
 
   # GET /objetivo_semanals/new
   def new
-    @objetivo_semanal = ObjetivoSemanal.new
+    @objetivo_semanal = ObjetivoSemanal.new(punto_venta_id: current_user.punto_venta_id)
   end
 
   # GET /objetivo_semanals/1/edit
