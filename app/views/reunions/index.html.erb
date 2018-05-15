@@ -1,11 +1,14 @@
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+
 <div class="page-header">
+<h2 style="text-align: center;font-weight: 600;">Reuniones</h2>
   <%= link_to new_reunion_path, class: 'btn btn-primary' do %>
     <%= fa_icon "plus", text: "Nueva Reunion" %>
   <% end %>
   <%= link_to "#{reunions_path}.pdf", class: 'btn btn-danger' do %>
     <%= fa_icon "file-pdf-o", text: "Imprimir reunion" %>
   <% end %>
-  <h4>Reuniones</h4>
 </div>
 
 <div class="table-responsive">
@@ -46,4 +49,6 @@
       <% end %>
     </tbody>
   </table>
+</div>
+</div>
 </div>
