@@ -1,4 +1,13 @@
-<h1>Objetivo Mensual</h1>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+
+   <div class="page-header">
+     <h2 style="text-align: center;font-weight: 600;">Objetivos Mensuales</h2>
+        <%= link_to new_objetivo_mensual_path, class: 'btn btn-primary' do %>
+        <%= fa_icon "plus", text: "Nuevo Objetivo" %>
+        <% end %>
+   </div>
+
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -50,12 +59,9 @@
     </tbody>
   </table>
 </div>
-
-<br>
-
-<div class="page-header">
-  <%= link_to new_objetivo_mensual_path, class: 'btn btn-primary' do %>
-    <%= fa_icon "plus", text: "Nuevo Objetivo" %>
-  <% end %>
+</div>
 </div>
 
+
+
+<br>
