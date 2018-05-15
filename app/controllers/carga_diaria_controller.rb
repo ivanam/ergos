@@ -57,6 +57,7 @@ class CargaDiariaController < ApplicationController
           carga_diaria.tipo_objetivo_id = id
           carga_diaria.cantidad = value
           carga_diaria.vendedor_id = current_user.id
+          carga_diaria.save
         end
       end
       redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
