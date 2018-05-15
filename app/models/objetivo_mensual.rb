@@ -14,7 +14,12 @@ class ObjetivoMensual < ApplicationRecord
 
   def self.objetivo_total_v(anio,mes,v)
     total = 0
-    ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: v.id).each do |o_m|
+    if v.nil?
+      vendedor_id = 0
+    else
+      vendedor_id = v.id
+    end
+    ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id).each do |o_m|
       total = total + o_m.cantidad_propuesta
     end
     return total
@@ -22,7 +27,12 @@ class ObjetivoMensual < ApplicationRecord
 
   def self.objetivo_v(anio,mes,v, ob)
     total = 0
-    ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: v.id, tipo_objetivo_id: ob).each do |o_m|
+    if v.nil?
+      vendedor_id = 0
+    else
+      vendedor_id = v.id
+    end
+    ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
       total = total + o_m.cantidad_propuesta
     end
     return total
