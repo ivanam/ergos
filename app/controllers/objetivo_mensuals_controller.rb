@@ -31,7 +31,6 @@ class ObjetivoMensualsController < ApplicationController
     vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
     @objetivo_mensual.user_id = current_user.id
       if (descpOb == "CSI")
-        debugger
         vendedores.each do |vendedores|
             objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
             objetivo_mensual.vendedor_id = vendedores.id

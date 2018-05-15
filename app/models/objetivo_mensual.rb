@@ -40,7 +40,6 @@ class ObjetivoMensual < ApplicationRecord
 
 
   def validarCantidades
-  	debugger
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first
     @obmPv = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first # Performs a COUNT(id)
@@ -57,17 +56,14 @@ class ObjetivoMensual < ApplicationRecord
 
     if (descpOb.descripcion != "CSI")
       if ((@obMen == nil) && (self.vendedor_id != nil))
-    	debugger
         errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
       end
     
       if ((self.vendedor_id == nil) && (@obMen != nil))
-    	debugger
           errors.add(:base,'Ya existe un Objetivo Mensual para ese mes y año para ese punto de venta')
       end
 
       if ((self.vendedor_id == @obmVend.vendedor_id.to_i))
-    	debugger
           errors.add(:base,'Ya existe un Objetivo Mensual para ese mes y año para ese vendedor')
       end 
     end
