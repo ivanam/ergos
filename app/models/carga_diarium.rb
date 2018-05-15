@@ -12,7 +12,12 @@ class CargaDiarium < ApplicationRecord
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
 		fecha_hasta = Date.new(anio,mes,31)
-		CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: v.id).each do |c_d|
+		if v.nil?
+			vendedor_id = 0
+		else
+			vendedor_id = v.id
+		end
+		CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_id).each do |c_d|
 			total = total + c_d.cantidad
 		end
 		return total
@@ -22,7 +27,12 @@ class CargaDiarium < ApplicationRecord
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
 		fecha_hasta = Date.new(anio,mes,31)
-		CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: v.id, tipo_objetivo_id: ob).each do |c_d|
+		if v.nil?
+			vendedor_id = 0
+		else
+			vendedor_id = v.id
+		end
+		CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |c_d|
 			total = total + c_d.cantidad
 		end
 		return total
