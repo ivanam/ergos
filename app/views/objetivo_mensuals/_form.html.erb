@@ -11,83 +11,78 @@
       </ul>
     </div>
   <% end %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"  align="center" >Objetivo Mensual</h3>
-  </div>
-  <div class="panel-body">
-   <div class="form-group">
-  <label class="col-sm-2 control-label">Tipo de objetivo</label>  
-    <div class="col-sm-10">
-     <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.all.order(:descripcion), :id, :descripcion, {:prompt => true},:style=>"width:50%" , :class => "form-control") %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"  align="center" >Objetivo Mensual</h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Tipo de objetivo</label>  
+        <div class="col-sm-10">
+          <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.all.order(:descripcion), :id, :descripcion, {:prompt => "Seleccione un Tipo de objetivo"},:style=>"width:50%" , :class => "form-control") %>
+        </div>
       </div>
-  </div>
-  </br>
+      </br>
   
-  <div class="form-group">
-  <label class="col-sm-2 control-label">Cantidad Objetivo</label>  
-    <div class="col-sm-10">
-    <%= f.number_field :cantidad_propuesta %>
-   </div>
-  </div>
-   </br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Cantidad Objetivo</label>  
+        <div class="col-sm-2">
+          <%= f.number_field :cantidad_propuesta, :class => "form-control" %>
+        </div>
+      </div>
+      </br>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Mes de objetivo</label>
-    <div class="col-sm-10"> 
-    <%= f.select :mes, ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Noviembre', 'Diciembre'] %>
-   </div>
-  </div>
-  </br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Mes de objetivo</label>
+        <div class="col-sm-10"> 
+          <%= select_month(Date.today, field_name: 'mes', prompt: "Selccione mes") %>
+        </div>
+      </div>
+      </br>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Año de objetivo</label>
-    <div class="col-sm-10"> 
-    <%= f.select :anio, ['2018', '2017', '2016', '2015', '2014', '2013', '2012']%>
-    </div>
-  </div>
-  </br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Año de objetivo</label>
+        <div class="col-sm-10">     
+          <%= select_year(Date.today, field_name: 'anio', start_year: Date.today.year, end_year: 1970, prompt: "Selccione año") %>
+        </div>
+      </div>
+      </br>
 
-<!--   <div class="form-group">
-    <label class="col-sm-2 control-label">Usuario</label>
-    <div class="col-sm-10"> 
-    <%= f.text_field :user_id %>
-  </div>
-  </div>
-  </br> -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Vendedor asignado al objetivo</label>
+        <div class="col-sm-10"> 
+          <%punto_venta_id = current_user.punto_venta_id%>
+          <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :id, :numero, {:prompt => "Seleccione un Vendedor"},:style=>"width:50%") %>
+        </div>
+      </div>
+      </br>
 
- <div class="form-group">
-    <label class="col-sm-2 control-label">Vendedor asignado al objetivo</label>
-    <div class="col-sm-10"> 
-     <%punto_venta_id = current_user.punto_venta_id%>
-     <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :id, :numero, {:prompt => true},:style=>"width:50%") %>
-    </div>
-  </div>
-  </br>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Punto de Venta del objetivo</label>
-    <div class="col-sm-10"> 
-    <%= f.collection_select(:punto_venta_id, PuntoVentum.where(:id => punto_venta_id), :id, :nombre, {:prompt => true},:style=>"width:50%") %> 
-  </div>
-  </div>
-  </br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Punto de Venta del objetivo</label>
+        <div class="col-sm-10"> 
+          <%= f.collection_select(:punto_venta_id, PuntoVentum.where(:id => punto_venta_id), :id, :nombre, {:prompt => "Seleccione un Punto de venta"},:style=>"width:50%") %> 
+        </div>
+      </div>
+      </br>
 
- <div class="form-group">
-    <label class="col-sm-2 control-label">Descripción del objetivo</label>
-    <div class="col-sm-10">
-      <%= f.text_field :descripcion, :class => "form-control" ,:style=>"width:50%"%>
-    </div>
-  </div>
- <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Descripción del objetivo</label>
+        <div class="col-sm-10">
+          <%= f.text_field :descripcion, :class => "form-control" ,:style=>"width:50%"%>
+        </div>
+      </div>
   
-  <%= link_to objetivo_mensuals_path, class: 'btn btn-primary' do %>
-    <%= fa_icon "plus", text: "Atras" %>
-  <% end %>
-  <% end %>
-</div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+          <%= link_to objetivo_mensuals_path, class: 'btn btn-primary' do %>
+            <%= fa_icon "arrow-left", text: "Atras" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 
 

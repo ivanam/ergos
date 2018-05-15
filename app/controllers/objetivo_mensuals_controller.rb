@@ -27,16 +27,18 @@ class ObjetivoMensualsController < ApplicationController
   # POST /objetivo_mensuals.json
   def create
     @objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
-       @objetivo_mensual.user_id = current_user.id
-       respond_to do |format|
-        if @objetivo_mensual.save
-          format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
-          format.json { render :show, status: :created, location: @objetivo_mensual }
-         else
-          format.html { render :new }
-          format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
-        end
-       end
+    @objetivo_mensual.mes = params[:date][:mes]
+    @objetivo_mensual.anio = params[:date][:anio]
+    @objetivo_mensual.user_id = current_user.id
+    respond_to do |format|
+      if @objetivo_mensual.save
+        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
+        format.json { render :show, status: :created, location: @objetivo_mensual }
+      else
+        format.html { render :new }
+        format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /objetivo_mensuals/1
