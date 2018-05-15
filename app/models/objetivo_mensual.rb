@@ -2,8 +2,8 @@ class ObjetivoMensual < ApplicationRecord
 	belongs_to :punto_venta, :class_name => 'PuntoVentum', :foreign_key => 'punto_venta_id'
 	#belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
 
-  validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
-  validates :anio, :presence => { :message => "Debe completar el campo Fecha de creacion" }
+    validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
+    validates :anio, :presence => { :message => "Debe completar el campo Fecha de creacion" }
 	validates :cantidad_propuesta, :presence => { :message => "Debe completar el campo Cantidad" }
 	validates :cantidad_propuesta, numericality: { only_integer: true, :message => "El campo Cantidad debe ser un valor entero"}	
 	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
@@ -40,6 +40,8 @@ class ObjetivoMensual < ApplicationRecord
 
 
   def validarCantidades
+  	debugger
+  	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first
     @obmPv = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first # Performs a COUNT(id)
     @obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).first
@@ -52,17 +54,23 @@ class ObjetivoMensual < ApplicationRecord
             errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual de vendedores, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
          end
     end
-    if ((@obMen == nil) && (self.vendedor_id != nil))
-        errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
-    end
-    
-    if((self.vendedor_id == nil) && (@obMen != nil))
-          errors.add(:base,'Ya existe un Objetivo Mensual para ese mes y año para ese punto de venta')
-    end
 
-    if(self.vendedor_id == @obmVend.vendedor_id.to_i)
+    if (descpOb.descripcion != "CSI")
+      if ((@obMen == nil) && (self.vendedor_id != nil))
+    	debugger
+        errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
+      end
+    
+      if ((self.vendedor_id == nil) && (@obMen != nil))
+    	debugger
+          errors.add(:base,'Ya existe un Objetivo Mensual para ese mes y año para ese punto de venta')
+      end
+
+      if ((self.vendedor_id == @obmVend.vendedor_id.to_i))
+    	debugger
           errors.add(:base,'Ya existe un Objetivo Mensual para ese mes y año para ese vendedor')
-    end 
+      end 
+    end
 end
 
 end

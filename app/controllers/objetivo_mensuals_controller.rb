@@ -27,16 +27,27 @@ class ObjetivoMensualsController < ApplicationController
   # POST /objetivo_mensuals.json
   def create
     @objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
-       @objetivo_mensual.user_id = current_user.id
-       respond_to do |format|
-        if @objetivo_mensual.save
+    descpOb = TipoObjetivo.find(@objetivo_mensual.tipo_objetivo_id).descripcion
+    vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
+    @objetivo_mensual.user_id = current_user.id
+      if (descpOb == "CSI")
+        debugger
+        vendedores.each do |vendedores|
+            objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
+            objetivo_mensual.vendedor_id = vendedores.id
+            objetivo_mensual.user_id = current_user.id
+            objetivo_mensual.save
+          end
+      end
+    respond_to do |format|
+      if @objetivo_mensual.save
           format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
           format.json { render :show, status: :created, location: @objetivo_mensual }
-         else
+      else
           format.html { render :new }
           format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
-        end
-       end
+      end
+    end
   end
 
   # PATCH/PUT /objetivo_mensuals/1
