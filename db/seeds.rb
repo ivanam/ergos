@@ -18,9 +18,10 @@ TipoDocumento.create(descripcion: 'CI')#4
 # Tipo de objetivo
 # ===================
 
-TipoObjetivo.create(descripcion: 'PROSPECTOS') #1
-TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO')#2
-TipoObjetivo.create(descripcion: 'VENTAS')#3
+TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO')#1
+TipoObjetivo.create(descripcion: 'VENTAS')#2
+TipoObjetivo.create(descripcion: 'COMPROMISO DE VENTAS SEMANAL')#3
+TipoObjetivo.create(descripcion: 'OPORTUNIDADES')#4
 
 # Personas
 # ========
