@@ -1,4 +1,15 @@
-<h1>Vendedores</h1>
+
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+
+
+<div class="page-header">
+<h2 style="text-align: center;font-weight: 600;">Vendedores</h2>
+  <%= link_to new_vendedor_path, class: 'btn btn-primary' do %>
+    <%= fa_icon "plus", text: "Nuevo vendedor" %>
+  <% end %>
+</div>
+
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -36,11 +47,7 @@
     </tbody>
   </table>
 </div>
+</div>
+</div>
 
 <br>
-
-<div class="page-header">
-  <%= link_to new_vendedor_path, class: 'btn btn-primary' do %>
-    <%= fa_icon "plus", text: "Nuevo vendedor" %>
-  <% end %>
-</div>
