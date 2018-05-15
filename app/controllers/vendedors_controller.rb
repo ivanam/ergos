@@ -109,6 +109,9 @@ class VendedorsController < ApplicationController
     @footer = false
     @carga_diarium = CargaDiarium.new
     @tipos_objetivos = TipoObjetivo.all
+    if current_user.has_role? :vendedor
+      @vendedor = current_user.persona.vendedors.first
+    end
   end
 
   private

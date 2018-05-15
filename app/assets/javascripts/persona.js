@@ -10,7 +10,9 @@ function buscar_persona(){
       $("#persona_id").val(data.id);
       $("#datos_persona").removeClass("hide");
       $("#crear_persona").addClass("hide");
-      $("#nombre_persona").val(data.nombre);
+      $("#nombre_persona").text(data.apellido + ", " + data.nombre);
+      $("#email_persona").text(data.email);
+      $("#contra_persona").text("12345678");
     }
     else{
       $("#persona_id").val("");

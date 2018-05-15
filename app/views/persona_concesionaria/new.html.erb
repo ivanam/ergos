@@ -1,7 +1,7 @@
 <%= javascript_include_tag "persona" %>
 
-<h1>New Persona Concesionarium</h1>
+<h1>Crear usuario administrador</h1>
 
 <%= render 'form', persona_concesionarium: @persona_concesionarium %>
 
-<%= link_to 'Back', concesionaria_path(@persona_concesionarium.concesionaria) %>
+<%= link_to 'Atras', concesionaria_path(@persona_concesionarium.concesionaria), class: "btn btn-default" %>

@@ -15,11 +15,12 @@
          <span class="fa fa-chevron-left"></span>
          Volver
          <% end %>
-      <% end %>
-      <%= link_to edit_concesionarium_path(@concesionarium), class: 'btn btn-primary btn-header-page' do %>
-        <span class="fa fa-pencil"></span>
-        Editar
-      <% end %>    
+  
+        <%= link_to edit_concesionarium_path(@concesionarium), class: 'btn btn-primary btn-header-page' do %>
+          <span class="fa fa-pencil"></span>
+          Editar
+        <% end %>    
+    <% end %>
     </div>
 
     
@@ -50,7 +51,7 @@
     </p>
 
     <% if current_user.admin? %>
-      <h4>Usuarios administradores <%= link_to fa_icon("plus"), new_persona_concesionarium_path(concesionaria: @concesionarium.id), style: "margin-left: 5px;" %></h4>
+      <h4>Usuarios administradores concesionaria<%= link_to fa_icon("plus"), new_persona_concesionarium_path(concesionaria: @concesionarium.id), style: "margin-left: 5px;" %></h4>
       <% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>
         <p style="margin-left: 15px;">
           <strong><%=fa_icon("user")%></strong>
