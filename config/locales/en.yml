@@ -23,4 +23,6 @@ en:
   hello: "Hello world"
   unauthorized:
     default: "No está autorizado para acceder a esta página."
+  date: 
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
 

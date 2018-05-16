@@ -22,7 +22,7 @@
 <div class="content">
   <% if current_user.has_role? :punto_venta %>
   <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("post", "person_id", Vendedor.all.collect {|v| [ v.persona.nombre, v.id ] }, { include_blank: true })%>
+    Seleccione Vendedor: <%=select("post", "person_id", Vendedor.where(punto_venta_id: current_user.punto_venta_id), { include_blank: true })%>
   </div>
   <% end %>
 	<h1>Avance</h1>
@@ -34,11 +34,17 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="<%= CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)*100/ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)%>" class="bar"><%= CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)*100/ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)%>%</div>
+              <%carga_total_mes_v = CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)
+              objetivo_total_v = ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)
+              aux_objetivo_total_v = objetivo_total_v
+              if objetivo_total_v.to_i == 0 
+                aux_objetivo_total_v = 1
+              end  %>
+        			<div data-percentage="<%=carga_total_mes_v*100/aux_objetivo_total_v%>" class="bar"><%= carga_total_mes_v*100/aux_objetivo_total_v%>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;"><%= CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor) %> /<%= ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)%></td>
+        <td style="text-align: right;"><%= carga_total_mes_v %> /<%= objetivo_total_v%></td>
       </tr>
       <tr>
       	<td>Ventas</td>
@@ -46,11 +52,17 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="<%= CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)*100/ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>" class="bar"><%= CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)*100/ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>%</div>
+              <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)
+              objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)
+              aux_objetivo_v = objetivo_v
+              if objetivo_v.to_i == 0 
+                aux_objetivo_v = 1
+              end  %>
+        			<div data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;"><%= CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)%>/<%=ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%></td>
+        <td style="text-align: right;"><%= carga_total_ob_mes_v%>/<%=objetivo_v%></td>
       </tr>
       <tr>
         <td>Créditos</td>
