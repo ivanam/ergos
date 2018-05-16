@@ -2,8 +2,12 @@
   <div class="container">
     <div class="main-nav">
     	<div class="details">
-    		<span>Juan Carlos Perez</span><br>
-    		Jefe de Vendedores
+    		<span><%= current_user.persona.nombre %> <%= current_user.persona.apellido %></span><br>
+    		<% if current_user.has_role? :punto_venta %>
+          Jefe de Vendedores
+        <%elsif current_user.has_role? :vendedor %>
+          Vendedor
+        <% end %>
     	</div>
       <%=image_tag "medalla.png", :class=>"medal img-fluid", :style=>""%>
       <div class="medal-text">1</div> <!-- variable con la posición que tiene en la tabla -->
@@ -16,9 +20,11 @@
   </div>
 </div>
 <div class="content">
+  <% if current_user.has_role? :punto_venta %>
   <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("post", "person_id", Vendedor.all.collect {|v| [ v.persona.nombre, v.id ] }, { include_blank: true })%>
+    Seleccione Vendedor: <%=select("post", "person_id", Vendedor.where(punto_venta_id: current_user.punto_venta_id), { include_blank: true })%>
   </div>
+  <% end %>
 	<h1>Avance</h1>
 	<table class="table">
     <tbody>
@@ -28,11 +34,17 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="66" class="bar">66%</div>
+              <%carga_total_mes_v = CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)
+              objetivo_total_v = ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)
+              aux_objetivo_total_v = objetivo_total_v
+              if objetivo_total_v.to_i == 0 
+                aux_objetivo_total_v = 1
+              end  %>
+        			<div data-percentage="<%=carga_total_mes_v*100/aux_objetivo_total_v%>" class="bar"><%= carga_total_mes_v*100/aux_objetivo_total_v%>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;">14/21</td>
+        <td style="text-align: right;"><%= carga_total_mes_v %> /<%= objetivo_total_v%></td>
       </tr>
       <tr>
       	<td>Ventas</td>
@@ -40,11 +52,17 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="10" class="bar">10%</div>
+              <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)
+              objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)
+              aux_objetivo_v = objetivo_v
+              if objetivo_v.to_i == 0 
+                aux_objetivo_v = 1
+              end  %>
+        			<div data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;">10/30</td>
+        <td style="text-align: right;"><%= carga_total_ob_mes_v%>/<%=objetivo_v%></td>
       </tr>
       <tr>
         <td>Créditos</td>
@@ -121,7 +139,7 @@
       	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title" id="exampleModalLongTitle">Ingrese los valores del día</h3>
+        <h4 class="modal-title" id="exampleModalLongTitle">Ingrese los valores del día</h4>
       </div>      
       <%= render 'form_modal', carga_diarium: @carga_diarium %>
       </div>      

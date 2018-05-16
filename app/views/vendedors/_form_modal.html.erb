@@ -1,35 +1,58 @@
 <%= form_for(carga_diarium, html: { id: 'form', class: "form-horizontal", role: "form" }) do |f| %>
-  <div id="errors" style="display: none" class="alert alert-danger alert-dismissable" role="alert">
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
+  <div id="errors" style="display: none" class="alert alert-danger" role="alert">
+    <button id="close_errors" type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h5><b><%= fa_icon "exclamation-circle", text: "Atención!" %></b></h5>
     <ul id="error">      
     </ul>
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <%= label_tag 'Fecha', nil, class: "col-sm-3 control-label" %>
-      <div class="col-sm-2">
-        <%= text_field_tag 'fecha', nil, class: 'form-control' %>
+      <%= label_tag 'Fecha', nil, class: "col-sm-4 control-label" %>
+      <div class="col-sm-4">
+        <%= date_field_tag 'fecha', nil, class: 'form-control required' %>
       </div>
     </div>
     <% @tipos_objetivos.each do |t|%>
       <div class="form-group">
-        <%= label_tag t.descripcion, nil, class: "col-sm-3 control-label" %>
-        <div class="col-sm-2">
-          <%= text_field_tag 'tipo_objetivo[]', nil, class: 'form-control' %>
+        <%= label_tag t.descripcion, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= number_field_tag t.id, 0, class: 'form-control' %>
         </div>
+        <a data-field="<%= t.id %>" class="btn btn-success plus">
+          <%= fa_icon "plus" %>
+        </a>
+        <a data-field="<%= t.id %>" class="btn btn-danger minus">
+          <%= fa_icon "minus" %>
+        </a>
       </div>
     <% end %>
   </div>
   <div class="modal-footer">    
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      <button id="cerrar" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       <button id="guardar" type="button" class="btn btn-primary">Guardar</button>
     </div>
   </div>
 <% end %>
 
 <script type="text/javascript">
+  $('.plus').click(function(){
+    input = $(this).attr('data-field');
+    $("input[name='"+input+"']").val(function(i, oldval) {
+      return ++oldval;
+    });
+  });
+  $('.minus').click(function(){
+    input = $(this).attr('data-field');
+    if ($("input[name='"+input+"']").val() >0) {
+      $("input[name='"+input+"']").val(function(i, oldval) {
+        return --oldval;
+      });
+    }
+  });
+  $('#close_errors').click(function(){
+    $('#errors').hide();
+  });
   $('#guardar').click(function(){
     $.ajax({
       url: '/carga_diaria',
@@ -37,18 +60,30 @@
       data: {
         carga_diarium: {
           fecha: $('#fecha').val(), 
-          cantidad: $('#cantidad').val(), 
-          tipo_objetivo: $('#tipo_objetivo').val(), 
+          tipos_objetivos: {
+          <% @tipos_objetivos.each do |t|%>
+              <%= t.id %>: $('#<%= t.id %>').val(),
+          <% end %>
+          }
         }
       }
     }).done(function(response){
-      if (response.length != 0) {
+      if (response.fecha != undefined || response.cantidades != undefined) {
         $('#errors').show();
         $('#error').empty();
         for (var item in response) {
           $('#error').append('<li>'+response[item]+'</li>');      
         }
-      }      
+      } 
+      else {
+        limpiar_campos();
+      }   
     });
   });
+  function limpiar_campos() {
+    $('#fecha').val = '';
+    <% @tipos_objetivos.each do |t|%>
+    $('#<%= t.id %>').val = 0;
+    <% end %>
+  }
 </script>

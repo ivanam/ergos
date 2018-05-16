@@ -1,4 +1,4 @@
-<%= form_for persona, html: { class: "form-horizontal", role: "form" }  do |p_form| %>
+<%= form_for persona, html: { class: "form-horizontal", role: "form" } ,url: {action: "create"} do |p_form| %>
 
   <% if @persona.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -114,16 +114,8 @@
     </div>
   </br>
   
+  <%= text_field_tag "punto_venta", nil, :class => "hidden", :value => @punto_venta_id %>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Foto</label>  
-      <div class="col-sm-2">
-      <div class="form-group">
-        <%= p_form.file_field :foto, :class => "select_foto " %>
-        </div>
-    </div>
-    </div>
-  </br>
   </fieldset>
   
 
@@ -137,7 +129,7 @@
     </div>   
     <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
-     <%= link_to personas_path, class: 'btn btn-primary' do %>
+     <%= link_to new_persona_punto_ventum_path(punto_venta: @punto_venta_id ), class: 'btn btn-primary' do %>
      <%= fa_icon "plus", text: "Atras" %>
      <% end %>
      </div>

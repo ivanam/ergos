@@ -42,7 +42,7 @@ class VendedorsController < ApplicationController
     pv = @vendedor.punto_venta
     cantVend = pv.concesionaria.cantVend
     cantvendconc = Vendedor.where(:id => @vendedor.punto_venta_id).count
-    if (cantVend <= cantvendconc)
+    if (cantVend.to_i <= cantvendconc.to_i + 1 )
       flash[:notice] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
     end
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
@@ -109,6 +109,9 @@ class VendedorsController < ApplicationController
     @footer = false
     @carga_diarium = CargaDiarium.new
     @tipos_objetivos = TipoObjetivo.all
+    if current_user.has_role? :vendedor
+      @vendedor = current_user.persona.vendedors.first
+    end
   end
 
   private

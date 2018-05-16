@@ -20,7 +20,7 @@ TipoDocumento.create(descripcion: 'CI')#4
 
 TipoObjetivo.create(descripcion: 'PROSPECTOS') #1
 TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO')#2
-TipoObjetivo.create(descripcion: 'VENTAS')#2
+TipoObjetivo.create(descripcion: 'VENTAS')#3
 
 # Personas
 # ========
@@ -36,7 +36,7 @@ Persona.create(tipo_documento_id: 3, numero_documento: 33343209,apellido: "Moren
 
 User.create(email: 'vendedor@vendedor.com', password: 'sumbudrule', persona_id: 1)#1
 User.create(email: 'jefe@jefe.com', password: 'sumbudrule', persona_id: 2)#2
-User.create(email: 'admin@admin.command', password: 'sumbudrule', persona_id: 3)#3
+User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
 User.create(email: 'vendedor2@vendedor.com', password: 'sumbudrule', persona_id: 4)#4
 User.create(email: 'concesionaria@concesionaria.com', password: 'sumbudrule', persona_id: 5)#5
 

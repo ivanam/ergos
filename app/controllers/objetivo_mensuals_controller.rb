@@ -6,7 +6,7 @@ class ObjetivoMensualsController < ApplicationController
   # GET /objetivo_mensuals
   # GET /objetivo_mensuals.json
   def index
-    @objetivo_mensuals = ObjetivoMensual.all
+    @objetivo_mensuals = ObjetivoMensual.where(punto_venta_id: current_user.punto_venta_id).order(:anio, :mes, :tipo_objetivo_id)
   end
 
   # GET /objetivo_mensuals/1
@@ -16,7 +16,7 @@ class ObjetivoMensualsController < ApplicationController
 
   # GET /objetivo_mensuals/new
   def new
-    @objetivo_mensual = ObjetivoMensual.new
+    @objetivo_mensual = ObjetivoMensual.new(punto_venta_id: current_user.punto_venta_id)
   end
 
   # GET /objetivo_mensuals/1/edit
@@ -27,25 +27,26 @@ class ObjetivoMensualsController < ApplicationController
   # POST /objetivo_mensuals.json
   def create
     @objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
-
-    if (@objetivo_mensual.vendedor_id != nil)
-       @obm = ObjetivoMensual.where(:tipo_objetivo_id => @objetivo_mensual.punto_venta_id, :tipo_objetivo_id => @objetivo_mensual.tipo_objetivo_id, :mes  => @objetivo_mensual.mes ,:anio=> @objetivo_mensual.anio,:tipo_objetivo_id => @objetivo_mensual.tipo_objetivo_id).first
-      if (@obm.cantidad_propuesta <= @objetivo_mensual.cantidad_propuesta) && (@objetivo_mensual.punto_venta_id == @obm.punto_venta_id)
-        respond_to do |format|
-        flash[:notice] = 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta'
-        format.html {render :new, notice: 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta' }
-        end
-      else
-       @objetivo_mensual.user_id = current_user.id
-       respond_to do |format|
-        if @objetivo_mensual.save
+    @objetivo_mensual.mes = params[:date][:mes]
+    @objetivo_mensual.anio = params[:date][:anio]
+    descpOb = TipoObjetivo.find(@objetivo_mensual.tipo_objetivo_id).descripcion
+    vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
+    @objetivo_mensual.user_id = current_user.id
+      if (descpOb == "CSI")
+        vendedores.each do |vendedores|
+            objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
+            objetivo_mensual.vendedor_id = vendedores.id
+            objetivo_mensual.user_id = current_user.id
+            objetivo_mensual.save
+          end
+      end
+    respond_to do |format|
+      if @objetivo_mensual.save
           format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
           format.json { render :show, status: :created, location: @objetivo_mensual }
-         else
+      else
           format.html { render :new }
           format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
-        end
-       end
       end
     end
   end

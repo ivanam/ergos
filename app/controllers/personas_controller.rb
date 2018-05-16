@@ -24,6 +24,12 @@ class PersonasController < ApplicationController
     @persona = Persona.new
   end
 
+
+  def new_persona_punto_venta
+    @punto_venta_id = params[:punto_venta]
+    @persona = Persona.new
+  end
+
   # GET /personas/1/edit
   def edit
   end
@@ -39,6 +45,16 @@ class PersonasController < ApplicationController
           format.json { render :show, status: :created, location: @persona }
         else
           format.html { redirect_to new_persona_concesionaria_path(concesionaria: params[:concesionaria]), alert: @persona.errors.full_messages  }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
+      end
+    elsif params[:punto_venta].to_i > 0
+      respond_to do |format|
+        if @persona.save
+          format.html { redirect_to new_persona_punto_ventum_path(punto_venta: params[:punto_venta]), notice: 'Persona creada correctamente.' }
+          format.json { render :show, status: :created, location: @persona }
+        else
+          format.html { redirect_to new_persona_punto_venta_path(punto_venta: params[:punto_venta]), alert: @persona.errors.full_messages  }
           format.json { render json: @persona.errors, status: :unprocessable_entity }
         end
       end

@@ -19,7 +19,7 @@
       <% end %>
     </div>
 
-    <h4>Datos del CPunto de Venta</h4>
+    <h4>Datos del Punto de Venta</h4>
     <p style="margin-left: 15px;">
       <strong>Domicilio:</strong>
       <%= @punto_ventum.domicilio %>
@@ -32,7 +32,7 @@
    
      
     <% if current_user.concesionaria? %>
-      <h4>Usuarios administradores <%= link_to fa_icon("plus"), new_persona_punto_ventum_path(punto_venta: @punto_ventum.id), style: "margin-left: 5px;" %></h4>
+      <h4>Agregar usuario Punto de Venta <%= link_to fa_icon("plus"), new_persona_punto_ventum_path(punto_venta: @punto_ventum.id), style: "margin-left: 5px;" %></h4>
       <% PersonaPuntoVentum.where(punto_venta_id: @punto_ventum.id).each do |ppv|%>
         <p style="margin-left: 15px;">
           <strong><%=fa_icon("user")%></strong>
