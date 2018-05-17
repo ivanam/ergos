@@ -7,7 +7,7 @@ default: &default
   host: 127.0.0.1
   username: root
   #password: 8102sogre
-  password: root
+  password: zzpregasep
 
 development:
   <<: *default

@@ -36,7 +36,7 @@
       <% PersonaPuntoVentum.where(punto_venta_id: @punto_ventum.id).each do |ppv|%>
         <p style="margin-left: 15px;">
           <strong><%=fa_icon("user")%></strong>
-          <%= ppv.persona %><%= link_to fa_icon("trash"), ppv, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?'}, :style=>"margin-left:15px;" %>
+          <%= ppv.persona %>|| Usuario: <%= ppv.persona.user.email %><%= link_to fa_icon("undo"), persona_cambiar_contrasenia_path(ppv.persona), :style=>"margin-left:15px;" %><%= link_to fa_icon("trash"), ppv, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?'}, :style=>"margin-left:15px;" %>
         </p>
       <% end %>
     <% end %>
