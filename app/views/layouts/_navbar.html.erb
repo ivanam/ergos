@@ -10,6 +10,8 @@
       <a class="navbar-brand" href="/"><%=image_tag("logoErgos2.png")%></a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-ergos">
+      
+    
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, edit_user_registration_path %></li>
@@ -18,9 +20,17 @@
           <li><%= link_to (fa_icon "sign-in", text: "Entrar"), new_user_session_path %></li>
         <% end %>
       </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to ("Concesionaria: " + current_user.concesionaria.to_s),  new_user_session_path%></li>
+          <li><%= link_to ("Punto de venta: " + current_user.punto_venta.to_s),  new_user_session_path%></li>
+        <% end %>
+      </ul>
+
     </div>
   </div>
-</nav>
+</nav>  
 
 
 
