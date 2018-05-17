@@ -32,16 +32,18 @@ class ObjetivoMensualsController < ApplicationController
     descpOb = TipoObjetivo.find(@objetivo_mensual.tipo_objetivo_id).descripcion
     vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
     @objetivo_mensual.user_id = current_user.id
-      if (descpOb == "CSI")
-        vendedores.each do |vendedores|
-            objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
-            objetivo_mensual.vendedor_id = vendedores.id
-            objetivo_mensual.user_id = current_user.id
-            objetivo_mensual.save
-          end
-      end
     respond_to do |format|
       if @objetivo_mensual.save
+          if (descpOb == "CSI")
+            vendedores.each do |vendedores|
+             objetivo_mensual_v = ObjetivoMensual.new(objetivo_mensual_params)
+             objetivo_mensual_v.vendedor_id = vendedores.id
+             objetivo_mensual_v.user_id = current_user.id
+             objetivo_mensual_v.mes = params[:date][:mes]
+             objetivo_mensual_v.anio = params[:date][:anio]
+             objetivo_mensual_v.save!
+            end
+          end
           format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
           format.json { render :show, status: :created, location: @objetivo_mensual }
       else
