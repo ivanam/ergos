@@ -14,7 +14,7 @@ class ObjetivoMensual < ApplicationRecord
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
 
-  validates_uniqueness_of :anio, scope: [:mes, :punto_venta_id, :vendedor_id, :tipo_objetivo_id] :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes"
+  validates_uniqueness_of :anio, scope: [:mes, :punto_venta_id, :vendedor_id, :tipo_objetivo_id] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes"
 
   def self.objetivo_total_v(anio,mes,v)
     total = 0
