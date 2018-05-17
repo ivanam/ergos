@@ -103,6 +103,9 @@ class PuntoVentaController < ApplicationController
     @sidebar = false
     @footer = false
     @bg_gray = true
+    @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
+    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
+
   end
 
   private

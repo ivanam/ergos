@@ -23,4 +23,5 @@ class PuntoVentum < ApplicationRecord
      end
     end 
 
+
 end
