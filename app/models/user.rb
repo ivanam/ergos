@@ -18,4 +18,8 @@ class User < ApplicationRecord
 	def concesionaria?
 		has_role?(:admin) or has_role?(:concesionaria)
 	end
+
+  def to_s
+    "#{self.email}"
+  end
 end

@@ -44,5 +44,7 @@ Rails.application.routes.draw do
 
   get "/home_vendedor", to: 'vendedors#home',  as: :home_vendedor
 
+  get "/persona/cambiar_contrasenia/:id", to: 'personas#cambiar_contrasenia',  as: :persona_cambiar_contrasenia
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
