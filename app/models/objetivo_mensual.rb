@@ -8,13 +8,13 @@ class ObjetivoMensual < ApplicationRecord
 	validates :cantidad_propuesta, numericality: { only_integer: true, :message => "El campo Cantidad debe ser un valor entero"}	
 	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
 	#validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
-	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" }
+	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" } 
 
 	validate :validarCantidades
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
 
-  validates_uniqueness_of :anio, scope: [:mes, :punto_venta_id, :vendedor_id, :tipo_objetivo_id]
+  validates_uniqueness_of :anio, scope: [:mes, :punto_venta_id, :vendedor_id, :tipo_objetivo_id] :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes"
 
   def self.objetivo_total_v(anio,mes,v)
     total = 0

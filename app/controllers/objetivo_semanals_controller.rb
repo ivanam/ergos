@@ -28,7 +28,8 @@ class ObjetivoSemanalsController < ApplicationController
   def create
     @objetivo_semanal = ObjetivoSemanal.new(objetivo_semanal_params)
     #@objetivo_semanal.objetivo_mensual_id = params[:objetivo_mensual_id]
-    @objetivo_semanal.punto_venta_id = params[:punto_venta_id]
+    debugger
+    @objetivo_semanal.punto_venta_id = current_user.punto_venta_id
     @objetivo_semanal.vendedor_id=params[:vendedor_id]
     @objetivo_semanal.tipo_objetivo_id=params[:tipo_objetivo_id]
     #@objetivo_semanal.user_id=params[:user_id]

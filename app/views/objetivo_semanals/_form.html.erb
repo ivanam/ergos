@@ -60,17 +60,16 @@
   </br>
 
    
-<!-- <div class="form-group"> 
-<label class="col-sm-2 control-label">Vendedor o punto de venta</label>
+<div class="form-group"> 
+<label class="col-sm-2 control-label">Asignar a Vendedor o Punto de venta</label>
  <div class="col-sm-3">
    <div class="form-group">
     <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
    </div>
   </div>
 </div>
-</br>    -->    
+</br>   
      
-<!-- 
 <div id="vendedor" style="display:none" >
   <div class="form-group">
     <label class="col-sm-2 control-label">Vendedor</label>  
@@ -81,9 +80,9 @@
     </div>
     </div>
  </div>   
-  </br> -->
+  </br> 
 
-<div id="pventa" >
+<div id="pventa" style="display:none" >
   <div class="form-group">
     <label class="col-sm-2 control-label">Punto de venta</label>  
       <div class="col-sm-3">
@@ -133,7 +132,7 @@
 
 </script>
 
-<!-- <script>
+<script>
 function myFunction() {
   $("#vendedor").val("");
   $("#pventa").val("");
@@ -145,7 +144,8 @@ function myFunction() {
     } else {
        $("#vendedor").hide();
         $("#pventa").show();
+        $("#vendedor").val("");
 
     }
 }
-</script> -->
+</script>

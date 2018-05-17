@@ -2,7 +2,7 @@
   <div class="content-box h-100">
 
   <div class="page-header">
-     <h2 style="text-align: center;font-weight: 600;">Objetivos Mensuales</h2>
+     <h2 style="text-align: center;font-weight: 600;">Objetivos Semanales</h2>
          <%= link_to new_objetivo_semanal_path, class: 'btn btn-primary' do %>
          <%= fa_icon "plus", text: "Nueva Carga" %>
          <% end %>
@@ -25,7 +25,10 @@
     <tbody>
       <% @objetivo_semanals.each do |objetivo_semanal| %>
         <tr>
-          <td><%= objetivo_semanal.objetivo_mensual_id %></td>
+          <% TipoObjetivo.where(:id => objetivo_semanal.tipo_objetivo_id).each do |r| %>
+          <% @tobj = r.descripcion %>
+          <td><%= @tobj %></td>
+          <% end %>
           <td><%= objetivo_semanal.fecha_creacion %></td>
           <td><%= objetivo_semanal.cantidad_propuesta %></td>
           <td><%= objetivo_semanal.numero_semana %></td>

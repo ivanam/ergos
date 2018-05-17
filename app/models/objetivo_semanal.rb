@@ -13,6 +13,7 @@ class ObjetivoSemanal < ApplicationRecord
 	#validates :user_id, :presence => { :message => "Debe completar el campo User" }
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo tipo de objetivo semanal" }
 	#validates :objetivo_mensual_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" }
+	validates_uniqueness_of :numero_semana, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id] ,  :message=>"Ya posee un tipo de objetivo para ese vendedor para esa semana" 
 
 end
 
