@@ -38,5 +38,25 @@ class CargaDiarium < ApplicationRecord
 		return total
 	end
 
+	  def diaSemana
+	  	
+	  	if self.fecha.strftime("%A") == "Monday"
+	  		dia = "L"
+	  	elsif self.fecha.strftime("%A") == "Tuesday"
+	  		dia = "Ma"
+	  	elsif self.fecha.strftime("%A") == "Wednesday"
+	  		dia = "Mi"
+    	elsif self.fecha.strftime("%A") == "Thursday"
+    		dia = "J"
+    	elsif self.fecha.strftime("%A") == "Friday"
+    		dia = "V"
+    	elsif self.fecha.strftime("%A") == "Saturday"
+    		dia = "S"
+    	elsif self.fecha.strftime("%A") == "Sunday"
+    		dia = "D"
+    	end
+    	return dia
+  end
+
 end
 
