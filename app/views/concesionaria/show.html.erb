@@ -55,7 +55,7 @@
       <% PersonaConcesionarium.where(concesionaria_id: @concesionarium.id).each do |pc|%>
         <p style="margin-left: 15px;">
           <strong><%=fa_icon("user")%></strong>
-          <%= pc.persona %><%= link_to fa_icon("trash"), pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?'}, :style=>"margin-left:15px;" %>
+          <%= pc.persona %> || Usuario: <%= pc.persona.user.email %><%= link_to fa_icon("undo"), persona_cambiar_contrasenia_path(pc.persona), :style=>"margin-left:15px;" %><%= link_to fa_icon("trash"), pc, method: :delete, data: { confirm: 'Seguro que desea eliminarlo?'}, :style=>"margin-left:15px;" %>
         </p>
       <% end %>
     <% end %>

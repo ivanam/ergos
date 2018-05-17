@@ -1,7 +1,7 @@
 class PersonasController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_persona, only: [:show, :edit, :update, :destroy]
+  before_action :set_persona, only: [:show, :edit, :update, :destroy, :cambiar_contrasenia]
 
   # GET /personas
   # GET /personas.json
@@ -74,13 +74,27 @@ class PersonasController < ApplicationController
   # PATCH/PUT /personas/1
   # PATCH/PUT /personas/1.json
   def update
-    respond_to do |format|
-      if @persona.update(persona_params)
-        format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
-        format.json { render :show, status: :ok, location: @persona }
-      else
-        format.html { render :edit }
-        format.json { render json: @persona.errors, status: :unprocessable_entity }
+    if !user_params.nil?
+      respond_to do |format|
+        if @persona.user.update(user_params)
+          format.html { redirect_to root_path, notice: 'Cambio de contraseña correcto.' }
+          format.json { render :show, status: :ok, location: @persona.user }
+        else
+          format.html { render :cambiar_contrasenia }
+          format.json { render json: @persona.user.errors, status: :unprocessable_entity }
+        end
+      end
+    
+    else
+
+      respond_to do |format|
+        if @persona.update(persona_params)
+          format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
+          format.json { render :show, status: :ok, location: @persona }
+        else
+          format.html { render :edit }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -107,6 +121,11 @@ class PersonasController < ApplicationController
     render json: @persona
   end
 
+  def cambiar_contrasenia
+
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_persona
@@ -116,5 +135,8 @@ class PersonasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def persona_params
       params.require(:persona).permit(:tipo_documento_id, :numero_documento, :cuit, :apellido, :nombre, :domicilio, :telefono, :email, :fecha_nacimiento)
+    end
+    def user_params
+      params.require(:user).permit(:password_confirmation, :reset_password_token, :password)
     end
 end
