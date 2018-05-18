@@ -108,7 +108,7 @@ class VendedorsController < ApplicationController
     @sidebar = false
     @footer = false
     @carga_diarium = CargaDiarium.new
-    @tipos_objetivos = TipoObjetivo.all
+    @tipos_objetivos = TipoObjetivo.where(tipo: 'KPI')
     if current_user.has_role? :vendedor
       @vendedor = current_user.persona.vendedors.first
     end
