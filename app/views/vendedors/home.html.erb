@@ -94,7 +94,7 @@
               objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)
               aux_objetivo_pm = objetivo_pm
               if objetivo_op.to_i == 0 
-                aux_objetivo_op = 1
+                aux_objetivo_pm = 1
               end  %>
               <div data-percentage="<%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>" class="bar"><%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>%</div>
             </div>
