@@ -50,9 +50,10 @@ class ObjetivoMensual < ApplicationRecord
     @obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).group("id").first
     if (@obmVend != nil)
     @obResto =  @obmPv.cantidadPV.to_i - @obmVend.cantidadVend.to_i
-    else
+    elsif (@obmPv != nil)
     @obResto =  @obmPv.cantidadPV.to_i
-    end  
+    end
+
     if ((@obMen != nil)  && (descpOb.descripcion != "CSI"))
       if (@obmPv.cantidad_propuesta.to_i != nil)
          if (@obmPv.cantidadPV < self.cantidad_propuesta.to_i)
