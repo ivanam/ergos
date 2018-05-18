@@ -52,11 +52,13 @@ class CargaDiariaController < ApplicationController
     if invalido.empty?
       tipos_objetivos.each do | id, value |
         if value.to_i > 0
+          persona = Persona.find(current_user.persona_id)
+          vendedor = Vendedor.find_by(persona_id: persona.id)
           carga_diaria = CargaDiarium.new
           carga_diaria.fecha = fecha
           carga_diaria.tipo_objetivo_id = id
           carga_diaria.cantidad = value
-          carga_diaria.vendedor_id = current_user.id
+          carga_diaria.vendedor_id = vendedor.id
           carga_diaria.save
         end
       end

@@ -52,8 +52,8 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-              <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)
-              objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)
+              <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 5)
+              objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 5)
               aux_objetivo_v = objetivo_v
               if objetivo_v.to_i == 0 
                 aux_objetivo_v = 1
@@ -65,28 +65,42 @@
         <td style="text-align: right;"><%= carga_total_ob_mes_v%>/<%=objetivo_v%></td>
       </tr>
       <tr>
-        <td>Créditos</td>
+        <td>Oportunidades</td>
         <td><div class="circle bg_green"></div></td>  
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="60" class="bar">60%</div>
-    				</div>
+        	<div class="bar-container">
+              <%carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)
+              objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 7)
+              aux_objetivo_op = objetivo_op
+              if objetivo_op.to_i == 0 
+                aux_objetivo_op = 1
+              end  %>
+              <div data-percentage="<%= carga_total_ob_mes_op*100/aux_objetivo_op%>" class="bar"><%= carga_total_ob_mes_op*100/aux_objetivo_op%>%</div>
+            </div>
 					</div>
         </td>
-        <td style="text-align: right;">9/12</td>
+        <td style="text-align: right;"><%= carga_total_ob_mes_op%>/<%=objetivo_op%></td>
       </tr>
       <tr>
-        <td>Calidad</td>
-        <td><div class="circle bg_yellow"></div></td>
+        <td>Pruebas de manejo</td>
+        <td><div class="circle bg_green"></div></td>  
         <td style="min-width: 70%;">
-        	<div class="chart">
-    				<div class="bar-container">
-        			<div data-percentage="50" class="bar">50%</div>
-    				</div>
-					</div>
+          <div class="chart">
+            <div class="bar-container">
+          <div class="bar-container">
+              <%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)
+              objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)
+              aux_objetivo_pm = objetivo_pm
+              if objetivo_op.to_i == 0 
+                aux_objetivo_op = 1
+              end  %>
+              <div data-percentage="<%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>" class="bar"><%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>%</div>
+            </div>
+          </div>
         </td>
-        <td style="text-align: right;"></td>
+        <td style="text-align: right;"><%= carga_total_ob_mes_pm%>/<%=objetivo_pm%></td>
       </tr>
     </tbody>
   </table>

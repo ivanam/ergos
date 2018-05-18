@@ -42,6 +42,32 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  def self.objetivo_op(anio,mes,v, ob)
+    total = 0
+    if v.nil?
+      vendedor_id = 0
+    else
+      vendedor_id = v.id
+    end
+    ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+      total = total + o_m.cantidad_propuesta
+    end
+    return total
+  end
+
+  def self.objetivo_pm(anio,mes,v, ob)
+    total = 0
+    if v.nil?
+      vendedor_id = 0
+    else
+      vendedor_id = v.id
+    end
+    ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+      total = total + o_m.cantidad_propuesta
+    end
+    return total
+  end
+
 
   def validarCantidades
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
