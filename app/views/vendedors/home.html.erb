@@ -126,9 +126,12 @@
       <center>
         <h4>EQUIPO</h4>
         <%=image_tag "Funnel2.png", class:"img-responsive"%>
-        <div class="legend legend-1">158</div>
-        <div class="legend legend-2">52</div>
-        <div class="legend legend-3">36</div>
+        <% total_op = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 7) %>
+        <% total_pm = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 4) %>
+        <% total_v = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 5) %>
+        <div class="legend legend-1"><%= total_op %></div>
+        <div class="legend legend-2"><%= total_pm %></div>
+        <div class="legend legend-3"><%= total_v %></div>
       </center>
     </div>	
 

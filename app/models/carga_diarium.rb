@@ -68,6 +68,17 @@ class CargaDiarium < ApplicationRecord
 		return total
 	end
 
+	def self.carga_total_por_equipo(anio, mes, current_user, ob)
+		total = 0
+		fecha_desde = Date.new(anio,mes,1)
+		fecha_hasta = Date.new(anio,mes,31)
+    	vendedor_ids = Vendedor.where(punto_venta_id: current_user.punto_venta_id).map(&:id)
+    	CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_ids, tipo_objetivo_id: ob).each do |c_d|
+			total = total + c_d.cantidad
+		end
+    	return total
+	end
+
 	  def diaSemana
 	  	
 	  	if self.fecha.strftime("%A") == "Monday"
