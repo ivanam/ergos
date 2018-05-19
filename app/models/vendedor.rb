@@ -54,4 +54,14 @@ class Vendedor < ApplicationRecord
   end
 
 
+  def carga_trimestral(anio, mes)
+    total = 0
+    fecha_desde = Date.new(anio,mes-3,1)
+    fecha_hasta = Date.new(anio,mes-1,31)
+    CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_id).each do |c_d|
+      total = total + c_d.cantidad
+    end
+    return total
+  end
+
 end
