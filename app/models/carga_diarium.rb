@@ -72,7 +72,16 @@ class CargaDiarium < ApplicationRecord
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
 		fecha_hasta = Date.new(anio,mes,31)
-    	vendedor_ids = Vendedor.where(punto_venta_id: current_user.punto_venta_id).map(&:id)
+		punto_venta_id = 0
+		if current_user.has_role? :vendedor
+			vendedor = Vendedor.where(persona_id: current_user.persona_id).first
+			punto_venta_id = vendedor.punto_venta_id
+		else
+			if current_user.has_role? :punto_venta
+				punto_venta_id = current_user.punto_venta_id
+			end
+		end
+    	vendedor_ids = Vendedor.where(punto_venta_id: punto_venta_id).map(&:id)
     	CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_ids, tipo_objetivo_id: ob).each do |c_d|
 			total = total + c_d.cantidad
 		end
