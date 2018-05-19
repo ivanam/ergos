@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <% if current_user.concesionaria? %>
+  <% if current_user.concesionaria? || current_user.punto_venta? %>
     <% if @sidebar.nil? or @sidebar == true %>
         <nav class="navbar navbar-default sidebar" role="navigation" style="">
           <div class="container-fluid">
@@ -13,6 +13,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
               <ul class="nav navbar-nav">
+                <% if !current_user.punto_venta? %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Organización<span class="caret"></span><span class="pull-right hidden-xs showopacity fa fa-home"></span></a>
                   <ul class="dropdown-menu forAnimate" role="menu">
@@ -23,9 +24,9 @@
                     <% end %>
                     <li><a href="<%= punto_venta_path %>">Puntos de Venta</a></li>
                     <li><a href="/vendedors">Vendedores</a></li>
-                    <li><a href="/estado_personas">Inasistencia Vendedores</a></li>
                   </ul>
                 </li>          
+                <% end %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Historial<span class="caret"></span><span class="pull-right hidden-xs showopacity fa fa-clock-o"></span></a>
                   <ul class="dropdown-menu forAnimate" role="menu">
@@ -33,6 +34,7 @@
                     <li><a href="/objetivo_semanals">Indicadores Semanales</a></li>
                     <li><a href="/reunions">Reunión Semanal</a></li>
                     <li><a href="/vendedors">Pizarra</a></li>
+                    <li><a href="/estado_personas">Inasistencia Vendedores</a></li>
                   </ul>
                 <li ><a href="/reunions.pdf">Template<span class="pull-right hidden-xs showopacity fa fa-file-text-o"></span></a></li>
                 <li ><a href="#">Reportes<span class="pull-right hidden-xs showopacity fa fa-bar-chart"></span></a></li>

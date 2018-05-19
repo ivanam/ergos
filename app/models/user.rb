@@ -15,6 +15,10 @@ class User < ApplicationRecord
 		has_role?(:admin)
 	end
 
+  def punto_venta?
+    has_role?(:admin) or has_role?(:punto_venta)
+  end
+
 	def concesionaria?
 		has_role?(:admin) or has_role?(:concesionaria)
 	end

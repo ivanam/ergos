@@ -17,7 +17,7 @@
     <%= render "layouts/navbar"%>
     <%= render "layouts/sidebar"%>
 
-    <% if !current_user.nil? && current_user.concesionaria? %>
+    <% if !current_user.nil? && (current_user.concesionaria? || current_user.punto_venta?)%>
       
       <% if !@sidebar.nil? %>
         <% if @sidebar == true %>
