@@ -111,13 +111,13 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">Compras</th>
+                  <th scope="row">Ventas</th>
                   <td>7</td>
                   <td>9</td>
                   <td>10</td>
                 </tr>
                 <tr>
-                  <th scope="row">Ventas</th>
+                  <th scope="row">Creditos</th>
                   <td>7</td>
                   <td>9</td>
                   <td>10</td>
@@ -179,12 +179,14 @@
           <div class="col-sm-5">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
-              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <%objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 7)%>
+              <input type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_op%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
-          de 50
+          <%carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)%>
+          de <%=carga_total_ob_mes_op%>
           </div>
           <br>
           <br>
@@ -195,12 +197,14 @@
           <div class="col-sm-5">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
-              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <%objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)%>
+              <input type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_pm%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
-          de 30
+          <%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)%>
+          de <%=carga_total_ob_mes_pm%>
           </div>
           <br>
           <br>
@@ -211,12 +215,14 @@
           <div class="col-sm-5">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
-              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+              <%objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 5)%>
+              <input type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_v%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
-          de 16
+          <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 5)%>
+          de <%=carga_total_ob_mes_v%>
           </div>
         </div>
         <div class="col-xs-6 row">
@@ -253,7 +259,8 @@
           </div>
           <div class="col-sm-5">
             <div class="btn-group" role="group" aria-label="...">
-              <input type="text" class="btn btn-default" style="max-width:70px;"></input>
+            <%objetivo_csi = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>
+              <input type="text" class="btn btn-default" style="max-width:70px; " value ="<%=objetivo_csi%>"></input>
             </div>
           </div> 
           <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
