@@ -107,7 +107,7 @@
          <%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)
               objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)
               aux_objetivo_pm = objetivo_pm
-              if objetivo_op.to_i == 0 
+              if objetivo_pm.to_i == 0 
                 aux_objetivo_pm = 1
               end  %>
            <%if (carga_total_ob_mes_pm*100/aux_objetivo_pm > 33 && carga_total_ob_mes_pm*100/aux_objetivo_pm <= 66)%>
