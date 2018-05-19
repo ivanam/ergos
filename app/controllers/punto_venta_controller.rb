@@ -100,7 +100,7 @@ class PuntoVentaController < ApplicationController
 
 
   def dashboard
-    @sidebar = false
+    @sidebar = true
     @footer = false
     @bg_gray = true
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first

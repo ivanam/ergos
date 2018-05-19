@@ -20,7 +20,10 @@ class Ability
           can :manage, [ObjetivoSemanal]
           can :manage, [ObjetivoMensual]
           can :manage, [CargaDiarium]
+          can :manage, [Reunion]
+          can :manage, [EstadoPersona]
           can :home, [Vendedor]
+          can :manage, [Vendedor]
         elsif user.has_role? :vendedor
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
