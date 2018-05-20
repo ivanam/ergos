@@ -26,20 +26,15 @@ TipoObjetivo.create(descripcion: 'OPORTUNIDADES', tipo: 'KPI')#4
 # Personas
 # ========
 
-Persona.create(tipo_documento_id: 3, numero_documento: 31343209,apellido: "Litterio", nombre: "Marcos", telefono: "0280154336704", email: "marcos0@gmail.com")
-Persona.create(tipo_documento_id: 3, numero_documento: 32343209,apellido: "Moyano", nombre: "Ivana", telefono: "0280154336457", email: "ivana@gmail.com")
-Persona.create(tipo_documento_id: 3, numero_documento: 33343209,apellido: "Pritzkler", nombre: "Gonzalo", telefono: "0280154336367", email: "gonzalo@gmail.com")
-Persona.create(tipo_documento_id: 3, numero_documento: 33343209,apellido: "Moreno", nombre: "Martin", telefono: "0280154336367", email: "martin@gmail.com")
+Persona.create!(tipo_documento_id: 3, numero_documento: 31343209,apellido: "Cerrutti", nombre: "German", telefono: "0280154336704", email: "gcerrutti@gmail.com", fecha_nacimiento: Date.new(1979,07,10))
 
 
 # Usuarios
 # ========
 
-User.create(email: 'vendedor@vendedor.com', password: 'sumbudrule', persona_id: 1)#1
-User.create(email: 'jefe@jefe.com', password: 'sumbudrule', persona_id: 2)#2
-User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 3)#3
-User.create(email: 'vendedor2@vendedor.com', password: 'sumbudrule', persona_id: 4)#4
-User.create(email: 'concesionaria@concesionaria.com', password: 'sumbudrule', persona_id: 5)#5
+
+User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 1)#1
+
 
 # Roles
 # ========
@@ -52,11 +47,8 @@ Role.create(name: 'admin')
 # Asignando Roles
 # ================
 
-User.find(1).add_role :vendedor
-User.find(2).add_role :punto_venta
-User.find(3).add_role :admin
-User.find(4).add_role :vendedor
-User.find(5).add_role :concesionaria
+User.find(1).add_role :admin
+
 
 # Creando Estados Personas
 # ================
