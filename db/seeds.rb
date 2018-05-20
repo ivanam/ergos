@@ -26,6 +26,7 @@ TipoObjetivo.create(descripcion: 'OPORTUNIDADES', tipo: 'KPI')#4
 # Personas
 # ========
 
+
 Persona.create!(tipo_documento_id: 3, numero_documento: 31343209,apellido: "Cerrutti", nombre: "German", telefono: "0280154336704", email: "gcerrutti@gmail.com", fecha_nacimiento: Date.new(1979,07,10))
 
 
