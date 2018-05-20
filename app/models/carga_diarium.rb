@@ -162,13 +162,18 @@ class CargaDiarium < ApplicationRecord
 
   	def self.cargaVendedorporDia(fecha,vendedor,ob,dia)
 	  	 
-	  	 self.diaSemana(fecha)
-	  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
-	  	 	cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
-	  	 else
-	  	 	cantidad=0
-	  	 end
-	  	 return cantidad
+	  	 if self.diaSemana(fecha) == dia
+		  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+		  	 	cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+		  	 else
+		  	 	cantidad=0
+		  	 end
+		 	 return cantidad
+		else
+			 cantidad = ""
+			 return cantidad
+		end
+
   	end
 end
 
