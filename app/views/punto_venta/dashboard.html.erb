@@ -1,5 +1,9 @@
 <div class="row" style="background-color: white;border-radius: 15px;margin-top: 25px">
-	
+	<% @semana = CargaDiarium.calcularSemana(2018,5,5) 
+	punto_venta_id = current_user.punto_venta_id
+	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id) 
+	 @fecha = Date.today%>
+
 	<div class="col-sm-12" >
 		<%=image_tag "escudo-generico.png", :class=>"dashboard-logo"%>
 		<h1 class="text-center" style="margin: -25px 0 20px;">Martes 20 de Marzo de 2018</h1>
@@ -96,7 +100,7 @@
 		      <th rowspan="2" style="max-width: 100px;">Compromiso de Ventas</th>
   			</tr>
 	      <tr>
-	        <th>S1</th>
+	          <th>S1</th>
 		      <th>S2</th>
 		      <th>S3</th>
 		      <th>S4</th>
@@ -111,16 +115,36 @@
 	      </tr>
   		</thead>
 		  <tbody>
-		  
-		  <% @vendedores.each do |v| %>
 			
 		    <tr>
+		     <% if @semana == 1 %>
 		      <td>1</td>
+		    <%else%>
+		   	  <td></td>
+		    <%end%>
+		    <% if @semana == 2 %>
 		      <td></td>
+		    <%else%>
+		   	  <td></td>
+		    <%end%>
+		    <% if @semana == 3 %>
 		      <td></td>
+		    <%else%>
+		   	  <td></td>
+		    <%end%>
+		    <% if @semana == 4 %>
 		      <td></td>
+		    <%else%>
+		   	  <td></td>
+		    <%end%>
+		    <% if @semana == 5 %>
 		      <td></td>
-		      <td></td>
+		    <%else%>
+		   	  <td></td>
+		    <%end%>	
+		    <% v = @vendedores.first %>
+		    <%CargaDiarium.cargaVendedorporDia(@fecha,v,1,"L")%>
+		      <td>1</td>
 		      <td>3</td>
 		      <td>1</td>
 		      <td>2</td>
@@ -128,6 +152,7 @@
 		      <td>1</td>
 		      <td>0</td>
 		      <th rowspan="3" style="text-align: center;vertical-align: middle;">15</td>
+	
 
 		    </tr>
 		    <tr>
@@ -160,7 +185,7 @@
 		      <td>0</td>
 		      
 		    </tr>
-		    <%end%>
+
 		    <tr>
 		      <td class="bg-light-blue">1</td>
 		      <td class="bg-light-blue"></td>

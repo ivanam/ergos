@@ -105,6 +105,9 @@ class PuntoVentaController < ApplicationController
     @bg_gray = true
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
     @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
+    @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
+    
+    @cargaDiaria=CargaDiarium.carga_total_ob_mes(2018,5,@v, "ventas")
 
   end
 

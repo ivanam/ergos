@@ -37,7 +37,7 @@
       @index=0
     end
 
-    cant = Vendedor.all.count
+    @cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
 
     if Vendedor.all.first != nil
         @primero = Vendedor.all.first.id
@@ -71,7 +71,7 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
         <div class="title-box w-20 bg-gray">Vendedores</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=previous%>"><</a> 1 de <%=@cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
       </div>
       <div class="row">
         <div class="col-xs-6">
@@ -106,9 +106,9 @@
                 segundo_mes = primer_mes + 1
                 tercer_mes = segundo_mes + 1
               %>
-              <% total_primer_mes = CargaDiarium.carga_total_ob_mes_v(anio, primer_mes, @vendedor, 7) %>
-              <% total_segundo_mes = CargaDiarium.carga_total_ob_mes_v(anio, segundo_mes, @vendedor, 4) %>
-              <% total_tercer_mes = CargaDiarium.carga_total_ob_mes_v(anio, tercer_mes, @vendedor, 5) %>
+              <% total_primer_mes = CargaDiarium.carga_total_ob_mes(anio, primer_mes, @vendedor, 7) %>
+              <% total_segundo_mes = CargaDiarium.carga_total_ob_mes(anio, segundo_mes, @vendedor, 4) %>
+              <% total_tercer_mes = CargaDiarium.carga_total_ob_mes(anio, tercer_mes, @vendedor, 5) %>
               <div class="legend legend-1" style="top:10%;"><%= total_primer_mes %></div>
               <div class="legend legend-2" style="top:40%;"><%= total_segundo_mes %></div>
               <div class="legend legend-3" style="bottom:8%;"><%= total_tercer_mes %></div>
@@ -170,7 +170,7 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
         <div class="title-box w-20 bg-gray">Objetivos</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> <%=@index%> de <%=cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> 1 de <%=@cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
       </div>
       <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
         <div style="padding-right: 10px; margin-right: 10px; border-right: 2px solid #fff; display:inline-block;">

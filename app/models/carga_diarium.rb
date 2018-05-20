@@ -23,10 +23,28 @@ class CargaDiarium < ApplicationRecord
 		return total
 	end
 
+
+
+	def self.carga_total_ob_mes(anio,mes,v,ob)
+		total = 0
+		fecha_desde = Date.new(anio,mes,1)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
+		if v.nil?
+			vendedor_id = 0
+		else
+			vendedor_id = v.id
+		end
+		CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |c_d|
+			total = total + c_d.cantidad
+		end
+		return total
+	end
+
+		
 	def self.carga_total_ob_mes_op(anio,mes,v,ob)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
-		fecha_hasta = Date.new(anio,mes,31)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
 		if v.nil?
 			vendedor_id = 0
 		else
@@ -41,7 +59,7 @@ class CargaDiarium < ApplicationRecord
 	def self.carga_total_ob_mes_pm(anio,mes,v,ob)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
-		fecha_hasta = Date.new(anio,mes,31)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
 		if v.nil?
 			vendedor_id = 0
 		else
@@ -54,6 +72,21 @@ class CargaDiarium < ApplicationRecord
 	end
 
 	def self.carga_total_ob_mes_v(anio,mes,v,ob)
+		total = 0
+		fecha_desde = Date.new(anio,mes,1)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
+		if v.nil?
+			vendedor_id = 0
+		else
+			vendedor_id = v.id
+		end
+		CargaDiarium.where('fecha >= "'+fecha_desde.to_s+'" and fecha <= "'+fecha_hasta.to_s+'"' ).where(vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |c_d|
+			total = total + c_d.cantidad
+		end
+		return total
+	end
+
+	def self.carga_sem_ob_vendedor(anio,mes,v,sem,ob)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
 		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
@@ -88,25 +121,54 @@ class CargaDiarium < ApplicationRecord
     	return total
 	end
 
-	  def diaSemana
+	  def self.diaSemana(fecha)
 	  	
-	  	if self.fecha.strftime("%A") == "Monday"
+	  	if fecha.strftime("%A") == "Monday"
 	  		dia = "L"
-	  	elsif self.fecha.strftime("%A") == "Tuesday"
+	  	elsif fecha.strftime("%A") == "Tuesday"
 	  		dia = "Ma"
-	  	elsif self.fecha.strftime("%A") == "Wednesday"
+	  	elsif fecha.strftime("%A") == "Wednesday"
 	  		dia = "Mi"
-    	elsif self.fecha.strftime("%A") == "Thursday"
+    	elsif fecha.strftime("%A") == "Thursday"
     		dia = "J"
-    	elsif self.fecha.strftime("%A") == "Friday"
+    	elsif fecha.strftime("%A") == "Friday"
     		dia = "V"
-    	elsif self.fecha.strftime("%A") == "Saturday"
+    	elsif fecha.strftime("%A") == "Saturday"
     		dia = "S"
-    	elsif self.fecha.strftime("%A") == "Sunday"
+    	elsif fecha.strftime("%A") == "Sunday"
     		dia = "D"
     	end
-    	return dia
+    return dia
   end
 
+  	def self.calcularSemana(anio,mes,dia)
+  		fecha = Date.new(anio,mes,dia)
+  		case fecha.day
+  		when (1..7)
+  			semana = 1
+  		when (8..14)
+  			semana = 2
+  		when (15..21)
+  			semana = 3
+  		when (22..28)
+  			semana = 4
+  		when (29..31)
+  			semana=5
+  		else 
+  			semana=5
+  		end
+  	return semana
+  	end
+
+  	def self.cargaVendedorporDia(fecha,vendedor,ob,dia)
+	  	 
+	  	 self.diaSemana(fecha)
+	  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+	  	 	cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+	  	 else
+	  	 	cantidad=0
+	  	 end
+	  	 return cantidad
+  	end
 end
 

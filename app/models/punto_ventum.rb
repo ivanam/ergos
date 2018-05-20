@@ -23,5 +23,9 @@ class PuntoVentum < ApplicationRecord
      end
     end 
 
+    def self.sumaObSemanales 
+
+    end
+
 
 end
