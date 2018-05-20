@@ -85,6 +85,8 @@ gem "nested_form"
 
 gem 'select2-rails'
 
+gem 'unicorn'
+
 
 
 
