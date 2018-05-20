@@ -179,7 +179,10 @@
         <button type="button" class="btn btn-xs btn-default btn-ergos">Guardar</button>
         <button type="button" class="btn btn-xs btn-default btn-ergos">Cancelar</button>
         <button type="button" class="btn btn-xs btn-default btn-ergos">Verificar</button>
-        
+         <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
+        <%= fa_icon "file-pdf-o", text: "Imprimir Objetivos" %>
+        <% end %>
+     
       </div>
       <div class="row">
         <div class="col-xs-6 row">
@@ -298,3 +301,5 @@
     </div>
     
   </div>
+
+

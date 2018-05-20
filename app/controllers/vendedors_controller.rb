@@ -15,8 +15,16 @@ class VendedorsController < ApplicationController
   # GET /vendedors/1.json
   def show
     @bg_gray = true
-
-    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'obj_vend_pdf', 
+          :template => 'vendedors/obj_vend_pdf.html.erb',
+          :layout => 'pdf.html.erb',
+          :orientation => 'Portrait',# default Portrait
+          :page_size => 'Legal'
+      end
+    end
   end
 
   # GET /vendedors/new
