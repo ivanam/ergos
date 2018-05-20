@@ -1,0 +1,58 @@
+<div>
+  <h3> Objetivos por Vendedor seleccionado </h3>
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Agente </th>
+      <th>Secuencia </th>
+      <th>Establecimiento </th>
+      <th>Descripcion </th>
+      <th>Curso </th>
+      <th>Articulo </th>
+      <th>Inicio / Fin </th>
+      <th>Observaciones </th>
+    </tr>
+    <% @licencia_alta.each do |l|%>
+      <tr>
+        <td><%= l.agente %></td>
+        <td><%= l.secuencia %></td>
+        <td><%= l.establecimiento %></td>
+        <td><%= l.descripcion %></td>
+        <td><%= l.curso %></td>
+        <td><%= l.articulo %></td>
+        <td><%= l.fecha_desde %> / <%= l.fecha_hasta %> </td>
+        <td><%= l.observaciones%> </td>
+      </tr>
+    <% end %>
+  </table>
+  <table class="table table-bordered table-striped">
+  <dt>Descripcion:</dt>
+  <dd><%= @objetivo_mensual.descripcion %></dd>
+  <dt><strong>Fecha creacion:</strong></dt>
+  <dd><%= @objetivo_mensual.created_at %></dd>
+  <dt>Tipo objetivo:</dt>
+  <% TipoObjetivo.where(:id => @objetivo_mensual.tipo_objetivo_id).each do |r| %>
+  <% @tobj = r.descripcion  %>
+  <dd><%= @tobj %></dd>
+  <% end %>
+  <dt><strong>Cantidad propuesta:</strong></dt>
+  <dd><%= @objetivo_mensual.cantidad_propuesta %></dd>
+  <dt><strong>Mes:</strong></dt>
+  <dd><%= @objetivo_mensual.mes %></dd>
+  <dt><strong>Anio:</strong></dt>
+  <dd><%= @objetivo_mensual.anio %></dd>
+  <dt><strong>User:</strong></dt>
+  <dd><%= @objetivo_mensual.user_id %></dd>
+  <dt><strong>Vendedor:</strong></dt>
+  <dd><%= @objetivo_mensual.vendedor_id %></dd>
+  <dt><strong>Punto venta:</strong></dt>
+  <dd><%= @objetivo_mensual.punto_venta_id %></dd>
+  <br/><br/>
+</table>
+
+<script type="text/javascript">
+
+     $('#btn-filtrar1').on('click', function(){
+       window.location.href = '/reunion/template_pdf.pdf';
+      })
+</script>
