@@ -111,6 +111,10 @@ class VendedorsController < ApplicationController
     @tipos_objetivos = TipoObjetivo.where(tipo: 'KPI')
     if current_user.has_role? :vendedor
       @vendedor = current_user.persona.vendedors.first
+    else
+      if (current_user.has_role? :punto_venta) && (!params[:vendedor].nil?)
+        @vendedor = Vendedor.find_by(numero: params[:vendedor][:numero])
+      end
     end
   end
 

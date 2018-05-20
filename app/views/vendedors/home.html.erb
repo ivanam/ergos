@@ -21,8 +21,13 @@
 </div>
 <div class="content">
   <% if current_user.has_role? :punto_venta %>
+  
   <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("post", "person_id", Vendedor.where(punto_venta_id: current_user.punto_venta_id), { include_blank: true })%>
+    <%= form_tag(:home_vendedor, method: "get") do %>
+    Seleccione Vendedor: <%=select("vendedor", "numero", Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]}, { include_blank: true}, selected: @vendedor.numero )%>
+    <%= submit_tag("Ver Información", class: "btn btn-primary") %>
+    <% end %>
+
   </div>
   <% end %>
 	<h1>Avance</h1>
@@ -192,12 +197,39 @@
 </div>
 
 <script type="text/javascript">
-$('.bar').each(function() {
+/*$('.bar').each(function() {
     percentage = $(this).attr('data-percentage');
     if (percentage > 100){
       $(this).css('width',100+'%');
     }else{
       $(this).css('width',percentage+'%');
      }
+});*/
+$('.bar[data-percentage]').each(function () {
+  var progress = $(this);
+  var percentage = Math.ceil($(this).attr('data-percentage'));
+  $({countNum: 0}).animate({countNum: percentage}, {
+    duration: 400,
+    easing:'linear',
+    step: function() {
+      // What todo on every count
+      var pct = '';
+      var ancho = '';
+      if(percentage == 0){
+        pct = Math.floor(this.countNum);
+        ancho = pct;
+      }else{
+        pct = Math.floor(this.countNum+1);
+        if (this.countNum <= 100) {          
+          ancho = pct+'%';
+        }
+        else {
+          ancho = '100%';
+        }
+      }
+      progress.text(pct+'%');
+      progress.css('width', ancho);
+    }
+  });
 });
 </script>

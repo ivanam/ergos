@@ -56,7 +56,7 @@ class CargaDiarium < ApplicationRecord
 	def self.carga_total_ob_mes_v(anio,mes,v,ob)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
-		fecha_hasta = Date.new(anio,mes,31)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
 		if v.nil?
 			vendedor_id = 0
 		else
