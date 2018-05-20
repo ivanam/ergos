@@ -28,7 +28,7 @@
         <td><%= vendedor.persona.apellido %></td>
         <td><%= vendedor.persona.nombre %></td>
         <td><%= vendedor.persona.age(vendedor.persona.fecha_nacimiento) %></td>
-        <td> ? </td>
+        <td><%= vendedor.persona.email %></td>
         <td><%= vendedor.fecha_alta %></td>
           <td class="text-center">
             <%= link_to vendedor, class: 'btn btn-sm btn-default' do %>
