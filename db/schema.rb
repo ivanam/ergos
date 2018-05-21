@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20180521155524) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -82,6 +83,8 @@ ActiveRecord::Schema.define(version: 20180521155524) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "tipo_objetivo_id"
+    t.integer  "mes"
+    t.integer  "anio"
   end
 
   create_table "persona_concesionaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
