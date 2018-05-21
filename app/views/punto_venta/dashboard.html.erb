@@ -1,7 +1,10 @@
 <div class="row" style="background-color: white;border-radius: 15px;margin-top: 25px">
 	<% semana = CargaDiarium.calcularSemana(2018,5,5) 
 	 punto_venta_id = current_user.punto_venta_id
-	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id)%>
+	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id)
+	 @anio=2018
+	 @mes=5
+	 @semana=4%>
 
 	<div class="col-sm-12" >
 	<div class="col-sm-3" >
@@ -162,29 +165,27 @@
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 2 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 3 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 4 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 5 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>	
 		    <% v = @vendedores.first %>
-		    <% 	@anio=2018
-			   	@mes=5
-			   	@semana=3
+		    <% 	
 		       if @semana == 1 
 		    		dias = [1,2,3,4,5,6,7]
 		       elsif @semana == 2
@@ -216,32 +217,32 @@
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 2 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 3 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 4 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 5 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>	
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"L",20)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"Ma",20)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"Mi",20)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"J",20)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"V",20)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"S",20)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"D",20)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"L",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"Ma",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"Mi",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"J",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"V",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"S",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"D",dias)%></td>
 		      
 		    </tr>
 		    <tr>
@@ -251,32 +252,32 @@
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 2 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 3 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 4 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 5 %>
-		      <td></td>
+		      <td>1</td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>	
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"L",19)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"Ma",19)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"Mi",19)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"J",19)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"V",19)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"S",19)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"D",19)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"L",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"Ma",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"Mi",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"J",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"V",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"S",dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"D",dias)%></td>
 
 		    </tr>
 

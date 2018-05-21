@@ -54,6 +54,6 @@ User.find(1).add_role :admin
 # Creando Estados Personas
 # ================
 
-EstadoPersona.create(estado: 'L', descripcion: 'Libre-Franco')#1
-EstadoPersona.create(estado: 'V', descripcion: 'Vacaciones')#2
-EstadoPersona.create(estado: 'A', descripcion: 'Ausente')#3
+Estado.create(nombre: 'L', descripcion: 'Libre-Franco')#1
+Estado.create(nombre: 'V', descripcion: 'Vacaciones')#2
+Estado.create(nombre: 'A', descripcion: 'Ausente')#3
