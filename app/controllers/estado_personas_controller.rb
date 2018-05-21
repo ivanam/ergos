@@ -33,6 +33,7 @@ class EstadoPersonasController < ApplicationController
   # POST /estado_personas.json
   def create
     @estado_persona = EstadoPersona.new(estado_persona_params)
+    debugger
 
     respond_to do | format|
       if @estado_persona.save
@@ -77,6 +78,6 @@ class EstadoPersonasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def estado_persona_params
-      params.require(:estado_persona).permit(:estado, :persona_id, :fecha_inicio, :fecha_fin, :persona_id)
+      params.require(:estado_persona).permit(:persona_id, :fecha_inicio, :fecha_fin, :persona_id, :estado_id)
     end
 end

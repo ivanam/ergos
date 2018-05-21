@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521154256) do
+ActiveRecord::Schema.define(version: 20180521155524) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -40,14 +40,13 @@ ActiveRecord::Schema.define(version: 20180521154256) do
   end
 
   create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "estado"
     t.integer  "persona_id"
     t.datetime "fecha_inicio"
     t.datetime "fecha_fin"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "descripcion"
     t.integer  "vendedor_id"
+    t.integer  "estado_id"
     t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 

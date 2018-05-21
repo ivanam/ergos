@@ -16,7 +16,7 @@
   <div class="form-group">
     <%= f.label :estado, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
-       <%= f.select :estado, ['L', 'V', 'A'], class: "form-control" %>
+       <%= f.collection_select(:estado_id, Estado.all, :id, :descripcion, {:prompt => true},:style=>"width:100%") %>
     </div>
   </div>
   <div class="form-group">
@@ -28,15 +28,9 @@
   </div>
   </br>
    <div class="form-group">
-    <%= f.label :fecha_inicio, class: "col-sm-2 control-label" %>
+    <%= f.label :fecha, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.date_field :fecha_inicio, class: "form-control" %>
-    </div>
-  </div>
-   <div class="form-group">
-    <%= f.label :fecha_fin, class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.date_field :fecha_fin, class: "form-control" %>
     </div>
   </div>
   <div class="form-group">
