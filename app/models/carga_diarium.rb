@@ -160,18 +160,23 @@ class CargaDiarium < ApplicationRecord
   	return semana
   	end
 
-  	def self.cargaVendedorporDia(fecha,vendedor,ob,dia)
-	  	 
-	  	 if self.diaSemana(fecha) == dia
-		  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
-		  	 	cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
-		  	 else
-		  	 	cantidad=0
-		  	 end
-		 	 return cantidad
-		else
-			 cantidad = ""
-			 return cantidad
+  	def self.cargaVendedorporDia(anio,mes,vendedor,ob,diaNombre, dias)
+
+  		for diaNum in dias
+  			d=diaNum.to_i
+	  		fecha = DateTime.new(anio, mes, d)
+	  		
+		  	 if self.diaSemana(fecha) == diaNombre
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+			  	 	cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+			  	 else
+			  	 	cantidad=0
+			  	 end
+			 	 return cantidad
+			else
+				 cantidad = ""
+				 return cantidad
+			end
 		end
 
   	end
