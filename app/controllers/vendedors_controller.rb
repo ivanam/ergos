@@ -15,8 +15,16 @@ class VendedorsController < ApplicationController
   # GET /vendedors/1.json
   def show
     @bg_gray = true
-
-    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'obj_vend_pdf', 
+          :template => 'vendedors/obj_vend_pdf.html.erb',
+          :layout => 'pdf.html.erb',
+          :orientation => 'Portrait',# default Portrait
+          :page_size => 'Legal'
+      end
+    end
   end
 
   # GET /vendedors/new
@@ -116,6 +124,21 @@ class VendedorsController < ApplicationController
         @vendedor = Vendedor.find_by(numero: params[:vendedor][:numero])
       end
     end
+  end
+
+  def objetivos_y_carga_diaria
+    mes = params[:mes].to_i
+    anio = params[:anio].to_i
+    vendedor_id = params[:vendedor_id].to_i
+    vendedor = Vendedor.find(vendedor_id)
+    totales = Hash.new
+    total_op = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 7)
+    total_pm = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 4)
+    total_v = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 5)
+    totales[:oportunidades] = total_op
+    totales[:pruebas_manejo] = total_pm
+    totales[:ventas] = total_v
+    render json: totales.to_json
   end
 
   private

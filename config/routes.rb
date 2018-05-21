@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :estados
   resources :estado_personas
   resources :persona_punto_venta
   resources :persona_concesionaria
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get "/home_vendedor", to: 'vendedors#home',  as: :home_vendedor
+
+  get "/objetivos_y_carga_diaria", to: 'vendedors#objetivos_y_carga_diaria',  as: :objetivos_y_carga_diaria
 
   get "/persona/cambiar_contrasenia/:id", to: 'personas#cambiar_contrasenia',  as: :persona_cambiar_contrasenia
 

@@ -179,7 +179,10 @@
         <button type="button" class="btn btn-xs btn-default btn-ergos">Guardar</button>
         <button type="button" class="btn btn-xs btn-default btn-ergos">Cancelar</button>
         <button type="button" class="btn btn-xs btn-default btn-ergos">Verificar</button>
-        
+         <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
+        <%= fa_icon "file-pdf-o", text: "Imprimir Objetivos" %>
+        <% end %>
+     
       </div>
       <div class="row">
         <div class="col-xs-6 row">
@@ -195,7 +198,7 @@
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
               <%objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 7)%>
-              <input type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_op%>"></input>
+              <input id="oportunidades" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_op%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
@@ -213,7 +216,7 @@
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
               <%objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)%>
-              <input type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_pm%>"></input>
+              <input id="pruebas_manejo" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_pm%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
@@ -231,7 +234,7 @@
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
               <%objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 5)%>
-              <input type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_v%>"></input>
+              <input id="ventas" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_v%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
@@ -242,12 +245,38 @@
         </div>
         <div class="col-xs-6 row">
           <!-- Mes -->
-          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
-          Mes:
+          <div class="row">
+            <%= label_tag :mes, "Mes", class: "col-sm-1 control-label" %>
+            <div class="col-sm-4">
+              <select class="form-control" name="mes" id="mes">
+                <option value="1">Enero </option>
+                <option value="2">Febrero </option>
+                <option value="3">Marzo </option>
+                <option value="4">Abril </option>
+                <option value="5">Mayo </option>
+                <option value="6">Junio </option>
+                <option value="7">Julio </option>
+                <option value="8">Agosto </option>
+                <option value="9">Septiembre </option>
+                <option value="10">Octubre </option>
+                <option value="11">Noviembre </option>
+                <option value="12">Diciembre </option>
+              </select>
+            </div>
+            <%= label_tag :anio, "Año", class: "col-sm-1 control-label" %>
+            <div class="col-sm-4">
+              <select class="form-control" name="anio" id="anio">
+                <script language="javascript" type="text/javascript">
+                  var k;
+                  var d = new Date();
+                  var n = d.getFullYear(); 
+                  for(k=n;k>=1970;k--){ 
+                    $("#anio").append(new Option(k, k));
+                  }
+                </script>
+              </select>
+            </div>
           </div>
-          <div class="col-sm-5">
-            <input type="text" class="btn btn-default"></input>
-          </div> 
           
           <br>
           <br>
@@ -298,3 +327,35 @@
     </div>
     
   </div>
+
+  <script type="text/javascript">
+  $('#mes').val(<%= Date.today.month %>);
+  $('#anio').val(<%= Date.today.year %>);
+
+  $('#mes').change(function(){
+    mes = $(this).val()
+    anio = $('#anio').val()
+    $.ajax({
+      url: '/objetivos_y_carga_diaria?anio='+anio+'&mes='+mes+'&vendedor_id='+<%= @vendedor.id %>,
+      type: 'GET',
+    }).done(function(response){      
+      $('#oportunidades').val(response.oportunidades);
+      $('#pruebas_manejo').val(response.pruebas_manejo);
+      $('#ventas').val(response.ventas);
+    });
+  });
+
+  $('#anio').change(function(){    
+    anio = $(this).val()
+    mes = $('#mes').val()
+    $.ajax({
+      url: '/objetivos_y_carga_diaria?anio='+anio+'&mes='+mes+'&vendedor_id='+<%= @vendedor.id %>,
+      type: 'GET',
+    }).done(function(response){
+      $('#oportunidades').val(response.oportunidades);
+      $('#pruebas_manejo').val(response.pruebas_manejo);
+      $('#ventas').val(response.ventas);
+    });
+  });
+  </script>
+

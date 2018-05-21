@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518112413) do
+
+ActiveRecord::Schema.define(version: 20180521155524) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -40,15 +41,21 @@ ActiveRecord::Schema.define(version: 20180518112413) do
   end
 
   create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "estado"
     t.integer  "persona_id"
     t.datetime "fecha_inicio"
     t.datetime "fecha_fin"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "descripcion"
     t.integer  "vendedor_id"
+    t.integer  "estado_id"
     t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
+  end
+
+  create_table "estados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "objetivo_mensuals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,6 +83,8 @@ ActiveRecord::Schema.define(version: 20180518112413) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "tipo_objetivo_id"
+    t.integer  "mes"
+    t.integer  "anio"
   end
 
   create_table "persona_concesionaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -18,7 +18,7 @@
     <h4>Estado de la persona</h4>
     <p style="margin-left: 15px;">
      <strong>Estado:</strong>
-      <%= @estado_persona.estado %>
+      <%= @estado_persona.estado.to_s %>
     </p>
 
     <p style="margin-left: 15px;">
@@ -31,10 +31,6 @@
       <%= @estado_persona.fecha_inicio %>
     </p>
 
-    <p style="margin-left: 15px;">
-      <strong>Fecha fin:</strong>
-      <%= @estado_persona.fecha_fin %>
-    </p>
 
     <p style="margin-left: 15px;">
       <strong>Persona:</strong>

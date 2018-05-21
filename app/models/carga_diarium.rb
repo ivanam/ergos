@@ -11,7 +11,7 @@ class CargaDiarium < ApplicationRecord
 	def self.carga_total_mes_v(anio,mes,v)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
-		fecha_hasta = Date.new(anio,mes,31)
+		fecha_hasta = Date.new(anio,mes).end_of_month
 		if v.nil?
 			vendedor_id = 0
 		else
@@ -160,15 +160,29 @@ class CargaDiarium < ApplicationRecord
   	return semana
   	end
 
-  	def self.cargaVendedorporDia(fecha,vendedor,ob,dia)
-	  	 
-	  	 self.diaSemana(fecha)
-	  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
-	  	 	cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
-	  	 else
-	  	 	cantidad=0
-	  	 end
-	  	 return cantidad
+  	def self.cargaVendedorporDia(anio,mes,vendedor,ob,diaNombre, dias)
+  			cantidad = nil
+  			dias.each do |diasNom|
+		  		fecha = Date.new(anio, mes, diasNom)
+		  		
+			  	if self.diaSemana(fecha) == diaNombre
+			  	 	 
+				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+				  	 	@cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+				  	 else
+				  	 	
+				  	 	if EstadoPersona.where(:persona_id => vendedor, :fecha_inicio => fecha.to_s ).first != nil
+				  	 		
+				  	 		estado_id = EstadoPersona.where(:persona_id => vendedor, :fecha_inicio => fecha.to_s ).first.estado_id
+				  	 		@cantidad = Estado.where(:id => estado_id).first.nombre
+				  	 	else
+				  	 		@cantidad = 0
+				  	 	end
+				  	 end
+				end
+			end
+			return @cantidad
+
   	end
 end
 

@@ -27,11 +27,11 @@ class ObjetivoSemanalsController < ApplicationController
   # POST /objetivo_semanals.json
   def create
     @objetivo_semanal = ObjetivoSemanal.new(objetivo_semanal_params)
-    #@objetivo_semanal.objetivo_mensual_id = params[:objetivo_mensual_id]
+    @objetivo_semanal.mes = params[:date][:mes]
+    @objetivo_semanal.anio = params[:date][:anio]
     @objetivo_semanal.punto_venta_id = current_user.punto_venta_id
     @objetivo_semanal.vendedor_id=params[:vendedor_id]
     @objetivo_semanal.tipo_objetivo_id=params[:tipo_objetivo_id]
-    #@objetivo_semanal.user_id=params[:user_id]
     respond_to do |format|
       if @objetivo_semanal.save
         format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal was successfully created.' }
@@ -75,6 +75,6 @@ class ObjetivoSemanalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def objetivo_semanal_params
-      params.require(:objetivo_semanal).permit(:objetivo_mensual_id, :fecha_creacion, :cantidad_propuesta, :numero_semana, :user_id, :vendedor_id, :punto_venta_id, :tipo_objetivo_id)
+      params.require(:objetivo_semanal).permit(:objetivo_mensual_id, :fecha_creacion, :cantidad_propuesta, :numero_semana, :user_id, :vendedor_id, :punto_venta_id, :tipo_objetivo_id, :anio, :mes)
     end
 end
