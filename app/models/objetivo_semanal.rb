@@ -42,10 +42,10 @@ end
     if ((@obMen != nil) && (descpOb.descripcion != 'COMPROMISO DE VENTAS SEMANAL'))
     	@obMenCantProp = @obMen.cantidad_propuesta.to_i
          if (@obMen.cantidad_propuesta.to_i < self.cantidad_propuesta.to_i)
-           errors.add(:base, 'EL objetivo semanal no puede superar al objetivo mensual del punto de venta: '+@obMenCantProp.to_s+'')
+           errors.add(:base, 'EL objetivo semanal no puede superar al objetivo mensual del punto de venta, el valor maximo deberia ser: '+@obMenCantProp.to_s+' repartido en las semanas restantes')
          end
          if (@obsemPv != nil)
-    	    @obResto =  @obsemPv.cantidad_propuesta.to_i - self.cantidad_propuesta.to_i
+    	    @obResto =   self.cantidad_propuesta.to_i - @obsemPv.cantidad_propuesta.to_i
            if (@obResto < self.cantidad_propuesta.to_i)
               errors.add(:base, 'El objetivo para esa semana deberia ser como maximo: '+@obResto.to_s+'')	
            end 
@@ -54,7 +54,6 @@ end
           errors.add(:base, 'Debe generar primero un Objetivo Mensual')
         end               
     end
-    debugger
     if ((@obMen == nil) && (descpOb.descripcion != 'COMPROMISO DE VENTAS SEMANAL'))
     	    errors.add(:base, 'Debe generar primero un Objetivo Mensual')
     end
