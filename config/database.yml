@@ -22,8 +22,8 @@ test:
 
 production:
   <<: *default
-  database: rails_project_production
-  username: rails
-  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+  database: ergos
+  username: root
+  password: 8102sogre
 
 #8102sogre
