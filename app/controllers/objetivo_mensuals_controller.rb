@@ -34,15 +34,15 @@ class ObjetivoMensualsController < ApplicationController
     @objetivo_mensual.user_id = current_user.id
     respond_to do |format|
       if @objetivo_mensual.save
-          if (descpOb == "CSI")
+          if (descpOb == "CSI" && @objetivo_mensual.csi_real == nil)
             vendedores.each do |vendedores|
              objetivo_mensual_v = ObjetivoMensual.new(objetivo_mensual_params)
              objetivo_mensual_v.vendedor_id = vendedores.id
              objetivo_mensual_v.user_id = current_user.id
              objetivo_mensual_v.mes = params[:date][:mes]
              objetivo_mensual_v.anio = params[:date][:anio]
-             objetivo_mensual_v.save!
-            end
+             objetivo_mensual_v.save
+             end
           end
           format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual creado con exito.' }
           format.json { render :show, status: :created, location: @objetivo_mensual }
@@ -85,6 +85,6 @@ class ObjetivoMensualsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def objetivo_mensual_params
-      params.require(:objetivo_mensual).permit(:descripcion, :fecha_creacion, :tipo_objetivo_id, :cantidad_propuesta, :mes, :anio, :user_id, :vendedor_id, :punto_venta_id)
+      params.require(:objetivo_mensual).permit(:descripcion, :fecha_creacion, :tipo_objetivo_id, :cantidad_propuesta, :mes, :anio, :user_id, :vendedor_id, :punto_venta_id, :csi_real)
     end
 end
