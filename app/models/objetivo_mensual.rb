@@ -4,13 +4,16 @@ class ObjetivoMensual < ApplicationRecord
 
   validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
   validates :anio, :presence => { :message => "Debe completar el campo Fecha de creacion" }
-	validates :cantidad_propuesta, :presence => { :message => "Debe completar el campo Cantidad" }
-	validates :cantidad_propuesta, numericality: { only_integer: true, :message => "El campo Cantidad debe ser un valor entero"}	
 	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
 	#validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" } 
 
 	validate :validarCantidades
+
+  validate :validarCantidadCsi
+
+  validate :validarCSI
+
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
 
@@ -97,6 +100,32 @@ class ObjetivoMensual < ApplicationRecord
       
     end
   end
+
+
+  def validarCSI
+    @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio, :csi_real=> self.csi_real).where(vendedor_id: nil).first
+    if(@obMen != nil)
+       if(self.tipo_objetivo_id == 5 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
+        errors.add(:base,'El CSI Real es por Vendedor no se genera para el Punto de Venta')
+      end
+       if(@obMen.csi_real != nil && @obMen.vendedor_id == self.vendedor_id)
+        errors.add(:base,'El vendedor ya tiene un CSI real asignado, se debe editar y no crear uno nuevo')
+       end 
+    end
+
+  end
+
+  def validarCantidadCsi
+    if(self.tipo_objetivo_id == 5 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
+      errors.add(:base,'Debe completar el campo Cantidad ya que el CSI real es para un vendedor')
+    end
+    if (self.tipo_objetivo_id != 5 && self.cantidad_propuesta == nil)
+       errors.add(:base,'Debe completar el campo Cantidad') 
+    end
+    if (self.tipo_objetivo_id != 5 && self.csi_real != nil)
+       errors.add(:base,'El campo CSI real es para los vendedores y para los objetivos de Satisfación al Cliente') 
+    end
+  end 
 
 end
 
