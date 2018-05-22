@@ -118,7 +118,7 @@ class PuntoVentaController < ApplicationController
     if params[:semana] == "" or params[:semana] == nil
       di=Date.today.day
       @dia=di.to_i
-      sem =CargaDiarium.calcularSemana(@anio,@mes,dia)
+      sem =CargaDiarium.calcularSemana(@anio,@mes,@dia)
       @semana = sem.to_i
     else
       sem=params[:semana]
