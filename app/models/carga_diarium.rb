@@ -187,6 +187,7 @@ class CargaDiarium < ApplicationRecord
 
 
   	def self.sumaCantSemVenOb(anio,mes,vendedor,ob,dias)
+  			
   			@cantidad = 0
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)	 

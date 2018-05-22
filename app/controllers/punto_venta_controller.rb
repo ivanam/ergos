@@ -102,20 +102,27 @@ class PuntoVentaController < ApplicationController
   def dashboard
 
     if params[:anio] == "" or params[:anio] == nil
-      @anio=Date.today.year
+      ani=Date.today.year
+      @anio=ani.to_i
     else
-      @anio=params[:anio]
+      ani=params[:anio]
+      @anio=ani.to_i
     end
     if params[:mes] == "" or params[:mes] == nil
-        @mes=Date.today.month
+        me=Date.today.month
+        @mes=me.to_i
     else
-      @mes=params[:mes]
+      me=params[:mes]
+      @mes=me.to_i
     end
     if params[:semana] == "" or params[:semana] == nil
-      dia=Date.today.day
-      @semana=CargaDiarium.calcularSemana(@anio,@mes,dia)
+      di=Date.today.day
+      @dia=di.to_i
+      sem =CargaDiarium.calcularSemana(@anio,@mes,dia)
+      @semana = sem.to_i
     else
-      @semana=params[:semana]
+      sem=params[:semana]
+      @semana = sem.to_i
     end
 
     @sidebar = true
