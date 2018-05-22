@@ -1,4 +1,12 @@
 <div class="row" style="background-color: white;border-radius: 15px;margin-top: 25px">
+	<style type="text/css">
+	.list_line_even {
+	  background: #73C8F6;
+	}
+	.list_line_odd {
+	  background: #FFF;
+	}
+	</style>
 	<% 
 	 punto_venta_id = current_user.punto_venta_id
 	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id)
@@ -161,7 +169,7 @@
   		</thead>
 		  <tbody>
 			<% v = @vendedores.first %>
-		    <tr>
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even') -%>">
 		    <% if @semana == 1 %>
 		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
 		    <%else%>
@@ -195,10 +203,10 @@
 		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"V",@dias)%></td>
 		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"S",@dias)%></td>
 		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"D",@dias)%></td>
-		      <th rowspan="3" style="text-align: center;vertical-align: middle;">15</td>
+		      <th rowspan="3" style="text-align: center;vertical-align: middle; background:white">15</td>
 		      
 		    </tr>
-		    <tr>
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even') -%>">
 		    <% if @semana == 1 or @semana == "1" %>
 		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
 		    <%else%>
@@ -233,7 +241,7 @@
 		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"D",@dias)%></td>
 		      
 		    </tr>
-		    <tr>
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even') -%>">
 	    	<% if @semana == 1 or @semana == "1" %>
 		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
 		    <%else%>
