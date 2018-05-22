@@ -168,8 +168,8 @@
 	      </tr>
   		</thead>
 		  <tbody>
-			<% v = @vendedores.first %>
-		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even') -%>">
+			<% @vendedores.each do |v|%>
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 		    <% if @semana == 1 %>
 		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
 		    <%else%>
@@ -206,7 +206,7 @@
 		      <th rowspan="3" style="text-align: center;vertical-align: middle; background:white">15</td>
 		      
 		    </tr>
-		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even') -%>">
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 		    <% if @semana == 1 or @semana == "1" %>
 		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
 		    <%else%>
@@ -241,7 +241,7 @@
 		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"D",@dias)%></td>
 		      
 		    </tr>
-		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even') -%>">
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 	    	<% if @semana == 1 or @semana == "1" %>
 		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
 		    <%else%>
@@ -276,187 +276,8 @@
 		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"D",@dias)%></td>
 
 		    </tr>
+		    <%end%>
 
-		    <tr>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">0</td>
-		      <th rowspan="3" style="text-align: center;vertical-align: middle;" class="bg-light-blue">15</td>
-		    </tr>
-		    <tr>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>0</td>
-		      <th rowspan="3" style="text-align: center;vertical-align: middle;">15</td>
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">0</td>
-		      <th rowspan="3" style="text-align: center;vertical-align: middle;" class="bg-light-blue">15</td>
-		    </tr>
-		    <tr>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue"></td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">2</td>
-		      <td class="bg-light-blue">3</td>
-		      <td class="bg-light-blue">1</td>
-		      <td class="bg-light-blue">0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>0</td>
-		      <th rowspan="3" style="text-align: center;vertical-align: middle;">15</td>
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>0</td>
-		      
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td></td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>2</td>
-		      <td>3</td>
-		      <td>1</td>
-		      <td>0</td>
-		      
-		    </tr>
 		  </tbody>
 		   	<tfoot>
 			    <tr>
