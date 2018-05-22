@@ -60,4 +60,6 @@ end
     if  ((descpOb.descripcion == 'COMPROMISO DE VENTAS SEMANAL') && (self.vendedor_id == nil))
     	errors.add(:base, 'Los compromisos de venta son para los vendedores, no pueden ser asignados a los Puntos de Venta')
     end
+
+
 end  

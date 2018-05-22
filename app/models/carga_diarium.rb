@@ -232,5 +232,30 @@ class CargaDiarium < ApplicationRecord
 			return @cantidad
 
   	end
+
+  	def self.obtenerCompromisoDeVentas(anio,mes,semana)
+  		@cantidad=0
+  		if semana == 1 
+		dias = [1,2,3,4,5,6,7]
+		elsif semana == 2 
+			dias = [8,9,10,11,12,13,14]
+		elsif semana == 3 
+			dias = [15,16,17,18,19,20,21]
+		elsif semana == 4 
+			dias = [22,23,24,25,26,27,28]
+		elsif semana == 5 
+			dias = [29,30,31]
+		else
+			dias=[29,30,31]
+		end
+		dias.each do |diasNom|
+			fecha = Date.new(anio, mes, diasNom)
+  			if ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => 3).first != nil
+  				@cantidad=ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => 3).first.cantidad_propuesta
+  			end
+  		end
+  		return @cantidad
+
+    end
 end
 
