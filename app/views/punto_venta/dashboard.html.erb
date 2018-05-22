@@ -73,6 +73,7 @@
 		  <thead>
   			<tr>
   			  <th rowspan="2">Posición</th>
+  			  <th rowspan="2">Vendedor</th>
 		      <th rowspan="2">Avance</th>
 		      <th colspan="2" class="">Ventas</th>
 		      <th colspan="2" class="">CSI</th>
@@ -90,6 +91,8 @@
 		  	<% @rankingVendedores.each do |v|%>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_even') -%>">
 		      <td><%=@posicion%>º</td>
+		      <% @nombre=v.persona.apellido[0] + v.persona.nombre[0] %>
+		      <td><%=@nombre%></td>
 		      <td><%=CargaDiarium.calculoDeAvance(@anio,@mes,v)%>%</td>
 		      <td><%=CargaDiarium.SumaVentasMensualVendedor(@anio,@mes,v)%></td>
 		      <td><%=CargaDiarium.obtenerCompromisoDeVentasMensual(@anio,@mes,v)%></td>
@@ -101,7 +104,7 @@
 		  </tbody>
 		   	<tfoot>
 			    <tr>
-			      <th>Total</th>
+			      <th colspan="2">Total</th>
 			      <th><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta, @vendedores)%>%</th>
 			      <th><%=CargaDiarium.obtenerReservasEquipo(@anio,@mes,@vendedores)%></th>
 			      <th><%=CargaDiarium.obtenerVentaPuntoVenta(@anio,@mes,@punto_venta)%></th>
