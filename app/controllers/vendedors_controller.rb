@@ -132,12 +132,22 @@ class VendedorsController < ApplicationController
     vendedor_id = params[:vendedor_id].to_i
     vendedor = Vendedor.find(vendedor_id)
     totales = Hash.new
+    total_ob_op = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 7)
+    total_ob_pm = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 4)
+    total_ob_v = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 3)
+    total_ob_csi = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 5)
     total_op = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 7)
     total_pm = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 4)
     total_v = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 5)
+    total_csi = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 3)
+    totales[:ob_oportunidades] = total_ob_op
+    totales[:ob_pruebas_manejo] = total_ob_pm
+    totales[:ob_ventas] = total_ob_v
+    totales[:ob_csi] = total_ob_csi
     totales[:oportunidades] = total_op
     totales[:pruebas_manejo] = total_pm
     totales[:ventas] = total_v
+    totales[:calidad] = total_csi
     render json: totales.to_json
   end
 

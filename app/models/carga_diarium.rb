@@ -121,6 +121,37 @@ class CargaDiarium < ApplicationRecord
     	return total
 	end
 
+	def self.total_trimestral(anio,mes,v, ob)
+	    mes_actual = Date.today.month
+        anio = Date.today.year
+        primer_mes = mes_actual - 3
+        if (primer_mes < 0)
+        	primer_mes = 13 + (primer_mes)
+            anio -=  1
+        end
+	    segundo_mes = primer_mes + 1
+	    tercer_mes = segundo_mes + 1
+
+	    total_primer_mes = 0
+	    total_segundo_mes = 0
+	    total_tercer_mes = 0
+	    if v.nil?
+	      vendedor_id = 0
+	    else
+	      vendedor_id = v.id
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_primer_mes += o_m.cantidad_propuesta
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_segundo_mes += o_m.cantidad_propuesta
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_tercer_mes += o_m.cantidad_propuesta
+	    end
+	    return total_primer_mes + total_segundo_mes + total_tercer_mes
+  	end
+
 	  def self.diaSemana(fecha)
 	  	
 	  	if fecha.strftime("%A") == "Monday"
