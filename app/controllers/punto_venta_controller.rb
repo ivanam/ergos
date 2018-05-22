@@ -100,16 +100,33 @@ class PuntoVentaController < ApplicationController
 
 
   def dashboard
+
+    if params[:anio] == "" or params[:anio] == nil
+      @anio=Date.today.year
+    else
+      @anio=params[:anio]
+    end
+    if params[:mes] == "" or params[:mes] == nil
+        @mes=Date.today.month
+    else
+      @mes=params[:mes]
+    end
+    if params[:semana] == "" or params[:semana] == nil
+      dia=Date.today.day
+      @semana=CargaDiarium.calcularSemana(@anio,@mes,dia)
+    else
+      @semana=params[:semana]
+    end
+
     @sidebar = true
     @footer = false
     @bg_gray = true
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
     @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
-    
     @cargaDiaria=CargaDiarium.carga_total_ob_mes(2018,5,@v, "ventas")
-
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

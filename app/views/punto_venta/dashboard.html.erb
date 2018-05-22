@@ -1,10 +1,33 @@
 <div class="row" style="background-color: white;border-radius: 15px;margin-top: 25px">
-	<% semana = CargaDiarium.calcularSemana(2018,5,5) 
+	<% 
 	 punto_venta_id = current_user.punto_venta_id
 	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id)
-	 @anio=2018
-	 @mes=5
-	 @semana=4
+	%>
+	</br>
+	<div class="col-sm-12"  style="border: 1px solid #000000;-moz-border-radius: 7px;-webkit-border-radius: 7px;padding: 10px; width:100%">
+
+	<div class="col-sm-3" >
+	</div>
+
+	<div class="col-sm-2" >
+    <%= label_tag "Seleccione año", nil,  :class => "control-label" %>
+    <%= select_tag :input_anio, options_for_select([['2018', 2018],['2017', 2017], ['2016', 2016], ['2015', 2015], ['2014', 2014], ['2013', 2013], ['2012', 2012], ['2011', 2011], ['2010', 2010], ['2009', 2009], ['2008', 2008], ['2007', 2007], ['2006', 2006], ['2005', 2005], ['2003', 2003], ['2002', 2002], ['2001', 2001], ['2000', 2000], ['1999', 1999], ['1998', 1998], ['1997', 1997], ['1996', 1996], ['1995', 1995], ['1994', 1994], ['1993', 1993]], 0,), {:prompt => "Seleccionar fecha", :value => @año, :id => "anio" }%> 
+    </div> 
+    <div class="col-sm-2" >
+    <%= label_tag "Seleccione mes", nil,  :class => "control-label" %>
+    <%= select_tag :input_mes, options_for_select([['Enero', 1],['Febrero', 2], ['Marzo', 3], ['Abril', 4], ['Mayo', 5], ['Junio', 6], ['Julio', 7], ['Agosto', 8], ['Septiembre', 9], ['Octubre', 10], ['Noviembre', 11], ['Diciembre', 12]], 0,), {:prompt => "Seleccionar Mes", :value => @mes, :id => "mes" }%> 
+    </div> 
+
+    <div class="col-sm-2" >
+    <%= label_tag "Seleccione semana", nil,  :class => "control-label" %>
+    <%= select_tag :input_semana, options_for_select([['1', 1],['2', 2], ['3', 3], ['4', 4], ['5', 5]], 0,), {:prompt => "Seleccionar Mes", :value => @semana, :id => "semana" }%> 
+    </div> 
+    <div class="col-sm-2" >
+    	</br>
+      <input id="btn-ir" class="btn btn-primary" type="submit" value="Ir">
+     </div>
+    </div> 
+    <% 
 
 	if @semana == 1 
 		dias = [1,2,3,4,5,6,7]
@@ -19,45 +42,8 @@
 	else
 		dias=[]
 
-	end %>
-
-	<div class="col-sm-12" >
-	<div class="col-sm-3" >
-	</div>
-
-	<div class="col-sm-2" >
-    <%= label_tag "Seleccione año", nil,  :class => "control-label" %>
-    <%= select_tag :input_anio_lic, options_for_select([['2018', 2018],['2017', 2017], ['2016', 2016], ['2015', 2015], ['2014', 2014], ['2013', 2013], ['2012', 2012], ['2011', 2011], ['2010', 2010], ['2009', 2009], ['2008', 2008], ['2007', 2007], ['2006', 2006], ['2005', 2005], ['2003', 2003], ['2002', 2002], ['2001', 2001], ['2000', 2000], ['1999', 1999], ['1998', 1998], ['1997', 1997], ['1996', 1996], ['1995', 1995], ['1994', 1994], ['1993', 1993]], 0,), {:prompt => "Seleccionar fecha", :value => @año }%> 
-    </div> 
-    <div class="col-sm-2" >
-    <%= label_tag "Seleccione mes", nil,  :class => "control-label" %>
-	    <select name="mes" id="select_mes" value="<%= @mes %>">
-	    <option value="1">Enero </option>
-	    <option value="2">Febrero </option>
-	    <option value="3">Marzo </option>
-	    <option value="4">Abril </option>
-	    <option value="5">Mayo </option>
-	    <option value="6">Junio </option>
-	    <option value="7">Julio </option>
-	    <option value="8">Agosto </option>
-	    <option value="9">Septiembre </option>
-	    <option value="10">Octubre </option>
-	    <option value="11">Noviembre </option>
-	    <option value="12">Diciembre </option>
-	  </select>
-    </div> 
-    <div class="col-sm-2" >
-    <%= label_tag "Seleccione semana", nil,  :class => "control-label", :prompt => "Semana" %>
-	    <select name="mes" id="select_mes" value="<%= @semana %>">
-		    <option value="1">1</option>
-		    <option value="2">2</option>
-		    <option value="3">3</option>
-		    <option value="4">4</option>
-		    <option value="5">5</option>
-	  </select>
-    </div> 
-    </div> 
-    <% @fecha = Date.today%>
+	end
+    %>
 
 	<div class="col-sm-12" >
 		<%=image_tag "escudo-generico.png", :class=>"dashboard-logo"%>
@@ -519,3 +505,19 @@
 
 	</div>
 </div>	
+
+<script type="text/javascript">
+  $('#btn-ir').click(function(){
+
+  	if (($("#anio").val() != "") && ($("#mes").val() != "") && ($("#semana").val() != "")){
+	    anio = $("#anio").val();
+	    mes = $("#mes").val();
+	    semana = $("#semana").val();
+	    window.location = '/dashboard?anio='+anio+'&mes='+mes+'&semana='+semana;
+    
+    }else{		
+		alert("Elija opciones válidas");
+	}
+
+  });
+</script>

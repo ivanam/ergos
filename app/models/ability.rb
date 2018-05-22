@@ -28,6 +28,7 @@ class Ability
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
           can :dashboard, [PuntoVentum]
+          can :dashboardConParametros, [PuntoVentum]
           can :manage, [Vendedor]
 
         end
