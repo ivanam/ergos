@@ -250,12 +250,48 @@ class CargaDiarium < ApplicationRecord
 		end
 		dias.each do |diasNom|
 			fecha = Date.new(anio, mes, diasNom)
-  			if ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => 3).first != nil
-  				@cantidad=ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => 3).first.cantidad_propuesta
+			tipo_objetivo =TipoObjetivo.where(:descripcion => "COMPROMISO DE VENTAS SEMANAL").first.id
+  			if ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => tipo_objetivo).first != nil
+  				@cantidad=ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => tipo_objetivo).first.cantidad_propuesta
   			end
   		end
   		return @cantidad
 
     end
+
+    def self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
+    		vid = vendedor.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+    def self.SumaVentasMensualVendedor(anio,mes,vendedor)
+  			
+  			@cantidad = 0
+  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			dias.each do |diasNom|
+		  		fecha = Date.new(anio, mes, diasNom)	 
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first != nil
+			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first.cantidad
+			  	 end
+			 end
+			return @cantidad
+
+  	end
+
+  	def self.calculoDeAvance(anio,mes,vendedor)
+  		meta = self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
+  		reservas = self.SumaVentasMensualVendedor(anio,mes,vendedor)
+  		@avance = reservas * 100 / meta
+  		return @avance
+  	end
+
 end
 
