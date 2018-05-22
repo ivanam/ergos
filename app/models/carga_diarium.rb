@@ -333,7 +333,7 @@ class CargaDiarium < ApplicationRecord
   	def self.obtenerVentaPuntoVenta(anio,mes,punto)
   			punto = punto.id
     		@cantidad = 0
-    		tipo_objetivo =TipoObjetivo.where(:descripcion => "CSI").first.id
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
   			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first != nil  				
   				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first.cantidad_propuesta
   			end
