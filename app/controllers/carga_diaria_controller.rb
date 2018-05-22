@@ -54,13 +54,19 @@ class CargaDiariaController < ApplicationController
         if value.to_i > 0
           persona = Persona.find(current_user.persona_id)
           vendedor = Vendedor.find_by(persona_id: persona.id)
-          carga_diaria = CargaDiarium.new
-          carga_diaria.fecha = fecha
-          carga_diaria.tipo_objetivo_id = id
-          carga_diaria.cantidad = value
-          carga_diaria.vendedor_id = vendedor.id
-          carga_diaria.save
-        end
+          cargaExis = CargaDiarium.where(:fecha => fecha, :tipo_objetivo_id => id, :vendedor_id => vendedor.id).first
+          if (cargaExis == nil )
+            carga_diaria = CargaDiarium.new
+            carga_diaria.fecha = fecha
+            carga_diaria.tipo_objetivo_id = id
+            carga_diaria.cantidad = value
+            carga_diaria.vendedor_id = vendedor.id
+            carga_diaria.save
+          else
+            cargaExis.cantidad = value 
+            cargaExis.save
+          end
+        end   
       end
       redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
     else
