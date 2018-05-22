@@ -198,5 +198,39 @@ class CargaDiarium < ApplicationRecord
 			return @cantidad
 
   	end
+
+
+  	def self.sumaCantSem(anio,mes,vendedores,ob,dias)
+  			
+  		@cantidad = 0
+  		vendedores.each do |vendedor|
+  			dias.each do |diasNom|
+		  		fecha = Date.new(anio, mes, diasNom)	 
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+			  	 end
+			 end
+		end
+		return @cantidad
+  	end
+
+  	 def self.cargaVendedoresPorDia(anio,mes,vendedores,ob,diaNombre, dias)
+  			@cantidad = 0
+  			dias.each do |diasNom|
+  				vendedores.each do |vendedor|
+		  		fecha = Date.new(anio, mes, diasNom)
+		  		
+			  	if self.diaSemana(fecha) == diaNombre
+			  	 	 
+				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+				  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+				  	 
+				  	 end
+				end
+			end
+			end
+			return @cantidad
+
+  	end
 end
 
