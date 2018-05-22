@@ -55,11 +55,18 @@
     %>
 
 
-	<div class="col-sm-12" >
-		<%=image_tag "escudo-generico.png", :class=>"dashboard-logo"%>
+	<div class="col-sm-12">
+
+		<div class="col-sm-1">
+
+        	<%=image_tag @concesionarium.logo.url(:thumb), :class=>"img-fluid", :style=>"width: 100px; max-height:100px;"%>
+        </div>
 		<%I18n.locale = :es%>
 		<%@hoy = I18n.l(Date.today.to_time, format: :long)%>
+		<div class="col-sm-11" >
+		</br></br>
 		<h1 class="text-center" style="margin: -25px 0 20px;"><%=@hoy%></h1>
+		</div>
 	</div>
 	<div class="col-sm-12 col-md-6" style="">
 		<table class="table table-bordered thead-dark table-condensed table-left">
@@ -95,16 +102,17 @@
 		   	<tfoot>
 			    <tr>
 			      <th>Total</th>
-			      <th>28%</th>
-			      <th>14</th>
-			      <th>35</th>
-			      <th>82%</th>
-			      <th>85%</th>
+			      <th><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta, @vendedores)%>%</th>
+			      <th><%=CargaDiarium.obtenerReservasEquipo(@anio,@mes,@vendedores)%></th>
+			      <th><%=CargaDiarium.obtenerVentaPuntoVenta(@anio,@mes,@punto_venta)%></th>
+			      <th><%=CargaDiarium.obtenerCSIEquipo(@anio,@mes,@punto_venta)%>%</th>
+			      <th><%=CargaDiarium.obtenerCSIEquipo(@anio,@mes,@punto_venta)%>%</th>
 			    </tr>
+
 
 			    <tr>
 			      <th colspan="2" style="height: 31px;">Avance/Mensual</th>
-			      <th style="height: 31px;">32%</th>
+			      <th style="height: 31px;"><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta, @vendedores)%>%</th>
 			    </tr>
 			  </tfoot>
 		</table>

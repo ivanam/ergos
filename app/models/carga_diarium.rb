@@ -283,6 +283,20 @@ class CargaDiarium < ApplicationRecord
 
     end
 
+
+     def self.obtenerCSIEquipo(anio,mes,punto)
+    		vid = punto.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "CSI").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => vid).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => vid).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+
     def self.SumaVentasMensualVendedor(anio,mes,vendedor)
   			
   			@cantidad = 0
@@ -296,6 +310,48 @@ class CargaDiarium < ApplicationRecord
 			 end
 			return @cantidad
 
+  	end
+
+
+    def self.obtenerReservasEquipo(anio,mes,vendedores)
+  			
+  			@cantidad = 0
+  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			vendedores.each do |vendedor|
+	  			dias.each do |diasNom|
+			  		fecha = Date.new(anio, mes, diasNom)	 
+				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first != nil
+				  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first.cantidad
+				  	 end
+				 end
+			end
+			return @cantidad
+
+  	end
+
+  	def self.obtenerVentaPuntoVenta(anio,mes,punto)
+  			punto = punto.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "CSI").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+    def self.calculoDeAvanceEquipo(anio,mes,punto,vendedores)
+  		@avance = 0
+  		if self.obtenerCSIEquipo(anio,mes,punto) != 0
+  			meta = self.obtenerCSIEquipo(anio,mes,punto)
+	  		if  self.obtenerReservasEquipo(anio,mes,vendedores) != 0
+	  			reservas = self.obtenerReservasEquipo(anio,mes,vendedores)
+	  			@avance = reservas * 100 / meta
+	  		end
+	  	end
+  		return @avance
   	end
 
   	def self.calculoDeAvance(anio,mes,vendedor)
