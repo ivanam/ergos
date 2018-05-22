@@ -124,6 +124,7 @@ class PuntoVentaController < ApplicationController
       sem=params[:semana]
       @semana = sem.to_i
     end
+   
 
     @sidebar = true
     @footer = false
@@ -131,7 +132,13 @@ class PuntoVentaController < ApplicationController
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
     @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
-    @cargaDiaria=CargaDiarium.carga_total_ob_mes(2018,5,@v, "ventas")
+    
+    @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first
+    @vendedores.each do |v|
+      v.avance = CargaDiarium.calculoDeAvance(@anio,@mes,v)
+    end
+
+    @rankingVendedores =  @vendedores.order(avance: :desc).limit(10)
   end
 
 

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180522152245) do
+=======
+ActiveRecord::Schema.define(version: 20180522143536) do
+>>>>>>> 7f8583eb044b9702208c301a378202b15a6d6d48
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -46,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180522152245) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "vendedor_id"
+    t.integer  "estado_id"
     t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 
@@ -210,6 +215,7 @@ ActiveRecord::Schema.define(version: 20180522152245) do
     t.string   "foto_content_type"
     t.integer  "foto_file_size"
     t.datetime "foto_updated_at"
+    t.integer  "avance"
   end
 
   add_foreign_key "estado_personas", "personas"
