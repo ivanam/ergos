@@ -271,6 +271,18 @@ class CargaDiarium < ApplicationRecord
 
     end
 
+     def self.obtenerCSIVendedor(anio,mes,vendedor)
+    		vid = vendedor.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "CSI").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
     def self.SumaVentasMensualVendedor(anio,mes,vendedor)
   			
   			@cantidad = 0
@@ -287,9 +299,14 @@ class CargaDiarium < ApplicationRecord
   	end
 
   	def self.calculoDeAvance(anio,mes,vendedor)
-  		meta = self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
-  		reservas = self.SumaVentasMensualVendedor(anio,mes,vendedor)
-  		@avance = reservas * 100 / meta
+  		@avance = 0
+  		if self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor) != 0
+  			meta = self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
+	  		if  self.SumaVentasMensualVendedor(anio,mes,vendedor) != 0
+	  			reservas = self.SumaVentasMensualVendedor(anio,mes,vendedor)
+	  			@avance = reservas * 100 / meta
+	  		end
+	  	end
   		return @avance
   	end
 

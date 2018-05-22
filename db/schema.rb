@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521155524) do
+ActiveRecord::Schema.define(version: 20180522143536) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(version: 20180521155524) do
     t.string   "foto_content_type"
     t.integer  "foto_file_size"
     t.datetime "foto_updated_at"
+    t.integer  "avance"
   end
 
   add_foreign_key "estado_personas", "personas"

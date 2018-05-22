@@ -66,7 +66,6 @@
 		  <thead>
   			<tr>
   			  <th rowspan="2">Posición</th>
-		      <th rowspan="2">Fecha</th>
 		      <th rowspan="2">Avance</th>
 		      <th colspan="2" class="">Ventas</th>
 		      <th colspan="2" class="">CSI</th>
@@ -80,55 +79,22 @@
 	      </tr>
   		</thead>
 		  <tbody>
-		    <tr>
-		      <td>1º</td>
-		      <td>EV1</td>
-		      <td><%=CargaDiarium.calculoDeAvance(@anio,@mes,@vendedores.first)%>%</td>
-		      <td><%=CargaDiarium.SumaVentasMensualVendedor(@anio,@mes,@vendedores.first)%></td>
-		      <td><%=CargaDiarium.obtenerCompromisoDeVentasMensual(@anio,@mes,@vendedores.first)%></td>
-		      <td>96%</td>
-		      <td>85%</td>
+		  	<%@posicion = 1%>
+		  	<% @rankingVendedores.each do |v|%>
+		    <tr class= "<%= cycle('list_line_odd', 'list_line_even') -%>">
+		      <td><%=@posicion%>º</td>
+		      <td><%=CargaDiarium.calculoDeAvance(@anio,@mes,v)%>%</td>
+		      <td><%=CargaDiarium.SumaVentasMensualVendedor(@anio,@mes,v)%></td>
+		      <td><%=CargaDiarium.obtenerCompromisoDeVentasMensual(@anio,@mes,v)%></td>
+		      <td><%=CargaDiarium.obtenerCSIVendedor(@anio,@mes,v)%>%</td>
+		      <td><%=CargaDiarium.obtenerCSIVendedor(@anio,@mes,v)%>%</td>
+		      <%@posicion += 1%>
 		    </tr>
-		    <tr>
-		      <td class="bg-light-blue">4º</td>
-		      <td class="bg-light-blue">EV4</td>
-      		<td class="bg-light-blue">30%</td>
-		  		<td class="bg-light-blue">3</td>
-      		<td class="bg-light-blue">10</td>
-      		<td class="bg-light-blue">96%</td>
-      		<td class="bg-light-blue">85%</td>
-		    </tr>
-		    <tr>
-		      <td>3º</td>
-		      <td>EV3</td>
-		      <td>30%</td>
-		      <td>3</td>
-		      <td>10</td>
-		      <td>96%</td>
-		      <td>85%</td>
-		    </tr>
-		    <tr>
-		      	<td class="bg-light-blue">4º</td>
-		      	<td class="bg-light-blue">EV4</td>
-	      		<td class="bg-light-blue">30%</td>
-			  	<td class="bg-light-blue">3</td>
-	      		<td class="bg-light-blue">10</td>
-	      		<td class="bg-light-blue">96%</td>
-	      		<td class="bg-light-blue">85%</td>
-		    </tr>
-		    <tr>
-		      <td>5º</td>
-		      <td>EV5</td>
-		      <td>30%</td>
-		      <td>3</td>
-		      <td>10</td>
-		      <td>96%</td>
-		      <td>85%</td>
-		    </tr>
+		    <%end%>
 		  </tbody>
 		   	<tfoot>
 			    <tr>
-			      <th colspan="2">Total</th>
+			      <th>Total</th>
 			      <th>28%</th>
 			      <th>14</th>
 			      <th>35</th>
