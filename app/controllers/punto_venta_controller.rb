@@ -100,6 +100,32 @@ class PuntoVentaController < ApplicationController
 
 
   def dashboard
+
+    if params[:anio] == "" or params[:anio] == nil
+      ani=Date.today.year
+      @anio=ani.to_i
+    else
+      ani=params[:anio]
+      @anio=ani.to_i
+    end
+    if params[:mes] == "" or params[:mes] == nil
+        me=Date.today.month
+        @mes=me.to_i
+    else
+      me=params[:mes]
+      @mes=me.to_i
+    end
+    if params[:semana] == "" or params[:semana] == nil
+      di=Date.today.day
+      @dia=di.to_i
+      sem =CargaDiarium.calcularSemana(@anio,@mes,@dia)
+      @semana = sem.to_i
+    else
+      sem=params[:semana]
+      @semana = sem.to_i
+    end
+   
+
     @sidebar = true
     @footer = false
     @bg_gray = true
@@ -107,9 +133,14 @@ class PuntoVentaController < ApplicationController
     @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
     
-    @cargaDiaria=CargaDiarium.carga_total_ob_mes(2018,5,@v, "ventas")
+    @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first
+    @vendedores.each do |v|
+      v.avance = CargaDiarium.calculoDeAvance(@anio,@mes,v)
+    end
 
+    @rankingVendedores =  @vendedores.order(avance: :desc).limit(10)
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

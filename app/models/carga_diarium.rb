@@ -121,6 +121,37 @@ class CargaDiarium < ApplicationRecord
     	return total
 	end
 
+	def self.total_trimestral(anio,mes,v, ob)
+	    mes_actual = Date.today.month
+        anio = Date.today.year
+        primer_mes = mes_actual - 3
+        if (primer_mes < 0)
+        	primer_mes = 13 + (primer_mes)
+            anio -=  1
+        end
+	    segundo_mes = primer_mes + 1
+	    tercer_mes = segundo_mes + 1
+
+	    total_primer_mes = 0
+	    total_segundo_mes = 0
+	    total_tercer_mes = 0
+	    if v.nil?
+	      vendedor_id = 0
+	    else
+	      vendedor_id = v.id
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_primer_mes += o_m.cantidad_propuesta
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_segundo_mes += o_m.cantidad_propuesta
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_tercer_mes += o_m.cantidad_propuesta
+	    end
+	    return total_primer_mes + total_segundo_mes + total_tercer_mes
+  	end
+
 	  def self.diaSemana(fecha)
 	  	
 	  	if fecha.strftime("%A") == "Monday"
@@ -184,5 +215,187 @@ class CargaDiarium < ApplicationRecord
 			return @cantidad
 
   	end
+
+
+  	def self.sumaCantSemVenOb(anio,mes,vendedor,ob,dias)
+  			
+  			@cantidad = 0
+  			dias.each do |diasNom|
+		  		fecha = Date.new(anio, mes, diasNom)	 
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+			  	 end
+			 end
+			return @cantidad
+
+  	end
+
+
+  	def self.sumaCantSem(anio,mes,vendedores,ob,dias)
+  			
+  		@cantidad = 0
+  		vendedores.each do |vendedor|
+  			dias.each do |diasNom|
+		  		fecha = Date.new(anio, mes, diasNom)	 
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+			  	 end
+			 end
+		end
+		return @cantidad
+  	end
+
+  	 def self.cargaVendedoresPorDia(anio,mes,vendedores,ob,diaNombre, dias)
+  			@cantidad = 0
+  			dias.each do |diasNom|
+  				vendedores.each do |vendedor|
+		  		fecha = Date.new(anio, mes, diasNom)
+		  		
+			  	if self.diaSemana(fecha) == diaNombre
+			  	 	 
+				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
+				  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+				  	 
+				  	 end
+				end
+			end
+			end
+			return @cantidad
+
+  	end
+
+  	def self.obtenerCompromisoDeVentas(anio,mes,semana)
+  		@cantidad=0
+  		if semana == 1 
+		dias = [1,2,3,4,5,6,7]
+		elsif semana == 2 
+			dias = [8,9,10,11,12,13,14]
+		elsif semana == 3 
+			dias = [15,16,17,18,19,20,21]
+		elsif semana == 4 
+			dias = [22,23,24,25,26,27,28]
+		elsif semana == 5 
+			dias = [29,30,31]
+		else
+			dias=[29,30,31]
+		end
+		dias.each do |diasNom|
+			fecha = Date.new(anio, mes, diasNom)
+			tipo_objetivo =TipoObjetivo.where(:descripcion => "COMPROMISO DE VENTAS SEMANAL").first.id
+  			if ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => tipo_objetivo).first != nil
+  				@cantidad=ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => tipo_objetivo).first.cantidad_propuesta
+  			end
+  		end
+  		return @cantidad
+
+    end
+
+    def self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
+    		vid = vendedor.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+     def self.obtenerCSIVendedor(anio,mes,vendedor)
+    		vid = vendedor.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "CSI").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+
+     def self.obtenerCSIEquipo(anio,mes,punto)
+    		vid = punto.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "CSI").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => vid).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => vid).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+
+    def self.SumaVentasMensualVendedor(anio,mes,vendedor)
+  			
+  			@cantidad = 0
+  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			dias.each do |diasNom|
+		  		fecha = Date.new(anio, mes, diasNom)	 
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first != nil
+			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first.cantidad
+			  	 end
+			 end
+			return @cantidad
+
+  	end
+
+
+    def self.obtenerReservasEquipo(anio,mes,vendedores)
+  			
+  			@cantidad = 0
+  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			vendedores.each do |vendedor|
+	  			dias.each do |diasNom|
+			  		fecha = Date.new(anio, mes, diasNom)	 
+				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first != nil
+				  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first.cantidad
+				  	 end
+				 end
+			end
+			return @cantidad
+
+  	end
+
+  	def self.obtenerVentaPuntoVenta(anio,mes,punto)
+  			punto = punto.id
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first != nil  				
+  				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
+
+    end
+
+    def self.calculoDeAvanceEquipo(anio,mes,punto,vendedores)
+  		@avance = 0
+  		if self.obtenerCSIEquipo(anio,mes,punto) != 0
+  			meta = self.obtenerCSIEquipo(anio,mes,punto)
+	  		if  self.obtenerReservasEquipo(anio,mes,vendedores) != 0
+	  			reservas = self.obtenerReservasEquipo(anio,mes,vendedores)
+	  			@avance = reservas * 100 / meta
+	  		end
+	  	end
+  		return @avance
+  	end
+
+  	def self.calculoDeAvance(anio,mes,vendedor)
+  		@avance = 0
+  		if self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor) != 0
+  			meta = self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
+	  		if  self.SumaVentasMensualVendedor(anio,mes,vendedor) != 0
+	  			reservas = self.SumaVentasMensualVendedor(anio,mes,vendedor)
+	  			@avance = reservas * 100 / meta
+	  		end
+	  	end
+  		return @avance
+  	end
+
 end
 

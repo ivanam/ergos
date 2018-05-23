@@ -21,7 +21,8 @@ TipoDocumento.create(descripcion: 'CI')#4
 TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO', tipo: 'KPI')#1
 TipoObjetivo.create(descripcion: 'VENTAS', tipo: 'KPI')#2
 TipoObjetivo.create(descripcion: 'COMPROMISO DE VENTAS SEMANAL',)#3
-TipoObjetivo.create(descripcion: 'OPORTUNIDADES', tipo: 'KPI')#4
+TipoObjetivo.create(descripcion: 'OPORTUNIDADES', tipo: 'KPI')
+TipoObjetivo.create(descripcion: 'CSI')#5
 
 # Personas
 # ========
