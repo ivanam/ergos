@@ -18,11 +18,11 @@ TipoDocumento.create(descripcion: 'CI')#4
 # Tipo de objetivo
 # ===================
 
-TipoObjetivo.create(descripcion: 'PRUEBA DE MANEJO', tipo: 'KPI')#1
-TipoObjetivo.create(descripcion: 'VENTAS', tipo: 'KPI')#2
-TipoObjetivo.create(descripcion: 'COMPROMISO DE VENTAS SEMANAL',)#3
-TipoObjetivo.create(descripcion: 'OPORTUNIDADES', tipo: 'KPI')
-TipoObjetivo.create(descripcion: 'CSI')#5
+TipoObjetivo.create(id: 3, descripcion: 'CSI')#5
+TipoObjetivo.create(id: 4, descripcion: 'PRUEBA DE MANEJO', tipo: 'KPI')#1
+TipoObjetivo.create(id: 5, descripcion: 'VENTAS', tipo: 'KPI')#2
+TipoObjetivo.create(id: 6, descripcion: 'COMPROMISO DE VENTAS SEMANAL',)#3
+TipoObjetivo.create(id: 7, descripcion: 'OPORTUNIDADES', tipo: 'KPI')
 
 # Personas
 # ========
@@ -35,7 +35,7 @@ Persona.create!(tipo_documento_id: 3, numero_documento: 31343209,apellido: "Cerr
 # ========
 
 
-User.create(email: 'admin@admin.com', password: 'sumbudrule', persona_id: 1)#1
+User.create(email: 'admin@admin.com', password: '12345678', persona_id: 1)#1
 
 
 # Roles
