@@ -33,7 +33,6 @@ class EstadoPersonasController < ApplicationController
   # POST /estado_personas.json
   def create
     @estado_persona = EstadoPersona.new(estado_persona_params)
-    debugger
 
     respond_to do | format|
       if @estado_persona.save
