@@ -24,6 +24,21 @@ class PersonasController < ApplicationController
     @persona = Persona.new
   end
 
+  def new_administrador
+    @persona = Persona.new
+  end
+
+  def administradores
+    personas_id = []
+
+    User.all.each do |u|
+      if u.admin? 
+        personas_id << u.persona_id
+      end
+    end
+
+    @personas = Persona.where(id: personas_id)
+  end
 
   def new_persona_punto_venta
     @punto_venta_id = params[:punto_venta]
@@ -55,6 +70,23 @@ class PersonasController < ApplicationController
           format.json { render :show, status: :created, location: @persona }
         else
           format.html { redirect_to new_persona_punto_venta_path(punto_venta: params[:punto_venta]), alert: @persona.errors.full_messages  }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
+      end
+    elsif params[:admin].to_i > 0
+      respond_to do |format|
+        if @persona.save
+          usuario = User.new(email: @persona.email, password: "12345678", persona_id: @persona.id)
+          if usuario.save
+            usuario.add_role("admin")
+          else
+            format.html { redirect_to new_administrador_path(admin: params[:admin]), alert: usuario.errors.full_messages  }
+            format.json { render json: usuario.errors, status: :unprocessable_entity }
+          end
+          format.html { redirect_to administradores_path, notice: 'Persona creada correctamente.' }
+          format.json { render :show, status: :created, location: @persona }
+        else
+          format.html { redirect_to new_administrador_path(admin: params[:admin]), alert: @persona.errors.full_messages  }
           format.json { render json: @persona.errors, status: :unprocessable_entity }
         end
       end
