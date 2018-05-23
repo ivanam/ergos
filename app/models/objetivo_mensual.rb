@@ -27,7 +27,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -40,7 +40,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -53,7 +53,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -66,7 +66,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -78,10 +78,8 @@ class ObjetivoMensual < ApplicationRecord
     @obmPv = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).group("id").first # Performs a COUNT(id)
     @obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).group("id").first
     if (@obmVend != nil)
-      debugger
     @obResto =  @obmPv.cantidadPV.to_i - @obmVend.cantidadVend.to_i
     elsif (@obmPv != nil)
-      debugger
     @obResto =  @obmPv.cantidadPV.to_i
     end
     if ((@obMen != nil)  && (descpOb.descripcion != "CSI"))
@@ -90,7 +88,6 @@ class ObjetivoMensual < ApplicationRecord
           errors.add(:base, 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta')
          end
           if (self.cantidad_propuesta.to_i > @obResto)
-            debugger
             errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual de vendedores, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
          end
       end
