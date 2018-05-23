@@ -18,37 +18,37 @@
     <% v= @vendedor
 
     if @vendedor.next != nil 
-      @next= @vendedor.next.id
+      siguiente= @vendedor.next.id
     else
-      @next= nil
+      siguiente= @vendedor.id
     end
 
 
     if @vendedor.previous != nil 
-      previous= @vendedor.previous.id
+      anterior= @vendedor.previous.id
     else
-      previous= nil
+      anterior= @vendedor.id
     end
 
 
     if @vendedor != nil
-      @index= @vendedor.id
+      indice= v.id
     else
-      @index=0
+      indice=0
     end
 
-    @cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
+    cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
 
     if Vendedor.all.first != nil
-        @primero = Vendedor.all.first.id
+        primero = Vendedor.where(punto_venta_id: punto_venta_id).first.id
     else
-      @primero = 0
+      primero = 0
     end
 
     if Vendedor.all.last != nil
-        @ultimo = Vendedor.all.last.id
+        ultimo = Vendedor.where(punto_venta_id: punto_venta_id).last.id
     else
-      @ultimo = 0
+      ultimo = 0
     end%>
 
 
@@ -71,7 +71,13 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
         <div class="title-box w-20 bg-gray">Vendedores</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=previous%>"><</a> 1 de <%=@cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray">
+          <a href="/vendedors/<%=primero%>"> << </a> 
+          <a href="/vendedors/<%=anterior%>"> < </a> 
+          1 de <%=cant%> 
+          <a href="/vendedors/<%=siguiente%>"> > </a>
+          <a href="/vendedors/<%=ultimo%>"> >> </a>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-6">
@@ -186,7 +192,13 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
         <div class="title-box w-20 bg-gray">Objetivos</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> 1 de <%=@cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray">
+          <a href="/vendedors/<%=primero%>"> << </a> 
+          <a href="/vendedors/<%=anterior%>"> < </a> 
+          1 de <%=cant%> 
+          <a href="/vendedors/<%=siguiente%>"> > </a>
+          <a href="/vendedors/<%=ultimo%>"> >> </a>
+        </div>
       </div>
       <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
         <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
