@@ -121,6 +121,37 @@ class CargaDiarium < ApplicationRecord
     	return total
 	end
 
+	def self.total_trimestral(anio,mes,v, ob)
+	    mes_actual = Date.today.month
+        anio = Date.today.year
+        primer_mes = mes_actual - 3
+        if (primer_mes < 0)
+        	primer_mes = 13 + (primer_mes)
+            anio -=  1
+        end
+	    segundo_mes = primer_mes + 1
+	    tercer_mes = segundo_mes + 1
+
+	    total_primer_mes = 0
+	    total_segundo_mes = 0
+	    total_tercer_mes = 0
+	    if v.nil?
+	      vendedor_id = 0
+	    else
+	      vendedor_id = v.id
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_primer_mes += o_m.cantidad_propuesta
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_segundo_mes += o_m.cantidad_propuesta
+	    end
+	    ObjetivoMensual.where(anio: anio, mes: primer_mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
+	      total_tercer_mes += o_m.cantidad_propuesta
+	    end
+	    return total_primer_mes + total_segundo_mes + total_tercer_mes
+  	end
+
 	  def self.diaSemana(fecha)
 	  	
 	  	if fecha.strftime("%A") == "Monday"
@@ -298,9 +329,16 @@ class CargaDiarium < ApplicationRecord
 
 
     def self.SumaVentasMensualVendedor(anio,mes,vendedor)
-  			
+  			case mes
+	  			when 1,3,5,7,8,10,12
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+	  			when 4,6,9,11
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+	  			else
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
+	  		end
   			@cantidad = 0
-  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			
   			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)	 
@@ -316,7 +354,14 @@ class CargaDiarium < ApplicationRecord
     def self.obtenerReservasEquipo(anio,mes,vendedores)
   			
   			@cantidad = 0
-  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			case mes
+	  			when 1,3,5,7,8,10,12
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+	  			when 4,6,9,11
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+	  			else
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
+	  		end
   			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
   			vendedores.each do |vendedor|
 	  			dias.each do |diasNom|
@@ -339,7 +384,19 @@ class CargaDiarium < ApplicationRecord
   			end
 
   			return @cantidad
+    end
 
+	#por semana
+    def self.obtenerObjPuntoVentaSemanal(anio,mes,punto,semana)
+  			punto = punto.id
+  			semanai = semana.to_i
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			if ObjetivoSemanal.where(:mes =>mes, :anio => anio, :numero_semana => semanai, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first != nil  				
+  				@cantidad=ObjetivoSemanal.where(:mes =>mes, :anio => anio, :numero_semana => semanai, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
     end
 
     def self.calculoDeAvanceEquipo(anio,mes,punto,vendedores)

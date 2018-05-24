@@ -15,12 +15,14 @@ class PuntoVentum < ApplicationRecord
 		"#{self.nombre}"
 	end
 
-    def validarCantPV
-     cantPv = Concesionarium.where(:id => self.concesionaria_id).first.cantPv
-     cantPvconc = PuntoVentum.where(:concesionaria_id => self.concesionaria_id).count
-     if (cantPv.to_i <= cantPvconc.to_i)
-      	errors.add(:base, "No puede generar mas puntos de venta para esta concesionaria")
-     end
+    def validarCantPV     
+      if self.concesionaria_id 
+        cantPv = Concesionarium.where(:id => self.concesionaria_id).first.cantPv
+        cantPvconc = PuntoVentum.where(:concesionaria_id => self.concesionaria_id).count
+        if (cantPv.to_i <= cantPvconc.to_i)
+          errors.add(:base, "No puede generar mas puntos de venta para esta concesionaria")
+        end
+      end
     end 
 
     def self.sumaObSemanales 

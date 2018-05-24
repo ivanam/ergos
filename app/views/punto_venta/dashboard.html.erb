@@ -363,36 +363,11 @@
 			      
 			    </tr>
 			    <tr>
-			      <% if @semana == 1 or @semana == "1" %>	
-			      <%@sumaS1 = CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%>
-			      	<th><%=@sumaS1%></th>
-			      <%else%>
-				  	<th>0</th>
-				  <%end%>
-			      <% if @semana == 2 or @semana == "2" %>	
-			      <%@sumaS1 = CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%>
-			      	<th><%=@sumaS1%></th>
-			      <%else%>
-				  	<th>0</th>
-				  <%end%>
-			      <% if @semana == 3 or @semana == "3" %>	
-			      <%@sumaS1 = CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%>
-			      	<th><%=@sumaS1%></th>
-			      <%else%>
-				  	<th>0</th>
-				  <%end%>
-			      <% if @semana == 4 or @semana == "4" %>	
-			      <%@sumaS1 = CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%>
-			      	<th><%=@sumaS1%></th>
-			      <%else%>
-				  	<th>0</th>
-				  <%end%>
-			      <% if @semana == 5 or @semana == "5" %>	
-			      <%@sumaS1 = CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias) + CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%>
-			      	<th><%=@sumaS1%></th>
-			      <%else%>
-				  	<th>0</th>
-				  <%end%>
+			      <th><%=CargaDiarium.obtenerObjPuntoVentaSemanal(@anio,@mes,@punto_venta,1)%></th>
+			      <th><%=CargaDiarium.obtenerObjPuntoVentaSemanal(@anio,@mes,@punto_venta,2)%></th>
+			      <th><%=CargaDiarium.obtenerObjPuntoVentaSemanal(@anio,@mes,@punto_venta,3)%></th>
+			      <th><%=CargaDiarium.obtenerObjPuntoVentaSemanal(@anio,@mes,@punto_venta,4)%></th>
+			      <th><%=CargaDiarium.obtenerObjPuntoVentaSemanal(@anio,@mes,@punto_venta,5)%></th>
 			    </tr>
 			  </tfoot>
 		</table>
@@ -403,12 +378,17 @@
 <script type="text/javascript">
   $('#btn-ir').click(function(){
 
+
   	if (($("#anio").val() != "") && ($("#mes").val() != "") && ($("#semana").val() != "")){
+  		if (($("#anio").val() != "") && ($("#mes").val() == "2") && ($("#semana").val() == "5")){
+  			alert("Elija opciones válidas");
+  		}else{
+
 	    anio = $("#anio").val();
 	    mes = $("#mes").val();
 	    semana = $("#semana").val();
 	    window.location = '/dashboard?anio='+anio+'&mes='+mes+'&semana='+semana;
-    
+    	}
     }else{		
 		alert("Elija opciones válidas");
 	}

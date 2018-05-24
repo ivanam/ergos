@@ -18,37 +18,37 @@
     <% v= @vendedor
 
     if @vendedor.next != nil 
-      @next= @vendedor.next.id
+      siguiente= @vendedor.next.id
     else
-      @next= nil
+      siguiente= @vendedor.id
     end
 
 
     if @vendedor.previous != nil 
-      previous= @vendedor.previous.id
+      anterior= @vendedor.previous.id
     else
-      previous= nil
+      anterior= @vendedor.id
     end
 
 
     if @vendedor != nil
-      @index= @vendedor.id
+      indice= v.id
     else
-      @index=0
+      indice=0
     end
 
-    @cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
+    cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
 
     if Vendedor.all.first != nil
-        @primero = Vendedor.all.first.id
+        primero = Vendedor.where(punto_venta_id: punto_venta_id).first.id
     else
-      @primero = 0
+      primero = 0
     end
 
     if Vendedor.all.last != nil
-        @ultimo = Vendedor.all.last.id
+        ultimo = Vendedor.where(punto_venta_id: punto_venta_id).last.id
     else
-      @ultimo = 0
+      ultimo = 0
     end%>
 
 
@@ -71,7 +71,13 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
         <div class="title-box w-20 bg-gray">Vendedores</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=previous%>"><</a> 1 de <%=@cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray">
+          <a href="/vendedors/<%=primero%>"> << </a> 
+          <a href="/vendedors/<%=anterior%>"> < </a> 
+          1 de <%=cant%> 
+          <a href="/vendedors/<%=siguiente%>"> > </a>
+          <a href="/vendedors/<%=ultimo%>"> >> </a>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-6">
@@ -92,58 +98,74 @@
             
           </div>    
           <div class="col-xs-6">
-            <center>
+            <center>            
               <%=image_tag "Funnel2.png", class:"img-responsive"%>
               <%
                 mes_actual = Date.today.month
                 anio = Date.today.year
-                if (mes_actual - 4) < 0
-                  primer_mes = 13 + (mes_actual - 4)
-                  anio -=  1
-                else
-                  primer_mes = mes_actual - 4
-                end
-                segundo_mes = primer_mes + 1
-                tercer_mes = segundo_mes + 1
               %>
-              <% total_primer_mes = CargaDiarium.carga_total_ob_mes(anio, primer_mes, @vendedor, 7) %>
-              <% total_segundo_mes = CargaDiarium.carga_total_ob_mes(anio, segundo_mes, @vendedor, 4) %>
-              <% total_tercer_mes = CargaDiarium.carga_total_ob_mes(anio, tercer_mes, @vendedor, 5) %>
-              <div class="legend legend-1" style="top:10%;"><%= total_primer_mes %></div>
-              <div class="legend legend-2" style="top:40%;"><%= total_segundo_mes %></div>
-              <div class="legend legend-3" style="bottom:8%;"><%= total_tercer_mes %></div>
+              <% total_trimestral_op = CargaDiarium.total_trimestral(anio, mes_actual, @vendedor, 7) %>
+              <% total_trimestral_pm = CargaDiarium.total_trimestral(anio, mes_actual, @vendedor, 4) %>
+              <% total_trimestral_v = CargaDiarium.total_trimestral(anio, mes_actual, @vendedor, 5) %>
+              <div class="legend legend-1" style="top:10%;"><%= total_trimestral_op %></div>
+              <div class="legend legend-2" style="top:40%;"><%= total_trimestral_pm %></div>
+              <div class="legend legend-3" style="bottom:8%;"><%= total_trimestral_v %></div>
             </center>
           </div>  
           <div class="col-xs-12">
+            <%
+              mes_actual = Date.today.month
+              anio = Date.today.year
+              primer_mes = mes_actual - 3
+              if (primer_mes < 0)
+                primer_mes = 13 + (primer_mes)
+                anio -=  1
+              end
+              segundo_mes = primer_mes + 1
+              tercer_mes = segundo_mes + 1
+            %>
             <table class="table cel-table" style="margin-top: 5px;">
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col">Dic</th>
-                  <th scope="col">Ene</th>
-                  <th scope="col">Feb</th>
+                  <th scope="col"><%= I18n.t("date.month_names")[primer_mes] %></th>
+                  <th scope="col"><%= I18n.t("date.month_names")[segundo_mes] %></th>
+                  <th scope="col"><%= I18n.t("date.month_names")[tercer_mes] %></th>
                 </tr>
               </thead>
               <tbody>
+                <%
+                total_op_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 7)
+                total_op_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 7)
+                total_op_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 7)
+                total_pm_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 4)
+                total_pm_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 4)
+                total_pm_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 4)
+                total_v_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 5)
+                total_v_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 5)
+                total_v_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 5)
+                %>
                 <tr>
-                  <th scope="row">Ventas</th>
-                  <td>7</td>
-                  <td>9</td>
-                  <td>10</td>
+                  <th scope="row">Oportunidades</th>
+                  <td><%= total_op_mes1 %></td>
+                  <td><%= total_op_mes2 %></td>
+                  <td><%= total_op_mes3 %></td>
                 </tr>
                 <tr>
-                  <th scope="row">Creditos</th>
-                  <td>7</td>
-                  <td>9</td>
-                  <td>10</td>
+                  <th scope="row">Pruebas de Manejo</th>
+                  <td><%= total_pm_mes1 %></td>
+                  <td><%= total_pm_mes2 %></td>
+                  <td><%= total_pm_mes3 %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Ventas</th>
+                  <td><%= total_v_mes1 %></td>
+                  <td><%= total_v_mes2 %></td>
+                  <td><%= total_v_mes3 %></td>
                 </tr>
               </tbody>
             </table>
-
           </div>  
-
-
-
         </div>
       </div>
       <div class="" style="width:90%;position: absolute;bottom: 20px;">
@@ -170,19 +192,18 @@
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 0px;">
         <div class="title-box w-20 bg-gray">Objetivos</div>
         <div class="title-box w-60 bg-ergosgray"></div>
-        <div class="title-box w-20 bg-gray"><a href="/vendedors/<%=@primero%>"> << </a> <a href="/vendedors/<%=@previous%>"><</a> 1 de <%=@cant%> <a href="/vendedors/<%=@next%>">></a> <a href="/vendedors/<%=@ultimo%>">>></a></div>
+        <div class="title-box w-20 bg-gray">
+          <a href="/vendedors/<%=primero%>"> << </a> 
+          <a href="/vendedors/<%=anterior%>"> < </a> 
+          1 de <%=cant%> 
+          <a href="/vendedors/<%=siguiente%>"> > </a>
+          <a href="/vendedors/<%=ultimo%>"> >> </a>
+        </div>
       </div>
       <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
-        <div style="padding-right: 10px; margin-right: 10px; border-right: 2px solid #fff; display:inline-block;">
-          <button type="button" class="btn btn-xs btn-default btn-ergos">Menu</button>
-        </div>
-        <button type="button" class="btn btn-xs btn-default btn-ergos">Guardar</button>
-        <button type="button" class="btn btn-xs btn-default btn-ergos">Cancelar</button>
-        <button type="button" class="btn btn-xs btn-default btn-ergos">Verificar</button>
-         <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
+        <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
         <%= fa_icon "file-pdf-o", text: "Imprimir Objetivos" %>
-        <% end %>
-     
+        <% end %>     
       </div>
       <div class="row">
         <div class="col-xs-6 row">
@@ -190,63 +211,64 @@
           <!-- Oportunidades -->
           <br><br>
           <br>
-          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          <div class="col-sm-4" style="text-align: right;padding: 6px 0px; font-weight: bold;">
           Oportunidades:
 
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
-              <%objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 7)%>
-              <input id="oportunidades" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_op%>"></input>
+              <%carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)%>    
+              <input id="input_oportunidades" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=carga_total_ob_mes_op%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
-          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
-          <%carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)%>
-          de <%=carga_total_ob_mes_op%>
+          <div id="oportunidades" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          <%objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 7)%>
+          de <%=objetivo_op%>
           </div>
           <br>
           <br>
           <!-- Prueba de Manejo -->
-          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
-          Prueba de Manejo:
+          <div class="col-sm-4" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          PM:
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
-              <%objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)%>
-              <input id="pruebas_manejo" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_pm%>"></input>
+              <%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)%>    
+              <input id="input_pruebas_manejo" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=carga_total_ob_mes_pm%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
-          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
-          <%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)%>
-          de <%=carga_total_ob_mes_pm%>
+          <div id="pruebas_manejo" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          <%objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)%>          
+          de <%=objetivo_pm%>
           </div>
           <br>
           <br>
           <!-- Ventas -->
-          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          <div class="col-sm-4" style="text-align: right;padding: 6px 0px; font-weight: bold;">
           Ventas:
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
-              <%objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 5)%>
-              <input id="ventas" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=objetivo_v%>"></input>
+              <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 5)%>    
+              <input id="input_ventas" type="text" class="btn btn-default" style="max-width:70px;" value ="<%=carga_total_ob_mes_v%>"></input>
               <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
-          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
-          <%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 5)%>
-          de <%=carga_total_ob_mes_v%>
+          <div id="ventas" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          <%objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 5)%>
+          
+          de <%=objetivo_v%>
           </div>
         </div>
         <div class="col-xs-6 row">
           <!-- Mes -->
           <div class="row">
-            <%= label_tag :mes, "Mes", class: "col-sm-1 control-label" %>
+            <%= label_tag :mes, "Mes", class: "col-sm-2 control-label" %>
             <div class="col-sm-4">
               <select class="form-control" name="mes" id="mes">
                 <option value="1">Enero </option>
@@ -263,7 +285,7 @@
                 <option value="12">Diciembre </option>
               </select>
             </div>
-            <%= label_tag :anio, "Año", class: "col-sm-1 control-label" %>
+            <%= label_tag :anio, "Año", class: "col-sm-2 control-label" %>
             <div class="col-sm-4">
               <select class="form-control" name="anio" id="anio">
                 <script language="javascript" type="text/javascript">
@@ -282,10 +304,10 @@
           <br>
           <br>
           <!-- Financiaciones -->
-          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          <div class="col-sm-4" style="text-align: right;padding: 6px 0px; font-weight: bold;">
           Financiaciones:
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
               <input type="text" class="btn btn-default" style="max-width:70px;"></input>
@@ -298,16 +320,21 @@
           <br>
           <br>
           <!-- Calidad -->
-          <div class="col-sm-5" style="text-align: right;padding: 6px 0px; font-weight: bold;">
+          <div class="col-sm-4" style="text-align: right;padding: 6px 0px; font-weight: bold;">
           Calidad:
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
-            <%objetivo_csi = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>
-              <input type="text" class="btn btn-default" style="max-width:70px; " value ="<%=objetivo_csi%>"></input>
+            <%carga_total_ob_mes_csi = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 3)%>    
+              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <input id="input_calidad" type="text" class="btn btn-default" style="max-width:70px; " value ="<%=carga_total_ob_mes_csi%>"></input>
+              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
-          <div class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          <div id="calidad" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
+          <%objetivo_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>
+          
+          de <%=objetivo_v%>
           </div>
           <br>
           <br>
@@ -322,7 +349,6 @@
   <div class="col-sm-12 h-6">
     <div class="btn-horizontal-list bg_white" style="">
       <a href="/reunions" type="button" class="btn btn-default btn-ergos">Preparar Reunión Semanal</a>
-      <a  href="/reunions" type="button" class="btn btn-default btn-ergos">Preparar Reunión Mensual</a>
       <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Agregar Atajo</div></button>
     </div>
     
@@ -339,9 +365,7 @@
       url: '/objetivos_y_carga_diaria?anio='+anio+'&mes='+mes+'&vendedor_id='+<%= @vendedor.id %>,
       type: 'GET',
     }).done(function(response){      
-      $('#oportunidades').val(response.oportunidades);
-      $('#pruebas_manejo').val(response.pruebas_manejo);
-      $('#ventas').val(response.ventas);
+      setear_valores(response);
     });
   });
 
@@ -352,10 +376,19 @@
       url: '/objetivos_y_carga_diaria?anio='+anio+'&mes='+mes+'&vendedor_id='+<%= @vendedor.id %>,
       type: 'GET',
     }).done(function(response){
-      $('#oportunidades').val(response.oportunidades);
-      $('#pruebas_manejo').val(response.pruebas_manejo);
-      $('#ventas').val(response.ventas);
+      setear_valores(response);
     });
   });
+
+  function setear_valores(response){
+    $('#oportunidades').text('de '+response.ob_oportunidades);
+    $('#pruebas_manejo').text('de '+response.ob_pruebas_manejo);
+    $('#ventas').text('de '+response.ob_ventas);
+    $('#calidad').text('de '+response.ob_csi);
+    $('#input_oportunidades').val(response.oportunidades);
+    $('#input_pruebas_manejo').val(response.pruebas_manejo);
+    $('#input_ventas').val(response.ventas);
+    $('#input_calidad').val(response.calidad);
+  }
   </script>
 
