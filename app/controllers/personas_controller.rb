@@ -136,7 +136,7 @@ class PersonasController < ApplicationController
   def destroy
     @persona.destroy
     respond_to do |format|
-      format.html { redirect_to personas_url, notice: 'Persona was successfully destroyed.' }
+      format.html { redirect_to administradores_path, notice: 'Persona was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

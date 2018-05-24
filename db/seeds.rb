@@ -35,7 +35,7 @@ Persona.create!(tipo_documento_id: 3, numero_documento: 31343209,apellido: "Cerr
 # ========
 
 
-User.create(email: 'admin@admin.com', password: '12345678', persona_id: 1)#1
+User.create(email: 'gcerrutti@gmail.com', password: '12345678', persona_id: 1)#1
 
 
 # Roles

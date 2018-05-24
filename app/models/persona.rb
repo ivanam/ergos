@@ -19,6 +19,8 @@ class Persona < ApplicationRecord
   validates :email, :presence => { :message => "Debe completar el campo Email" }
   validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
 
+  before_destroy :deshabilitar_user
+
 
   def to_s
     "#{self.apellido}, #{self.nombre}"
@@ -30,5 +32,14 @@ class Persona < ApplicationRecord
       now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     end
   end
+
+
+  def deshabilitar_user
+    usuario = User.where(email: self.email).first
+    if !usuario.nil?
+      usuario.remove_role("admin")
+    end
+  end
+
 end
   
