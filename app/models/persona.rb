@@ -38,6 +38,7 @@ class Persona < ApplicationRecord
     usuario = User.where(email: self.email).first
     if !usuario.nil?
       usuario.remove_role("admin")
+      usuario.delete
     end
   end
 

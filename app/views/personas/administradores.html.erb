@@ -29,12 +29,6 @@
         <td><%= p.age(p.fecha_nacimiento) %></td>
         <td><%= p.email %></td>
         <td class="text-center">
-          <%= link_to p, class: 'btn btn-sm btn-default' do %>
-            <span class="fa fa-search"></span>
-          <% end %>
-          <%= link_to edit_persona_path(p), class: 'btn btn-sm btn-default' do %>
-            <span class="fa fa-pencil"></span>
-          <% end %>
           <%= link_to p, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
             <span class="fa fa-trash"></span>
           <% end %>
