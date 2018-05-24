@@ -6,7 +6,7 @@ default: &default
   pool: 5
   host: 127.0.0.1
   username: root
-  password: root
+  password: finan2
   #password: root
 
 development:
@@ -24,6 +24,6 @@ production:
   <<: *default
   database: ergos
   username: root
-  password: 8102sogre
+  password: finan2
 
 #8102sogre
