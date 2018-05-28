@@ -329,9 +329,16 @@ class CargaDiarium < ApplicationRecord
 
 
     def self.SumaVentasMensualVendedor(anio,mes,vendedor)
-  			
+  			case mes
+	  			when 1,3,5,7,8,10,12
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+	  			when 4,6,9,11
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+	  			else
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
+	  		end
   			@cantidad = 0
-  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			
   			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)	 
@@ -347,7 +354,14 @@ class CargaDiarium < ApplicationRecord
     def self.obtenerReservasEquipo(anio,mes,vendedores)
   			
   			@cantidad = 0
-  			dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+  			case mes
+	  			when 1,3,5,7,8,10,12
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+	  			when 4,6,9,11
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+	  			else
+	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
+	  		end
   			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
   			vendedores.each do |vendedor|
 	  			dias.each do |diasNom|
@@ -370,7 +384,19 @@ class CargaDiarium < ApplicationRecord
   			end
 
   			return @cantidad
+    end
 
+	#por semana
+    def self.obtenerObjPuntoVentaSemanal(anio,mes,punto,semana)
+  			punto = punto.id
+  			semanai = semana.to_i
+    		@cantidad = 0
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			if ObjetivoSemanal.where(:mes =>mes, :anio => anio, :numero_semana => semanai, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first != nil  				
+  				@cantidad=ObjetivoSemanal.where(:mes =>mes, :anio => anio, :numero_semana => semanai, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first.cantidad_propuesta
+  			end
+
+  			return @cantidad
     end
 
     def self.calculoDeAvanceEquipo(anio,mes,punto,vendedores)

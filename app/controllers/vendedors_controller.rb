@@ -134,8 +134,8 @@ class VendedorsController < ApplicationController
     totales = Hash.new
     total_ob_op = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 7)
     total_ob_pm = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 4)
-    total_ob_v = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 3)
-    total_ob_csi = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 5)
+    total_ob_v = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 5)
+    total_ob_csi = ObjetivoMensual.objetivo_pm(anio, mes, vendedor, 3)
     total_op = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 7)
     total_pm = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 4)
     total_v = CargaDiarium.carga_total_ob_mes_pm(anio, mes, vendedor, 5)
