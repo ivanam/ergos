@@ -17,7 +17,7 @@ class ReunionsController < ApplicationController
           :layout => 'pdf.html.erb',
           :orientation => 'Portrait',# default Portrait
           :page_size => 'Legal'
-      end
+      end 
     end
   end
 
