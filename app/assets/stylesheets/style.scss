@@ -1460,7 +1460,7 @@ nav.sidebar, .main{
 }
 
 .modal {
-  padding: 20%;
+  padding: 0%; /*Para que el modal no se mueva hacia la izquierda*/
 }
 
 .modal-header{

@@ -27,7 +27,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -40,7 +40,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -53,7 +53,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
@@ -66,7 +66,7 @@ class ObjetivoMensual < ApplicationRecord
       vendedor_id = v.id
     end
     ObjetivoMensual.where(anio: anio, mes: mes, vendedor_id: vendedor_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta
+      total = total + o_m.cantidad_propuesta.to_i
     end
     return total
   end
