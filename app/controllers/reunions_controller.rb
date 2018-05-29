@@ -21,6 +21,20 @@ class ReunionsController < ApplicationController
     end
   end
 
+  def reunion_mensual
+    @reunions = Reunion.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'template_pdf', 
+          :template => 'reunions/templateMensual_pdf.html.erb',
+          :layout => 'pdf.html.erb',
+          :orientation => 'Portrait',# default Portrait
+          :page_size => 'Legal'
+      end 
+    end
+  end
+
   # GET /reunions/1
   # GET /reunions/1.json
   def show

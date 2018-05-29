@@ -53,5 +53,7 @@ Rails.application.routes.draw do
 
   get "/persona/cambiar_contrasenia/:id", to: 'personas#cambiar_contrasenia',  as: :persona_cambiar_contrasenia
 
+  get "/reunionsm.pdf", to: 'reunions#reunion_mensual', as: :reunion_mensual
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
