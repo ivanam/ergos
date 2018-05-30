@@ -197,15 +197,15 @@
 </div>
 
 <script type="text/javascript">
-/*$('.bar').each(function() {
+$('.bar').each(function() {
     percentage = $(this).attr('data-percentage');
     if (percentage > 100){
       $(this).css('width',100+'%');
     }else{
       $(this).css('width',percentage+'%');
      }
-});*/
-$('.bar[data-percentage]').each(function () {
+});
+/*$('.bar[data-percentage]').each(function () {
   var progress = $(this);
   var percentage = Math.ceil($(this).attr('data-percentage'));
   $({countNum: 0}).animate({countNum: percentage}, {
@@ -231,5 +231,5 @@ $('.bar[data-percentage]').each(function () {
       progress.css('width', ancho);
     }
   });
-});
+});*/
 </script>
