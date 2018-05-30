@@ -52,6 +52,13 @@
     </div>
   </div>
 
+   <div class="form-group">
+    <%= f.label :adjunto, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+       <%= f.file_field :adjunto, :class => "select_foto" %>
+    </div>
+  </div>
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title"><%= fa_icon "users" %> Participantes</h3>

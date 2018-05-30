@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522152245) do
+ActiveRecord::Schema.define(version: 20180530114055) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20180522152245) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "vendedor_id"
-    t.integer  "estado_id"
     t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 
@@ -140,10 +139,11 @@ ActiveRecord::Schema.define(version: 20180522152245) do
     t.integer  "semana"
     t.string   "lugar_fisico"
     t.integer  "persona_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "plan_accion"
     t.string   "accion"
+    t.binary   "adjunto",      limit: 65535
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
