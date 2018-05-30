@@ -12,6 +12,4 @@ class Reunion < ApplicationRecord
 
   	accepts_nested_attributes_for :reunion_participantes, allow_destroy: true
 
-  	attachment :adjunto
-
 end
