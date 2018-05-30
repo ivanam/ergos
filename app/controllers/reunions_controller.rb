@@ -27,7 +27,7 @@ class ReunionsController < ApplicationController
       format.html
       format.pdf do
         render :pdf => 'template_pdf', 
-          :template => 'reunions/templateMensual_pdf.html.erb',
+          :template => 'reunions/template_mensual_pdf.html.erb',
           :layout => 'pdf.html.erb',
           :orientation => 'Portrait',# default Portrait
           :page_size => 'Legal'
