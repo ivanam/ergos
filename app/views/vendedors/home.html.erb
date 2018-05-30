@@ -45,7 +45,7 @@
               if objetivo_total_v.to_i == 0 
                 aux_objetivo_total_v = 1
               end  %>
-        			<div data-percentage="<%=carga_total_mes_v*100/aux_objetivo_total_v%>" class="bar"><%= carga_total_mes_v*100/aux_objetivo_total_v%>%</div>
+        			<div id="barra_mes" data-percentage="<%=carga_total_mes_v*100/aux_objetivo_total_v%>" class="bar"><%= carga_total_mes_v*100/aux_objetivo_total_v%>%</div>
     				</div>
 					</div>
         </td>
@@ -72,7 +72,7 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
+        			<div id="barra_ventas" data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
     				</div>
 					</div>
         </td>
@@ -100,7 +100,7 @@
         	<div class="chart">
     				<div class="bar-container">
         	<div class="bar-container">
-              <div data-percentage="<%= carga_total_ob_mes_op*100/aux_objetivo_op%>" class="bar"><%= carga_total_ob_mes_op*100/aux_objetivo_op%>%</div>
+              <div id="barra_oportunidades" data-percentage="<%= carga_total_ob_mes_op*100/aux_objetivo_op%>" class="bar"><%= carga_total_ob_mes_op*100/aux_objetivo_op%>%</div>
             </div>
 					</div>
         </td>
@@ -128,7 +128,7 @@
           <div class="chart">
             <div class="bar-container">
           <div class="bar-container">
-              <div data-percentage="<%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>" class="bar"><%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>%</div>
+              <div id="barra_pruebas_manejo" data-percentage="<%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>" class="bar"><%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>%</div>
             </div>
           </div>
         </td>
