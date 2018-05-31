@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180530114055) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "vendedor_id"
+    t.integer  "estado_id"
     t.index ["persona_id"], name: "index_estado_personas_on_persona_id", using: :btree
   end
 
