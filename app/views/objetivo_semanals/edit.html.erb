@@ -1,13 +1,145 @@
-<div class="page-header">
-  <%= link_to objetivo_semanal_path, class: 'btn btn-default' do %>
-    <span class="fa fa-list-alt"></span>
-    Volver
+<%= form_for(@objetivo_semanal, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @objetivo_semanal.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
+      <ul>
+      <% @objetivo_semanal.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
-  <%= link_to @objetivo_semanal, class: 'btn btn-primary' do %>
-    <span class="fa fa-info-sign"></span>
-    Ver
-  <% end %>
-  <h4>Editar Objetivo Semanal</h4>
-</div>
 
-<%= render 'form', objetivo_semanal: @objetivo_semanal %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"  align="center" >Objetivo semanal</h3>
+</div>
+</br>
+
+   <div class="form-group">
+    <label class="col-sm-2 control-label">Fecha Creación</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+        <%= f.text_field :fecha_creacion, :id => "datepicker1", :placeholder => "dd/mm/aaaa", :class => "form-fecha-nac form-control"%>
+         </div>
+    </div>
+    </div>
+  </br>
+
+    <div class="form-group">
+    <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+         <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.all.order(:descripcion), :id, :descripcion, {:prompt => "Seleccione un Tipo de objetivo", :disabled => true},:style=>"width:50%" ,:class => "form-control", :disabled => true)%>
+         </div>
+    </div>
+    </div>
+  </br>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Cantidad propuesta</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+        <%= f.text_field :cantidad_propuesta, class: "form-alta-vendedor text-field form-control" %>
+         </div>
+    </div>
+    </div>
+  </br>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Número semana</label>  
+      <div class="col-sm-3">
+        <div class="form-group">
+           <%= f.select :numero_semana, options_for_select(['1','2','3','4','5'], :disabled => true), :readonly => true%>
+            </div>
+        </div>
+    </div>
+  </br>
+
+<div class="form-group">
+        <label class="col-sm-2 control-label">Mes de objetivo</label>
+        <div class="col-sm-10"> 
+          <%= select_month(Date.today, field_name: 'mes', prompt: "Selccione mes", :disabled => true) %>
+        </div>
+      </div>
+      </br>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Año de objetivo</label>
+        <div class="col-sm-10">     
+          <%= select_year(Date.today, field_name: 'anio', start_year: Date.today.year, end_year: 1970, prompt: "Selccione año", :disabled => true) %>
+        </div>
+      </div>
+      </br>
+   
+
+<div id="pventa" style="display:none" >
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Punto de venta</label>  
+      <div class="col-sm-3">
+      <div class="form-group">
+      <%= select_tag   'punto_venta_id', options_from_collection_for_select(PuntoVentum.all, :id , :nombre, ""), :id => "select_punto_venta", :class => "form-alta-vendedor text-field form-control", prompt: "Por favor seleccione" %>
+         </div>
+    </div>
+  </div>
+</div>  
+  </br>
+
+
+<div class="form-group">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-3">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+      <% end %>
+    </div>  
+    </div>   
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-3">
+     <%= link_to objetivo_semanals_path, class: 'btn btn-primary' do %>
+     <%= fa_icon "arrow-left", text: "Atras" %>
+     <% end %>
+     </div>
+  </div>
+  </div>
+  </div>
+
+
+
+<script type="text/javascript">
+        
+    $("#datepicker1").datepicker({
+    format: 'dd/mm/yyyy',
+    dayNamesMin: ["Do", "Lu", "Ma", "Mie", "Jue", "Vie", "Sa"],
+    changeYear: true,
+    changeMonth: true,
+    yearRange: "1910:<%= Date.today.year + 10 %>", 
+    monthNames: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], 
+    navigationAsDateFormat: true,
+    nextText: "Sig", 
+    prevText: "Ant", 
+    
+      });
+
+</script>
+
+<script>
+function myFunction() {
+  $("#vendedor").val("");
+  $("#pventa").val("");
+    var checkBox = document.getElementById("myCheck");
+    if (checkBox.checked == true){
+         $("#vendedor").show();
+         $("#pventa").hide();
+         $("#pventa").val("");
+    } else {
+       $("#vendedor").hide();
+        $("#pventa").show();
+        $("#vendedor").val("");
+
+    }
+}
+</script>
