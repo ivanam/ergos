@@ -7,7 +7,8 @@ default: &default
   host: 127.0.0.1
   username: root
   #assword: zzpregasep
-  password: zzpregasep
+  #password: zzpregasep
+  password: root
 
 development:
   <<: *default
