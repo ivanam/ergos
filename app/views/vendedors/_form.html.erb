@@ -160,11 +160,11 @@
   </div>
   </br>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Número</label>  
+  <div class="form-group" id= "alias">
+    <label class="col-sm-2 control-label">Alias</label>  
     <div class="col-sm-2">
       <div class="form-group">
-        <%= v_form.text_field :numero, autofocus: true, class: 'form-control solo_numerico', :style=>"width:50%"  %>
+        <%= v_form.text_field :numero, autofocus: true, class: 'form-control', :style=>"width:50%" , :id => "numero" %>
       </div>
     </div>
   </div>
@@ -198,6 +198,37 @@
   </div>
 <% end %>
 
+
+<script type="text/javascript">
+
+
+$("#input_apellidos").bind("propertychange change click keyup input paste",function(){
+  var nombre = $("#input_nombre").val();
+  var apellido = $("#input_apellidos").val(); 
+
+  var n = nombre.charAt(0);
+  var a = apellido.charAt(0);
+
+  var result = n.concat(a);
+
+  $("#numero").val(result);
+
+});
+
+$("#input_nombre").bind("propertychange change click keyup input paste",function(){
+  var nombre = $("#input_nombre").val();
+  var apellido = $("#input_apellidos").val(); 
+
+  var n = nombre.charAt(0);
+  var a = apellido.charAt(0);
+
+  var result = n.concat(a);
+
+  $("#numero").val(result);
+
+});
+
+</script>
 
 
 
