@@ -192,7 +192,8 @@ class CargaDiarium < ApplicationRecord
   	end
 
   	def self.cargaVendedorporDia(anio,mes,vendedor,ob,diaNombre, dias)
-  			cantidad = nil
+  			
+  			@cantidad = 0
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)
 		  		
