@@ -100,7 +100,7 @@
 
 <script>
 $(document).ready(function($) {
-  $("#csi").show();
+  $("#csi").hide();
 });
 
 
@@ -115,10 +115,10 @@ function myFunction() {
 }
 
 $("#select_tipo").bind("propertychange change click keyup input paste",function(){
-  if ($("#select_tipo").val() == "2"){
-    $("#csi").hide();
-  }else{
+  if ($("#select_tipo").val() == "5"){
     $("#csi").show();
+  }else{
+    $("#csi").hide();
   }
 
 });
