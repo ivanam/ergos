@@ -81,8 +81,8 @@ class ObjetivoMensual < ApplicationRecord
       @obResto =  @obmPv.cantidadPV.to_i - @obmVend.cantidadVend.to_i
     elsif (@obmPv != nil)
       @obResto =  @obmPv.cantidadPV.to_i
-    end
-    if ((@obMen == nil)  && (descpOb.descripcion != "CSI") && (self.vendedor_id != nil))
+    end 
+    if ((@obMen != nil)  && (descpOb.descripcion != "CSI") && (self.vendedor_id))
       if (@obmPv.cantidad_propuesta.to_i != nil)
          if (@obmPv.cantidadPV < self.cantidad_propuesta.to_i)
             errors.add(:base, 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta')

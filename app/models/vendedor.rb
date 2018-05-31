@@ -10,9 +10,8 @@ class Vendedor < ApplicationRecord
   validates_attachment_size :foto, less_than_or_equal_to: 4.megabytes
 
 
-  validates :numero, :uniqueness => {:message => "debe ser único"}
-  validates :numero, :presence => { :message => "Debe completar el campo Número" }
-  validates :numero, numericality: { only_integer: true, :message => "El campo Número debe ser un valor entero"}
+  validates :numero, :uniqueness => {:message => "Alias debe ser único"}
+  validates :numero, :presence => { :message => "Debe completar el campo Alias" }
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
  
 
