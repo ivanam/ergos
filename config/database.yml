@@ -8,6 +8,7 @@ default: &default
   username: root
   password: finan2
 
+
 development:
   <<: *default
   database: ergos
@@ -24,7 +25,6 @@ production:
   database: ergos
   username: root
   password: finan2
-
 
 #8102sogre
 #unix:/run/DigitalOceanOneClick/unicorn.sock
