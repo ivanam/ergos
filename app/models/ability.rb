@@ -23,7 +23,7 @@ class Ability
           can :manage, [Reunion]
           can :manage, [EstadoPersona]
           can :home, [Vendedor]
-          can :manage, [Vendedor]
+          can :read, [Vendedor]
         elsif user.has_role? :vendedor
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
