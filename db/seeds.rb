@@ -23,6 +23,8 @@ TipoObjetivo.create(id: 4, descripcion: 'PRUEBA DE MANEJO', tipo: 'KPI')#1
 TipoObjetivo.create(id: 5, descripcion: 'VENTAS', tipo: 'KPI')#2
 TipoObjetivo.create(id: 6, descripcion: 'COMPROMISO DE VENTAS SEMANAL',)#3
 TipoObjetivo.create(id: 7, descripcion: 'OPORTUNIDADES', tipo: 'KPI')
+TipoObjetivo.create(id: 7, descripcion: 'FINANCIACIONES', tipo: 'KPI')
+
 
 # Personas
 # ========
