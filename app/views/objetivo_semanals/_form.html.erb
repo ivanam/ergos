@@ -34,7 +34,7 @@
     <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
       <div class="col-sm-3">
         <div class="form-group">
-         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id", :class => "form-alta-vendedor text-field form-control" %>
+         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id" %>
          </div>
     </div>
     </div>
@@ -50,27 +50,31 @@
     </div>
   </br>
   <div class="form-group">
-    <label class="col-sm-2 control-label">Número semana</label>  
-      <div class="col-sm-3">
+    <label class="col-sm-2 control-label">Número semana</label>        
+      <div class="col-sm-10">
         <div class="form-group">
-           <%= f.select :numero_semana, options_for_select(['1','2','3','4','5']) %>
-            </div>
-        </div>
+        <%= f.select :numero_semana, options_for_select(['1','2','3','4','5']), prompt: "Seleccione semana" %>
+        </div>      
+      </div>      
     </div>
   </br>
 
 <div class="form-group">
         <label class="col-sm-2 control-label">Mes de objetivo</label>
         <div class="col-sm-10"> 
-          <%= select_month(Date.today, field_name: 'mes', prompt: "Selccione mes") %>
+        <div class="form-group">
+          <%= select_month(Date.today, field_name: 'mes', prompt: "Seleccione mes") %>
+        </div>
         </div>
       </div>
       </br>
 
       <div class="form-group">
         <label class="col-sm-2 control-label">Año de objetivo</label>
-        <div class="col-sm-10">     
+        <div class="col-sm-10"> 
+        <div class="form-group">    
           <%= select_year(Date.today, field_name: 'anio', start_year: Date.today.year, end_year: 1970, prompt: "Selccione año") %>
+          </div>
         </div>
       </div>
       </br>

@@ -149,109 +149,109 @@
 			<% @vendedores.each do |v|%>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 		    <% if @semana == 1 %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 2 %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 3 %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 4 %>
-			 <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
+			 <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 5  %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,4,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>	
 		    
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"L",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"Ma",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"Mi",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"J",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"V",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"S",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,4,"D",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","L",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","Ma",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","Mi",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","J",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","V",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","S",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"OPORTUNIDADES","D",@dias)%></td>
 		      <th rowspan="3" style="text-align: center;vertical-align: middle; background:white"><%=CargaDiarium.obtenerCompromisoDeVentas(@anio,@mes,@semana)%></td>
 		      
 		    </tr>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 		    <% if @semana == 1 or @semana == "1" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 2 or @semana == "2" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 3 or @semana == "3" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 4 or @semana == "4" %>
-			 <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
+			 <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 5 or @semana == "5" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,1,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>	
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"L",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"Ma",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"Mi",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"J",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"V",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"S",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,1,"D",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","L",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","Ma",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","Mi",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","J",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","V",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","S",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"PRUEBA DE MANEJO","D",@dias)%></td>
 		      
 		    </tr>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 	    	<% if @semana == 1 or @semana == "1" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 2 or @semana == "2" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 3 or @semana == "3" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 4 or @semana == "4" %>
-			 <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
+			 <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>
 		    <% if @semana == 5 or @semana == "5" %>
-		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,2,@dias)%></td>
+		      <td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
 		    <%else%>
 		   	  <td></td>
 		    <%end%>	
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"L",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"Ma",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"Mi",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"J",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"V",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"S",@dias)%></td>
-		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,2,"D",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","L",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","Ma",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","Mi",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","J",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","V",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","S",@dias)%></td>
+		      <td><%=CargaDiarium.cargaVendedorporDia(@anio,@mes,v,"VENTAS","D",@dias)%></td>
 
 		    </tr>
 		    <%end%>
@@ -260,107 +260,107 @@
 		   	<tfoot>
 			    <tr>
 			      <% if @semana == 1 or @semana == "1" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 2 or @semana == "2" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 3 or @semana == "3" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 4 or @semana == "4" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 5 or @semana == "5" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,4,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"L",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"Ma",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"Mi",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"J",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"V",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"S",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,4,"D",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","L",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","Ma",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","Mi",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","J",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","V",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","S",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"OPORTUNIDADES","D",@dias)%></th>
 			      <th rowspan="3" style="text-align: center;vertical-align: middle;"><%=CargaDiarium.obtenerCompromisoDeVentas(@anio,@mes,@semana)%></td>
 			    </tr>
 			    <tr>
 			     <% if @semana == 1 or @semana == "1" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 2 or @semana == "2" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 3 or @semana == "3" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 4 or @semana == "4" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 5 or @semana == "5" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,1,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"L",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"Ma",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"Mi",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"J",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"V",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"S",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,1,"D",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","L",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","Ma",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","Mi",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","J",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","V",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","S",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"PRUEBA DE MANEJO","D",@dias)%></th>
 			      
 			    </tr>
 			    <tr>
 			      <% if @semana == 1 or @semana == "1" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 2 or @semana == "2" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 3 or @semana == "3" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 4 or @semana == "4" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
 			      <% if @semana == 5 or @semana == "5" %>	
-			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,2,@dias)%></th>
+			      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
 			      <%else%>
 			      	<th>0</th>
 			      <%end%>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"L",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"Ma",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"Mi",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"J",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"V",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"S",@dias)%></th>
-			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,2,"D",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","L",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","Ma",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","Mi",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","J",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","V",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","S",@dias)%></th>
+			      <th><%=CargaDiarium.cargaVendedoresPorDia(@anio,@mes,@vendedores,"VENTAS","D",@dias)%></th>
 			      
 			    </tr>
 			    <tr>

@@ -23,11 +23,7 @@
   <% if current_user.has_role? :punto_venta %>
   
   <div class="select-vendedores">
-    <%= form_tag(:home_vendedor, method: "get") do %>
-    Seleccione Vendedor: <%=select("vendedor", "numero", Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]}, { include_blank: true})%>
-    <%= submit_tag("Ver Información", class: "btn btn-primary") %>
-    <% end %>
-
+    Seleccione Vendedor: <%=select("vendedor", "numero", ['Yo y mi Equipo']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
   </div>
   <% end %>
 	<h1>Avance</h1>
@@ -204,6 +200,10 @@ $('.bar').each(function() {
     }else{
       $(this).css('width',percentage+'%');
      }
+});
+$('#vendedor_numero').change(function(){
+    url = window.location.href.replace(window.location, "");
+    window.location = url + 'home_vendedor?vendedor=' + $(this).val();    
 });
 /*$('.bar[data-percentage]').each(function () {
   var progress = $(this);

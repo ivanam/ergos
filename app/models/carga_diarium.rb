@@ -191,8 +191,10 @@ class CargaDiarium < ApplicationRecord
   	return semana
   	end
 
-  	def self.cargaVendedorporDia(anio,mes,vendedor,ob,diaNombre, dias)
-  			cantidad = nil
+  	def self.cargaVendedorporDia(anio,mes,vendedor,obj,diaNombre, dias)
+  			ob =TipoObjetivo.where(:descripcion => obj).first.id
+
+  			@cantidad = 0
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)
 		  		
@@ -218,12 +220,12 @@ class CargaDiarium < ApplicationRecord
 
 
   	def self.sumaCantSemVenOb(anio,mes,vendedor,ob,dias)
-  			
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => ob).first.id
   			@cantidad = 0
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)	 
-			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
-			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
+			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first != nil
+			  	 	@cantidad += CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first.cantidad
 			  	 end
 			 end
 			return @cantidad
@@ -231,8 +233,8 @@ class CargaDiarium < ApplicationRecord
   	end
 
 
-  	def self.sumaCantSem(anio,mes,vendedores,ob,dias)
-  			
+  	def self.sumaCantSem(anio,mes,vendedores,obj,dias)
+  		ob =TipoObjetivo.where(:descripcion => obj).first.id
   		@cantidad = 0
   		vendedores.each do |vendedor|
   			dias.each do |diasNom|
@@ -245,7 +247,8 @@ class CargaDiarium < ApplicationRecord
 		return @cantidad
   	end
 
-  	 def self.cargaVendedoresPorDia(anio,mes,vendedores,ob,diaNombre, dias)
+  	 def self.cargaVendedoresPorDia(anio,mes,vendedores,obj,diaNombre, dias)
+  	 		ob =TipoObjetivo.where(:descripcion => obj).first.id
   			@cantidad = 0
   			dias.each do |diasNom|
   				vendedores.each do |vendedor|
