@@ -9,7 +9,7 @@
     <div class="form-group">
       <%= label_tag 'Fecha', nil, class: "col-sm-4 control-label" %>
       <div class="col-sm-4">
-        <%= date_field_tag 'fecha', nil, class: 'form-control required' %>
+        <%= date_field_tag 'fecha', nil, class: 'form-control required', min: Date.yesterday %>
       </div>
     </div>
     <% @tipos_objetivos.each do |t|%>      
