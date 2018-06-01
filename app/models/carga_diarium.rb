@@ -104,7 +104,7 @@ class CargaDiarium < ApplicationRecord
 	def self.carga_total_por_equipo(anio, mes, current_user, ob)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
-		fecha_hasta = Date.new(anio,mes,31)
+		fecha_hasta = Date.new(anio,mes).end_of_month
 		punto_venta_id = 0
 		if current_user.has_role? :vendedor
 			vendedor = Vendedor.where(persona_id: current_user.persona_id).first
