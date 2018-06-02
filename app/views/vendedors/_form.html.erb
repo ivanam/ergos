@@ -6,34 +6,38 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
         <ul>
-        <% @vendedor.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <% @vendedor.errors.messages.values.each do |msg| %>
+          <% msg.each do  |m| %>
+            <li><%= m %></li>
+          <% end %>
         <% end %>
         </ul>
       </div>
     <% end %>
 
-    <% if !@vendedor.persona.nil? %>
-      <% if @vendedor.persona.errors.any? %>
+    <% if !@persona.nil? %>
+      <% if @persona.errors.any? %>
         <div class="alert alert-danger alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
           <ul>
-          <% @vendedor.persona.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+          <% @persona.errors.messages.values.each do |msg| %>
+            <% msg.each do  |m| %>
+              <li><%= m %></li>
+            <% end %>
           <% end %>
           </ul>
         </div>
       <% end 
-      cuit = @vendedor.persona.cuit
-      tipo_documento_id = @vendedor.persona.tipo_documento_id
-      numero_documento = @vendedor.persona.numero_documento
-      apellido = @vendedor.persona.apellido 
-      nombre = @vendedor.persona.nombre
-      domicilio = @vendedor.persona.domicilio
-      telefono = @vendedor.persona.telefono
-      fecha_nacimiento = @vendedor.persona.fecha_nacimiento
-      email = @vendedor.persona.email
+      cuit = @persona.cuit
+      tipo_documento_id = @persona.tipo_documento_id
+      numero_documento = @persona.numero_documento
+      apellido = @persona.apellido 
+      nombre = @persona.nombre
+      domicilio = @persona.domicilio
+      telefono = @persona.telefono
+      fecha_nacimiento = @persona.fecha_nacimiento
+      email = @persona.email
 
      else 
       cuit = ""
