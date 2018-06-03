@@ -13,18 +13,33 @@ class Vendedor < ApplicationRecord
   validates :numero, :uniqueness => {:message => "Alias debe ser único"}
   validates :numero, :presence => { :message => "Debe completar el campo Alias" }
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
- 
+  validate :control_persona
+
+  validate :max_vendedor
 
   before_create :habilitar_user
   before_destroy :deshabilitar_user
 
 
+  def max_vendedor
+    pv = self.punto_venta
+    cantVend = pv.concesionaria.cantVend
+    cantvendconc = Vendedor.where(:id => pv.id).count
+
+    if (cantVend.to_i <= cantvendconc.to_i + 1 )
+      errors.add(:base, "No puede crear mas Vendedores para este punto de venta, solicite permiso")
+    end
+  end
 
   def to_s
   	self.numero
   end
 
-
+  def control_persona
+    if ((Vendedor.where(:persona_id => self.persona.id, :punto_venta_id => self.punto_venta_id).first) != nil)
+       errors.add(:base, "Esta persona ya se encuentra como vendedor en este punto de venta")
+    end
+  end
 
   def next
     self.class.where("id > ?", id).where(:punto_venta_id => self.punto_venta_id).first

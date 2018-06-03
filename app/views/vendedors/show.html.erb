@@ -102,32 +102,56 @@
             
           </div>    
           <div class="col-xs-6">
-            <center>            
-              <%=image_tag "Funnel2.png", class:"img-responsive"%>
+            <center> 
               <%
                 mes_actual = Date.today.month
                 anio = Date.today.year
+                primer_mes = mes_actual - 3
+                if (primer_mes < 0)
+                  primer_mes = 13 + (primer_mes)
+                  anio -=  1
+                end
+                segundo_mes = primer_mes + 1
+                tercer_mes = segundo_mes + 1
+                total_op_mes1 = CargaDiarium.carga_total_ob_mes_op(anio, primer_mes, @vendedor, 7)
+                total_op_mes2 = CargaDiarium.carga_total_ob_mes_op(anio, segundo_mes, @vendedor, 7)
+                total_op_mes3 = CargaDiarium.carga_total_ob_mes_op(anio, tercer_mes, @vendedor, 7)
+                total_pm_mes1 = CargaDiarium.carga_total_ob_mes_pm(anio, primer_mes, @vendedor, 4)
+                total_pm_mes2 = CargaDiarium.carga_total_ob_mes_pm(anio, segundo_mes, @vendedor, 4)
+                total_pm_mes3 = CargaDiarium.carga_total_ob_mes_pm(anio, tercer_mes, @vendedor, 4)
+                total_v_mes1 = CargaDiarium.carga_total_ob_mes_v(anio, primer_mes, @vendedor, 5)
+                total_v_mes2 = CargaDiarium.carga_total_ob_mes_v(anio, segundo_mes, @vendedor, 5)
+                total_v_mes3 = CargaDiarium.carga_total_ob_mes_v(anio, tercer_mes, @vendedor, 5)
+                total_trimestral_op = total_op_mes1 + total_op_mes2 + total_op_mes3 
+                total_trimestral_pm = total_pm_mes1 + total_pm_mes2 + total_pm_mes3 
+                total_trimestral_v = total_v_mes1 + total_v_mes2 + total_v_mes3 
+                total_carga_trimestral = total_trimestral_op + total_trimestral_pm + total_trimestral_v
               %>
-              <% total_trimestral_op = CargaDiarium.total_trimestral(anio, mes_actual, @vendedor, 7) %>
-              <% total_trimestral_pm = CargaDiarium.total_trimestral(anio, mes_actual, @vendedor, 4) %>
-              <% total_trimestral_v = CargaDiarium.total_trimestral(anio, mes_actual, @vendedor, 5) %>
+              <%=image_tag "Funnel2.png", class:"img-responsive"%>
               <div class="legend legend-1" style="top:10%;"><%= total_trimestral_op %></div>
               <div class="legend legend-2" style="top:40%;"><%= total_trimestral_pm %></div>
-              <div class="legend legend-3" style="bottom:8%;"><%= total_trimestral_v %></div>
+              <div class="legend legend-3" style="bottom:20%;"><%= total_trimestral_v %></div>
+              <%
+              total_ob_op_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 7)
+              total_ob_op_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 7)
+              total_ob_op_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 7)
+              total_ob_pm_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 4)
+              total_ob_pm_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 4)
+              total_ob_pm_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 4)
+              total_ob_v_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 5)
+              total_ob_v_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 5)
+              total_ob_v_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 5)
+              total_ob_trimestral_op = total_ob_op_mes1 + total_ob_op_mes2 + total_ob_op_mes3 
+              total_ob_trimestral_pm = total_ob_pm_mes1 + total_ob_pm_mes2 + total_ob_pm_mes3
+              total_ob_trimestral_v = total_ob_v_mes1 + total_ob_v_mes2 + total_ob_v_mes3
+              total_objetivo_trimestral = total_ob_trimestral_op + total_ob_trimestral_pm + total_ob_trimestral_v
+              total_objetivo_trimestral = (total_objetivo_trimestral.to_i == 0) ? 1 : total_objetivo_trimestral
+              porcentaje_trimestral = total_carga_trimestral * 100 / (total_objetivo_trimestral) 
+              %>
+              <div style="bottom:20%;"><b><%= porcentaje_trimestral %>%</b></div>
             </center>
           </div>  
           <div class="col-xs-12">
-            <%
-              mes_actual = Date.today.month
-              anio = Date.today.year
-              primer_mes = mes_actual - 3
-              if (primer_mes < 0)
-                primer_mes = 13 + (primer_mes)
-                anio -=  1
-              end
-              segundo_mes = primer_mes + 1
-              tercer_mes = segundo_mes + 1
-            %>
             <table class="table cel-table" style="margin-top: 5px;">
               <thead>
                 <tr>
@@ -138,17 +162,6 @@
                 </tr>
               </thead>
               <tbody>
-                <%
-                total_op_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 7)
-                total_op_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 7)
-                total_op_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 7)
-                total_pm_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 4)
-                total_pm_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 4)
-                total_pm_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 4)
-                total_v_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 5)
-                total_v_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 5)
-                total_v_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 5)
-                %>
                 <tr>
                   <th scope="row">Oportunidades</th>
                   <td><%= total_op_mes1 %></td>
