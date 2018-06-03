@@ -48,13 +48,7 @@ class VendedorsController < ApplicationController
 
     @vendedor = Vendedor.new(vendedor_params)
     @vendedor.punto_venta_id = current_user.punto_venta_id
-    pv = @vendedor.punto_venta
-    cantVend = pv.concesionaria.cantVend
-    cantvendconc = Vendedor.where(:id => @vendedor.punto_venta_id).count
-
-    if (cantVend.to_i <= cantvendconc.to_i + 1 )
-      flash[:error] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
-    end
+    
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
       @persona = Persona.new(persona_params)
     else
@@ -78,15 +72,19 @@ class VendedorsController < ApplicationController
                  if @vendedor.save
                     if @vendedor.persona.user.has_role? :punto_venta
                       format.html { redirect_to current_user.punto_venta, notice: 'Vendedor was successfully created.' }
-        
 
                     else
                       format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
                       format.json { render :show, status: :created, location: @vendedor }
                     end
                  else
-                    format.html { render :new }
-                    format.json { render json: @vendedor.errors, status: :unprocessable_entity }
+                    if @persona.user.has_role? :punto_venta
+                      format.html { redirect_to vendedor_cambiar_rol_path(persona: @persona.id) }
+                      format.json { render json: @vendedor.errors, status: :unprocessable_entity }
+                    else
+                      format.html { render :new }
+                      format.json { render json: @vendedor.errors, status: :unprocessable_entity }
+                    end
                  end
              else
 
@@ -162,7 +160,8 @@ class VendedorsController < ApplicationController
 
 
   def cambiar_rol
-      @persona = Persona.where(id: params[:id]).first
+      @persona = Persona.where(id: params[:persona]).first
+      @vendedor = Vendedor.new
   end
 
   private
