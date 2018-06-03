@@ -1,19 +1,11 @@
-<div class="row">
-  <div class="col-md-3">
-    <%= pie_chart @data_personal, @options_personal %>
-  </div>
-  <div class="col-md-3">
-    <%= pie_chart @data_equipo, @options_equipo %>
-  </div>
-</div>
 
 <div class="page-header">
-  <%= link_to new_carga_diarium_path, class: 'btn btn-primary' do %>
-    <%= fa_icon "plus", text: "Nueva Carga" %>
-  <% end %>
   <h4>Cargas Diarias</h4>
+  <h4></h4>
 </div>
-
+<div class="select-vendedores">
+    Seleccione Vendedor: <%=select("vendedor", "numero", ['Seleccione']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
+  </div>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -32,7 +24,7 @@
           <td><%= carga_diarium.fecha %></td>
           <td><%= carga_diarium.cantidad %></td>
           <td><%= carga_diarium.tipo_objetivo.to_s %></td>
-          <td><%= carga_diarium.user.email %></td>
+          <td><%= carga_diarium.vendedor.persona.email %></td>
           <td class="text-center">
             <%= link_to carga_diarium, class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-search"></span>
@@ -49,3 +41,14 @@
     </tbody>
   </table>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+
+      $('#vendedor_numero').change(function(){
+          url = window.location.href.replace(window.location, "");
+          window.location = url + 'carga_diaria?vendedor=' + $(this).val();    
+      });
+
+    });
+</script>

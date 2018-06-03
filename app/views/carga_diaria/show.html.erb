@@ -1,7 +1,7 @@
 <div class="page-header">
-  <%= link_to carga_diaria_path, class: 'btn btn-default' do %>
-    <span class="fa fa-list-alt"></span>
-    Volver
+  <%= link_to carga_diaria_path(vendedor: @carga_diarium.vendedor.numero), class: 'btn btn-default' do %>
+    <span class="fa fa-arrow-left"></span>
+    Atras
   <% end %>
   <%= link_to edit_carga_diarium_path(@carga_diarium), class: 'btn btn-primary' do %>
     <span class="fa fa-pencil"></span>
