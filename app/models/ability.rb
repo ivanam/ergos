@@ -24,6 +24,7 @@ class Ability
           can :manage, [EstadoPersona]
           can :home, [Vendedor]
           can :read, [Vendedor]
+          can :objetivos_y_carga_diaria, [Vendedor]
         elsif user.has_role? :vendedor
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
