@@ -45,13 +45,15 @@ class VendedorsController < ApplicationController
   # POST /vendedors
   # POST /vendedors.json
   def create
+
     @vendedor = Vendedor.new(vendedor_params)
     @vendedor.punto_venta_id = current_user.punto_venta_id
     pv = @vendedor.punto_venta
     cantVend = pv.concesionaria.cantVend
     cantvendconc = Vendedor.where(:id => @vendedor.punto_venta_id).count
+
     if (cantVend.to_i <= cantvendconc.to_i + 1 )
-      flash[:notice] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
+      flash[:error] = 'No puede crear mas Vendedores para este punto de venta, solicite permiso'
     end
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
       @persona = Persona.new(persona_params)
@@ -66,15 +68,22 @@ class VendedorsController < ApplicationController
       @persona.fecha_nacimiento=params[:persona][:fecha_nacimiento]
       @persona.email=params[:persona][:email]
     end
+    
    
     #el numero de vendedor debe ser unico
     respond_to do |format|
              if @persona.save
-              
                  @vendedor.persona_id=@persona.id
+
                  if @vendedor.save
-                    format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
-                    format.json { render :show, status: :created, location: @vendedor }
+                    if @vendedor.persona.user.has_role? :punto_venta
+                      format.html { redirect_to current_user.punto_venta, notice: 'Vendedor was successfully created.' }
+        
+
+                    else
+                      format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
+                      format.json { render :show, status: :created, location: @vendedor }
+                    end
                  else
                     format.html { render :new }
                     format.json { render json: @vendedor.errors, status: :unprocessable_entity }
@@ -149,6 +158,11 @@ class VendedorsController < ApplicationController
     totales[:ventas] = total_v
     totales[:calidad] = total_csi
     render json: totales.to_json
+  end
+
+
+  def cambiar_rol
+      @persona = Persona.where(id: params[:id]).first
   end
 
   private
