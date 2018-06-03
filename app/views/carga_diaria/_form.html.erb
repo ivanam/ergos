@@ -16,7 +16,7 @@
   <div class="form-group">
     <%= f.label :fecha, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
-      <%= f.text_field :fecha, class: "form-control" %>
+      <%= f.text_field :fecha, class: "form-control", readonly: true %>
     </div>
   </div>
   <div class="form-group">
@@ -28,7 +28,7 @@
   <div class="form-group">
     <%= f.label :tipo_objetivo_id, "Tipo de objetivo", class: "col-sm-2 control-label" %>
     <div class="col-sm-3">
-      <%= f.collection_select :tipo_objetivo_id, TipoObjetivo.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+      <%= f.text_field :tipo_objetivo_id, class: "form-control", :readonly => true, value: carga_diarium.tipo_objetivo %>
     </div>
   </div>
   <div class="form-group">
