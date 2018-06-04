@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603213819) do
+ActiveRecord::Schema.define(version: 20180603231302) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -140,11 +140,15 @@ ActiveRecord::Schema.define(version: 20180603213819) do
     t.integer  "semana"
     t.string   "lugar_fisico"
     t.integer  "persona_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "plan_accion"
     t.string   "accion"
-    t.binary   "adjunto",      limit: 65535
+    t.binary   "adjunto",              limit: 65535
+    t.string   "adjunto_file_name"
+    t.string   "adjunto_content_type"
+    t.integer  "adjunto_file_size"
+    t.datetime "adjunto_updated_at"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

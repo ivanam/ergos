@@ -7,8 +7,11 @@ class Reunion < ApplicationRecord
 	validates :semana, :presence => { :message => "Debe completar el campo Semana" }
   	validates :semana, numericality: { only_integer: true, :message => "El campo Semana debe ser un valor entero"}
   	validates :semana, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 4, :message => "El campo semana debe ser un valor entre 1 y 4"}
-  	validates :lugar_fisico, :presence => { :message => "Debe completar el campo Lugar Fisico" }  	
+  	validates :lugar_fisico, :presence => { :message => "Debe completar el campo Lugar Fisico" }
     
+   has_attached_file :adjunto
+  validates_attachment :adjunto, presence: true, content_type: { content_type: ["application/pdf", "application/doc", "application/docx","image/jpeg", "image/gif", "image/png", "image/jpg", "image/bmp"] },size: { in: 1..5000.kilobytes }
+
 
   	accepts_nested_attributes_for :reunion_participantes, allow_destroy: true
 

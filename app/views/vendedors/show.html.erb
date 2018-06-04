@@ -135,18 +135,13 @@
               total_ob_op_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 7)
               total_ob_op_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 7)
               total_ob_op_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 7)
-              total_ob_pm_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 4)
-              total_ob_pm_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 4)
-              total_ob_pm_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 4)
               total_ob_v_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, @vendedor, 5)
               total_ob_v_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, @vendedor, 5)
               total_ob_v_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, @vendedor, 5)
               total_ob_trimestral_op = total_ob_op_mes1 + total_ob_op_mes2 + total_ob_op_mes3 
-              total_ob_trimestral_pm = total_ob_pm_mes1 + total_ob_pm_mes2 + total_ob_pm_mes3
               total_ob_trimestral_v = total_ob_v_mes1 + total_ob_v_mes2 + total_ob_v_mes3
-              total_objetivo_trimestral = total_ob_trimestral_op + total_ob_trimestral_pm + total_ob_trimestral_v
-              total_objetivo_trimestral = (total_objetivo_trimestral.to_i == 0) ? 1 : total_objetivo_trimestral
-              porcentaje_trimestral = total_carga_trimestral * 100 / (total_objetivo_trimestral) 
+              total_ob_trimestral_op = (total_ob_trimestral_op.to_i == 0) ? 1 : total_ob_trimestral_op
+              porcentaje_trimestral = total_ob_trimestral_v * 100 / (total_ob_trimestral_op) 
               %>
               <div style="bottom:20%;"><b><%= porcentaje_trimestral %>%</b></div>
             </center>

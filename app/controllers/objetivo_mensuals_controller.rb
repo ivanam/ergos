@@ -29,8 +29,11 @@ class ObjetivoMensualsController < ApplicationController
     @objetivo_mensual = ObjetivoMensual.new(objetivo_mensual_params)
     @objetivo_mensual.mes = params[:date][:mes]
     @objetivo_mensual.anio = params[:date][:anio]
-    descpOb = TipoObjetivo.find(@objetivo_mensual.tipo_objetivo_id).descripcion
-    vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
+    if @objetivo_mensual.tipo_objetivo_id != nil
+      descpOb = TipoObjetivo.find(@objetivo_mensual.tipo_objetivo_id).descripcion
+      vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
+    end
+    
     @objetivo_mensual.user_id = current_user.id
     respond_to do |format|
       if @objetivo_mensual.save

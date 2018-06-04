@@ -38,18 +38,12 @@
       	<td></td>
         <td style="min-width: 70%;">
         	<div class="chart">
-    				<div class="bar-container">
-              <%carga_total_mes_v = CargaDiarium.carga_total_mes_v(Date.today.year, Date.today.month, @vendedor)
-              objetivo_total_v = ObjetivoMensual.objetivo_total_v(Date.today.year, Date.today.month, @vendedor)
-              aux_objetivo_total_v = objetivo_total_v
-              if objetivo_total_v.to_i == 0 
-                aux_objetivo_total_v = 1
-              end  %>
-        			<div id="barra_mes" data-percentage="<%=carga_total_mes_v*100/aux_objetivo_total_v%>" class="bar"><%= carga_total_mes_v*100/aux_objetivo_total_v%>%</div>
+    				<div class="bar-container">              
+        			<div id="barra_mes" data-percentage="<%= Date.today.day.to_i * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= Date.today.day.to_i * 100 / Date.today.end_of_month.day.to_i %>%</div>
     				</div>
 					</div>
         </td>
-        <td style="text-align: right;"><%= carga_total_mes_v %>/<%= objetivo_total_v%></td>
+        <td style="text-align: right;"><%= Date.today.day.to_i %>/<%= Date.today.end_of_month.day.to_i %></td>
       </tr>
       <tr>
 
