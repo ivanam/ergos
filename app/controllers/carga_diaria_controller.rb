@@ -8,7 +8,7 @@ class CargaDiariaController < ApplicationController
   # GET /carga_diaria.json
   def index
     @vendedor = Vendedor.where(numero: params[:vendedor]).first
-    @carga_diaria = CargaDiarium.where(vendedor_id: @vendedor).where('fecha = "' + Date.today.to_s + '" or fecha = "' + (Date.today - 1).to_s + '"')
+    @carga_diaria = CargaDiarium.where(vendedor_id: @vendedor)
 
 #    carga_personal = CargaDiarium.select('tipo_objetivos.descripcion as descripcion, SUM(carga_diaria.cantidad) as cantidad').joins(:tipo_objetivo).where(vendedor_id: current_user.id).group('tipo_objetivos.descripcion')
 #    @data_personal = chart_data(carga_personal)
