@@ -10,9 +10,8 @@ class Reunion < ApplicationRecord
   	validates :lugar_fisico, :presence => { :message => "Debe completar el campo Lugar Fisico" }
     
    has_attached_file :adjunto
-   validates_attachment_presence :adjunto
-   validates_attachment_content_type :adjunto, :content_type => [ 'application/pdf','text/plain']
-   do_not_validate_attachment_file_type :adjunto
+  validates_attachment :adjunto, presence: true, content_type: { content_type: ["application/pdf", "application/doc", "application/docx","image/jpeg", "image/gif", "image/png", "image/jpg", "image/bmp"] },size: { in: 1..5000.kilobytes }
+
 
   	accepts_nested_attributes_for :reunion_participantes, allow_destroy: true
 
