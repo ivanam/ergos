@@ -31,7 +31,8 @@ class Ability
           can :dashboard, [PuntoVentum]
           can :dashboardConParametros, [PuntoVentum]
           can :manage, [Vendedor]
-
+        else
+          raise CanCan::AccessDenied.new("Usuario bloqueado") 
         end
     end
     # Define abilities for the passed in user here. For example:
