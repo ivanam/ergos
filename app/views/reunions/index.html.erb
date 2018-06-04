@@ -34,7 +34,7 @@
           <td><%= reunion.persona %></td>
           <td><%= reunion.plan_accion %></td>
           <td><%= reunion.accion %></td>
-          <td><a href="<%= reunion.adjunto %>">Adjunto</a></td>
+          <td><a href="<%= reunion.adjunto %>"><%=reunion.adjunto_file_name%></a></td>
           <td class="text-center">
             <%= link_to reunion, class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-eye"></span>
