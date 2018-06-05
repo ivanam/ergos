@@ -71,6 +71,51 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  def self.total_trimestral(anio, mes, v, ob)
+    mes_actual = mes
+    primer_mes = mes_actual - 3
+    if (primer_mes < 0)
+      primer_mes = 13 + (primer_mes)
+      anio -=  1
+    end
+    segundo_mes = primer_mes + 1
+    tercer_mes = segundo_mes + 1
+    total_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, v, ob)
+    total_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, v, ob)
+    total_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, v, ob)
+    return total_mes1 + total_mes2 + total_mes3
+  end
+
+  def self.proyeccion(anio, mes, v, ob)
+    total_ventas_arbitrario = ObjetivoMensual.objetivo_v(anio, mes, v, 5)
+    ventas_promedio = CargaDiarium.total_trimestral(anio, mes, v, 5) / 3
+    promedio = CargaDiarium.total_trimestral(anio, mes, v, ob) / 3
+    denominador = (ventas_promedio == 0) ? 1 : ventas_promedio
+    porcentaje = promedio / denominador
+    return total_ventas_arbitrario * porcentaje / 100
+  end
+
+  def self.total_objetivos_punto_venta(anio, mes, v, ob)
+     total = 0
+    if v.nil?
+      vendedor_id = 0
+    else
+      vendedor_id = v.id
+    end
+    ObjetivoMensual.where(anio: anio, mes: mes, punto_venta_id: v.punto_venta_id, tipo_objetivo_id: ob).each do |o_m|
+      total = total + o_m.cantidad_propuesta.to_i
+    end
+    return total
+  end
+
+  def self.asignado_o_proyeccion(anio, mes, v, ob)
+    total_asignado = ObjetivoMensual.objetivo_v(anio, mes, v, ob)
+    if total_asignado != nil
+      return total_asignado
+    else
+      return ObjetivoMensual.proyeccion(anio, mes, v, ob)
+    end
+  end
 
   def validarCantidades
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
