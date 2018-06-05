@@ -13,18 +13,34 @@
     </div>
   <% end %>
 
+   <div class="form-group"> 
+        <label class="col-sm-2 control-label">Elija el mes si es una Reunión Mensual</label>
+        <div class="col-sm-3">
+          <div class="form-group">
+          <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
+          </div>
+        </div>
+      </div>
+      </br>
+
   <div class="form-group">
     <%= f.label :fecha, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.date_field :fecha, class: "form-control" %>
     </div>
   </div>
-  <div class="form-group">
+    <div class="form-group">
     <%= f.label :semana, "Semana", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.text_field :semana, class: "form-control" %>
     </div>
   </div>
+      <div class="form-group", id="mes" hidden>
+        <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
+        <div class="col-sm-2"> 
+          <%= select_month(field_name: 'mes' , prompt: "Selccione mes", :include_blank => true) %>
+        </div>
+      </div>
   <div class="form-group">
     <%= f.label :lugar_fisico, "Lugar Físico", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
@@ -88,7 +104,8 @@
   </div>
 <% end %>
 
-<script type="text/javascript">    
+<script type="text/javascript">
+$("#mes").val("");   
   $('document').ready(function(){
     $('form').on('nested:fieldAdded', function() {
       /* apply select2 styling */ 
@@ -98,4 +115,15 @@
       }); 
     });
   });
+
+function myFunction() {
+  $("#mes").val("");
+  var checkBox = document.getElementById("myCheck");
+  if (checkBox.checked == true){
+    $("#mes").show();
+  } else {
+    $("#mes").hide();
+    $("#mes").val("");
+  }
+ } 
 </script>
