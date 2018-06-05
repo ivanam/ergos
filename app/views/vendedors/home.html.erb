@@ -73,59 +73,61 @@
       </tr>
       <tr>
 
-        <td style="text-align: left">Oportunidades</td>
-         <%carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)
-              objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 7)
+        <td style="text-align: left">Créditos</td>
+         <%carga_total_ob_mes_cre = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 8)
+         carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)
+              objetivo_op = ObjetivoMensual.objetivo_op(Date.today.year, Date.today.month, @vendedor, 8)
               aux_objetivo_op = objetivo_op
               if objetivo_op.to_i == 0 
                 aux_objetivo_op = 1
               end  %>
-         <%if (carga_total_ob_mes_op*100/aux_objetivo_op > 33 && carga_total_ob_mes_op*100/aux_objetivo_op <= 66)%>
+         <%if (carga_total_ob_mes_cre*100/aux_objetivo_op > 33 && carga_total_ob_mes_cre*100/aux_objetivo_op <= 66)%>
         <td><div class="circle bg_yellow"></div></td>
         <% end %>
-         <%if (carga_total_ob_mes_op*100/aux_objetivo_op<= 33) %>
+         <%if (carga_total_ob_mes_cre*100/aux_objetivo_op<= 33) %>
          <td><div class="circle bg_red"></div></td>
         <% end %>
-        <%if (carga_total_ob_mes_op*100/aux_objetivo_op > 66)%>
+        <%if (carga_total_ob_mes_cre*100/aux_objetivo_op > 66)%>
         <td><div class="circle bg_green"></div></td>
         <% end %>  
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
         	<div class="bar-container">
-              <div id="barra_oportunidades" data-percentage="<%= carga_total_ob_mes_op*100/aux_objetivo_op%>" class="bar"><%= carga_total_ob_mes_op*100/aux_objetivo_op%>%</div>
+              <div id="barra_oportunidades" data-percentage="<%= carga_total_ob_mes_cre*100/aux_objetivo_op%>" class="bar"><%= carga_total_ob_mes_cre*100/aux_objetivo_op%>%</div>
             </div>
 					</div>
         </td>
-        <td style="text-align: right;"><%= carga_total_ob_mes_op%>/<%=objetivo_op%></td>
+        <td style="text-align: right;"><%= carga_total_ob_mes_cre%>/<%=objetivo_op%></td>
       </tr>
       <tr>
 
-        <td style="text-align: left">Pruebas de manejo</td>
+        <td style="text-align: left">Calidad</td>
          <%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)
-              objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 4)
+              objetivo_pm_csi_real = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 3)
+              objetivo_pm = ObjetivoMensual.objetivo_pm(Date.today.year, Date.today.month, @vendedor, 3)
               aux_objetivo_pm = objetivo_pm
               if objetivo_pm.to_i == 0 
                 aux_objetivo_pm = 1
               end  %>
-           <%if (carga_total_ob_mes_pm*100/aux_objetivo_pm > 33 && carga_total_ob_mes_pm*100/aux_objetivo_pm <= 66)%>
+           <%if (objetivo_pm > 33 && objetivo_pm <= 66)%>
         <td><div class="circle bg_yellow"></div></td>
         <% end %>
-         <%if (carga_total_ob_mes_pm*100/aux_objetivo_pm<= 33) %>
+         <%if (objetivo_pm <= 33) %>
          <td><div class="circle bg_red"></div></td>
         <% end %>
-        <%if (carga_total_ob_mes_pm*100/aux_objetivo_pm > 66)%>
+        <%if (objetivo_pm > 66)%>
         <td><div class="circle bg_green"></div></td> 
         <% end %> 
         <td style="min-width: 70%;">
           <div class="chart">
             <div class="bar-container">
           <div class="bar-container">
-              <div id="barra_pruebas_manejo" data-percentage="<%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>" class="bar"><%= carga_total_ob_mes_pm*100/aux_objetivo_pm%>%</div>
+              <div id="barra_pruebas_manejo" data-percentage="<%= aux_objetivo_pm%>" class="bar"><%= objetivo_pm%>%</div>
             </div>
           </div>
         </td>
-        <td style="text-align: right;"><%= carga_total_ob_mes_pm%>/<%=objetivo_pm%></td>
+        <td style="text-align: right;"><%= objetivo_pm%>/<%=objetivo_pm%></td>
       </tr>
     </tbody>
   </table>
