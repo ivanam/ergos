@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <% if current_user.concesionaria? || current_user.punto_venta? %>
     <% if @sidebar.nil? or @sidebar == true %>
-        <nav class="navbar navbar-default sidebar" role="navigation" style="">
+        <nav class="navbar navbar-default sidebar hidden-xs" role="navigation" style="">
           <div class="container-fluid">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
