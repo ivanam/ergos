@@ -21,7 +21,6 @@ end
 
 
 def reunionMensual
-  debugger
   if (self.semana == nil && self.mes == nil)
      errors.add(:base, 'Debe seleccionar el tipo de reunión, si es semana el nro sino el mes de la misma')
   end

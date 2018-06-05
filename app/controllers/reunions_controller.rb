@@ -52,7 +52,6 @@ class ReunionsController < ApplicationController
   # POST /reunions
   # POST /reunions.json
   def create
-    debugger
     @reunion = Reunion.new(reunion_params)
     if params[:date][:mes] != nil
     @reunion.mes = params[:date][:mes]
