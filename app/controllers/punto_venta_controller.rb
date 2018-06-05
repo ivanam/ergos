@@ -134,11 +134,16 @@ class PuntoVentaController < ApplicationController
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
     
     @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first
-    @vendedores.each do |v|
-      v.avance = CargaDiarium.calculoDeAvance(@anio,@mes,v)
-    end
+    #fecha_anterior=Time.now - 1.month
+    fecha_anterior=Date.new(@anio,@mes,1) - 1.month
+    mes_anterior= fecha_anterior.month
+     @vendedores.each do |v|
 
-    @rankingVendedores =  @vendedores.order(avance: :desc).limit(10)
+        @ve=Vendedor.where(:id =>v.id).first
+        @ve.avance = CargaDiarium.SumaVentasMensualVendedor(@anio,mes_anterior,v)
+        @ve.save
+      end
+    @rankingVendedores =  @vendedores.order(avance: :desc,  numero: :asc )
   end
 
 

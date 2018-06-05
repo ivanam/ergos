@@ -204,10 +204,9 @@ class CargaDiarium < ApplicationRecord
 				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
 				  	 	@cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
 				  	 else
-				  	 	
-				  	 	if EstadoPersona.where(:persona_id => vendedor, :fecha_inicio => fecha.to_s ).first != nil
+				  	 	if EstadoPersona.where(:vendedor_id => vendedor, :fecha_inicio => fecha.to_s).first != nil
 				  	 		
-				  	 		estado_id = EstadoPersona.where(:persona_id => vendedor, :fecha_inicio => fecha.to_s ).first.estado_id
+				  	 		estado_id = EstadoPersona.where(:vendedor_id => vendedor, :fecha_inicio => fecha.to_s ).first.estado_id
 				  	 		@cantidad = Estado.where(:id => estado_id).first.nombre
 				  	 	else
 				  	 		@cantidad = 0
@@ -268,7 +267,7 @@ class CargaDiarium < ApplicationRecord
 
   	end
 
-  	def self.obtenerCompromisoDeVentas(anio,mes,semana)
+  	def self.obtenerCompromisoDeVentas(anio,mes,semana,vendedor)
   		@cantidad=0
   		if semana == 1 
 		dias = [1,2,3,4,5,6,7]
@@ -283,12 +282,43 @@ class CargaDiarium < ApplicationRecord
 		else
 			dias=[29,30,31]
 		end
+		vendedorid = vendedor.id
 		dias.each do |diasNom|
-			fecha = Date.new(anio, mes, diasNom)
 			tipo_objetivo =TipoObjetivo.where(:descripcion => "COMPROMISO DE VENTAS SEMANAL").first.id
-  			if ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => tipo_objetivo).first != nil
-  				@cantidad=ObjetivoSemanal.where(:fecha_creacion =>fecha, :tipo_objetivo => tipo_objetivo).first.cantidad_propuesta
+  			if ObjetivoSemanal.where(:vendedor => vendedorid, :anio => anio, :mes => mes , :numero_semana => semana, :tipo_objetivo => tipo_objetivo).first != nil
+  				@cantidad=ObjetivoSemanal.where(:vendedor => vendedorid, :anio => anio, :mes => mes, :numero_semana => semana, :tipo_objetivo => tipo_objetivo).first.cantidad_propuesta
   			end
+  		end
+  		return @cantidad
+
+    end
+
+    def self.obtenerCompromisoDeVentasPromedio(anio,mes,semana,vendedores)
+  		@cantidad=0
+  		@cantidad1 = 0
+  		if semana == 1 
+		dias = [1,2,3,4,5,6,7]
+		elsif semana == 2 
+			dias = [8,9,10,11,12,13,14]
+		elsif semana == 3 
+			dias = [15,16,17,18,19,20,21]
+		elsif semana == 4 
+			dias = [22,23,24,25,26,27,28]
+		elsif semana == 5 
+			dias = [29,30,31]
+		else
+			dias=[29,30,31]
+		end
+		dias.each do |diasNom|
+			vendedores.each do |v|
+				tipo_objetivo =TipoObjetivo.where(:descripcion => "COMPROMISO DE VENTAS SEMANAL").first.id
+	  			if ObjetivoSemanal.where(:vendedor => v.id, :anio => anio, :mes => mes , :numero_semana => semana, :tipo_objetivo => tipo_objetivo).first != nil
+	  				@cantidad1=ObjetivoSemanal.where(:vendedor => v.id, :anio => anio, :mes => mes, :numero_semana => semana, :tipo_objetivo => tipo_objetivo).first.cantidad_propuesta
+	  				if @cantidad < @cantidad1
+	  					@cantidad = @cantidad1
+	  			    end
+	  			end
+	  		end
   		end
   		return @cantidad
 
@@ -426,6 +456,7 @@ class CargaDiarium < ApplicationRecord
 	  	end
   		return @avance
   	end
+
 
 end
 
