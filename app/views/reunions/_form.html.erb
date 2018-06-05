@@ -38,7 +38,7 @@
       <div class="form-group", id="mes" hidden>
         <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
         <div class="col-sm-2"> 
-          <%= select_month(field_name: 'mes' , prompt: "Selccione mes", :include_blank => true) %>
+          <%= select_month(Date.today, field_name: 'mes' , prompt: "Selccione mes") %>
         </div>
       </div>
   <div class="form-group">
@@ -104,8 +104,7 @@
   </div>
 <% end %>
 
-<script type="text/javascript">
-$("#mes").val("");   
+<script type="text/javascript">  
   $('document').ready(function(){
     $('form').on('nested:fieldAdded', function() {
       /* apply select2 styling */ 
@@ -123,7 +122,6 @@ function myFunction() {
     $("#mes").show();
   } else {
     $("#mes").hide();
-    $("#mes").val("");
   }
  } 
 </script>

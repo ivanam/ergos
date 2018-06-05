@@ -53,9 +53,7 @@ class ReunionsController < ApplicationController
   # POST /reunions.json
   def create
     @reunion = Reunion.new(reunion_params)
-    if params[:date][:mes] != nil
     @reunion.mes = params[:date][:mes]
-    end
     respond_to do |format|
       if @reunion.save
         format.html { redirect_to @reunion, notice: 'Se ha creado una nueva Reunion.' }

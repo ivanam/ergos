@@ -13,7 +13,7 @@ class Reunion < ApplicationRecord
   validate :reunionMensual
 
   has_attached_file :adjunto
-  validates_attachment :adjunto, presence: true, content_type: { content_type: ["application/pdf", "application/doc", "application/docx","image/jpeg", "image/gif", "image/png", "image/jpg", "image/bmp"] },size: { in: 1..5000.kilobytes }
+  #validates_attachment :adjunto, presence: true, content_type: { content_type: ["application/pdf", "application/doc", "application/docx","image/jpeg", "image/gif", "image/png", "image/jpg", "image/bmp"] },size: { in: 1..5000.kilobytes }
   accepts_nested_attributes_for :reunion_participantes, allow_destroy: true
 
 
@@ -24,8 +24,4 @@ def reunionMensual
   if (self.semana == nil && self.mes == nil)
      errors.add(:base, 'Debe seleccionar el tipo de reunión, si es semana el nro sino el mes de la misma')
   end
-  if (self.semana != nil && self.mes != nil)
-     errors.add(:base, 'Debe seleccionar un solo tipo de reunión, si es semana el nro sino el mes de la misma')
-  end
-  
 end
