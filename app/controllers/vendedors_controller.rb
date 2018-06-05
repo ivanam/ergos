@@ -48,6 +48,7 @@ class VendedorsController < ApplicationController
 
     @vendedor = Vendedor.new(vendedor_params)
     @vendedor.punto_venta_id = current_user.punto_venta_id
+    @vendedor.avance = 0
     
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
       @persona = Persona.new(persona_params)
@@ -70,15 +71,16 @@ class VendedorsController < ApplicationController
                  @vendedor.persona_id=@persona.id
 
                  if @vendedor.save
-                    if @vendedor.persona.user.has_role? :punto_venta
+                    if @vendedor.persona.user != nil and @vendedor.persona.user.has_role? :punto_venta
                       format.html { redirect_to current_user.punto_venta, notice: 'Vendedor was successfully created.' }
 
                     else
                       format.html { redirect_to @vendedor, notice: 'Vendedor was successfully created.' }
                       format.json { render :show, status: :created, location: @vendedor }
                     end
+                  
                  else
-                    if @persona.user.has_role? :punto_venta
+                    if @vendedor.persona.user != nil and @persona.user.has_role? :punto_venta
                       format.html { redirect_to vendedor_cambiar_rol_path(persona: @persona.id) }
                       format.json { render json: @vendedor.errors, status: :unprocessable_entity }
                     else

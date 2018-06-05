@@ -13,7 +13,7 @@ class Vendedor < ApplicationRecord
   validates :numero, :uniqueness => {:message => "Alias debe ser único"}
   validates :numero, :presence => { :message => "Debe completar el campo Alias" }
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
-  validate :control_persona
+  validate :control_persona,  on: :create
 
   validate :max_vendedor
 
@@ -36,6 +36,7 @@ class Vendedor < ApplicationRecord
   end
 
   def control_persona
+
     if ((Vendedor.where(:persona_id => self.persona.id, :punto_venta_id => self.punto_venta_id).first) != nil)
        errors.add(:base, "Esta persona ya se encuentra como vendedor en este punto de venta")
     end

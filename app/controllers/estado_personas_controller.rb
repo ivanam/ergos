@@ -33,6 +33,9 @@ class EstadoPersonasController < ApplicationController
   # POST /estado_personas.json
   def create
     @estado_persona = EstadoPersona.new(estado_persona_params)
+    @estado_persona.estado_id = params[:estado_persona][:estado_id]
+    @estado_persona.vendedor_id =  params[:estado_persona][:vendedor_id]
+    @estado_persona.fecha_inicio = params[:estado_persona][:fecha_inicio]
 
     respond_to do | format|
       if @estado_persona.save
