@@ -13,7 +13,6 @@ html {
 
 body { 
   padding-top: 50px; 
-  /*padding-bottom: 20px;*/
   height: 100%;
   
 }
@@ -235,7 +234,7 @@ nav.sidebar, .main{
     padding: 10px 10px 0 10px;
   }
 
- @media (min-width: 765px) {
+ @media (min-width: 768px) {
 
     .main{
       position: absolute;
@@ -359,6 +358,8 @@ nav.sidebar, .main{
 .breadcrumb > li {
   margin-left: 5px;
 }
+
+
 
 /* --------------------- FOOTER ---------------------------- */
 .footer{
@@ -1209,41 +1210,6 @@ nav.sidebar, .main{
   margin: 0.5px;
 }
 
-@media(max-width:1366px){
-  table.dataTable tbody th, table.dataTable tbody td {
-    padding: 2px 2px;
-    font-size: 12px;
-    text-align: center;
-  }
-    
-  .btn-acciones > .btn{
-    width: 22px;
-    height: 22px;
-    padding: 2px 2px;
-  }
-}
-
-@media(max-width:1000px){
-  table.dataTable tbody th, table.dataTable tbody td {
-    padding: 2px 1px;
-    font-size: 11px;
-    text-align: center;
-  }
-    
-  .btn-acciones > .btn{
-    width: 20px;
-    height: 20px;
-    padding: 1px 1px;
-  }
-}
-
-@media(max-width:768px){
-  .btn-acciones > .btn{
-    width: 18px;
-    height: 18px;
-    padding: 1px 1px;
-  }
-}
 
 
 .dropdown-menu{
@@ -1316,6 +1282,71 @@ nav.sidebar, .main{
   height: 69px;
 }
 
+
+@media(max-width:1366px){
+  table.dataTable tbody th, table.dataTable tbody td {
+    padding: 2px 2px;
+    font-size: 12px;
+    text-align: center;
+  }
+    
+  .btn-acciones > .btn{
+    width: 22px;
+    height: 22px;
+    padding: 2px 2px;
+  }
+}
+
+@media(max-width:1000px){
+  table.dataTable tbody th, table.dataTable tbody td {
+    padding: 2px 1px;
+    font-size: 11px;
+    text-align: center;
+  }
+    
+  .btn-acciones > .btn{
+    width: 20px;
+    height: 20px;
+    padding: 1px 1px;
+  }
+}
+
+@media(max-width:850px){
+  table thead th, table tbody td {
+    padding: 2px 1px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .table > tbody > tr > td {
+    height: 23px;
+  } 
+
+  .table-left > tbody > tr > td {
+    height: 69px;
+  }
+
+  .table > tfoot > tr > th {
+    font-size: 11px;
+  }
+
+  .btn-acciones > .btn{
+    width: 18px;
+    height: 18px;
+    padding: 1px 1px;
+  }
+
+  .table-condensed > thead > tr > th,
+  .table-condensed > thead > tr > td,
+  .table-condensed > tbody > tr > th,
+  .table-condensed > tbody > tr > td,
+  .table-condensed > tfoot > tr > th,
+  .table-condensed > tfoot > tr > td 
+  {
+    padding: 3px;
+  }
+}
+
   
 .dashboard-logo {
   position: relative;
@@ -1324,6 +1355,15 @@ nav.sidebar, .main{
   max-height: 70px;
 }
 
+
+.dashboard-container > .row {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.dashboard-container > .row > .col-xs-6 {
+  display: inline-block;
+  float: none;
+}
 
 /*LOGIN CSS*/
 

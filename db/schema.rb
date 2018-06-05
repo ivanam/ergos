@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605004829) do
+ActiveRecord::Schema.define(version: 20180605173139) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20180605004829) do
     t.string   "adjunto_content_type"
     t.integer  "adjunto_file_size"
     t.datetime "adjunto_updated_at"
+    t.string   "mes"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

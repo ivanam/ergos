@@ -53,6 +53,7 @@ class ReunionsController < ApplicationController
   # POST /reunions.json
   def create
     @reunion = Reunion.new(reunion_params)
+    @reunion.mes = params[:date][:mes]
     respond_to do |format|
       if @reunion.save
         format.html { redirect_to @reunion, notice: 'Se ha creado una nueva Reunion.' }
@@ -97,6 +98,6 @@ class ReunionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reunion_params
-      params.require(:reunion).permit(:fecha, :semana, :lugar_fisico, :persona_id, :plan_accion, :accion, :adjunto, :adjunto_file_name, reunion_participantes_attributes: [:id, :persona_id, :_destroy])
+      params.require(:reunion).permit(:fecha, :semana, :mes, :lugar_fisico, :persona_id, :plan_accion, :accion, :adjunto, :adjunto_file_name, reunion_participantes_attributes: [:id, :persona_id, :_destroy])
     end
 end
