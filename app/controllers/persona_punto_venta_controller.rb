@@ -14,7 +14,11 @@ class PersonaPuntoVentaController < ApplicationController
 
   # GET /persona_punto_venta/new
   def new
+    if params[:persona].to_i > 0
+    @persona_punto_ventum = PersonaPuntoVentum.new(punto_venta_id: params[:punto_venta],persona_id: params[:persona].to_i)
+    else
     @persona_punto_ventum = PersonaPuntoVentum.new(punto_venta_id: params[:punto_venta])
+    end  
   end
 
   # GET /persona_punto_venta/1/edit

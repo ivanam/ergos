@@ -17,14 +17,14 @@
       <h3 class="panel-title"  align="center">Usuario de la concesionaria</h3>
       <h3 class="panel-title"  align="center"><%= Concesionarium.find(persona_concesionarium.concesionaria_id) %></h3>
     </div>
-
+    <br/>
     <div class="form-group">
       <label class="col-sm-2 control-label">Buscar persona</label> 
       <div class="col-sm-2">
         <div class="form-group">
-          <%= text_field_tag 'buscar_cuil', nil, class: " input_cuil text-field form-control solo_numerico", placeholder: "CUIL"%>
-          <label id="bot_buscar" onclick="buscar_persona()"  class="btn btn-primary"> Buscar </label>
-          <%= f.hidden_field :persona_id, class: " input_cuil text-field form-control solo_numerico", id: "persona_id"%>
+        <div class="select-Persona">
+         <%=f.collection_select :persona_id, Persona.all, :id, :to_s_comp, {prompt: true}, {:class => "form-control select"} %>     
+         </div>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div  id = "crear_persona" class="hide form-group">
+    <div  id = "crear_persona" class="form-group">
       <label class="col-sm-2 control-label">Sin resultados</label> 
       <%= link_to new_persona_concesionaria_path(concesionaria: persona_concesionarium.concesionaria_id), class: "btn-default btn" do %>
         <%= fa_icon "plus", text: "Agregar" %>
@@ -72,3 +72,5 @@
 
   </div>
 <% end %>
+
+

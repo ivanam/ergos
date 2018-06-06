@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   get "/persona/new_administrador", to: 'personas#new_administrador',  as: :new_administrador
 
+  get "/persona/edit_administrador", to: 'personas#edit_administrador',  as: :edit_administrador
+
   get "/persona/administradores", to: 'personas#administradores',  as: :administradores
 
   get "/punto_ventum/select", to: 'punto_venta#select',  as: :select_punto_venta
@@ -56,6 +58,8 @@ Rails.application.routes.draw do
   get "/reunionsm.pdf", to: 'reunions#reunion_mensual', as: :reunion_mensual
 
   get "/vendedor/cambiar_rol", to: 'vendedors#cambiar_rol', as: :vendedor_cambiar_rol
+
+  post "/objetivo_mensuals/actualizar_objetivos" , to: 'objetivo_mensuals#actualizar_objetivos', as: :actualizar_objetivos
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

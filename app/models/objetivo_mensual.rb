@@ -84,21 +84,6 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
-  def self.total_trimestral(anio, mes, v, ob)
-    mes_actual = mes
-    primer_mes = mes_actual - 3
-    if (primer_mes < 0)
-      primer_mes = 13 + (primer_mes)
-      anio -=  1
-    end
-    segundo_mes = primer_mes + 1
-    tercer_mes = segundo_mes + 1
-    total_mes1 = ObjetivoMensual.objetivo_pm(anio, primer_mes, v, ob)
-    total_mes2 = ObjetivoMensual.objetivo_pm(anio, segundo_mes, v, ob)
-    total_mes3 = ObjetivoMensual.objetivo_pm(anio, tercer_mes, v, ob)
-    return total_mes1 + total_mes2 + total_mes3
-  end
-
   def self.proyeccion(anio, mes, v, ob)
     total_ventas_arbitrario = ObjetivoMensual.objetivo_v(anio, mes, v, 5)
     ventas_promedio = CargaDiarium.total_trimestral(anio, mes, v, 5) / 3
