@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   get "/persona/new_administrador", to: 'personas#new_administrador',  as: :new_administrador
 
+  get "/persona/edit_administrador", to: 'personas#edit_administrador',  as: :edit_administrador
+
   get "/persona/administradores", to: 'personas#administradores',  as: :administradores
 
   get "/punto_ventum/select", to: 'punto_venta#select',  as: :select_punto_venta

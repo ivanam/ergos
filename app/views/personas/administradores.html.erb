@@ -17,7 +17,7 @@
         <th>Nombre</th>
         <th>Edad</th>
         <th>Email</th>
-        <th class="col-md-2">&nbsp;</th>
+        <th class="col-md-2">Acciones</th>
       </tr>
     </thead>
 
@@ -29,6 +29,9 @@
         <td><%= p.age(p.fecha_nacimiento) %></td>
         <td><%= p.email %></td>
         <td class="text-center">
+        <%= link_to edit_administrador_path(persona: p.id), class: 'btn btn-sm btn-primary' do %>
+            <span class="fa fa-pencil"></span>
+          <% end %>
           <%= link_to p, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
             <span class="fa fa-trash"></span>
           <% end %>
