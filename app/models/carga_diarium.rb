@@ -323,10 +323,10 @@ class CargaDiarium < ApplicationRecord
 
     end
 
-    def self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
+    def self.obtenerMetaObMensual(anio,mes,vendedor,ob)
     		vid = vendedor.id
     		@cantidad = 0
-    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => ob).first.id
   			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first != nil  				
   				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :vendedor_id => vid).first.cantidad_propuesta
   			end
@@ -361,7 +361,7 @@ class CargaDiarium < ApplicationRecord
     end
 
 
-    def self.SumaVentasMensualVendedor(anio,mes,vendedor)
+    def self.SumaObMensualVendedor(anio,mes,vendedor,ob)
   			case mes
 	  			when 1,3,5,7,8,10,12
 	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
@@ -372,7 +372,7 @@ class CargaDiarium < ApplicationRecord
 	  		end
   			@cantidad = 0
   			
-  			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => ob).first.id
   			dias.each do |diasNom|
 		  		fecha = Date.new(anio, mes, diasNom)	 
 			  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => tipo_objetivo, :fecha => fecha ).first != nil
@@ -383,8 +383,24 @@ class CargaDiarium < ApplicationRecord
 
   	end
 
+  	def self.calculoPorcentajeObVendedor(anio,mes,vendedor,ob)
+  		@porcentaje = 0
+  		if  self.obtenerMetaObMensual(anio,mes,vendedor,ob) != 0
+  		  		@porcentaje = self.SumaObMensualVendedor(anio,mes,vendedor,ob) * 100 / self.obtenerMetaObMensual(anio,mes,vendedor,ob)
+  		end
+  		return @porcentaje
+  	end
 
-    def self.obtenerReservasEquipo(anio,mes,vendedores)
+  	def self.calculoPorcentajeObEquipo(anio,mes,vendedores,ob,punto)
+  		@porcentaje = 0
+  		if  self.obtenerVentaPuntoVenta(anio,mes,punto,ob) != 0
+  		  		@porcentaje = self.obtenerReservasEquipo(anio,mes,vendedores,ob) * 100 / self.obtenerVentaPuntoVenta(anio,mes,punto,ob)
+  		end
+  		return @porcentaje
+  	end
+
+
+    def self.obtenerReservasEquipo(anio,mes,vendedores,ob)
   			
   			@cantidad = 0
   			case mes
@@ -395,7 +411,7 @@ class CargaDiarium < ApplicationRecord
 	  			else
 	  				dias=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
 	  		end
-  			tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+  			tipo_objetivo =TipoObjetivo.where(:descripcion => ob).first.id
   			vendedores.each do |vendedor|
 	  			dias.each do |diasNom|
 			  		fecha = Date.new(anio, mes, diasNom)	 
@@ -408,10 +424,10 @@ class CargaDiarium < ApplicationRecord
 
   	end
 
-  	def self.obtenerVentaPuntoVenta(anio,mes,punto)
+  	def self.obtenerVentaPuntoVenta(anio,mes,punto,ob)
   			punto = punto.id
     		@cantidad = 0
-    		tipo_objetivo =TipoObjetivo.where(:descripcion => "VENTAS").first.id
+    		tipo_objetivo =TipoObjetivo.where(:descripcion => ob).first.id
   			if ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first != nil  				
   				@cantidad=ObjetivoMensual.where(:mes =>mes, :anio => anio, :tipo_objetivo_id => tipo_objetivo, :punto_venta_id => punto).first.cantidad_propuesta
   			end
@@ -432,29 +448,44 @@ class CargaDiarium < ApplicationRecord
   			return @cantidad
     end
 
+#verificar
     def self.calculoDeAvanceEquipo(anio,mes,punto,vendedores)
+  		meta = 0
+  		reservas = 0
   		@avance = 0
-  		if self.obtenerCSIEquipo(anio,mes,punto) != 0
-  			meta = self.obtenerCSIEquipo(anio,mes,punto)
-	  		if  self.obtenerReservasEquipo(anio,mes,vendedores) != 0
-	  			reservas = self.obtenerReservasEquipo(anio,mes,vendedores)
+  		vendedores.each do |vendedor|
+	  			meta =+ self.obtenerMetaObMensual(anio,mes,vendedor,"VENTAS")
+		  		reservas =+ self.SumaObMensualVendedor(anio,mes,vendedor,"VENTAS")
+		end
+		if meta != 0
+			@avance = reservas * 100 / meta
+		end
+  		return @avance
+  	end
+
+  	def self.calculoDeAvancePorcentual(anio,mes)
+  		@avance = 0
+  		if Date.today.day > 1
+  			dias = Date.today.day - 1
+
+  			@avance = dias * 100 / ((Date.new(anio,mes).end_of_month).day)
+  		end
+  		return @avance
+
+  	end
+
+  	def self.calculoDeAvance(anio,mes,vendedor)
+  		@avance = 0
+  		if self.obtenerMetaObMensual(anio,mes,vendedor,"VENTAS") != 0
+  			meta = self.obtenerMetaObMensual(anio,mes,vendedor,"VENTAS")
+	  		if  self.SumaObMensualVendedor(anio,mes,vendedor,"VENTAS") != 0
+	  			reservas = self.SumaObMensualVendedor(anio,mes,vendedor,"VENTAS")
 	  			@avance = reservas * 100 / meta
 	  		end
 	  	end
   		return @avance
   	end
 
-  	def self.calculoDeAvance(anio,mes,vendedor)
-  		@avance = 0
-  		if self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor) != 0
-  			meta = self.obtenerCompromisoDeVentasMensual(anio,mes,vendedor)
-	  		if  self.SumaVentasMensualVendedor(anio,mes,vendedor) != 0
-	  			reservas = self.SumaVentasMensualVendedor(anio,mes,vendedor)
-	  			@avance = reservas * 100 / meta
-	  		end
-	  	end
-  		return @avance
-  	end
 
 
 end

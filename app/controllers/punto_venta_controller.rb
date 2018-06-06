@@ -140,7 +140,7 @@ class PuntoVentaController < ApplicationController
      @vendedores.each do |v|
 
         @ve=Vendedor.where(:id =>v.id).first
-        @ve.avance = CargaDiarium.SumaVentasMensualVendedor(@anio,mes_anterior,v)
+        @ve.avance = CargaDiarium.SumaObMensualVendedor(@anio,mes_anterior,v,"VENTAS")
         @ve.save
       end
     @rankingVendedores =  @vendedores.order(avance: :desc,  numero: :asc )
