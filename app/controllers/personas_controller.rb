@@ -28,6 +28,10 @@ class PersonasController < ApplicationController
     @persona = Persona.new
   end
 
+  def edit_administrador
+    @persona = Persona.find(params[:persona])
+  end
+
   def administradores
     personas_id = []
 
@@ -106,7 +110,8 @@ class PersonasController < ApplicationController
   # PATCH/PUT /personas/1
   # PATCH/PUT /personas/1.json
   def update
-    if !user_params.nil?
+
+    begin
       respond_to do |format|
         if @persona.user.update(user_params)
           format.html { redirect_to root_path, notice: 'Cambio de contraseña correcto.' }
@@ -117,15 +122,26 @@ class PersonasController < ApplicationController
         end
       end
     
-    else
-
-      respond_to do |format|
-        if @persona.update(persona_params)
-          format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
-          format.json { render :show, status: :ok, location: @persona }
-        else
-          format.html { render :edit }
-          format.json { render json: @persona.errors, status: :unprocessable_entity }
+    rescue
+      if params[:admin].to_i > 0
+        respond_to do |format|
+          if @persona.update(persona_params)
+            format.html { redirect_to administradores_path, notice: 'Persona creada correctamente.' }
+            format.json { render :show, status: :created, location: @persona }
+          else
+            format.html { redirect_to new_administrador_path(admin: params[:admin]), alert: @persona.errors.full_messages  }
+            format.json { render json: @persona.errors, status: :unprocessable_entity }
+          end
+        end
+      else
+        respond_to do |format|
+          if @persona.update(persona_params)
+            format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
+            format.json { render :show, status: :ok, location: @persona }
+          else
+            format.html { render :edit }
+            format.json { render json: @persona.errors, status: :unprocessable_entity }
+          end
         end
       end
     end
@@ -169,6 +185,10 @@ class PersonasController < ApplicationController
       params.require(:persona).permit(:tipo_documento_id, :numero_documento, :cuit, :apellido, :nombre, :domicilio, :telefono, :email, :fecha_nacimiento)
     end
     def user_params
-      params.require(:user).permit(:password_confirmation, :reset_password_token, :password)
+      begin
+        params.require(:user).permit(:password_confirmation, :reset_password_token, :password)
+      rescue
+        raise e
+      end
     end
 end

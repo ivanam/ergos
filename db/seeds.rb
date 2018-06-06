@@ -30,7 +30,7 @@ TipoObjetivo.create(id: 8, descripcion: 'FINANCIACIONES', tipo: 'KPI')
 # ========
 
 
-Persona.create!(tipo_documento_id: 3, numero_documento: 31343209,apellido: "Cerrutti", nombre: "German", telefono: "0280154336704", email: "gcerrutti@gmail.com", fecha_nacimiento: Date.new(1979,07,10))
+Persona.create!(tipo_documento_id: 3,cuit: 20313432098, numero_documento: 31343209,apellido: "Cerrutti", nombre: "German", telefono: "0280154336704", email: "gcerrutti@gmail.com", fecha_nacimiento: Date.new(1979,07,10))
 
 
 # Usuarios
