@@ -14,7 +14,11 @@ class PersonaConcesionariaController < ApplicationController
 
   # GET /persona_concesionaria/new
   def new
+    if params[:persona].to_i > 0
+    @persona_concesionarium = PersonaConcesionarium.new(concesionaria_id: params[:concesionaria].to_i, persona_id: params[:persona].to_i)
+    else
     @persona_concesionarium = PersonaConcesionarium.new(concesionaria_id: params[:concesionaria].to_i)
+    end
   end
 
   # GET /persona_concesionaria/1/edit

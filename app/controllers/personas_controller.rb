@@ -56,7 +56,7 @@ class PersonasController < ApplicationController
     if params[:concesionaria].to_i > 0
       respond_to do |format|
         if @persona.save
-          format.html { redirect_to new_persona_concesionarium_path(concesionaria: params[:concesionaria]), notice: 'Persona creada correctamente.' }
+          format.html { redirect_to new_persona_concesionarium_path(concesionaria: params[:concesionaria], persona: @persona.id), notice: 'Persona creada correctamente.' }
           format.json { render :show, status: :created, location: @persona }
         else
           format.html { redirect_to new_persona_concesionaria_path(concesionaria: params[:concesionaria]), alert: @persona.errors.full_messages  }
@@ -66,7 +66,7 @@ class PersonasController < ApplicationController
     elsif params[:punto_venta].to_i > 0
       respond_to do |format|
         if @persona.save
-          format.html { redirect_to new_persona_punto_ventum_path(punto_venta: params[:punto_venta]), notice: 'Persona creada correctamente.' }
+          format.html { redirect_to new_persona_punto_ventum_path(punto_venta: params[:punto_venta], persona: @persona.id), notice: 'Persona creada correctamente.' }
           format.json { render :show, status: :created, location: @persona }
         else
           format.html { redirect_to new_persona_punto_venta_path(punto_venta: params[:punto_venta]), alert: @persona.errors.full_messages  }

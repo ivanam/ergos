@@ -26,6 +26,10 @@ class Persona < ApplicationRecord
     "#{self.apellido}, #{self.nombre}"
   end
 
+  def to_s_comp
+    "#{self.apellido}, #{self.nombre}, #{self.numero_documento}"
+  end
+
   def age(dob)
     if dob != nil
       now = Date.today
