@@ -41,6 +41,44 @@ class CargaDiarium < ApplicationRecord
 		return total
 	end
 
+	def self.porcentaje_conversion_yo(anio,mes,v)
+		total = 0
+		fecha_desde = Date.new(anio,mes,1)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
+		if v.nil?
+			vendedor_id = 0
+		else
+			vendedor_id = v.id
+		end
+		
+		ventas = CargaDiarium.carga_total_ob_mes(anio,mes,v,5)
+		oportunidades = CargaDiarium.carga_total_ob_mes(anio,mes,v,7)
+		if oportunidades == 0
+			oportunidades = 1
+		end
+		total = ventas.to_f/oportunidades.to_f*100
+
+
+		return total.to_i
+	end
+
+	def self.porcentaje_conversion_equipo(anio, mes, current_user)
+		total = 0
+		fecha_desde = Date.new(anio,mes,1)
+		fecha_hasta = Date.new(anio,mes).end_of_month #Si el mes tiene menos de 30
+		
+		ventas = CargaDiarium.carga_total_por_equipo(anio,mes,current_user,5)
+		oportunidades = CargaDiarium.carga_total_por_equipo(anio,mes,current_user,7)
+		if oportunidades == 0
+			oportunidades = 1
+		end
+		debugger
+		total = ventas.to_f/oportunidades.to_f*100
+
+
+		return total.to_i
+	end	
+
 		
 	def self.carga_total_ob_mes_op(anio,mes,v,ob)
 		total = 0
