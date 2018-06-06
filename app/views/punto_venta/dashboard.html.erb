@@ -66,16 +66,20 @@
   			  <th class="hidden-sm hidden-xs" rowspan="2">Posición</th>
   			  <th rowspan="2">Vendedor</th>
 		      <th rowspan="2">Avance</th>
-		      <th colspan="2" class="">Ventas</th>
-		      <th colspan="2" class="">CSI</th>
+		      <th colspan="3" class="">Ventas</th>
+		      <th colspan="3" class="">Créditos</th>
+		      <th class="">CSI</th>
 		      
   			</tr>
 	      <tr>
 	        <th class="visible-xs">Res.</th>
 	        <th class="hidden-xs">Reserva</th>
-		      <th>Meta</th>
-		      <th>Real</th>
-		      <th>Meta</th>
+		    <th>Meta</th>
+		    <th>%</th>
+		    <th class="hidden-xs">Reserva</th>
+		    <th>Meta</th>
+		    <th>%</th>
+		    <th>%</th>
 	      </tr>
   		</thead>
 		  <tbody>
@@ -86,9 +90,12 @@
 		      <% @nombre=v.numero %>
 		      <td><%=@nombre%></td>
 		      <td><%=CargaDiarium.calculoDeAvance(@anio,@mes,v)%>%</td>
-		      <td><%=CargaDiarium.SumaVentasMensualVendedor(@anio,@mes,v)%></td>
-		      <td><%=CargaDiarium.obtenerCompromisoDeVentasMensual(@anio,@mes,v)%></td>
-		      <td><%=CargaDiarium.obtenerCSIVendedor(@anio,@mes,v)%>%</td>
+		      <td><%=CargaDiarium.SumaObMensualVendedor(@anio,@mes,v,"VENTAS")%></td>
+		      <td><%=CargaDiarium.obtenerMetaObMensual(@anio,@mes,v,"VENTAS")%></td>
+		      <td><%=CargaDiarium.calculoPorcentajeObVendedor(@anio,@mes,v,"VENTAS")%>%</td>
+		      <td><%=CargaDiarium.SumaObMensualVendedor(@anio,@mes,v,"FINANCIACIONES")%></td>
+		      <td><%=CargaDiarium.obtenerMetaObMensual(@anio,@mes,v,"FINANCIACIONES")%></td>
+		      <td><%=CargaDiarium.calculoPorcentajeObVendedor(@anio,@mes,v,"FINANCIACIONES")%>%</td>
 		      <td><%=CargaDiarium.obtenerCSIVendedor(@anio,@mes,v)%>%</td>
 		      <%@posicion += 1%>
 		    </tr>
@@ -97,17 +104,20 @@
 	   	<tfoot>
 		    <tr>
 		      <th colspan="2">Total</th>
-		      <th><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta, @vendedores)%>%</th>
-		      <th><%=CargaDiarium.obtenerReservasEquipo(@anio,@mes,@vendedores)%></th>
-		      <th><%=CargaDiarium.obtenerVentaPuntoVenta(@anio,@mes,@punto_venta)%></th>
-		      <th><%=CargaDiarium.obtenerCSIEquipo(@anio,@mes,@punto_venta)%>%</th>
+		      <th><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta,@vendedores)%>%</th>
+		      <th><%=CargaDiarium.obtenerReservasEquipo(@anio,@mes,@vendedores,"VENTAS")%></th>
+		      <th><%=CargaDiarium.obtenerVentaPuntoVenta(@anio,@mes,@punto_venta,"VENTAS")%></th>
+			  <th><%=CargaDiarium.calculoPorcentajeObEquipo(@anio,@mes,@vendedores,"VENTAS",@punto_venta)%>%</th>
+		      <th><%=CargaDiarium.obtenerReservasEquipo(@anio,@mes,@vendedores,"FINANCIACIONES")%></th>
+		      <th><%=CargaDiarium.obtenerVentaPuntoVenta(@anio,@mes,@punto_venta,"FINANCIACIONES")%></th>
+		      <th><%=CargaDiarium.calculoPorcentajeObEquipo(@anio,@mes,@vendedores,"FINANCIACIONES",@punto_venta)%>%</th>
 		      <th><%=CargaDiarium.obtenerCSIEquipo(@anio,@mes,@punto_venta)%>%</th>
 		    </tr>
 
 
 		    <tr>
 		      <th colspan="2" style="height: 31px;">Avance/Mensual</th>
-		      <th style="height: 31px;"><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta, @vendedores)%>%</th>
+		      <th style="height: 31px;"><%=CargaDiarium.calculoDeAvancePorcentual(@anio,@mes)%>%</th>
 		    </tr>
 		  </tfoot>
 		</table>
