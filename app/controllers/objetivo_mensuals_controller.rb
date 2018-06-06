@@ -100,32 +100,28 @@ class ObjetivoMensualsController < ApplicationController
     objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 4)
     if cantidad_pm.to_i != 0 && objetivo_pm != nil
       objetivo_pm.cantidad_propuesta = cantidad_pm
-      objetivo_pm.save
-      if objetivo_op.save
+      if objetivo_pm.save
         msj += ' Pruebas de manejo '
       end
     end
     objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 5)
     if cantidad_v.to_i != 0 && objetivo_v != nil
       objetivo_v.cantidad_propuesta = cantidad_v
-      objetivo_v.save
-      if objetivo_op.save
+      if objetivo_v.save
         msj += ' Ventas '
       end
     end
     objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 8)
     if cantidad_f.to_i != 0 && objetivo_f != nil
       objetivo_f.cantidad_propuesta = cantidad_f
-      objetivo_f.save
-      if objetivo_op.save
+      if objetivo_f.save
         msj += ' Financiaciones '
       end
     end
     objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 3)
     if cantidad_c.to_i != 0 && objetivo_c != nil
       objetivo_c.cantidad_propuesta = cantidad_c
-      objetivo_c.save
-      if objetivo_op.save
+      if objetivo_c.save
         msj += ' Calidad '
       end
     end
