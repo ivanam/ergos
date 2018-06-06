@@ -72,7 +72,6 @@ class CargaDiarium < ApplicationRecord
 		if oportunidades == 0
 			oportunidades = 1
 		end
-		debugger
 		total = ventas.to_f/oportunidades.to_f*100
 
 
