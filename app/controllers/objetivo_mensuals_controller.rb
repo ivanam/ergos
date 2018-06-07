@@ -106,7 +106,7 @@ class ObjetivoMensualsController < ApplicationController
       if objetivo_pm.save
         msj += ' Pruebas de manejo '
       else
-        errores[:pruebas_manejo] = "Pruebas de manejo: #{objetivo_op.errors.full_messages.first}"
+        errores[:pruebas_manejo] = "Pruebas de manejo: #{objetivo_pm.errors.full_messages.first}"
       end
     end
     objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 5)
@@ -115,7 +115,7 @@ class ObjetivoMensualsController < ApplicationController
       if objetivo_v.save
         msj += ' Ventas '
       else
-        errores[:ventas] = "Ventas: #{objetivo_op.errors.full_messages.first}"
+        errores[:ventas] = "Ventas: #{objetivo_v.errors.full_messages.first}"
       end
     end
     objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 8)
@@ -124,7 +124,7 @@ class ObjetivoMensualsController < ApplicationController
       if objetivo_f.save
         msj += ' Financiaciones '
       else
-        errores[:financiaciones] = "Financiaciones: #{objetivo_op.errors.full_messages.first}"
+        errores[:financiaciones] = "Financiaciones: #{objetivo_f.errors.full_messages.first}"
       end
     end
     objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 3)
@@ -133,7 +133,7 @@ class ObjetivoMensualsController < ApplicationController
       if objetivo_c.save
         msj += ' Calidad '
       else
-        errores[:calidad] = "Calidad: #{objetivo_op.errors.full_messages.first}"
+        errores[:calidad] = "Calidad: #{objetivo_c.errors.full_messages.first}"
       end
     end
     if msj == ''
