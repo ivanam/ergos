@@ -217,10 +217,10 @@
           </div>
           <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <button type="button" data-field="oportunidades" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
               <% valor_op = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 7)%>    
               <input id="input_oportunidades" type="text" class="btn btn-default" style="max-width:70px;" name="oportunidades" value ="<%= valor_op %>"></input>
-              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+              <button type="button" data-field="oportunidades" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div id="oportunidades" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
@@ -235,10 +235,10 @@
           </div>
           <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <button type="button" data-field="pruebas_manejo" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
               <% valor_pm = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 4)%>    
               <input id="input_pruebas_manejo" type="text" class="btn btn-default" style="max-width:70px;" name="pruebas_manejo" value ="<%= valor_pm %>"></input>
-              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+              <button type="button" data-field="pruebas_manejo" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div id="pruebas_manejo" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
@@ -252,11 +252,11 @@
           Ventas:
           </div>
           <div class="col-sm-6">
-            <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+            <div class="btn-group" role="group" aria-label="...">            
+              <button type="button" data-field="ventas" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
               <% valor_v = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 5)%>    
               <input id="input_ventas" type="text" class="btn btn-default" style="max-width:70px;" name="ventas" value ="<%= valor_v %>"></input>
-              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+              <button type="button" data-field="ventas" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div id="ventas" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
@@ -309,10 +309,10 @@
           </div>
           <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
-            <% valor_f = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 8)%>    
-              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+              <button type="button" data-field="financiaciones" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
+              <% valor_f = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 8)%>    
               <input type="text" class="btn btn-default" style="max-width:70px;" name="financiaciones" value="<%= valor_f %>"></input>
-              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+              <button type="button" data-field="financiaciones" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div id="financiaciones" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
@@ -328,10 +328,10 @@
           </div>
           <div class="col-sm-6">
             <div class="btn-group" role="group" aria-label="...">
-            <% valor_csi = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 3)%>    
-              <button type="button" class="btn btn-default btn-menos"><%= fa_icon ("minus")%></button>
+            <% valor_csi = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 3)%>
+              <button type="button" data-field="calidad" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
               <input id="input_calidad" type="text" class="btn btn-default" style="max-width:70px; " name="calidad" value="<%= valor_csi %>"></input>
-              <button type="button" class="btn btn-default btn-mas"><%= fa_icon ("plus")%></button>
+              <button type="button" data-field="calidad" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
           <div id="calidad" class="col-sm-2" style="text-align: left;padding: 6px 0px; font-weight: bold;">
@@ -359,6 +359,21 @@
   </div>
 
   <script type="text/javascript">
+  $('.plus').click(function(){
+    input = $(this).attr('data-field');
+    $("input[name='"+input+"']").val(function(i, oldval) {
+      return ++oldval;
+    });
+  });
+  $('.minus').click(function(){
+    input = $(this).attr('data-field');
+    if ($("input[name='"+input+"']").val() >0) {
+      $("input[name='"+input+"']").val(function(i, oldval) {
+        return --oldval;
+      });
+    }
+  });
+
   $('#mes').val(<%= Date.today.month %>);
   $('#anio').val(<%= Date.today.year %>);
 
