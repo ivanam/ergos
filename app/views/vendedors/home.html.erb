@@ -13,7 +13,7 @@
         <%=image_tag "cucarda_jefe.jpg", :class=>"medal img-fluid", :style=>""%>
       <% else %>
         <%=image_tag "medalla.png", :class=>"medal img-fluid", :style=>""%>
-        <div class="medal-text">1</div> <!-- variable con la posición que tiene en la tabla -->
+        <div class="medal-text"><%= @vendedor.avance %></div> <!-- variable con la posición que tiene en la tabla -->
         <div class="buttons">
           <a data-toggle="modal" data-target="#exampleModalCenter"><span class="fa fa-plus-circle"></span></a>
         </div>

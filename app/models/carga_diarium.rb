@@ -9,6 +9,23 @@ class CargaDiarium < ApplicationRecord
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo Tipo de Objetivo" }
 	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
 
+	validate :estado_vend
+
+	def estado_vend
+		self.vendedor.estado_personas.each do |e_p|
+			f_i = e_p.fecha_inicio
+			if e_p.fecha_fin == nil
+				f_f = Date.new(3000,f_i.month,f_i.day)
+			else
+				f_f = e_p.fecha_fin
+			end
+			if self.fecha.to_date >= f_i and self.fecha.to_date <= f_f
+				errors.add(:base, "No puede realizar la carga")
+				return 0
+			end
+		end
+	end
+
 	def self.carga_total_mes_v(anio,mes,v)
 		total = 0
 		fecha_desde = Date.new(anio,mes,1)
