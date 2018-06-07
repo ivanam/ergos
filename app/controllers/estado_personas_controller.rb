@@ -6,7 +6,8 @@ class EstadoPersonasController < ApplicationController
   # GET /estado_personas
   # GET /estado_personas.json
   def index
-    @estado_personas = EstadoPersona.all
+    vendedores = current_user.punto_venta.vendedors
+    @estado_personas = EstadoPersona.where(vendedor_id: vendedores)
     @bg_gray = true
 
   end

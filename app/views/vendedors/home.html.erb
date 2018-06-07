@@ -13,7 +13,7 @@
         <%=image_tag "cucarda_jefe.jpg", :class=>"medal img-fluid", :style=>""%>
       <% else %>
         <%=image_tag "medalla.png", :class=>"medal img-fluid", :style=>""%>
-        <div class="medal-text">1</div> <!-- variable con la posición que tiene en la tabla -->
+        <div class="medal-text"><%= @vendedor.avance %></div> <!-- variable con la posición que tiene en la tabla -->
         <div class="buttons">
           <a data-toggle="modal" data-target="#exampleModalCenter"><span class="fa fa-plus-circle"></span></a>
         </div>
@@ -26,7 +26,7 @@
   <% if current_user.has_role? :punto_venta %>
   
   <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("vendedor", "numero", ['Yo y mi Equipo']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
+    Seleccione Vendedor: <%=select("vendedor", "numero", ['Mis datos como vendedor']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
   </div>
   <% end %>
 	<h1>Avance</h1>
@@ -38,7 +38,7 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">              
-        			<div id="barra_mes" data-percentage="<%=(Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%</div>
+        			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= Date.today.day.to_i * 100 / Date.today.end_of_month.day.to_i %>%</div>
     				</div>
 					</div>
         </td>
