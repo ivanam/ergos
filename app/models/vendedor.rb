@@ -3,6 +3,8 @@ class Vendedor < ApplicationRecord
   belongs_to :persona, optional: true
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
 
+  has_many :estado_personas
+
   #validates_attachment_presence :foto
   has_attached_file :foto, styles: { medium: "200x250>", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :foto, content_type: /\Aimage/

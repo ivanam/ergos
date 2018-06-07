@@ -48,7 +48,8 @@ class VendedorsController < ApplicationController
 
     @vendedor = Vendedor.new(vendedor_params)
     @vendedor.punto_venta_id = current_user.punto_venta_id
-    @vendedor.avance = 0
+
+    @vendedor.avance = current_user.punto_venta.vendedors.order(:avance).last.avance.to_i + 1
     
     if Persona.where(:cuit => params[:persona][:cuit]).first == nil
       @persona = Persona.new(persona_params)

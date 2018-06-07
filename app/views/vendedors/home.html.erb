@@ -13,7 +13,7 @@
         <%=image_tag "cucarda_jefe.jpg", :class=>"medal img-fluid", :style=>""%>
       <% else %>
         <%=image_tag "medalla.png", :class=>"medal img-fluid", :style=>""%>
-        <div class="medal-text">1</div> <!-- variable con la posición que tiene en la tabla -->
+        <div class="medal-text"><%= @vendedor.avance %></div> <!-- variable con la posición que tiene en la tabla -->
         <div class="buttons">
           <a data-toggle="modal" data-target="#exampleModalCenter"><span class="fa fa-plus-circle"></span></a>
         </div>
@@ -38,7 +38,7 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">              
-        			<div id="barra_mes" data-percentage="<%=(Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%</div>
+        			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= Date.today.day.to_i * 100 / Date.today.end_of_month.day.to_i %>%</div>
     				</div>
 					</div>
         </td>
@@ -146,7 +146,7 @@
         <div class="legend legend-1"><%=carga_total_ob_mes_op%></div>
         <div class="legend legend-2"><%=carga_total_ob_mes_pm%></div>
         <div class="legend legend-3"><%=carga_total_ob_mes_v%></div>
-        <div><%= CargaDiarium.porcentaje_conversion_yo(Date.today.year, Date.today.month, @vendedor)%> %</div>
+        <div><%= CargaDiarium.porcentaje_conversion_yo(Date.today.year, Date.today.month, @vendedor)%></div>
         
       </center>
     </div>	
@@ -162,7 +162,7 @@
         <% total_op = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 7) %>
         <% total_pm = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 4) %>
         <% total_v = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 5) %>
-        <div><%= CargaDiarium.porcentaje_conversion_equipo(Date.today.year, Date.today.month, current_user)%> %</div>
+        <div><%= CargaDiarium.porcentaje_conversion_equipo(Date.today.year, Date.today.month, current_user)%> </div>
         <div class="legend legend-1"><%= total_op %></div>
         <div class="legend legend-2"><%= total_pm %></div>
         <div class="legend legend-3"><%= total_v %></div>
