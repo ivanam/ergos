@@ -89,40 +89,51 @@ class ObjetivoMensualsController < ApplicationController
     cantidad_v = params[:ventas]
     cantidad_f = params[:financiaciones]
     cantidad_c = params[:calidad]    
-    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 7)
+    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 7)
     msj = ''
+    errores = Hash.new
     if cantidad_op.to_i != 0 && objetivo_op != nil
       objetivo_op.cantidad_propuesta = cantidad_op
-      if objetivo_op.save
+      if objetivo_op.save        
         msj += ' Oportunidades '
+      else
+        errores[:oportunidades] = objetivo_op.errors
       end
     end
-    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 4)
+    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 4)
     if cantidad_pm.to_i != 0 && objetivo_pm != nil
       objetivo_pm.cantidad_propuesta = cantidad_pm
       if objetivo_pm.save
         msj += ' Pruebas de manejo '
+      else
+        errores[:pruebas_manejo] = objetivo_pm.errors
       end
     end
-    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 5)
+    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 5)
     if cantidad_v.to_i != 0 && objetivo_v != nil
       objetivo_v.cantidad_propuesta = cantidad_v
       if objetivo_v.save
         msj += ' Ventas '
+      else
+        errores[:ventas] = objetivo_v.errors
       end
     end
-    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 8)
+    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 8)
     if cantidad_f.to_i != 0 && objetivo_f != nil
       objetivo_f.cantidad_propuesta = cantidad_f
       if objetivo_f.save
         msj += ' Financiaciones '
+      else
+        errores[:financiaciones] = objetivo_f.errors
       end
     end
-    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, tipo_objetivo_id: 3)
+    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 3)
     if cantidad_c.to_i != 0 && objetivo_c != nil
       objetivo_c.cantidad_propuesta = cantidad_c
       if objetivo_c.save
         msj += ' Calidad '
+      else
+        errores[:calidad] = objetivo_c.errors
       end
     end
     if msj == ''
@@ -131,8 +142,13 @@ class ObjetivoMensualsController < ApplicationController
       msj = 'Se actualizaron los valores de '+msj
     end
     respond_to do |format|
-      format.html { redirect_to "/vendedors/#{vendedor_id}", notice: msj }
-      format.json { head :no_content }
+      if errores.blank?
+        format.html { redirect_to "/vendedors/#{vendedor_id}", notice: msj }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to "/vendedors/#{vendedor_id}", notice: errores }
+        format.json { render json: errores, status: :unprocessable_entity }
+      end
     end    
   end
 
