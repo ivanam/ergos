@@ -38,6 +38,7 @@ class VendedorsController < ApplicationController
   # GET /vendedors/1/edit
   def edit
     @vendedor = Vendedor.where(:id => params[:id]).first
+    @persona  = @vendedor.persona
     @bg_gray = true
 
   end

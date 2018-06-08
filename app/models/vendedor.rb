@@ -1,6 +1,6 @@
 class Vendedor < ApplicationRecord
 
-  belongs_to :persona, optional: true
+  belongs_to :persona
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
 
   has_many :estado_personas
