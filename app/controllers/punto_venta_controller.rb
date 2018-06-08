@@ -124,7 +124,7 @@ class PuntoVentaController < ApplicationController
       sem=params[:semana]
       @semana = sem.to_i
     end
-   
+    #preguntar si es principio de mes...lamar a ranking
 
     @sidebar = true
     @footer = false
@@ -135,15 +135,39 @@ class PuntoVentaController < ApplicationController
     
     @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first
     #fecha_anterior=Time.now - 1.month
-    fecha_anterior=Date.new(@anio,@mes,1) - 1.month
-    mes_anterior= fecha_anterior.month
-     @vendedores.each do |v|
+    @rankingVendedores =  @vendedores.order(avance: :asc)
+  end
 
-        @ve=Vendedor.where(:id =>v.id).first
-        @ve.avance = CargaDiarium.SumaObMensualVendedor(@anio,mes_anterior,v,"VENTAS")
-        @ve.save
+  def ranking 
+    if params[:mes] != "" and params[:anio] != ""
+      fecha_anterior=Date.new(params[:anio],params[:mes],1) - 1.month
+      mes_anterior= fecha_anterior.month
+    else
+      fecha_anterior=Date.today - 1.month
+      mes_anterior= fecha_anterior.month
+    end
+    if params[:anio] != ""
+      ani0 = params[:anio]
+    else
+      anio = Date.today.year
+    end
+    @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
+    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
+    lista = []
+    posicion = 1
+     @vendedores.each do |ve|
+        rank = CargaDiarium.SumaObMensualVendedor(anio,mes_anterior,ve,"VENTAS")
+        lista << [rank,ve]
       end
-    @rankingVendedores =  @vendedores.order(avance: :desc,  numero: :asc )
+      listOrdenada=lista.sort.reverse
+      listOrdenada.each do |l|
+        vendedor = Vendedor.where(:id => l[1].id).first
+        vendedor.avance = posicion
+        vendedor.save
+        posicion =+ posicion + 1
+      end
+      
+      @rankingVendedores =  @vendedores.order(avance: :asc)
   end
 
 
