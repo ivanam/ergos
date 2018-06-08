@@ -136,7 +136,12 @@
 	<div class="row">
 		<div class="col-xs-4">
       <center>
-        <h4>YO</h4>
+      <% if ((current_user.has_role? :vendedor && @vendedor != nil) or current_user.has_role? :vendedor)%>
+          <h4>YO</h4> 
+        <%else%>
+        <h4>Vendedor</h4>
+      <%end%>
+          
         <%=image_tag "Funnel1.png", class:"img-responsive"%>
         <div class="legend legend-1"><%=carga_total_ob_mes_op%></div>
         <div class="legend legend-2"><%=carga_total_ob_mes_pm%></div>
