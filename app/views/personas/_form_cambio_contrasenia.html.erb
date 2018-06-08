@@ -33,7 +33,7 @@
     <%= p_form.hidden_field :id, value: persona.id %>
 
     <div class="field">
-      <%= u_form.label :password, "New password" %><br />
+      <%= u_form.label :password, "Nueva Contraseña" %><br />
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em><br />
       <% end %>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="field">
-      <%= u_form.label :password_confirmation, "Confirm new password" %><br />
+      <%= u_form.label :password_confirmation, "Confirmar Contraseña" %><br />
       <%= u_form.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
