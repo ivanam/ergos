@@ -90,63 +90,59 @@ class ObjetivoMensualsController < ApplicationController
     cantidad_f = params[:financiaciones]
     cantidad_c = params[:calidad]    
     objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 7)
-    msj = ''
-    errores = Hash.new
+    msj = 'Se actualizaron los valores de '
+    errores = '<ul>'
     if cantidad_op.to_i != 0 && objetivo_op != nil
       objetivo_op.cantidad_propuesta = cantidad_op
       if objetivo_op.save        
-        msj += ' Oportunidades '
+        msj += ' <b>Oportunidades</b> '
       else
-        errores[:oportunidades] = "Oportunidades: #{objetivo_op.errors.full_messages.first}"
+        errores += "<li>Oportunidades: #{objetivo_op.errors.full_messages.first}</li>\n"
       end
     end
     objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 4)
     if cantidad_pm.to_i != 0 && objetivo_pm != nil
       objetivo_pm.cantidad_propuesta = cantidad_pm
       if objetivo_pm.save
-        msj += ' Pruebas de manejo '
+        msj += ' <b>Pruebas de manejo</b> '
       else
-        errores[:pruebas_manejo] = "Pruebas de manejo: #{objetivo_pm.errors.full_messages.first}"
+        errores += "<li>Pruebas de manejo: #{objetivo_pm.errors.full_messages.first}</li>\n"
       end
     end
     objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 5)
     if cantidad_v.to_i != 0 && objetivo_v != nil
       objetivo_v.cantidad_propuesta = cantidad_v
       if objetivo_v.save
-        msj += ' Ventas '
+        msj += ' <b>Ventas</b> '
       else
-        errores[:ventas] = "Ventas: #{objetivo_v.errors.full_messages.first}"
+        errores += "<li>Ventas: #{objetivo_v.errors.full_messages.first}</li>\n"
       end
     end
     objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 8)
     if cantidad_f.to_i != 0 && objetivo_f != nil
       objetivo_f.cantidad_propuesta = cantidad_f
       if objetivo_f.save
-        msj += ' Financiaciones '
+        msj += ' <b>Financiaciones</b> '
       else
-        errores[:financiaciones] = "Financiaciones: #{objetivo_f.errors.full_messages.first}"
+        errores += "<li>Financiaciones: #{objetivo_f.errors.full_messages.first}</li>\n"
       end
     end
     objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: vendedor_id, tipo_objetivo_id: 3)
     if cantidad_c.to_i != 0 && objetivo_c != nil
       objetivo_c.cantidad_propuesta = cantidad_c
       if objetivo_c.save
-        msj += ' Calidad '
+        msj += ' <b>Calidad</b> '
       else
-        errores[:calidad] = "Calidad: #{objetivo_c.errors.full_messages.first}"
+        errores += "<li>Calidad: #{objetivo_c.errors.full_messages.first}</li>\n"
       end
     end
-    if msj == ''
-      msj = 'No se actualizo ningun dato'
-    else
-      msj = 'Se actualizaron los valores de '+msj
-    end
+
     respond_to do |format|
       if errores.blank?
-        format.html { redirect_to "/vendedors/#{vendedor_id}", notice: msj }
+        format.html { redirect_to "/vendedors/#{vendedor_id}", notice: msj.html_safe.to_s }
         format.json { head :no_content }
       else
-        format.html { redirect_to "/vendedors/#{vendedor_id}", alert: errores }
+        format.html { redirect_to "/vendedors/#{vendedor_id}", alert: errores.html_safe.to_s }
         format.json { render json: errores, status: :unprocessable_entity }
       end
     end    
