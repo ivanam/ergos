@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'punto_venta#dashboard', as:'punto_venta_dashboard'
 
+  post "/punto_venta/ranking/", to: 'punto_venta#ranking'
+
   post "/personas/buscar_persona_completa/:cuit", to: 'personas#buscar_persona_completa'
 
   post "/personas/buscar_persona/:cuit", to: 'personas#buscar_persona',  as: :buscar_persona

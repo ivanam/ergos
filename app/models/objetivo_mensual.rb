@@ -96,14 +96,12 @@ class ObjetivoMensual < ApplicationRecord
   def self.total_objetivos_punto_venta(anio, mes, v, ob)
      total = 0
     if v.nil?
-      vendedor_id = 0
+      punto_venta_id = 0
     else
-      vendedor_id = v.id
+      punto_venta_id = v.punto_venta_id
     end
-    ObjetivoMensual.where(anio: anio, mes: mes, punto_venta_id: v.punto_venta_id, tipo_objetivo_id: ob).each do |o_m|
-      total = total + o_m.cantidad_propuesta.to_i
-    end
-    return total
+    objetivo_mensual = ObjetivoMensual.find_by(anio: anio, mes: mes, punto_venta_id: punto_venta_id, tipo_objetivo_id: ob)
+    (objetivo_mensual != nil) ? objetivo_mensual.cantidad_propuesta.to_i : 0
   end
 
   def self.asignado_o_proyeccion(anio, mes, v, ob)

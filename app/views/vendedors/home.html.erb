@@ -136,12 +136,17 @@
 	<div class="row">
 		<div class="col-xs-4">
       <center>
-        <h4>YO</h4>
+      <% if ((current_user.has_role? :vendedor && @vendedor != nil) or current_user.has_role? :vendedor)%>
+          <h4>YO</h4> 
+        <%else%>
+        <h4>Vendedor</h4>
+      <%end%>
+          
         <%=image_tag "Funnel1.png", class:"img-responsive"%>
         <div class="legend legend-1"><%=carga_total_ob_mes_op%></div>
         <div class="legend legend-2"><%=carga_total_ob_mes_pm%></div>
         <div class="legend legend-3"><%=carga_total_ob_mes_v%></div>
-        <div><%= CargaDiarium.porcentaje_conversion_yo(Date.today.year, Date.today.month, @vendedor)%> %</div>
+        <div><%= CargaDiarium.porcentaje_conversion_yo(Date.today.year, Date.today.month, @vendedor)%></div>
         
       </center>
     </div>	
@@ -157,7 +162,7 @@
         <% total_op = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 7) %>
         <% total_pm = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 4) %>
         <% total_v = CargaDiarium.carga_total_por_equipo(Date.today.year, Date.today.month, current_user, 5) %>
-        <div><%= CargaDiarium.porcentaje_conversion_equipo(Date.today.year, Date.today.month, current_user)%> %</div>
+        <div><%= CargaDiarium.porcentaje_conversion_equipo(Date.today.year, Date.today.month, current_user)%> </div>
         <div class="legend legend-1"><%= total_op %></div>
         <div class="legend legend-2"><%= total_pm %></div>
         <div class="legend legend-3"><%= total_v %></div>
