@@ -175,10 +175,7 @@
     <div class="content-box">
       <h4 style="">Información relacionada</h4>
       <ul>
-        <li><%= link_to (fa_icon "user-circle", text: "Perfil Completo"), "#" %></li>
-        <li><%= link_to (fa_icon "list", text: "Historial de Carga"), "#" %></li>
-        <li><%= link_to (fa_icon "shopping-cart", text: "Oportunidades"), "#" %></li>
-        <li><%= link_to (fa_icon "line-chart", text: "Performance"), "#" %></li>
+        <li><%= link_to (fa_icon "list", text: "Historial de Carga"), carga_diaria_path(vendedor: @vendedor.numero) %></li>
     </ul>
     </div>
 
