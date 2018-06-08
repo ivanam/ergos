@@ -134,6 +134,23 @@ class PuntoVentaController < ApplicationController
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
     
     @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first
+    if Date.today.day == 1
+      fecha_anterior=Date.new(@anio,@mes,1) - 1.month
+      mes_anterior= fecha_anterior.month
+      lista = []
+      posicion = 1
+       @vendedores.each do |ve|
+          rank = CargaDiarium.SumaObMensualVendedor(@anio,mes_anterior,ve,"VENTAS")
+          lista << [rank,ve]
+        end
+        listOrdenada=lista.sort.reverse
+        listOrdenada.each do |l|
+          vendedor = Vendedor.where(:id => l[1].id).first
+          vendedor.avance = posicion
+          vendedor.save
+          posicion =+ posicion + 1
+        end
+    end
     #fecha_anterior=Time.now - 1.month
     @rankingVendedores =  @vendedores.order(avance: :asc)
   end
@@ -147,7 +164,7 @@ class PuntoVentaController < ApplicationController
       mes_anterior= fecha_anterior.month
     end
     if params[:anio] != ""
-      ani0 = params[:anio]
+      anio = params[:anio]
     else
       anio = Date.today.year
     end
