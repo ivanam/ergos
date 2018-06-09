@@ -3,6 +3,19 @@
   concesionaria_id = PuntoVentum.where(:id => punto_venta_id ).first.concesionaria_id
   @concesionaria = Concesionarium.where(:id => concesionaria_id).first.nombre
   %>
+
+  <% if !@errores.blank? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
+      <ul>
+        <% @errores.each do |objeto, error| %>
+          <li><%= objeto.to_s.humanize %>: <%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="col-sm-12 h-6">
     <ol class="breadcrumb">
       <li><a href="/">Organización: Ergos</a></li> /
@@ -16,8 +29,6 @@
     </ol>
 
   </div>
-
-    
 
     <% v= @vendedor
 
@@ -193,7 +204,7 @@
           <a href="/vendedors/<%=ultimo%>"> >> </a>
         </div>
       </div>
-      <%= form_tag("/objetivo_mensuals/actualizar_objetivos", method: "post") do %>
+      <%= form_tag("/vendedors/actualizar_objetivos", method: "post") do %>
       <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
         <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
         <%= fa_icon "file-pdf-o", text: "Imprimir Objetivos" %>

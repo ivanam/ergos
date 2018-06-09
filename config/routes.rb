@@ -61,7 +61,7 @@ Rails.application.routes.draw do
 
   get "/vendedor/cambiar_rol", to: 'vendedors#cambiar_rol', as: :vendedor_cambiar_rol
 
-  post "/objetivo_mensuals/actualizar_objetivos" , to: 'objetivo_mensuals#actualizar_objetivos', as: :actualizar_objetivos
+  post "/vendedors/actualizar_objetivos" , to: 'vendedors#actualizar_objetivos', as: :actualizar_objetivos
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
