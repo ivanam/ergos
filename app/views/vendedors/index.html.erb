@@ -40,12 +40,12 @@
               <%= link_to edit_vendedor_path(vendedor), class: 'btn btn-sm btn-default' do %>
                 <span class="fa fa-pencil"></span>
               <% end %>
-            <% end %>
-            <%= link_to persona_cambiar_contrasenia_path(vendedor.persona), class: 'btn btn-sm btn-default' do %>
-              <span class="fa fa-undo"></span>
-            <% end %>
-            <%= link_to vendedor, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
-              <span class="fa fa-trash"></span>
+              <%= link_to persona_cambiar_contrasenia_path(vendedor.persona), class: 'btn btn-sm btn-default' do %>
+                <span class="fa fa-undo"></span>
+              <% end %>
+              <%= link_to vendedor, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
+                <span class="fa fa-trash"></span>
+              <% end %>
             <% end %>
           </td>
         </tr>
