@@ -74,9 +74,16 @@
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
-        <h4 style="">Vendedor</h4>
+        <h4 style="padding-bottom: 30px;">Vendedor</h4>
         <p style="">Estado: Activo</p>
-        <p style="">Última Carga: Ayer 17:54</p>
+        <% if CargaDiarium.where(vendedor_id: @vendedor.id).last.nil?
+          ultima_carga = "Sin cargas"
+        else
+          ultima_carga = CargaDiarium.where(vendedor_id: @vendedor.id).last.created_at
+        end
+        %>
+        <p style="">Última Carga: <%= ultima_carga %></p>
+
       </div>
     </div>
   </div>
