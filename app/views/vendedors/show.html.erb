@@ -31,16 +31,15 @@
   </div>
 
     <% v= @vendedor
-
-    if @vendedor.next != nil 
-      siguiente= @vendedor.next.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).where("avance > ?", @vendedor.avance).order(:avance).first != nil 
+      siguiente= Vendedor.where(punto_venta_id: punto_venta_id).where("avance > ?", @vendedor.avance).order(:avance).first.id
     else
       siguiente= @vendedor.id
     end
 
 
-    if @vendedor.previous != nil 
-      anterior= @vendedor.previous.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).where("avance < ?", @vendedor.avance).order("avance DESC").first != nil 
+      anterior= Vendedor.where(punto_venta_id: punto_venta_id).where("avance < ?", @vendedor.avance).order("avance DESC").first.id
     else
       anterior= @vendedor.id
     end
@@ -54,14 +53,14 @@
 
     cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
 
-    if Vendedor.all.first != nil
-        primero = Vendedor.where(punto_venta_id: punto_venta_id).first.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).first != nil
+        primero = Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).first.id
     else
       primero = 0
     end
 
-    if Vendedor.all.last != nil
-        ultimo = Vendedor.where(punto_venta_id: punto_venta_id).last.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).last != nil
+        ultimo = Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).last.id
     else
       ultimo = 0
     end%>
@@ -90,7 +89,7 @@
           <center>
             <a href="/vendedors/<%=primero%>"> << </a> 
             <a href="/vendedors/<%=anterior%>"> < </a> 
-            1 de <%=cant%> 
+            <%= @vendedor.avance %> de <%=cant%> 
             <a href="/vendedors/<%=siguiente%>"> > </a>
             <a href="/vendedors/<%=ultimo%>"> >> </a>
           </center>
@@ -201,7 +200,7 @@
           <center>
             <a href="/vendedors/<%=primero%>"> << </a> 
             <a href="/vendedors/<%=anterior%>"> < </a> 
-            1 de <%=cant%> 
+            <%= @vendedor.avance%> de <%=cant%> 
             <a href="/vendedors/<%=siguiente%>"> > </a>
             <a href="/vendedors/<%=ultimo%>"> >> </a>
           </center>
