@@ -205,6 +205,19 @@
 
 <script type="text/javascript">
 
+$( document ).ready(function() {
+  var nombre = $("#input_nombre").val();
+  var apellido = $("#input_apellidos").val(); 
+
+  var n = nombre.charAt(0);
+  var a = apellido.charAt(0);
+
+  var result = n.concat(a);
+
+  $("#numero").val(result);
+
+
+})
 
 $("#input_apellidos").bind("propertychange change click keyup input paste",function(){
   var nombre = $("#input_nombre").val();
