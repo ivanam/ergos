@@ -1,9 +1,10 @@
 <div class="col-sm-12" style="margin-top: 15px;">
   <div class="content-box h-100">
 
-<% if ((current_user.has_role? :concesionaria) || (current_user.has_role? :admin)) %>
+
+<h2 style="text-align: center;font-weight: 600;">Vendedores</h2>
+<% if current_user.has_role? :concesionaria %>
   <div class="page-header">
-  <h2 style="text-align: center;font-weight: 600;">Vendedores</h2>
     <%= link_to new_vendedor_path, class: 'btn btn-primary' do %>
       <%= fa_icon "plus", text: "Nuevo vendedor" %>
     <% end %>
@@ -35,8 +36,10 @@
             <%= link_to vendedor, class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-eye"></span>
             <% end %>
-            <%= link_to edit_vendedor_path(vendedor), class: 'btn btn-sm btn-default' do %>
-              <span class="fa fa-pencil"></span>
+            <% if current_user.has_role? :concesionaria %>
+              <%= link_to edit_vendedor_path(vendedor), class: 'btn btn-sm btn-default' do %>
+                <span class="fa fa-pencil"></span>
+              <% end %>
             <% end %>
             <%= link_to persona_cambiar_contrasenia_path(vendedor.persona), class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-undo"></span>

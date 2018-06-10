@@ -8,22 +8,20 @@
   <div class="modal-body">
     <div class="form-group">
       <%= label_tag 'Fecha', nil, class: "col-sm-4 control-label" %>
-      <div class="col-sm-4">
-        <%= date_field_tag 'fecha', nil, class: 'form-control required', min: Date.yesterday, max: Date.today %>
+      <div class="col-sm-6">
+        <%= date_field_tag 'fecha', nil, class: 'form-control required', min: Date.yesterday, max: Date.today, value: Date.today %>
       </div>
     </div>
     <% @tipos_objetivos.each do |t|%>      
       <div class="form-group"> 
-      <div class="col-sm-12">  
-        <div class="col-sm-4">     
+        <div class="col-sm-2">     
         <%= label_tag t.descripcion, nil%>
         </div>
-          <div class="col-sm-8 btn-group" role="group" aria-label="...">
-            <a data-field="<%= t.id %>" class="btn btn-success plus"><%= fa_icon "plus" %></a>
-            <%= number_field_tag t.id, 0, class: 'btn btn-default' %>
-            <a data-field="<%= t.id %>" class="btn btn-danger minus"><%= fa_icon "minus" %></a>
-          </div>
-      </div>
+        <div class="col-sm-6 btn-group" role="group" aria-label="...">
+          <a data-field="<%= t.id %>" class="btn btn-success plus"><%= fa_icon "plus" %></a>
+          <%= number_field_tag t.id, 0, class: 'btn btn-default' %>
+          <a data-field="<%= t.id %>" class="btn btn-danger minus"><%= fa_icon "minus" %></a>
+        </div>      
       </div>
     <% end %>
   </div>

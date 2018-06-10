@@ -3,6 +3,19 @@
   concesionaria_id = PuntoVentum.where(:id => punto_venta_id ).first.concesionaria_id
   @concesionaria = Concesionarium.where(:id => concesionaria_id).first.nombre
   %>
+
+  <% if !@errores.blank? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
+      <ul>
+        <% @errores.each do |objeto, error| %>
+          <li><%= objeto.to_s.humanize %>: <%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="col-sm-12 h-6">
     <ol class="breadcrumb">
       <li><a href="/">Organización: Ergos</a></li> /
@@ -16,8 +29,6 @@
     </ol>
 
   </div>
-
-    
 
     <% v= @vendedor
 
@@ -73,14 +84,16 @@
   <div class="col-sm-9 admin-box h-400">
     <div class="content-box h-100">
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
-        <div class="title-box w-20 bg-gray">Vendedores</div>
+        <div class="title-box w-20 bg-gray"><b>Vendedores</b></div>
         <div class="title-box w-60 bg-ergosgray"></div>
         <div class="title-box w-20 bg-gray">
-          <a href="/vendedors/<%=primero%>"> << </a> 
-          <a href="/vendedors/<%=anterior%>"> < </a> 
-          1 de <%=cant%> 
-          <a href="/vendedors/<%=siguiente%>"> > </a>
-          <a href="/vendedors/<%=ultimo%>"> >> </a>
+          <center>
+            <a href="/vendedors/<%=primero%>"> << </a> 
+            <a href="/vendedors/<%=anterior%>"> < </a> 
+            1 de <%=cant%> 
+            <a href="/vendedors/<%=siguiente%>"> > </a>
+            <a href="/vendedors/<%=ultimo%>"> >> </a>
+          </center>
         </div>
       </div>
       <div class="row">
@@ -88,9 +101,8 @@
           <div class="">
             <h4 class="text-center font-weight-bold" style="margin-top:0px;">Datos Personales</h4>
             <p><span class="font-weight-bold">Identificación: </span><%=v.persona.cuit%></p>
-            <p><span class="font-weight-bold">Edad:</span><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
+            <p><span class="font-weight-bold">Edad: </span><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
             <p><span class="font-weight-bold">Fecha de Ingreso: </span><%=v.fecha_alta%></p>
-            <p><span class="font-weight-bold">Interno: </span> ? </p>
             <p><span class="font-weight-bold">Teléfono Móvil: </span><%=v.persona.telefono%></p>
             <p><span class="font-weight-bold">E-Mail: </span><%=v.persona.email%></p>
           </div>
@@ -165,7 +177,7 @@
         </div>
       </div>
       <div class="" style="width:90%;position: absolute;bottom: 20px;">
-        <p class="text-center "><a href="">más..</a></p>
+        
       </div>
 
     </div>
@@ -186,14 +198,16 @@
         <div class="title-box w-20 bg-gray"><b>Objetivos</b></div>
         <div class="title-box w-60 bg-ergosgray"></div>
         <div class="title-box w-20 bg-gray">
-          <a href="/vendedors/<%=primero%>"> << </a> 
-          <a href="/vendedors/<%=anterior%>"> < </a> 
-          1 de <%=cant%> 
-          <a href="/vendedors/<%=siguiente%>"> > </a>
-          <a href="/vendedors/<%=ultimo%>"> >> </a>
+          <center>
+            <a href="/vendedors/<%=primero%>"> << </a> 
+            <a href="/vendedors/<%=anterior%>"> < </a> 
+            1 de <%=cant%> 
+            <a href="/vendedors/<%=siguiente%>"> > </a>
+            <a href="/vendedors/<%=ultimo%>"> >> </a>
+          </center>
         </div>
       </div>
-      <%= form_tag("/objetivo_mensuals/actualizar_objetivos", method: "post") do %>
+      <%= form_tag("/vendedors/actualizar_objetivos", method: "post") do %>
       <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
         <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos' do %>
         <%= fa_icon "file-pdf-o", text: "Imprimir Objetivos" %>
@@ -265,8 +279,8 @@
         <div class="col-xs-6 row">
           <!-- Mes -->
           <div class="row">
-            <%= label_tag :mes, "Mes", class: "col-sm-2 control-label" %>
-            <div class="col-sm-4">
+            <%= label_tag :mes, "Mes", class: "col-sm-1 control-label" %>
+            <div class="col-sm-5">
               <select class="form-control" name="mes" id="mes">
                 <option value="1">Enero </option>
                 <option value="2">Febrero </option>
@@ -282,7 +296,7 @@
                 <option value="12">Diciembre </option>
               </select>
             </div>
-            <%= label_tag :anio, "Año", class: "col-sm-2 control-label" %>
+            <%= label_tag :anio, "Año", class: "col-sm-1 control-label" %>
             <div class="col-sm-4">
               <select class="form-control" name="anio" id="anio">
                 <script language="javascript" type="text/javascript">
@@ -349,8 +363,8 @@
   </div>
   <div class="col-sm-12 h-6">
     <div class="btn-horizontal-list bg_white" style="">
-      <a href="/reunions" type="button" class="btn btn-default btn-ergos">Preparar Reunión Semanal</a>
-      <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Agregar Atajo</div></button>
+      <a href="/reunions" type="button" class="btn btn-default btn-ergos">Preparar Reuniones</a>
+      <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Atajo</div></button>
     </div>
     
   </div>

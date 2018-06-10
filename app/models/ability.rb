@@ -25,12 +25,15 @@ class Ability
           can :home, [Vendedor]
           can :read, [Vendedor]
           can :objetivos_y_carga_diaria, [Vendedor]
+          can :actualizar_objetivos, [Vendedor]
+          can :show, [Concesionarium]
         elsif user.has_role? :vendedor
           can :manage, [CargaDiarium]
           can :read, [PuntoVentum]
           can :dashboard, [PuntoVentum]
           can :dashboardConParametros, [PuntoVentum]
           can :manage, [Vendedor]
+          can :show, [Concesionarium]
         else
           raise CanCan::AccessDenied.new("Usuario bloqueado") 
         end
