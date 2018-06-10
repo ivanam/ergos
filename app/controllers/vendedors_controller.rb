@@ -99,6 +99,105 @@ class VendedorsController < ApplicationController
     end
   end
 
+  def actualizar_objetivos
+    mes = params[:mes]
+    anio = params[:anio]
+    @vendedor = Vendedor.find(params[:vendedor][:id])
+    cantidad_op = params[:oportunidades]
+    cantidad_pm = params[:pruebas_manejo]
+    cantidad_v = params[:ventas]
+    cantidad_f = params[:financiaciones]
+    cantidad_c = params[:calidad]    
+    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 7)
+    msj = 'Se actualizaron los valores de '
+    @errores = Hash.new
+    if cantidad_op.to_i != 0
+      if objetivo_op != nil
+        objetivo_op.cantidad_propuesta = cantidad_op
+        if objetivo_op.save        
+          msj += ' <b>Oportunidades</b> '
+        else
+          @errores[:oportunidades] = objetivo_op.errors.full_messages.first
+        end
+      else
+        @errores[:oportunidades] = 'No hay un objetivo creado para editar'
+      end
+    else
+      @errores[:oportunidades] = 'La cantidad debe ser mayor a 0'
+    end
+    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 4)
+    if cantidad_pm.to_i != 0 
+      if objetivo_pm != nil
+        objetivo_pm.cantidad_propuesta = cantidad_pm
+        if objetivo_pm.save
+          msj += ' <b>Pruebas de manejo</b> '
+        else
+          @errores[:pruebas_de_manejo] = objetivo_pm.errors.full_messages.first
+        end
+      else
+        @errores[:pruebas_de_manejo] = 'No hay un objetivo creado para editar'  
+      end
+    else
+      @errores[:pruebas_de_manejo] = 'La cantidad debe ser mayor a 0'
+    end
+    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 5)
+    if cantidad_v.to_i != 0 
+      if objetivo_v != nil
+        objetivo_v.cantidad_propuesta = cantidad_v
+        if objetivo_v.save
+          msj += ' <b>Ventas</b> '
+        else
+          @errores[:ventas] = objetivo_v.errors.full_messages.first
+        end
+      else
+        @errores[:ventas] = 'No hay un objetivo creado para editar'  
+      end
+    else
+      @errores[:ventas] = 'La cantidad debe ser mayor a 0'
+    end
+    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 8)
+    if cantidad_f.to_i != 0 
+      if objetivo_f != nil
+        objetivo_f.cantidad_propuesta = cantidad_f
+        if objetivo_f.save
+          msj += ' <b>Financiaciones</b> '
+        else
+          @errores[:financiaciones] = objetivo_f.errors.full_messages.first
+        end
+      else
+        @errores[:ventas] = 'No hay un objetivo creado para editar'  
+      end
+    else
+      @errores[:financiaciones] = 'La cantidad debe ser mayor a 0'
+    end
+    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 3)
+    if cantidad_c.to_i != 0 
+      if objetivo_c != nil
+        objetivo_c.cantidad_propuesta = cantidad_c
+        if objetivo_c.save
+          msj += ' <b>Calidad</b> '
+        else
+          @errores[:calidad] = objetivo_c.errors.full_messages.first
+        end
+      else
+        @errores[:ventas] = 'No hay un objetivo creado para editar'
+      end
+    else
+      @errores[:calidad] = 'La cantidad debe ser mayor a 0'
+    end
+
+    respond_to do |format|
+      if @errores.blank?
+        format.html { redirect_to @vendedor, notice: msj }
+        format.json { head :no_content }
+      else
+        @bg_gray = true
+        format.html { render :show }
+        format.json { render json: @errores, status: :unprocessable_entity }
+      end
+    end    
+  end
+
   # PATCH/PUT /vendedors/1
   # PATCH/PUT /vendedors/1.json
   def update
