@@ -34,6 +34,8 @@ class Ability
           can :dashboardConParametros, [PuntoVentum]
           can :manage, [Vendedor]
           can :show, [Concesionarium]
+        elsif user.has_role? :dashboard
+          can :dashboard, [PuntoVentum]
         else
           raise CanCan::AccessDenied.new("Usuario bloqueado") 
         end
