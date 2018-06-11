@@ -36,7 +36,7 @@
             <%= link_to vendedor, class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-eye"></span>
             <% end %>
-            <% if current_user.has_role? :concesionaria %>
+            <% if current_user.has_role? :concesionaria ||  current_user.has_role? :admin%>
               <%= link_to edit_vendedor_path(vendedor), class: 'btn btn-sm btn-default' do %>
                 <span class="fa fa-pencil"></span>
               <% end %>
