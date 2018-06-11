@@ -24,6 +24,8 @@ class Persona < ApplicationRecord
 
   before_destroy :deshabilitar_user
 
+  before_update :consistencia_mail
+
 
   def to_s
     "#{self.apellido}, #{self.nombre}"
@@ -38,6 +40,10 @@ class Persona < ApplicationRecord
       now = Date.today
       now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     end
+  end
+
+  def consistencia_mail
+    User.where(persona_id: self.id).first.update(email: self.email)
   end
 
 
