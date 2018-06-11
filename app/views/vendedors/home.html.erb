@@ -28,10 +28,15 @@
 </div>
 <div class="content">
   <% if current_user.has_role? :punto_venta %>
-  
-  <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("vendedor", "numero", ['Mis datos como vendedor']+Vendedor.where.not(:persona_id => current_user.persona.id).where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]}, :id => "vendedor_numero") %>    
-  </div>
+  <% if current_user.persona.vendedors == [] %>
+   <div class="select-vendedores">
+     Seleccione Vendedor: <%=select("vendedor", "numero",['']+Vendedor.where.not(:persona_id => current_user.persona.id).where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]}, :id => "vendedor_numero") %>   
+   </div>
+  <%else%>
+    <div class="select-vendedores">
+     Seleccione Vendedor: <%=select("vendedor", "numero", ['Mis datos como vendedor']+Vendedor.where.not(:persona_id => current_user.persona.id).where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]}, :id => "vendedor_numero") %>    
+    </div>
+  <% end %>
   <% end %>
 	<h1>Avance</h1>
 	<table class="table", style="text-align: left;">
@@ -44,6 +49,7 @@
     				<div class="bar-container">              
         			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%</div>
     				</div>
+            
 					</div>
         </td>
         <td style="text-align: right;"><%= Date.today.day.to_i %>/<%= Date.today.end_of_month.day.to_i %></td>
@@ -207,8 +213,10 @@ $('.bar').each(function() {
     percentage = $(this).attr('data-percentage');
     if (percentage > 100){
       $(this).css('width',100+'%');
+      $(this).css('text-align: center',percentage);
     }else{
-      $(this).css('width',percentage+'%');
+      $(this).css('width', percentage+'%');
+      $(this).css('text-align: center',percentage);
      }
 });
 $('#vendedor_numero').change(function(){
