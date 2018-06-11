@@ -507,6 +507,11 @@ nav.sidebar, .main{
   min-height: 400px;
 }
 
+.h-500 .content-box {
+  min-height: 500px;
+}
+
+
 .content-box ul{
   list-style:none;
   padding-left:20px;
@@ -614,6 +619,12 @@ nav.sidebar, .main{
   
 }
 
+.box-description p {
+  height: 60px;
+  padding: 20px 0px;
+}
+
+
 
 @media (min-width: 765px) {
 
@@ -629,6 +640,8 @@ nav.sidebar, .main{
   }
 
 }
+
+
 
 
 /* --------------------------------------------------------- */
