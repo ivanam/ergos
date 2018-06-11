@@ -1,7 +1,7 @@
 <%= form_for persona_punto_ventum, html: { class: "form-horizontal", role: "form" } do |f| %>
   <% if persona_punto_ventum.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(persona_punto_ventum.errors.count, "error") %> prohibited this persona_punto_ventum from being saved:</h2>
+      <h2><%= pluralize(persona_punto_ventum.errors.count, "error") %></h2>
 
       <ul>
       <% persona_punto_ventum.errors.full_messages.each do |message| %>
