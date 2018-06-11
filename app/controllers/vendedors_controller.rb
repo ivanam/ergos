@@ -118,7 +118,7 @@ class VendedorsController < ApplicationController
       if objetivo_op != nil
         objetivo_op.cantidad_propuesta = cantidad_op
         if objetivo_op.save        
-          msj += ' <b>Oportunidades</b> '
+          msj += ' Oportunidades '
         else
           @errores[:oportunidades] = objetivo_op.errors.full_messages.first
         end
@@ -133,7 +133,7 @@ class VendedorsController < ApplicationController
       if objetivo_pm != nil
         objetivo_pm.cantidad_propuesta = cantidad_pm
         if objetivo_pm.save
-          msj += ' <b>Pruebas de manejo</b> '
+          msj += ' Pruebas de manejo '
         else
           @errores[:pruebas_de_manejo] = objetivo_pm.errors.full_messages.first
         end
@@ -148,7 +148,7 @@ class VendedorsController < ApplicationController
       if objetivo_v != nil
         objetivo_v.cantidad_propuesta = cantidad_v
         if objetivo_v.save
-          msj += ' <b>Ventas</b> '
+          msj += ' Ventas '
         else
           @errores[:ventas] = objetivo_v.errors.full_messages.first
         end
@@ -163,7 +163,7 @@ class VendedorsController < ApplicationController
       if objetivo_f != nil
         objetivo_f.cantidad_propuesta = cantidad_f
         if objetivo_f.save
-          msj += ' <b>Financiaciones</b> '
+          msj += ' Financiaciones '
         else
           @errores[:financiaciones] = objetivo_f.errors.full_messages.first
         end
@@ -178,7 +178,7 @@ class VendedorsController < ApplicationController
       if objetivo_c != nil
         objetivo_c.cantidad_propuesta = cantidad_c
         if objetivo_c.save
-          msj += ' <b>Calidad</b> '
+          msj += ' Calidad '
         else
           @errores[:calidad] = objetivo_c.errors.full_messages.first
         end
