@@ -69,25 +69,25 @@
 
   <div class="col-sm-3 admin-box h-500">
     <div class="content-box h-100">
-      
+      <div class="box-top-bar"></div>
       <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:250px;"%></center> 
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
         <h4 style="padding-bottom: 30px;">Vendedor</h4>
-        <p style="">Estado: Activo</p>
+        <p style="border-top: 2px solid;padding: 5px 0px;border-bottom: 2px solid;background-color: rgba(193, 204, 207, 0.22);"><span style="font-weight: 600">Estado:</span> Activo</p>
         <% if CargaDiarium.where(vendedor_id: @vendedor.id).last.nil?
           ultima_carga = "Sin cargas"
         else
           ultima_carga = CargaDiarium.where(vendedor_id: @vendedor.id).last.created_at
         end
         %>
-        <p style="">Última Carga: <%= ultima_carga %></p>
+        <p style=""><span style="font-weight: 600">Última Carga:</span> <%= ultima_carga %></p>
 
       </div>
     </div>
   </div>
-  <div class="col-sm-9 admin-box h-400">
+  <div class="col-sm-9 admin-box h-500">
     <div class="content-box h-100">
       <div class="btn-group w-100" role="group" aria-label="..." style="margin-bottom: 20px;">
         <div class="title-box w-20 bg-gray"><b>Vendedores</b></div>
@@ -104,8 +104,9 @@
       </div>
       <div class="row">
         <div class="col-xs-6">
-          <div class="">
-            <h4 class="text-center font-weight-bold" style="margin-top:0px;">Datos Personales</h4>
+          <h4 class="text-center font-weight-bold" style="margin-top:0px;">Datos Personales</h4>
+          <div class="box-description">
+            
             <p><span class="font-weight-bold">Identificación: </span><%=v.persona.cuit%></p>
             <p><span class="font-weight-bold">Edad: </span><%=v.persona.age(v.persona.fecha_nacimiento)%> años</p>
             <p><span class="font-weight-bold">Fecha de Ingreso: </span><%=v.fecha_alta%></p>
@@ -113,10 +114,10 @@
             <p><span class="font-weight-bold">E-Mail: </span><%=v.persona.email%></p>
           </div>
         </div>
-        <div class="col-xs-6 row">
+        <div class="col-xs-6 row" style="color:#23527c;">
           <h4 class="text-center font-weight-bold" style="margin-top:0px;">Último Trimestre</h4>
           <div class="col-xs-6">
-            <%=image_tag "Funnel-details.png", class:"img-responsive"%>
+            <%=image_tag "Funnel-details.png", class:"img-responsive", style:"max-height:175px;"%>
             
           </div>    
           <div class="col-xs-6">
@@ -126,7 +127,7 @@
                 total_trimestral_pm = CargaDiarium.total_trimestral(Date.today.year, Date.today.month, @vendedor, 4) 
                 total_trimestral_v = CargaDiarium.total_trimestral(Date.today.year, Date.today.month, @vendedor, 5) 
               %>
-              <%=image_tag "Funnel2.png", class:"img-responsive"%>
+              <%=image_tag "Funnel2.png", class:"img-responsive", style:"max-height:175px;"%>
               <div class="legend legend-1" style="top:10%;"><%= total_trimestral_op %></div>
               <div class="legend legend-2" style="top:40%;"><%= total_trimestral_pm %></div>
               <div class="legend legend-3" style="bottom:20%;"><%= total_trimestral_v %></div>
@@ -153,9 +154,9 @@
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col"><%= I18n.t("date.month_names")[primer_mes] %></th>
-                  <th scope="col"><%= I18n.t("date.month_names")[segundo_mes] %></th>
-                  <th scope="col"><%= I18n.t("date.month_names")[tercer_mes] %></th>
+                  <th scope="col" style="color:#23527c;"><%= I18n.t("date.month_names")[primer_mes] %></th>
+                  <th scope="col" style="color:#23527c;"><%= I18n.t("date.month_names")[segundo_mes] %></th>
+                  <th scope="col" style="color:#23527c;"><%= I18n.t("date.month_names")[tercer_mes] %></th>
                 </tr>
               </thead>
               <tbody>
