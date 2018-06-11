@@ -30,7 +30,7 @@
   <% if current_user.has_role? :punto_venta %>
   
   <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("vendedor", "numero", ['Mis datos como vendedor']+Vendedor.where.not(:persona_id => current_user.persona.id).where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
+    Seleccione Vendedor: <%=select("vendedor", "numero", ['Mis datos como vendedor']+Vendedor.where.not(:persona_id => current_user.persona.id).where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]}, :id => "vendedor_numero") %>    
   </div>
   <% end %>
 	<h1>Avance</h1>
