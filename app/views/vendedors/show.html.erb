@@ -18,7 +18,7 @@
 
   <div class="col-sm-12 h-6">
     <ol class="breadcrumb">
-      <li><a href="/">Organización: Ergos</a></li> /
+      <li><a href="/">Inicio</a></li> /
       <%= link_to  concesionarium_url(concesionaria_id) do %>
        Concesionarios: <%=@concesionaria%> / 
       <% end %>
@@ -71,6 +71,7 @@
     <div class="content-box h-100">
       
       <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:250px;"%></center> 
+      <%= v.foto.url(:medium) %>
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 

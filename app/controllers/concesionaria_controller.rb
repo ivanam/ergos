@@ -35,7 +35,7 @@ class ConcesionariaController < ApplicationController
     @concesionarium.user_id = current_user.id
     respond_to do |format|
       if @concesionarium.save
-        format.html { redirect_to @concesionarium, notice: 'Concesionarium was successfully created.' }
+        format.html { redirect_to @concesionarium, notice: 'La Concesionaria fue creada.' }
         format.json { render :show, status: :created, location: @concesionarium }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class ConcesionariaController < ApplicationController
   def update
     respond_to do |format|
       if @concesionarium.update(concesionarium_params)
-        format.html { redirect_to @concesionarium, notice: 'Concesionarium was successfully updated.' }
+        format.html { redirect_to @concesionarium, notice: 'Se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @concesionarium }
       else
         format.html { render :edit }
