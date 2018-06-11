@@ -625,6 +625,15 @@ nav.sidebar, .main{
 }
 
 
+.box-top-bar {
+  
+  min-height: 20px;
+  background-color: #2F3337;
+  position: relative;
+  top: -15px;
+  left: -15px;
+  width: calc(100% + 30px);
+}
 
 @media (min-width: 765px) {
 
