@@ -266,6 +266,7 @@ class VendedorsController < ApplicationController
 
 
   def cambiar_rol
+
       @persona = Persona.where(id: params[:persona]).first
       @vendedor = Vendedor.new
   end
