@@ -62,7 +62,7 @@
       <label class="col-sm-2 control-label">Cuit</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.text_field :cuit , :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit", :value => cuit , :readonly => :true%> 
+          <%= p_form.text_field :cuit , :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit", :value => cuit %> 
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
       <label class="col-sm-2 control-label">Tipo de Documento</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all.order(:descripcion), :id, :descripcion, {prompt: false} ,:style=>"width:50%" ,:id=> "select_tipo_documento", :class => "form-control select input_tipo_documento", :value =>tipo_documento_id , :readonly => :true%>
+          <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all.order(:descripcion), :id, :descripcion, {prompt: false} ,:style=>"width:50%" ,:id=> "select_tipo_documento", :class => "form-control select input_tipo_documento", :value =>tipo_documento_id %>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
       <label class="col-sm-2 control-label">Número de Documento</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.text_field :numero_documento, :class => "form-alta-vendedor input_dni text-field form-control solo_numerico", :id => "input_dni", :value => numero_documento, :readonly => :true %>
+          <%= p_form.text_field :numero_documento, :class => "form-alta-vendedor input_dni text-field form-control solo_numerico", :id => "input_dni", :value => numero_documento%>
         </div>
       </div>
     </div>
@@ -93,7 +93,7 @@
       <label class="col-sm-2 control-label">Apellido</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.text_field :apellido , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_apellidos", :placeholder => "Apellido",  :value => apellido, :readonly => :true %>
+          <%= p_form.text_field :apellido , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_apellidos", :placeholder => "Apellido",  :value => apellido%>
         </div>
       </div>
     </div>
@@ -104,7 +104,7 @@
       <label class="col-sm-2 control-label">Nombre</label>  
       <div class="col-sm-2">
         <div class="form-group">
-           <%= p_form.text_field :nombre , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_nombre", :placeholder => "Nombre",  :value => nombre , :readonly => :true %>
+           <%= p_form.text_field :nombre , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_nombre", :placeholder => "Nombre",  :value => nombre  %>
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@
       <label class="col-sm-2 control-label">Domicilio</label>  
       <div class="col-sm-2">
         <div class="form-group">
-         <%= p_form.text_field :domicilio , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_domicilio", :placeholder => "Domicilio",  :value => domicilio , :readonly => :true%>
+         <%= p_form.text_field :domicilio , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_domicilio", :placeholder => "Domicilio",  :value => domicilio%>
         </div>
       </div>
     </div>
@@ -125,7 +125,7 @@
       <label class="col-sm-2 control-label">Teléfono</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.text_field :telefono , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_telefono", :placeholder => "Teléfono",  :value => telefono, :readonly => :true %>
+          <%= p_form.text_field :telefono , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_telefono", :placeholder => "Teléfono",  :value => telefono%>
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@
       <label class="col-sm-2 control-label">Fecha Nacimiento</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.date_field :fecha_nacimiento, :id => "datepicker1", :placeholder => "Fecha Nacimiento", :class => "form-fecha-nac form-control",  :value => fecha_nacimiento, :readonly => :true %>
+          <%= p_form.date_field :fecha_nacimiento, :id => "datepicker1", :placeholder => "Fecha Nacimiento", :class => "form-fecha-nac form-control",  :value => fecha_nacimiento %>
         </div>
       </div>
     </div>
@@ -145,7 +145,7 @@
       <label class="col-sm-2 control-label">Email</label>  
       <div class="col-sm-2">
         <div class="form-group">
-          <%= p_form.text_field :email , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_email", :placeholder => "Email",  :value => email, :readonly => :true %>
+          <%= p_form.text_field :email , :class => "form-alta text-field form-control", :style => "width: 250px;", :id => "input_email", :placeholder => "Email",  :value => email%>
         </div>
       </div>
     </div>
@@ -168,7 +168,7 @@
     <label class="col-sm-2 control-label">Alias</label>  
     <div class="col-sm-2">
       <div class="form-group">
-        <%= v_form.text_field :numero, autofocus: true, class: 'form-control', :style=>"width:50%" , :id => "numero", :required => true, :oninvalid => "alert('Debe completar el Alias');" %>
+        <%= v_form.text_field :numero, autofocus: true, class: 'form-control', :style=>"width:50%" , :id => "numero"%>
       </div>
     </div>
   </div>
@@ -178,7 +178,7 @@
     <label class="col-sm-2 control-label">Fecha Alta</label>  
     <div class="col-sm-2">
       <div class="form-group">
-        <%= v_form.date_field :fecha_alta, :id => "datepicker2", :placeholder => "Fecha Alta", :class => "form-fecha-nac form-control",  :required => true , :oninvalid => "alert('Debe completar la fecha de alta');"%>
+        <%= v_form.date_field :fecha_alta, :id => "datepicker2", :placeholder => "Fecha Alta", :class => "form-fecha-nac form-control"%>
       </div>
     </div>
   </div>
