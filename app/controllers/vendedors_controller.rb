@@ -74,8 +74,8 @@ class VendedorsController < ApplicationController
     respond_to do |format|
              if @persona.save
                  @vendedor.persona_id=@persona.id
-
                  if @vendedor.save
+
                     if @vendedor.persona.user != nil and @vendedor.persona.user.has_role? :punto_venta
                       format.html { redirect_to current_user.punto_venta, notice: 'Vendedor was successfully created.' }
 
@@ -85,8 +85,10 @@ class VendedorsController < ApplicationController
                     end
                   
                  else
-                    if @vendedor.persona.user != nil and @persona.user.has_role? :punto_venta
-                      format.html { redirect_to vendedor_cambiar_rol_path(persona: @persona.id) }
+                    if @persona.user != nil and @persona.user.has_role? :punto_venta
+                      flash[:error] = @vendedor.errors.messages.first[1][0]
+                      
+                      format.html { redirect_to vendedor_cambiar_rol_path(persona: @persona.id)} 
                       format.json { render json: @vendedor.errors, status: :unprocessable_entity }
                     else
                       format.html { render :new }
@@ -94,9 +96,15 @@ class VendedorsController < ApplicationController
                     end
                  end
              else
-
-                format.html { render :new }
-                format.json { render json: @persona.errors, status: :unprocessable_entity }
+                if @persona.user != nil and @persona.user.has_role? :punto_venta
+                    flash[:error] = @persona.errors.messages.first[1][0]
+                    
+                    format.html { redirect_to vendedor_cambiar_rol_path(persona: @persona.id)} 
+                    format.json { render json: @persona.errors, status: :unprocessable_entity }
+                else
+                    format.html { render :new }
+                    format.json { render json: @persona.errors, status: :unprocessable_entity }
+                end
              end
   
     end

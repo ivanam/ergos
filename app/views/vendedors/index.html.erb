@@ -3,7 +3,7 @@
 
 
 <h2 style="text-align: center;font-weight: 600;">Vendedores</h2>
-<% if current_user.has_role? :concesionaria %>
+<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin)%>
   <div class="page-header">
     <%= link_to new_vendedor_path, class: 'btn btn-primary' do %>
       <%= fa_icon "plus", text: "Nuevo vendedor" %>
