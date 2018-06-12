@@ -222,6 +222,7 @@ $('.bar').each(function() {
 $('#vendedor_numero').change(function(){
     url = window.location.href.replace(window.location, "");
     window.location = url + 'home_vendedor?vendedor=' + $(this).val();    
+    return false;
 });
 /*$('.bar[data-percentage]').each(function () {
   var progress = $(this);
