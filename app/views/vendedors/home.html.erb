@@ -48,6 +48,7 @@
         	<div class="chart">
     				<div class="bar-container">              
         			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%</div>
+              <%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%
     				</div>
             
 					</div>
@@ -76,6 +77,7 @@
         	<div class="chart">
     				<div class="bar-container">
         			<div id="barra_ventas" data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
+              <%= carga_total_ob_mes_v*100/aux_objetivo_v%>%
     				</div>
 					</div>
         </td>
@@ -105,6 +107,7 @@
     				<div class="bar-container">
         	<div class="bar-container">
               <div id="barra_oportunidades" data-percentage="<%= carga_total_ob_mes_cre*100/aux_objetivo_op%>" class="bar"><%= carga_total_ob_mes_cre*100/aux_objetivo_op%>%</div>
+              <%= carga_total_ob_mes_cre*100/aux_objetivo_op%>%
             </div>
 					</div>
         </td>
@@ -134,6 +137,7 @@
             <div class="bar-container">
           <div class="bar-container">
               <div id="barra_pruebas_manejo" data-percentage="<%= aux_objetivo_pm%>" class="bar"><%= objetivo_pm%>%</div>
+              <%= objetivo_pm%>%
             </div>
           </div>
         </td>
@@ -222,6 +226,7 @@ $('.bar').each(function() {
 $('#vendedor_numero').change(function(){
     url = window.location.href.replace(window.location, "");
     window.location = url + 'home_vendedor?vendedor=' + $(this).val();    
+    return false;
 });
 /*$('.bar[data-percentage]').each(function () {
   var progress = $(this);
