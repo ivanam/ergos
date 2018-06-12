@@ -79,7 +79,7 @@
         <% if CargaDiarium.where(vendedor_id: @vendedor.id).last.nil?
           ultima_carga = "Sin cargas"
         else
-          ultima_carga = CargaDiarium.where(vendedor_id: @vendedor.id).last.created_at
+          ultima_carga = CargaDiarium.where(vendedor_id: @vendedor.id).last.updated_at
         end
         %>
         <p style=""><span style="font-weight: 600">Última Carga:</span> <%= ultima_carga %></p>

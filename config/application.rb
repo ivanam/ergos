@@ -10,6 +10,9 @@ module RailsProject
   class Application < Rails::Application
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
+    config.active_record.default_timezone = :local
+    config.active_record.time_zone_aware_attributes = false 
+    config.time_zone = 'America/Argentina/Buenos_Aires' 
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
