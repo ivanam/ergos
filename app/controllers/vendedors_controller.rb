@@ -238,11 +238,13 @@ class VendedorsController < ApplicationController
     @footer = false
     @carga_diarium = CargaDiarium.new
     @tipos_objetivos = TipoObjetivo.where(tipo: 'KPI')
-    if current_user.has_role? :vendedor
+    if current_user.has_role? :vendedor and !(current_user.has_role? :punto_venta) 
       @vendedor = current_user.persona.vendedors.first
     else
-      if (current_user.has_role? :punto_venta) && (!params[:vendedor].nil?)
+      if (current_user.has_role? :punto_venta) && (!params[:vendedor].nil?) && (params[:vendedor] != "Mis datos como vendedor" )
         @vendedor = Vendedor.find_by(numero: params[:vendedor])
+      else
+        @vendedor = current_user.persona.vendedors.first
       end
     end
   end
