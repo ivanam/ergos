@@ -68,12 +68,12 @@
 		<table class="table table-bordered thead-dark table-condensed table-left">
 		  <thead>
   			<tr>
+
   			  <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Pos.</th>
   			  <th class="hidden-sm hidden-xs" rowspan="2" style="font-size: 10px;">Posición</th>
   			  <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Ven.</th>
   			  <th class="hidden-sm hidden-xs" rowspan="2" style="font-size: 10px;">Vendedor</th>
 		      <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Avan.</th>
-  			  <th class="hidden-sm hidden-xs" rowspan="2" style="font-size: 10px;">Avance</th>
 		      <th colspan="3" class="" >Ventas</th>
 		      <th colspan="3" class="">Créditos</th>
 		      <th class="">CSI</th>
@@ -100,7 +100,6 @@
 		      <td><%=@posicion%>º</td>
 		      <% @nombre=v.numero %>
 		      <td><%=@nombre%></td>
-		      <td><%=CargaDiarium.calculoDeAvance(@anio,@mes,v)%>%</td>
 		      <td><%=CargaDiarium.SumaObMensualVendedor(@anio,@mes,v,"VENTAS")%></td>
 		      <td><%=CargaDiarium.obtenerMetaObMensual(@anio,@mes,v,"VENTAS")%></td>
 		      <td><%=CargaDiarium.calculoPorcentajeObVendedor(@anio,@mes,v,"VENTAS")%>%</td>
@@ -115,7 +114,6 @@
 	   	<tfoot>
 		    <tr>
 		      <th colspan="2">Total</th>
-		      <th><%=CargaDiarium.calculoDeAvanceEquipo(@anio,@mes,@punto_venta,@vendedores)%>%</th>
 		      <th><%=CargaDiarium.obtenerReservasEquipo(@anio,@mes,@vendedores,"VENTAS")%></th>
 		      <th><%=CargaDiarium.obtenerVentaPuntoVenta(@anio,@mes,@punto_venta,"VENTAS")%></th>
 			  <th><%=CargaDiarium.calculoPorcentajeObEquipo(@anio,@mes,@vendedores,"VENTAS",@punto_venta)%>%</th>
