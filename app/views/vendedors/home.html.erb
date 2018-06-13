@@ -47,9 +47,8 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">              
-        			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%</div>
+        			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar">  <%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>% </div>
     				</div>
-            
 					</div>
         </td>
         <td style="text-align: right;"><%= Date.today.day.to_i %>/<%= Date.today.end_of_month.day.to_i %></td>
@@ -75,7 +74,7 @@
         <td style="min-width: 70%;">
         	<div class="chart">
     				<div class="bar-container">
-        			<div id="barra_ventas" data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
+        			<div id="barra_ventas" data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"> <%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
     				</div>
 					</div>
         </td>
