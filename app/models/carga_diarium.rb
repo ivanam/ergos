@@ -227,25 +227,24 @@ class CargaDiarium < ApplicationRecord
   end
 
   	def self.calcularSemana(anio,mes,dia)
-  		fecha = Date.new(anio,mes,dia)
-  		case fecha.day
-  		when (1..7)
-  			semana = 1
-  		when (8..14)
-  			semana = 2
-  		when (15..21)
-  			semana = 3
-  		when (22..28)
-  			semana = 4
-  		when (29..31)
-  			semana=5
-  		else 
-  			semana=5
-  		end
-  	return semana
+  		 semana = Date.new(2018,6,13).week_of_month
+  		return semana
+  	end
+  	def self.obtenerDiasSemanasegunFecha(anio,mes,dia)
+  		 semana = Date.new(2018,6,13).week_of_month
+  		 semana_split = Date.new(2018,6,13).week_split
+  		 dias = semana_split[semana - 1]
+  		return dias
+  	end
+
+  	def self.obtenerDiasSemana(anio,mes,semana)
+  		 semana_split = Date.new(anio,mes,1).week_split
+  		 dias = semana_split[semana - 1]
+  		return dias
   	end
 
   	def self.cargaVendedorporDia(anio,mes,vendedor,obj,diaNombre, dias)
+  			
   			ob =TipoObjetivo.where(:descripcion => obj).first.id
 
   			@cantidad = 0
@@ -321,20 +320,9 @@ class CargaDiarium < ApplicationRecord
   	end
 
   	def self.obtenerCompromisoDeVentas(anio,mes,semana,vendedor)
+  		dias = self.obtenerDiasSemana(anio,mes,semana)
   		@cantidad=0
-  		if semana == 1 
-		dias = [1,2,3,4,5,6,7]
-		elsif semana == 2 
-			dias = [8,9,10,11,12,13,14]
-		elsif semana == 3 
-			dias = [15,16,17,18,19,20,21]
-		elsif semana == 4 
-			dias = [22,23,24,25,26,27,28]
-		elsif semana == 5 
-			dias = [29,30,31]
-		else
-			dias=[29,30,31]
-		end
+  		
 		vendedorid = vendedor.id
 		dias.each do |diasNom|
 			tipo_objetivo =TipoObjetivo.where(:descripcion => "COMPROMISO DE VENTAS SEMANAL").first.id
@@ -349,19 +337,7 @@ class CargaDiarium < ApplicationRecord
     def self.obtenerCompromisoDeVentasPromedio(anio,mes,semana,vendedores)
   		@cantidad=0
   		@cantidad1 = 0
-  		if semana == 1 
-		dias = [1,2,3,4,5,6,7]
-		elsif semana == 2 
-			dias = [8,9,10,11,12,13,14]
-		elsif semana == 3 
-			dias = [15,16,17,18,19,20,21]
-		elsif semana == 4 
-			dias = [22,23,24,25,26,27,28]
-		elsif semana == 5 
-			dias = [29,30,31]
-		else
-			dias=[29,30,31]
-		end
+  		dias = self.obtenerDiasSemana(anio,mes,semana)
 		dias.each do |diasNom|
 			vendedores.each do |v|
 				tipo_objetivo =TipoObjetivo.where(:descripcion => "COMPROMISO DE VENTAS SEMANAL").first.id
