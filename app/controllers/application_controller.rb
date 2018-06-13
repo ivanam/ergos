@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    if  (current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)
+    if current_user.has_role? :dashboard
+      redirect_to punto_venta_dashboard_path
+    elsif  (current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)
       redirect_to home_vendedor_path, :alert => exception.message
     else
       redirect_to root_url, :alert => exception.message
@@ -18,7 +20,9 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    if  (current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)
+    if current_user.has_role? :dashboard
+      punto_venta_dashboard_path
+    elsif (current_user.has_role? :vendedor) || (current_user.has_role? :punto_venta)
       home_vendedor_path
     else
       root_url
