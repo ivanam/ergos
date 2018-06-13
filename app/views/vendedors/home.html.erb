@@ -50,7 +50,7 @@
         			<div id="barra_mes" data-percentage="<%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>" class="bar"><%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%</div>
               <%= (Date.today.day.to_i - 1) * 100 / Date.today.end_of_month.day.to_i %>%
     				</div>
-            
+            <br>
 					</div>
         </td>
         <td style="text-align: right;"><%= Date.today.day.to_i %>/<%= Date.today.end_of_month.day.to_i %></td>
@@ -79,6 +79,7 @@
         			<div id="barra_ventas" data-percentage="<%= carga_total_ob_mes_v*100/aux_objetivo_v%>" class="bar"><%= carga_total_ob_mes_v*100/aux_objetivo_v%>%</div>
               <%= carga_total_ob_mes_v*100/aux_objetivo_v%>%
     				</div>
+             <br>
 					</div>
         </td>
         <td style="text-align: right;"><%= carga_total_ob_mes_v%>/<%=objetivo_v%></td>
@@ -110,6 +111,7 @@
               <%= carga_total_ob_mes_cre*100/aux_objetivo_op%>%
             </div>
 					</div>
+            <br>
         </td>
         <td style="text-align: right;"><%= carga_total_ob_mes_cre%>/<%=objetivo_op%></td>
       </tr>
@@ -140,6 +142,7 @@
               <%= objetivo_pm%>%
             </div>
           </div>
+           <br>
         </td>
       </tr>
     </tbody>
