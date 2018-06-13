@@ -69,20 +69,20 @@
 
   <div class="col-sm-3 admin-box h-500">
     <div class="content-box h-100">
-      
+      <div class="box-top-bar"></div>
       <center><%=image_tag v.foto.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:250px;"%></center> 
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
         <h4 style="padding-bottom: 30px;">Vendedor</h4>
-        <p style="">Estado: Activo</p>
+        <p style="border-top: 2px solid;padding: 5px 0px;border-bottom: 2px solid;background-color: rgba(193, 204, 207, 0.22);"><span style="font-weight: 600">Estado:</span> Activo</p>
         <% if CargaDiarium.where(vendedor_id: @vendedor.id).last.nil?
           ultima_carga = "Sin cargas"
         else
-          ultima_carga = CargaDiarium.where(vendedor_id: @vendedor.id).last.created_at
+          ultima_carga = CargaDiarium.where(vendedor_id: @vendedor.id).last.updated_at
         end
         %>
-        <p style="">Última Carga: <%= ultima_carga %></p>
+        <p style=""><span style="font-weight: 600">Última Carga:</span> <%= ultima_carga %></p>
 
       </div>
     </div>
@@ -361,7 +361,7 @@
           <br>
         </div>
         <div class="" style="width:90%;position: absolute;bottom: 20px;">
-          <p class="text-center "><a href="">más..</a></p>
+          <p class="text-center "><a href=""></a></p>
         </div>
       </div>
       <% end %>
@@ -371,7 +371,7 @@
   <div class="col-sm-12 h-6">
     <div class="btn-horizontal-list bg_white" style="">
       <a href="/reunions" type="button" class="btn btn-default btn-ergos">Preparar Reuniones</a>
-      <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Atajo</div></button>
+      <button type="button" class="btn btn-default btn-ergos btn-add-btns"><%= fa_icon "plus" %><div class="text">Atajos</div></button>
     </div>
     
   </div>

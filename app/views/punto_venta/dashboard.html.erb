@@ -8,7 +8,7 @@
 		}
 	</style>
 	
-	<% if !current_user.has_role? :vendedor
+	<% if (current_user.has_role? :punto_venta) || (current_user.has_role? :concesionaria) || (current_user.has_role? :admin)
 	 punto_venta_id = current_user.punto_venta_id
 	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id)%>
 	
@@ -51,9 +51,11 @@
 		<div class="col-xs-2">
     	<%=image_tag @concesionarium.logo.url(:thumb), :class=>"img-fluid", :style=>"width: 100px; max-height:100px;"%>
     	</div>
-    	<div class="col-xs-2">
-			<button type="button" id="boton" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search">Calcular ranking</span></button>
-    	</div>
+    	<% if (current_user.has_role? :punto_venta) || (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
+	    	<div class="col-xs-2">
+				<button type="button" id="boton" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search">Calcular ranking</span></button>
+	    	</div>
+	    <% end %>
 		<%I18n.locale = :es%>
 		<%fechaSeleccionada = Date.new(@anio,@mes,1) %>
 		<%@hoy = I18n.l(fechaSeleccionada.to_time, format: :long)%>
@@ -66,21 +68,34 @@
 		<table class="table table-bordered thead-dark table-condensed table-left">
 		  <thead>
   			<tr>
+<<<<<<< HEAD
   			  <th class="visible-sm visible-xs" rowspan="2">Pos.</th>
   			  <th class="hidden-sm hidden-xs" rowspan="2">Posición</th>
   			  <th rowspan="2">Vendedor</th>
 		      <th colspan="3" class="">Ventas</th>
+=======
+  			  <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Pos.</th>
+  			  <th class="hidden-sm hidden-xs" rowspan="2" style="font-size: 10px;">Posición</th>
+  			  <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Ven.</th>
+  			  <th class="hidden-sm hidden-xs" rowspan="2" style="font-size: 10px;">Vendedor</th>
+		      <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Avan.</th>
+  			  <th class="hidden-sm hidden-xs" rowspan="2" style="font-size: 10px;">Avance</th>
+		      <th colspan="3" class="" >Ventas</th>
+>>>>>>> 66eb7036bd2dbda2761e56d5255e90451645c5bd
 		      <th colspan="3" class="">Créditos</th>
 		      <th class="">CSI</th>
 		      
   			</tr>
 	      <tr>
-	        <th class="visible-xs">Res.</th>
+	        <th class="visible-xs" style="font-size: 8px;">Res.</th>
 	        <th class="hidden-xs">Reserva</th>
-		    <th>Meta</th>
+		    <th class="visible-xs"  style="font-size: 8px;">Meta</th>
+		    <th class="hidden-xs">Meta</th>
 		    <th>%</th>
+		    <th class="visible-xs"  style="font-size: 8px;">Soli.</th>
 		    <th class="hidden-xs">Solicitados</th>
-		    <th>Meta</th>
+		    <th class="visible-xs"  style="font-size: 8px;">Meta</th>
+		    <th class="hidden-xs">Meta</th>
 		    <th>%</th>
 		    <th>%</th>
 	      </tr>
@@ -124,14 +139,14 @@
 		</table>
 		</div>
 		<div class="col-xs-6">
-		<table class="col-xs-6 table table-bordered thead-dark table-condensed">
+		<table class="col-xs-6 table table-bordered thead-dark table-condensed" style="padding-left: 20px;">
 	  	<thead>
 				<tr>
 					<th class="visible-xs visible-sm" colspan="5">Act. Semanal</th>
 					<th class="hidden-xs hidden-sm" colspan="5">Actividad Semanal</th>
 		      <th colspan="7">Actividad Diaria</th>
-		      <th class="visible-xs" rowspan="2">Comp. de Ventas</th>
-		      <th class="hidden-xs" rowspan="2">Compromiso de Ventas</th>
+		      <th class="visible-xs" rowspan="2" style="font-size: 10px;">C. de Ventas</th>
+		      <th class="hidden-xs" rowspan="2" style="font-size: 10px;">Compromiso de Ventas</th>
 				</tr>
 	      <tr>
 	        <th>S1</th>
@@ -432,5 +447,7 @@
   });
 </script>
 
-<script>setTimeout('document.location.reload()', 10000); </script>
+<% if current_user.has_role? :dashboard %>
+	<script>setTimeout('document.location.reload()', 10000); </script>
+<% end %>
 

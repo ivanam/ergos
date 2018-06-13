@@ -625,6 +625,15 @@ nav.sidebar, .main{
 }
 
 
+.box-top-bar {
+  
+  min-height: 20px;
+  background-color: #2F3337;
+  position: relative;
+  top: -15px;
+  left: -15px;
+  width: calc(100% + 30px);
+}
 
 @media (min-width: 765px) {
 
@@ -1603,12 +1612,22 @@ nav.sidebar, .main{
 .chart .bar-container {
   width:100%;
   background-color: #eee;
+  color: #FFFFFF;
 }
 .chart .bar-container .bar {
   background:#55565a;
-  margin-top:5px;
-  color:#fff;
+  margin-top:1px;
   font-size:16px;
+}
+
+.bar-container {
+  position: absolute;
+  z-index: 20;
+}
+
+.bar {
+  position: absolute;
+  z-index: -10;
 }
 
 
@@ -1622,18 +1641,22 @@ nav.sidebar, .main{
 /* Colores en las barras de progreso */
 #barra_mes {
   background-color: #06FCFC;
+  color: transparent; 
 }
 
 #barra_ventas {
   background-color: #505053; 
+  color: transparent; 
 }
 
 #barra_oportunidades {
   background-color: #67676B;  
+  color: transparent; 
 }
 
 #barra_pruebas_manejo {
   background-color: #A7A7AB; 
+  color: transparent; 
 }
 /* Colores en las barras de progreso */
 
