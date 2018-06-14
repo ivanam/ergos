@@ -162,7 +162,6 @@ class ObjetivoMensual < ApplicationRecord
     if (self.tipo_objetivo_id != 3 && self.cantidad_propuesta == nil)
        errors.add(:base,'Debe completar el campo Cantidad') 
     end
-    debugger
     if (self.tipo_objetivo_id != 3 && self.csi_real != nil)
        errors.add(:base,'El campo CSI real es para los vendedores y para los objetivos de Satisfación al Cliente') 
     end
