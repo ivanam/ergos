@@ -13,7 +13,7 @@ class Vendedor < ApplicationRecord
 
 
   validates :numero, :uniqueness => {:message => "Alias debe ser único"}
-  validates :numero, :presence => { :message => "Debe completar el campo Alias" }
+  validates :numero, :presence => { :message => "Ya existe un vendedor con ese alias, asignarle otro alias." }
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
   validate :control_persona,  on: :create
 
