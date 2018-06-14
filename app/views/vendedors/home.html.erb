@@ -153,9 +153,10 @@
 	<div class="row">
 		<div class="col-xs-4">
       <center>
-      <% if current_user.has_role? :punto_venta %>
-          <h4>YO</h4> 
-        <%else%>
+      <% debugger%>
+      <% if @vendedor.numero =="Mis datos como vendedor"%>
+          <h4>YO</h4>
+      <%else%>
         <h4>Vendedor</h4>
       <%end%>
           
@@ -163,14 +164,12 @@
         <div class="legend legend-1"><%=carga_total_ob_mes_op%></div>
         <div class="legend legend-2"><%=carga_total_ob_mes_pm%></div>
         <div class="legend legend-3"><%=carga_total_ob_mes_v%></div>
-        <div><%= CargaDiarium.porcentaje_conversion_yo(Date.today.year, Date.today.month, @vendedor)%>%</div>
-        
+        <div><%= CargaDiarium.porcentaje_conversion_yo(Date.today.year, Date.today.month, @vendedor)%>%</div>     
       </center>
     </div>	
 		<div class="col-xs-4">
       <h4 style="color:white;">detalle</h4>
       <%=image_tag "Funnel-details.png", class:"img-responsive"%>
-      
     </div>		
 		<div class="col-xs-4">
       <center>
@@ -182,10 +181,9 @@
         <div><%= CargaDiarium.porcentaje_conversion_equipo(Date.today.year, Date.today.month, current_user)%>% </div>
         <div class="legend legend-1"><%= total_op %></div>
         <div class="legend legend-2"><%= total_pm %></div>
-        <div class="legend legend-3"><%= total_v %></div>
+        <div class="legend legend-3"><%= total_v %><br></div>
       </center>
-    </div>	
-
+    </div>
 	</div>
 
 
