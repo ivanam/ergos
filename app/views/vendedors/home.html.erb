@@ -154,9 +154,9 @@
 		<div class="col-xs-4">
       <center>
       <% if current_user.has_role? :punto_venta %>
-          <h4>YO</h4> 
+          <div id="user"><h4></h4></div>
         <%else%>
-        <h4>Vendedor</h4>
+         <h4>Vendedor</h4>
       <%end%>
           
         <%=image_tag "Funnel1.png", class:"img-responsive"%>
@@ -216,6 +216,27 @@
 </div>
 
 <script type="text/javascript">
+
+$(document).ready(function($) {
+
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results == null){
+      return 0;
+    }else{
+      return results[1] || 0;
+    }
+  }
+  if ($.urlParam('vendedor') == "Mis%20datos%20como%20vendedor" ){
+     $("#user").html("<h4>YO</h4>");
+    }else if ($.urlParam('vendedor') == 0 ){
+     $("#user").html("<h4>YO</h4>");
+    }else{
+      $("#user").html("<h4>Vendedor</h4>");
+    }
+
+  });
+
 $('.bar').each(function() {
     percentage = $(this).attr('data-percentage');
     if (percentage > 100){
