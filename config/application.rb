@@ -13,6 +13,7 @@ module RailsProject
     config.active_record.default_timezone = :local
     config.active_record.time_zone_aware_attributes = false 
     config.time_zone = 'America/Argentina/Buenos_Aires' 
+    WeekOfMonth.configuration.monday_active = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
