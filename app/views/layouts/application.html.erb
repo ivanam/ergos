@@ -42,15 +42,15 @@
     <% else %>
       <%= render "layouts/footer"%>
     <% end %-->
+    <script type="text/javascript">
+      $('document').ready(function() { 
+        $('select').select2({
+          theme: "bootstrap",
+          language: "es"
+        }); 
+      });
+    </script>
   </body>
-  <script type="text/javascript">
-    $('document').ready(function() { 
-      $('select').select2({
-        theme: "bootstrap",
-        language: "es"
-      }); 
-    });
-  </script>
 </html>
 
 
