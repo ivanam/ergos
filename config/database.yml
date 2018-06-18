@@ -7,6 +7,7 @@ default: &default
   host: 127.0.0.1
   username: root
   password: finan2
+  #password: root
 
 
 
