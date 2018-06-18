@@ -20,11 +20,31 @@ class Persona < ApplicationRecord
   validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
 
   validates :cuit, :presence => { :message => "Debe completar el campo CUIL" }
-  validates :cuit, uniqueness: true
+  validates_uniqueness_of :cuit, :message=>"ya fue utilizado por otra persona" 
+  validates_uniqueness_of :email, :message=>"ya fue utilizado por otra persona" 
 
   before_destroy :deshabilitar_user
 
   before_update :consistencia_mail
+
+
+
+
+  def estado_vend
+    self.vendedor.estado_personas.each do |e_p|
+      f_i = e_p.fecha_inicio
+      if e_p.fecha_fin == nil
+        f_f = Date.new(3000,f_i.month,f_i.day)
+      else
+        f_f = e_p.fecha_fin
+      end
+      if self.fecha.to_date >= f_i and self.fecha.to_date <= f_f
+        errors.add(:base, "No puede realizar la carga")
+        return 0
+      end
+    end
+  end
+
 
 
   def to_s

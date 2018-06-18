@@ -21,11 +21,19 @@ class PersonasController < ApplicationController
 
   def new_persona_concesionaria
     @concesionaria_id = params[:concesionaria]
-    @persona = Persona.new
+    begin
+      @persona = Persona.new(persona_params)
+    rescue Exception => e
+      @persona = Persona.new
+    end
   end
 
   def new_administrador
-    @persona = Persona.new
+    begin
+      @persona = Persona.new(persona_params)
+    rescue Exception => e
+      @persona = Persona.new
+    end
   end
 
   def edit_administrador
@@ -46,7 +54,11 @@ class PersonasController < ApplicationController
 
   def new_persona_punto_venta
     @punto_venta_id = params[:punto_venta]
-    @persona = Persona.new
+    begin
+      @persona = Persona.new(persona_params)
+    rescue Exception => e
+      @persona = Persona.new
+    end
   end
 
   # GET /personas/1/edit
@@ -63,7 +75,7 @@ class PersonasController < ApplicationController
           format.html { redirect_to new_persona_concesionarium_path(concesionaria: params[:concesionaria], persona: @persona.id), notice: 'Persona creada correctamente.' }
           format.json { render :show, status: :created, location: @persona }
         else
-          format.html { redirect_to new_persona_concesionaria_path(concesionaria: params[:concesionaria]), alert: @persona.errors.full_messages  }
+          format.html { redirect_to new_persona_concesionaria_path(concesionaria: params[:concesionaria], persona: @persona.attributes), alert: @persona.errors.full_messages  }
           format.json { render json: @persona.errors, status: :unprocessable_entity }
         end
       end
@@ -73,7 +85,7 @@ class PersonasController < ApplicationController
           format.html { redirect_to new_persona_punto_ventum_path(punto_venta: params[:punto_venta], persona: @persona.id), notice: 'Persona creada correctamente.' }
           format.json { render :show, status: :created, location: @persona }
         else
-          format.html { redirect_to new_persona_punto_venta_path(punto_venta: params[:punto_venta]), alert: @persona.errors.full_messages  }
+          format.html { redirect_to new_persona_punto_venta_path(punto_venta: params[:punto_venta], persona: @persona.attributes), alert: @persona.errors.full_messages  }
           format.json { render json: @persona.errors, status: :unprocessable_entity }
         end
       end
@@ -90,7 +102,7 @@ class PersonasController < ApplicationController
           format.html { redirect_to administradores_path, notice: 'Persona creada correctamente.' }
           format.json { render :show, status: :created, location: @persona }
         else
-          format.html { redirect_to new_administrador_path(admin: params[:admin]), alert: @persona.errors.full_messages  }
+          format.html { redirect_to new_administrador_path(admin: params[:admin], persona: @persona.attributes), alert: @persona.errors.full_messages  }
           format.json { render json: @persona.errors, status: :unprocessable_entity }
         end
       end
@@ -129,7 +141,7 @@ class PersonasController < ApplicationController
             format.html { redirect_to administradores_path, notice: 'Persona creada correctamente.' }
             format.json { render :show, status: :created, location: @persona }
           else
-            format.html { redirect_to new_administrador_path(admin: params[:admin]), alert: @persona.errors.full_messages  }
+            format.html { redirect_to edit_administrador_path(persona: @persona.id), alert: @persona.errors.full_messages  }
             format.json { render json: @persona.errors, status: :unprocessable_entity }
           end
         end
