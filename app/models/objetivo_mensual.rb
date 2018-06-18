@@ -145,7 +145,7 @@ class ObjetivoMensual < ApplicationRecord
   def validarCSI
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio, :csi_real=> self.csi_real).where(vendedor_id: nil).first
     if(@obMen != nil)
-       if(self.tipo_objetivo_id == 5 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
+       if(self.tipo_objetivo_id == 3 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
         errors.add(:base,'El CSI Real es por Vendedor no se genera para el Punto de Venta')
       end
        if(@obMen.csi_real != nil && @obMen.vendedor_id == self.vendedor_id)
@@ -156,13 +156,13 @@ class ObjetivoMensual < ApplicationRecord
   end
 
   def validarCantidadCsi
-    if(self.tipo_objetivo_id == 5 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
+    if(self.tipo_objetivo_id == 3 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
       errors.add(:base,'Debe completar el campo Cantidad ya que el CSI real es para un vendedor')
     end
-    if (self.tipo_objetivo_id != 5 && self.cantidad_propuesta == nil)
+    if (self.tipo_objetivo_id != 3 && self.cantidad_propuesta == nil)
        errors.add(:base,'Debe completar el campo Cantidad') 
     end
-    if (self.tipo_objetivo_id != 5 && self.csi_real != nil)
+    if (self.tipo_objetivo_id != 3 && self.csi_real != nil)
        errors.add(:base,'El campo CSI real es para los vendedores y para los objetivos de Satisfación al Cliente') 
     end
   end 

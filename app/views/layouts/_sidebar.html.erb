@@ -29,16 +29,16 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Historial<span class="caret"></span><span class="pull-right hidden-xs showopacity fa fa-clock-o"></span></a>
                   <ul class="dropdown-menu forAnimate" role="menu">
-                    <li><a href="/objetivo_mensuals">Indicadores Mensuales</a></li>
-                    <li><a href="/objetivo_semanals">Indicadores Semanales</a></li>
+                    <li><a target="_blank" href="/objetivo_mensuals" >Indicadores Mensuales</a></li>
+                    <li><a target="_blank" href="/objetivo_semanals" >Indicadores Semanales</a></li>
                     <li><a href="/reunions">Reuniones</a></li>
                     <li><a href="/dashboard">Pizarra</a></li>
                     <li><a href="/vendedors">Vendedores</a></li>
                     <li><a href="/estado_personas">Inasistencia Vendedores</a></li>
                     <li><a href="/carga_diaria">Editar carga diaria</a></li>
                   </ul>
-                <li ><a href="/reunions.pdf">Ficha Semanal<span class="pull-right hidden-xs showopacity fa fa-file-text-o"></span></a></li>
-                <li ><a href="/reunionsm.pdf">Ficha Mensual<span class="pull-right hidden-xs showopacity fa fa-file-text-o"></span></a></li>
+                <li ><a onclick="myFunction1()">Ficha Semanal<span class="pull-right hidden-xs showopacity fa fa-file-text-o"></span></a></li>
+                <li ><a onclick="myFunction()">Ficha Mensual<span class="pull-right hidden-xs showopacity fa fa-file-text-o"></span></a></li>
                 <li ><a href="#">Reportes<span class="pull-right hidden-xs showopacity fa fa-bar-chart"></span></a></li>
                 <li ><a href="#">Configuración<span class="pull-right hidden-xs showopacity fa fa-gear"></span></a></li>
                 <li ><a href="<%= administradores_path%>">Administradores<span class="pull-right hidden-xs showopacity fa fa-gear"></span></a></li>
@@ -52,3 +52,15 @@
   <% end %>
 <% end %>
 
+
+<script>
+function myFunction1() {
+    window.open("/reunions.pdf");
+}
+</script>
+
+<script>
+function myFunction() {
+    window.open("/reunionsm.pdf");
+}
+</script>

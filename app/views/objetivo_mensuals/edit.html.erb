@@ -29,7 +29,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Cantidad Objetivo</label>  
         <div class="col-sm-2">
-          <%= f.number_field :cantidad_propuesta, :class => "form-control" %>
+          <%= f.number_field :cantidad_propuesta, :class => "form-control", :readonly => :true %>
         </div>
       </div>
       </br>
@@ -37,7 +37,7 @@
       <div id="csi" class="form-group">
         <label class="col-sm-2 control-label">Cantidad de CSI Real</label>  
         <div class="col-sm-2">
-          <%= f.number_field :csi_real, :class => "form-control", :readonly => :true %>
+          <%= f.number_field :csi_real, :class => "form-control"%>
         </div>
       </div>
       </br>
@@ -57,28 +57,22 @@
         </div>
       </div>
       </br>
-
-     <!--  <div class="form-group"> 
-        <label class="col-sm-2 control-label">Asignar a vendedor</label>
-        <div class="col-sm-3">
-          <div class="form-group">
-          <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
-          </div>
-        </div>
-      </div>
-      </br>
  
-      <div class="form-group" id="vendedor" hidden>
+      <div class="form-group" id="vendedor">
         <label class="col-sm-2 control-label">Vendedor asignado al objetivo</label>
         <div class="col-sm-10"> 
           <%punto_venta_id = current_user.punto_venta_id%>
-          <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :id, :numero, {:prompt => true},:style=>"width:50%") %>
+          <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :id, :numero, {:prompt => true},:style=>"width:50%", :disabled => true) %>
         </div>
       </div>
-      </br>
-        <%= f.hidden_field :punto_venta_id, value: @objetivo_mensual.punto_venta_id %> 
-      </br>
- -->
+
+      <div class="form-group" id="vendedor">
+      <label class="col-sm-2 control-label">Punto de venta</label>
+      <div class="col-sm-10"> 
+        <%= f.text_field :punto_venta_id, value: @objetivo_mensual.punto_venta_id, :disabled => true %>
+      </div>
+        </div>
+        
       <div class="form-group">
         <label class="col-sm-2 control-label">Descripción del objetivo</label>
         <div class="col-sm-10">

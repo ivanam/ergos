@@ -20,8 +20,10 @@ class Persona < ApplicationRecord
   validates :email, :format => {:with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i, :message => "El campo Email debe contener una dirección de correo válida"}
 
   validates :cuit, :presence => { :message => "Debe completar el campo CUIL" }
+
   validates_uniqueness_of :cuit, :message=>"ya fue utilizado por otra persona" 
   validates_uniqueness_of :email, :message=>"ya fue utilizado por otra persona" 
+
 
   before_destroy :deshabilitar_user
 
