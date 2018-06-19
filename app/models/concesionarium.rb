@@ -12,10 +12,18 @@ class Concesionarium < ApplicationRecord
 
 	validates :nombre, :presence => { :message => "Debe completar el campo Nombre" }
 
+	validates :cantPv , :presence => { :message => "Debe completar la cantidad de Puntos de Venta" }
+	validates :cantVend , :presence => { :message => "Debe completar la cantidad de PVendedores" }
+
+    validates :cantPv, numericality: { only_integer: true, :message => "El campo Cantidad de Puntos de venta debe ser un valor entero"}
+
+    validates :cantVend, numericality: { only_integer: true, :message => "El campo Cantidad de Vendedores debe ser un valor entero"}
+
 	accepts_nested_attributes_for :persona_concesionaria, allow_destroy: true
 
 	validate :control_punto_venta
 	validate :control_vendedores
+	validate :nombre_conce
 
 	def to_s
 		"#{self.nombre}"
@@ -24,6 +32,13 @@ class Concesionarium < ApplicationRecord
 	def control_punto_venta
 		if (self.cantPv.to_i < self.puntos_venta.count.to_i)
           errors.add(:base, "Debe eliminar puntos de venta para poder editar")
+        end
+	end
+
+	def nombre_conce
+		descpOb = Concesionarium.where(:nombre => self.nombre).first
+		if (descpOb  != nil)
+          errors.add(:base, "Ya existe una concesionaria con ese nombre")
         end
 	end
 
