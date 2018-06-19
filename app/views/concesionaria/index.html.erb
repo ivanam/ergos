@@ -35,7 +35,7 @@
               <td><%= concesionarium.fecha_baja %></td>
               <td><%= concesionarium.user.email %></td>
               <td class="text-center">
-                <%= link_to concesionarium, class: 'btn btn-sm btn-default' do %>
+                <%= link_to select_concesionaria_path(id: concesionarium), class: 'btn btn-sm btn-default' do %>
                   <span class="fa fa-eye"></span>
                 <% end %>
                 <%= link_to edit_concesionarium_path(concesionarium), class: 'btn btn-sm btn-default' do %>
@@ -44,9 +44,7 @@
                 <%= link_to concesionarium, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
                   <span class="fa fa-trash"></span>
                 <% end %>
-                <%= link_to select_concesionaria_path(id: concesionarium), class: 'btn btn-sm btn-default' do %>
-                  <span class="fa fa-check"></span>
-                <% end %>
+                
               </td>
             </tr>
           <% end %>

@@ -34,7 +34,7 @@
             <td><%= punto_ventum.domicilio %></td>
             <td><%= punto_ventum.persona_id %></td>
             <td class="text-center">
-                <%= link_to punto_ventum, class: 'btn btn-sm btn-default' do %>
+                <%= link_to select_punto_venta_path(id: punto_ventum), class: 'btn btn-sm btn-default' do %>
                   <span class="fa fa-eye"></span>
                 <% end %>
                 <%= link_to edit_punto_ventum_path(punto_ventum), class: 'btn btn-sm btn-default' do %>
@@ -43,9 +43,7 @@
                 <%= link_to punto_ventum, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
                   <span class="fa fa-trash"></span>
                 <% end %>
-                <%= link_to select_punto_venta_path(id: punto_ventum), class: 'btn btn-sm btn-default' do %>
-                  <span class="fa fa-check"></span>
-                <% end %>
+                
               </td>
           </tr>
         <% end %>
