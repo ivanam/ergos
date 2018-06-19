@@ -71,6 +71,7 @@ class ConcesionariaController < ApplicationController
 
   def select
     current_user.update(concesionaria_id: @concesionarium.id)
+    current_user.update(punto_venta_id: @concesionarium.puntos_venta.first)
     respond_to do |format|
       format.html { redirect_to @concesionarium, notice: 'Concesionaria seleccionada' }
       format.json { head :no_content }
