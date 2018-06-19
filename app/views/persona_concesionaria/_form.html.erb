@@ -73,4 +73,13 @@
   </div>
 <% end %>
 
+<script type="text/javascript">
+$(document).ready( ready );                  //... once document ready
+$(document).ajaxComplete( ready );           //... once ajax is complete
+$(document).on('turbolinks:load', ready );   //... once a link is clicked
 
+$(document).on('turbolinks:before-cache', function() {     // this approach corrects the select 2 to be duplicated when clicking the back button.
+        $('.select-select2').select2('destroy');
+        $('.select-search-select2').select2('destroy');
+    } );
+</script>
