@@ -63,7 +63,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <%= f.submit class: "btn btn-primary" ,value: "Guardar" %>
-          <%= link_to punto_venta_path(persona_punto_ventum.punto_venta), class: 'btn btn-primary' do %>
+          <%= link_to persona_punto_ventum.punto_venta, class: 'btn btn-primary' do %>
             <%= fa_icon "arrow-left", text: "Atras" %>
           <% end %>
         </div>
