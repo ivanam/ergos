@@ -1,4 +1,4 @@
-<%= form_for persona_concesionarium, html: { class: "form-horizontal", role: "form" }  do |f| %>
+<%= form_for persona_concesionarium, html: { class: "form-horizontal", role: "form", autocomplete: "off"}  do |f| %>
   <% if persona_concesionarium.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(persona_concesionarium.errors.count, "error") %> prohibited this persona_concesionarium from being saved:</h2>
@@ -64,7 +64,7 @@
   <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <%= f.submit class: "btn btn-primary" ,value: "Guardar" %>
-        <%= link_to concesionaria_path(persona_concesionarium.concesionaria), class: 'btn btn-primary' do %>
+        <%= link_to persona_concesionarium.concesionaria, class: 'btn btn-primary' do %>
           <%= fa_icon "arrow-left", text: "Atras" %>
         <% end %>
       </div>
@@ -73,4 +73,13 @@
   </div>
 <% end %>
 
+<script type="text/javascript">
+$(document).ready( ready );                  //... once document ready
+$(document).ajaxComplete( ready );           //... once ajax is complete
+$(document).on('turbolinks:load', ready );   //... once a link is clicked
 
+$(document).on('turbolinks:before-cache', function() {     // this approach corrects the select 2 to be duplicated when clicking the back button.
+        $('.select-select2').select2('destroy');
+        $('.select-search-select2').select2('destroy');
+    } );
+</script>
