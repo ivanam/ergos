@@ -34,7 +34,7 @@ class ObjetivoSemanalsController < ApplicationController
     @objetivo_semanal.tipo_objetivo_id=params[:tipo_objetivo_id]
     respond_to do |format|
       if @objetivo_semanal.save
-        format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal was successfully created.' }
+        format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal creado con exito.' }
         format.json { render :show, status: :created, location: @objetivo_semanal }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class ObjetivoSemanalsController < ApplicationController
   def update
     respond_to do |format|
       if @objetivo_semanal.update(objetivo_semanal_params)
-        format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal was successfully updated.' }
+        format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal modificado con exito.' }
         format.json { render :show, status: :ok, location: @objetivo_semanal }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class ObjetivoSemanalsController < ApplicationController
   def destroy
     @objetivo_semanal.destroy
     respond_to do |format|
-      format.html { redirect_to objetivo_semanals_url, notice: 'Objetivo semanal was successfully destroyed.' }
+      format.html { redirect_to objetivo_semanals_url, notice: 'Objetivo semanal eliminado con exito.' }
       format.json { head :no_content }
     end
   end
