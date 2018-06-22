@@ -1,5 +1,5 @@
 
-<%= form_for persona_punto_ventum, html: { class: "form-horizontal", role: "form" } do |f| %>
+<%= form_for persona_punto_ventum, html: { class: "form-horizontal", role: "form", :autocomplete => "off"} do |f| %>
   <% if persona_punto_ventum.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(persona_punto_ventum.errors.count, "error") %></h2>
