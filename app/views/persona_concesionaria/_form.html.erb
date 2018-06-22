@@ -1,4 +1,4 @@
-<%= form_for persona_concesionarium, html: { class: "form-horizontal", role: "form", autocomplete: "off"}  do |f| %>
+<%= form_for persona_concesionarium, html: { class: "form-horizontal", role: "form", :autocomplete => "off"}  do |f| %>
   <% if persona_concesionarium.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(persona_concesionarium.errors.count, "error") %> prohibited this persona_concesionarium from being saved:</h2>

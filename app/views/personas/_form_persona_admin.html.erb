@@ -1,4 +1,4 @@
-<%= form_for persona, html: { class: "form-horizontal", role: "form" }  do |p_form| %>
+<%= form_for persona, html: { class: "form-horizontal", role: "form", :autocomplete => "off" }  do |p_form| %>
 
   <% if @persona.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -24,7 +24,7 @@
     <label class="col-sm-2 control-label">Cuit</label>  
       <div class="col-sm-2">
        <div class="form-group">
-      <%= p_form.text_field :cuit , :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil", :placeholder => "Cuit" %> 
+      <%= p_form.text_field :cuit , :autocomplete=>"none", :class => " form-alta-vendedor  input_cuil text-field form-control solo_numerico", :id => "input_cuil" , :placeholder => "Cuit" %> 
            </div>
     </div>
     </div>
@@ -41,11 +41,11 @@
     </div>
     </br>
 
-  <div class="form-group">
+  <div class="form-group", autocomplete="off">
     <label class="col-sm-2 control-label">Número de Documento</label>  
-    <div class="col-sm-2">
-     <div class="form-group">
-        <%= p_form.text_field :numero_documento, :class => "form-alta-vendedor input_dni text-field form-control solo_numerico", :id => "input_dni" , :style => "width: 250px;"%>
+    <div class="col-sm-2", autocomplete="off">
+     <div class="form-group", autocomplete="off">
+        <%= p_form.text_field :numero_documento, input_html: {autocomplete: 'false'}, :class => "form-alta-vendedor input_dni text-field form-control solo_numerico", :id => "input_dni" , :style => "width: 250px;", autocomplete: :off%>
          </div>
     </div>
     </div>
@@ -136,6 +136,9 @@
   </div>
   </div>
 <script type="text/javascript">
+$(':id').live('focus',function(){
+    $(this).attr('autocomplete', 'off');
+});
 $(document).ready( ready );                  //... once document ready
 $(document).ajaxComplete( ready );           //... once ajax is complete
 $(document).on('turbolinks:load', ready );   //... once a link is clicked

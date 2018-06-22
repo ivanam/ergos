@@ -21,6 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'week_of_month'
 
+gem "autocomplete-off"
 
 gem "paperclip", "~> 5.0.0.beta1"
 

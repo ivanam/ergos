@@ -34,8 +34,7 @@
       <strong>Cantidad de Puntos de Venta consumidos:</strong>
       <% cantPv = @concesionarium.cantPv %>
       <% cantPvCons = PuntoVentum.where(concesionaria_id: @concesionarium.id).count %>
-      <% cantCon = cantPv.to_i - cantPvCons.to_i  %>
-      <%= cantCon %>
+      <%= cantPvCons %>
     </p>
 
     <p style="margin-left: 15px;">
