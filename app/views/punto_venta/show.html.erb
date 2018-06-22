@@ -4,12 +4,12 @@
     <div class="page-header">
       <center>
         <h2 style="text-align: center;font-weight: 600;"><%= @punto_ventum.nombre %></h2>
-      </center> 
-      <% if current_user.admin? %>
+      </center>       
       <%= link_to punto_venta_path, class: 'btn btn-default btn-header-page' do %>
         <span class="fa fa-chevron-left"></span>
         Volver
       <% end %>
+    <% if current_user.admin? %>
       <%= link_to edit_punto_ventum_path(@punto_ventum), class: 'btn btn-primary btn-header-page' do %>
         <span class="fa fa-pencil"></span>
         Editar
