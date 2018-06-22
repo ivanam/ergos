@@ -35,7 +35,7 @@ class ConcesionariaController < ApplicationController
     @concesionarium.user_id = current_user.id
     respond_to do |format|
       if @concesionarium.save
-        format.html { redirect_to @concesionarium, notice: 'La Concesionaria fue creada.' }
+        format.html { redirect_to @concesionarium, notice: 'Concesionaria creada con exito.' }
         format.json { render :show, status: :created, location: @concesionarium }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class ConcesionariaController < ApplicationController
   def update
     respond_to do |format|
       if @concesionarium.update(concesionarium_params)
-        format.html { redirect_to @concesionarium, notice: 'Se actualizo correctamente.' }
+        format.html { redirect_to @concesionarium, notice: 'Concesionaria modificada con exito.' }
         format.json { render :show, status: :ok, location: @concesionarium }
       else
         format.html { render :edit }
@@ -64,14 +64,16 @@ class ConcesionariaController < ApplicationController
     @concesionarium.persona_concesionaria.destroy_all
     @concesionarium.destroy
     respond_to do |format|
-      format.html { redirect_to concesionaria_url, notice: 'Concesionarium was successfully destroyed.' }
+      format.html { redirect_to concesionaria_url, notice: 'Concesionaria eliminada con exito.' }
       format.json { head :no_content }
     end
   end
 
   def select
     current_user.update(concesionaria_id: @concesionarium.id)
-    current_user.update(punto_venta_id: @concesionarium.puntos_venta.first.id)
+    if !@concesionarium.puntos_venta.blank?
+      current_user.update(punto_venta_id: @concesionarium.puntos_venta.first.id)
+    end
     respond_to do |format|
       format.html { redirect_to @concesionarium, notice: 'Concesionaria seleccionada' }
       format.json { head :no_content }
