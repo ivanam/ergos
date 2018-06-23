@@ -21,7 +21,7 @@ end
 
 
 def to_s
-    "#{self.descipcion}"
+    "#{self.descripcion}"
 end
 
 
