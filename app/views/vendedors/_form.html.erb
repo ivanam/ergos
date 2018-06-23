@@ -194,6 +194,16 @@
   </div>
   </br>
 
+  <div class="form-group">
+      <label class="col-sm-2 control-label">Tipo de Documento</label>  
+      <div class="col-sm-2">
+        <div class="form-group">
+          <%= p_form.collection_select :tipo_documento_id, TipoDocumento.all.order(:descripcion), :id, :descripcion, {prompt: false} ,:style=>"width:50%" ,:id=> "select_tipo_documento", :class => "form-control select input_tipo_documento", :value =>tipo_documento_id %>
+        </div>
+      </div>
+  </div>
+  </br>
+
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
