@@ -65,7 +65,12 @@ class Persona < ApplicationRecord
   end
 
   def consistencia_mail
-    User.where(persona_id: self.id).first.update(email: self.email)
+    user = User.where(persona_id: self.id).first
+    if !user.nil?
+      if user.email != self.email
+        User.where(persona_id: self.id).first.update(email: self.email)
+      end
+    end      
   end
 
 

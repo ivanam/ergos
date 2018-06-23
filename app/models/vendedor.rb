@@ -20,7 +20,7 @@ class Vendedor < ApplicationRecord
   validate :max_vendedor
 
   before_create :habilitar_user
-  before_destroy :deshabilitar_user
+  before_update :deshabilitar_user
 
 
   def max_vendedor
@@ -34,7 +34,7 @@ class Vendedor < ApplicationRecord
   end
 
   def to_s
-  	self.numero
+  	"#{self.numero} - #{self.persona.apellido}, #{self.persona.nombre}"
   end
 
   def control_persona
@@ -66,8 +66,10 @@ class Vendedor < ApplicationRecord
   end
 
   def deshabilitar_user
-    usuario = User.where(email: self.persona.email).first
-    usuario.remove_role("vendedor")
+    if self.baja
+      usuario = User.where(email: self.persona.email).first
+      usuario.remove_role("vendedor")
+    end
   end
 
 end

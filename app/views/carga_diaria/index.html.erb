@@ -4,7 +4,7 @@
   <h4></h4>
 </div>
 <div class="select-vendedores">
-    Seleccione Vendedor: <%=select("vendedor", "numero", ['Seleccione']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
+    Seleccione Vendedor: <%=select("vendedor", "numero", ['Seleccione']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).where('baja is null or baja = false').collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
   </div>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">

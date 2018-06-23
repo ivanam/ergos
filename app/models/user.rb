@@ -10,6 +10,8 @@ class User < ApplicationRecord
   belongs_to :concesionaria, :foreign_key => 'concesionaria_id', :class_name => 'Concesionarium', optional: true
   
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum', optional: true
+
+  before_update :consistencia_mail
   
   def admin?
 		has_role?(:admin)
@@ -22,6 +24,10 @@ class User < ApplicationRecord
 	def concesionaria?
 		has_role?(:admin) or has_role?(:concesionaria)
 	end
+
+  def consistencia_mail
+    Persona.where(id: self.persona_id).first.update(email: self.email)
+  end
 
   def to_s
     "#{self.email}"
