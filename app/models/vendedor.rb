@@ -8,7 +8,7 @@ class Vendedor < ApplicationRecord
   #validates_attachment_presence :foto
   has_attached_file :foto, styles: { medium: "200x250>", thumb: "100x100#" }, default_url: "/assets/:style/missing.png"
   validates_attachment_content_type :foto, content_type: /\Aimage/
-  validates_attachment_file_name :foto, matches: [/png\Z/, /jpe?g\Z/]
+  validates_attachment :foto, content_type: { content_type: ['image/jpeg', 'image/png', 'image/jpg'] } 
   validates_attachment_size :foto, less_than_or_equal_to: 4.megabytes
 
 

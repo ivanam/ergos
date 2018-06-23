@@ -15,7 +15,8 @@
       <tr>
         <th>Apellido</th>
         <th>Nombre</th>
-        <th>Edad</th>
+        <th>Cuil</th>
+        <th>Teléfono</th>
         <th>Email</th>
         <th class="col-md-2">Acciones</th>
       </tr>
@@ -26,7 +27,8 @@
         <tr>
         <td><%= p.apellido %></td>
         <td><%= p.nombre %></td>
-        <td><%= p.age(p.fecha_nacimiento) %></td>
+        <td><%= p.cuit %></td>
+        <td><%= p.telefono %></td>
         <td><%= p.email %></td>
         <td class="text-center">
         <%= link_to edit_administrador_path(persona: p.id), class: 'btn btn-sm btn-primary' do %>
