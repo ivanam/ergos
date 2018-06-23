@@ -21,20 +21,18 @@
       <%= @estado_persona.estado.to_s %>
     </p>
 
-    <p style="margin-left: 15px;">
-        <strong>Persona:</strong>
-        <%= @estado_persona.persona_id %>
-    </p>
 
     <p style="margin-left: 15px;">
-      <strong>Fecha inicio:</strong>
+      <strong>Fecha:</strong>
       <%= @estado_persona.fecha_inicio %>
     </p>
 
 
     <p style="margin-left: 15px;">
       <strong>Persona:</strong>
-      <%= @estado_persona.persona_id.to_s %>
+      <% persona_id = Vendedor.where(:id => @estado_persona.vendedor_id).first.persona_id 
+        persona = Persona.where(:id => persona_id).first%>
+      <%= persona.to_s%>
     </p>    
   </div>
 </div>

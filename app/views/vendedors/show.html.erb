@@ -74,8 +74,14 @@
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
+        <% if EstadoPersona.where(:vendedor_id => v.id, :fecha_inicio => Date.today.to_s).first != nil
+            estado_id = EstadoPersona.where(:vendedor_id => v, :fecha_inicio => Date.today.to_s ).first.estado_id
+            @estadoPersona = Estado.where(:id => estado_id).first.descripcion
+           else
+            @estadoPersona = "Activo"
+          end%>
         <h4 style="padding-bottom: 30px;">Vendedor</h4>
-        <p style="border-top: 2px solid;padding: 5px 0px;border-bottom: 2px solid;background-color: rgba(193, 204, 207, 0.22);"><span style="font-weight: 600">Estado:</span> Activo</p>
+        <p style="border-top: 2px solid;padding: 5px 0px;border-bottom: 2px solid;background-color: rgba(193, 204, 207, 0.22);"><span style="font-weight: 600">Estado:</span><%=@estadoPersona%></p>
         <% if CargaDiarium.where(vendedor_id: @vendedor.id).last.nil?
           ultima_carga = "Sin cargas"
         else
