@@ -17,18 +17,19 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title"  align="center" >Objetivo semanal</h3>
-</div>
-</br>
+  </div>
+  <div class="panel-body">
+    </br>
 
-   <div class="form-group">
-    <label class="col-sm-2 control-label">Fecha Creación</label>  
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Fecha Creación</label>  
       <div class="col-sm-3">
         <div class="form-group">
         <%= f.text_field :fecha_creacion, :id => "datepicker1", :placeholder => "dd/mm/aaaa", :class => "form-fecha-nac form-control"%>
          </div>
+      </div>
     </div>
-    </div>
-  </br>
+    </br>
 
     <div class="form-group">
     <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
@@ -92,11 +93,11 @@
 <div id="vendedor" style="display:none" >
   <div class="form-group">
     <label class="col-sm-2 control-label">Vendedor</label>  
-      <div class="col-sm-3">
-      <div class="form-group">
-      <%= select_tag 'vendedor_id', options_from_collection_for_select(Vendedor.all, :id , :numero, ""), :id => "select_vendedor", :class => "form-alta-vendedor text-field form-control", prompt: "Por favor seleccione" %>
-           </div>
-    </div>
+      <div class="col-sm-10">
+        <%punto_venta_id = current_user.punto_venta_id%>
+        <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :id, :to_s, {:prompt => true},:style=>"width:50%") %>
+        </div>
+      </div>
     </div>
  </div>   
   </br> 
@@ -104,10 +105,8 @@
 <div id="pventa" style="display:none" >
   <div class="form-group">
     <label class="col-sm-2 control-label">Punto de venta</label>  
-      <div class="col-sm-3">
-      <div class="form-group">
+      <div class="col-sm-10">
       <%= select_tag   'punto_venta_id', options_from_collection_for_select(PuntoVentum.all, :id , :nombre, ""), :id => "select_punto_venta", :class => "form-alta-vendedor text-field form-control", prompt: "Por favor seleccione" %>
-         </div>
     </div>
   </div>
 </div>  

@@ -34,7 +34,7 @@ class Vendedor < ApplicationRecord
   end
 
   def to_s
-  	self.numero
+  	"#{self.numero} - #{self.persona.apellido}, #{self.persona.nombre}"
   end
 
   def control_persona
