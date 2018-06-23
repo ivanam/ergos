@@ -7,8 +7,7 @@ class VendedorsController < ApplicationController
   # GET /vendedors.json
   def index
     @bg_gray = true
-
-    @vendedors = Vendedor.where(punto_venta_id: current_user.punto_venta_id)
+    @vendedors = Vendedor.where(punto_venta_id: current_user.punto_venta_id).where('baja is null or baja = false')
   end
 
   # GET /vendedors/1
@@ -221,9 +220,9 @@ class VendedorsController < ApplicationController
   # DELETE /vendedors/1
   # DELETE /vendedors/1.json
   def destroy
-    @vendedor.destroy
+    @vendedor.update(fecha_baja: Date.today, baja: true)
     respond_to do |format|
-      format.html { redirect_to vendedors_url, notice: 'Vendedor was successfully destroyed.' }
+      format.html { redirect_to vendedors_url, notice: 'Se dio de baja correctamente.' }
       format.json { head :no_content }
     end
   end

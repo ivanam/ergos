@@ -8,9 +8,7 @@
 		}
 	</style>
 	
-	<% if (current_user.has_role? :punto_venta) || (current_user.has_role? :concesionaria) || (current_user.has_role? :admin)
-	 punto_venta_id = current_user.punto_venta_id
-	 @vendedores= Vendedor.where(:punto_venta_id => punto_venta_id)%>
+	<% if (current_user.has_role? :punto_venta) || (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
 	
 
 		<div class="col-xs-12 row"  style="">

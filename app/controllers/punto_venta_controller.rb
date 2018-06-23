@@ -127,7 +127,8 @@ class PuntoVentaController < ApplicationController
     @footer = false
     @bg_gray = false
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
-    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
+
+    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id).where('baja is null or baja = false') #solo vendedores activos
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
     
     @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first
@@ -166,7 +167,7 @@ class PuntoVentaController < ApplicationController
       anio = Date.today.year
     end
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
-    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id)
+    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id).where('baja is null or baja = false')
     lista = []
     posicion = 1
      @vendedores.each do |ve|
