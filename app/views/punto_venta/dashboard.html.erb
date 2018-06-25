@@ -8,7 +8,7 @@
 		}
 	</style>
 	
-	<% if (current_user.has_role? :punto_venta) || (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
+	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
 	
 
 		<div class="col-xs-12 row"  style="">
@@ -36,7 +36,7 @@
 		<div class="col-xs-2">
     	<%=image_tag @concesionarium.logo.url(:thumb), :class=>"img-fluid", :style=>"width: 100px; max-height:100px;"%>
     	</div>
-    	<% if (current_user.has_role? :punto_venta) || (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
+    	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
 	    	<div class="col-xs-2">
 				<button type="button" id="boton" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search">Calcular ranking</span></button>
 	    	</div>
