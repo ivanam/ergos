@@ -17,7 +17,6 @@
             <th>Concesionaria</th>
             <th>Nombre</th>
             <th>Domicilio</th>
-            <th>Persona</th>
             <th class="col-md-2">Acciones&nbsp;</th>
           </tr>
         </thead>
@@ -32,7 +31,6 @@
             <% end %>
             <td><%= punto_ventum.nombre %></td>
             <td><%= punto_ventum.domicilio %></td>
-            <td><%= punto_ventum.persona_id %></td>
             <td class="text-center">
                 <%= link_to select_punto_venta_path(id: punto_ventum), class: 'btn btn-sm btn-default' do %>
                   <span class="fa fa-eye"></span>
