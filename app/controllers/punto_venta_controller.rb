@@ -128,7 +128,7 @@ class PuntoVentaController < ApplicationController
     @bg_gray = false
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
 
-    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id).where('baja is null or baja = false') #solo vendedores activos
+    @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id).where("baja is null or fecha_baja >= '" + Date.new(@anio,@mes,1).to_s + "'") #solo vendedores activos
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
     
     @concesionarium = Concesionarium.where(:id => @punto_venta.concesionaria_id).first

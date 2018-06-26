@@ -24,7 +24,7 @@ class ObjetivoMensual < ApplicationRecord
 
 
   def vendedor_activo
-    if self.vendedor.baja && (self.fecha >= self.vendedor.fecha_baja)
+    if self.vendedor.baja
       errors.add(:base, "El vendedor se encuentra de baja")
     end
   end

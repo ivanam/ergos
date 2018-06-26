@@ -95,7 +95,7 @@
     <label class="col-sm-2 control-label">Vendedor</label>  
       <div class="col-sm-10">
         <%punto_venta_id = current_user.punto_venta_id%>
-        <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :id, :to_s, {:prompt => true},:style=>"width:50%") %>
+        <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ).where('baja is null or baja = false'), :id, :to_s, {:prompt => true},:style=>"width:50%") %>
         </div>
       </div>
     </div>

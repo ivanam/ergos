@@ -79,6 +79,9 @@
             @estadoPersona = Estado.where(:id => estado_id).first.descripcion
            else
             @estadoPersona = "Activo"
+          end
+          if v.baja
+            @estadoPersona = "Baja"
           end%>
         <h4 style="padding-bottom: 30px;">Vendedor</h4>
         <p style="border-top: 2px solid;padding: 5px 0px;border-bottom: 2px solid;background-color: rgba(193, 204, 207, 0.22);"><span style="font-weight: 600">Estado:</span><%=@estadoPersona%></p>
