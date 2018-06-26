@@ -1,6 +1,10 @@
 <div class="col-sm-12" style="margin-top: 15px;">
   <div class="content-box h-100">
-  <h3>Editar Reunión</h3>
+   <%= link_to reunions_path, class: 'btn btn-default' do %>
+    <span class="fa fa-list-alt"></span>
+    Volver
+  <% end %>
+  <h3 style="text-align: left;font-weight: 600;">Editar Reunión</h3>
 <div class="page-header">
 <%= nested_form_for(@reunion, html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if @reunion.errors.any? %>
