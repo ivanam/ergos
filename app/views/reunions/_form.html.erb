@@ -48,7 +48,7 @@
     <%= f.label :persona_id, "Organizador", class: "col-sm-2 control-label" %>
     <div class="col-sm-3">
       <%punto_venta_id = current_user.punto_venta_id%>
-      <%= f.collection_select :persona_id, PersonaPuntoVentum.where(:punto_venta_id => punto_venta_id), :persona_id, :to_s, {prompt: false}, {:class => "col-sm-2 control-label"} %>
+      <%= f.collection_select :persona_id, PersonaPuntoVentum.where(:punto_venta_id => punto_venta_id), :persona_id, :to_s, {prompt: false}, {:class => "col-sm-2 control-label", style: "width: 300px;"} %>
     </div>
   </div>
 
