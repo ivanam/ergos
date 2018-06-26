@@ -30,21 +30,6 @@
   <%= @reunion.persona.to_s %>
 </p>
 
-<p>
-  <strong>Plan de Acción:</strong>
-  <%= @reunion.plan_accion %>
-</p>
-
-<p>
-  <strong>Accion:</strong>
-  <%= @reunion.accion %>
-</p>
-
-<p>
-  <strong>Organizador:</strong>
-  <%= @reunion.persona.to_s %>
-</p>
-
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -52,11 +37,14 @@
   </div>
   <div class="panel-body">  
     <dl class="dl-horizontal">
-      <% if !@reunion.personas.empty? %>
-        <% @reunion.personas.each do |p| %>
+      <% if @reunion.id != nil %>
+      <% ReunionParticipante.where(reunion_id: @reunion.id).each do |pe| %>
+      <% perid = pe.persona_id  %>
+         <% Persona.where(id: perid).each do |pv| %>
           <dt>Participante:</dt>
-          <dd><%= p.to_s %></dd>
+          <dd><%= pv.nombre %> - <%= pv.apellido %></dd>
         <% end %>
+      <% end %>
       <% else %>
         <div class="alert alert-warning" role="alert">
           <b><%= fa_icon "exclamation-circle" %></b>

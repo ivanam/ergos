@@ -1,9 +1,6 @@
 class Reunion < ApplicationRecord
 	belongs_to :persona
 	has_many :reunion_participantes, :foreign_key => 'reunion_id', :class_name => 'ReunionParticipante'
-  has_many :personas, :through => :reunion_participantes
-
-
 
 	validates :fecha, :presence => { :message => "Debe completar el campo Fecha" }
 	# validates :semana, :presence => { :message => "Debe completar el campo Semana" }
@@ -13,7 +10,7 @@ class Reunion < ApplicationRecord
   validate :reunionMensual
 
   has_attached_file :adjunto
-  validates_attachment :adjunto, presence: true, content_type: { content_type: ["application/pdf", "application/doc", "application/docx","image/jpeg", "image/gif", "image/png", "image/jpg", "image/bmp"] },size: { in: 1..5000.kilobytes }
+  validates_attachment :adjunto, content_type: { content_type: ["application/pdf", "application/doc", "application/docx","image/jpeg", "image/gif", "image/png", "image/jpg", "image/bmp"] },size: { in: 1..5000.kilobytes }
   accepts_nested_attributes_for :reunion_participantes, allow_destroy: true
 
 

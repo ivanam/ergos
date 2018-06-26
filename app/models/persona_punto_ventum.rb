@@ -23,4 +23,9 @@ class PersonaPuntoVentum < ApplicationRecord
     usuario = User.where(email: self.persona.email).first
     usuario.remove_role("punto_venta")
   end
+
+  def to_s
+    " #{self.persona.apellido}, #{self.persona.nombre}"
+  end
+
 end

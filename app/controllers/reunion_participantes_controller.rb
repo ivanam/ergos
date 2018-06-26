@@ -27,7 +27,6 @@ class ReunionParticipantesController < ApplicationController
   # POST /reunion_participantes.json
   def create
     @reunion_participante = ReunionParticipante.new(reunion_participante_params)
-
     respond_to do |format|
       if @reunion_participante.save
         format.html { redirect_to @reunion_participante, notice: 'Reunion participante was successfully created.' }
@@ -71,6 +70,6 @@ class ReunionParticipantesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reunion_participante_params
-      params.require(:reunion_participante).permit(:reunion_id, :persona_id)
+      params.require(:reunion_participante).permit(:reunion_id, :persona_id, :vendedor_id)
     end
 end
