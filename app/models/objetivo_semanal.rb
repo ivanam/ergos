@@ -17,22 +17,29 @@ class ObjetivoSemanal < ApplicationRecord
 
     validate :validarCantidadesSem
 
-end
+  validate :vendedor_activo
 
 
-def to_s
-    "#{self.descripcion}"
-end
 
+  def to_s
+      "#{self.descripcion}"
+  end
 
-def validaVendedor
-    if self.punto_venta_id == nil
-    	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
-     else
-     	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
+  def vendedor_activo
+    if self.vendedor.baja && (self.fecha >= self.vendedor.fecha_baja)
+      errors.add(:base, "El vendedor se encuentra de baja")
     end
+  end
 
-end
+
+  def validaVendedor
+      if self.punto_venta_id == nil
+      	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
+       else
+       	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
+      end
+
+  end
 
   def validarCantidadesSem
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
@@ -62,4 +69,5 @@ end
     end
 
 
-end  
+  end  
+end

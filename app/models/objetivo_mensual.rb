@@ -1,5 +1,6 @@
 class ObjetivoMensual < ApplicationRecord
 	belongs_to :punto_venta, :class_name => 'PuntoVentum', :foreign_key => 'punto_venta_id'
+  belongs_to :vendedor, optional: true
 	#belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
 
   validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
@@ -14,10 +15,19 @@ class ObjetivoMensual < ApplicationRecord
 
   validate :validarCSI
 
+  validate :vendedor_activo
+
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
 
   validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil)}
+
+
+  def vendedor_activo
+    if self.vendedor.baja && (self.fecha >= self.vendedor.fecha_baja)
+      errors.add(:base, "El vendedor se encuentra de baja")
+    end
+  end
 
   def self.objetivo_total_v(anio,mes,v)
     total = 0
