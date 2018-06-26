@@ -36,9 +36,12 @@ class Concesionarium < ApplicationRecord
 	end
 
 	def nombre_conce
-		descpOb = Concesionarium.where(:nombre => self.nombre).first
-		if (descpOb  != nil)
-          errors.add(:base, "Ya existe una concesionaria con ese nombre")
+		conCant = Concesionarium.where(:nombre => self.nombre).first
+		debugger
+		if (conCant  != nil)
+		  if (fecha_baja == nil)
+           errors.add(:base, "Ya existe una concesionaria con ese nombre")
+          end
         end
 	end
 
