@@ -31,15 +31,15 @@
   </div>
 
     <% v= @vendedor
-    if Vendedor.where(punto_venta_id: punto_venta_id).where("avance > ?", @vendedor.avance).order(:avance).first != nil 
-      siguiente= Vendedor.where(punto_venta_id: punto_venta_id).where("avance > ?", @vendedor.avance).order(:avance).first.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').where("avance > ?", @vendedor.avance).order(:avance).first != nil 
+      siguiente= Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').where("avance > ?", @vendedor.avance).order(:avance).first.id
     else
       siguiente= @vendedor.id
     end
 
 
-    if Vendedor.where(punto_venta_id: punto_venta_id).where("avance < ?", @vendedor.avance).order("avance DESC").first != nil 
-      anterior= Vendedor.where(punto_venta_id: punto_venta_id).where("avance < ?", @vendedor.avance).order("avance DESC").first.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').where("avance < ?", @vendedor.avance).order("avance DESC").first != nil 
+      anterior= Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').where("avance < ?", @vendedor.avance).order("avance DESC").first.id
     else
       anterior= @vendedor.id
     end
@@ -51,16 +51,16 @@
       indice=0
     end
 
-    cant = Vendedor.where(:punto_venta_id => punto_venta_id).count
+    cant = Vendedor.where(:punto_venta_id => punto_venta_id).where('baja is null or baja = false').count
 
-    if Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).first != nil
-        primero = Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).first.id
+    if Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').order(:avance).first != nil
+        primero = Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').order(:avance).first.id
     else
       primero = 0
     end
 
     if Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).last != nil
-        ultimo = Vendedor.where(punto_venta_id: punto_venta_id).order(:avance).last.id
+        ultimo = Vendedor.where(punto_venta_id: punto_venta_id).where('baja is null or baja = false').order(:avance).last.id
     else
       ultimo = 0
     end%>
@@ -79,6 +79,9 @@
             @estadoPersona = Estado.where(:id => estado_id).first.descripcion
            else
             @estadoPersona = "Activo"
+          end
+          if v.baja
+            @estadoPersona = "Baja"
           end%>
         <h4 style="padding-bottom: 30px;">Vendedor</h4>
         <p style="border-top: 2px solid;padding: 5px 0px;border-bottom: 2px solid;background-color: rgba(193, 204, 207, 0.22);"><span style="font-weight: 600">Estado:</span><%=@estadoPersona%></p>

@@ -11,6 +11,8 @@ class CargaDiarium < ApplicationRecord
 
 	validate :estado_vend
 
+	validate :vendedor_activo
+
 	def estado_vend
 		self.vendedor.estado_personas.each do |e_p|
 			f_i = e_p.fecha_inicio
@@ -23,6 +25,12 @@ class CargaDiarium < ApplicationRecord
 				errors.add(:base, "No puede realizar la carga")
 				return 0
 			end
+		end
+	end
+
+	def vendedor_activo
+		if self.vendedor.baja && (self.fecha >= self.vendedor.fecha_baja)
+			errors.add(:base, "El vendedor se encuentra de baja")
 		end
 	end
 
