@@ -1,13 +1,143 @@
-<div class="page-header">
-  <%= link_to reunions_path, class: 'btn btn-default' do %>
+<div class="col-sm-12" style="margin-top: 15px;">
+  <div class="content-box h-100">
+   <%= link_to reunions_path, class: 'btn btn-default' do %>
     <span class="fa fa-list-alt"></span>
     Volver
   <% end %>
-  <%= link_to @reunion, class: 'btn btn-primary' do %>
-    <span class="fa fa-info-sign"></span>
-    Ver
+  <h3 style="text-align: left;font-weight: 600;">Editar Reunión</h3>
+<div class="page-header">
+<%= nested_form_for(@reunion, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @reunion.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h5><b><%= fa_icon "exclamation-circle", text: "Atención! Ocurrieron los siguientes errores" %></b></h5>
+      <ul>
+      <% @reunion.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
-  <h4>Editar Reunion</h4>
+
+   <div class="form-group"> 
+        <label class="col-sm-2 control-label">Reunión Mensual</label>
+        <div class="col-sm-3">
+          <div class="form-group">
+          <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
+          </div>
+        </div>
+      </div>
+
+  <div class="form-group">
+    <%= f.label :fecha, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.date_field :fecha, class: "form-control" %>
+    </div>
+  </div>
+      <div class="form-group", id="mes" hidden>
+        <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
+         <div class="col-sm-2"> 
+            <%= f.select :mes, options_for_select([["Enero", "Enero"], ["Febrero", "Febrero"], ["Marzo", "Marzo"], ["Abril", "Abril"], ["Mayo", "Mayo"], ["Junio", "Junio"], ["Julio", "Julio"], ["Agosto", "Agosto"], ["Septiembre", "Septiembre"], ["Octubre", "Octubre"], ["Noviembre", "Noviembre"], ["Diciembre", "Diciembre"]], 0,), {:prompt => "Seleccionar Mes"} %> 
+        </div> 
+       </div>
+    <div class="form-group", id="sem">
+    <%= f.label :semana, "Semana", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :semana, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :lugar_fisico, "Lugar Físico", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :lugar_fisico, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :persona_id, "Organizador", class: "col-sm-2 control-label" %>
+    <div class="col-sm-3">
+      <%punto_venta_id = current_user.punto_venta_id%>
+      <%= f.collection_select :persona_id, PersonaPuntoVentum.where(:punto_venta_id => punto_venta_id), :persona_id, :to_s, {prompt: false}, {:class => "col-sm-2 control-label"} %>
+    </div>
+  </div>
+
+<!--   <div class="form-group">
+    <%= f.label :plan_accion, "Plan de Acción", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :plan_accion, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :accion, "Accion", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :accion, class: "form-control" %>
+    </div>
+  </div> -->
+
+   <div class="form-group">
+    <%= f.label :adjunto, class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+       <%= f.file_field :adjunto, :class => "select_foto" %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= fa_icon "users" %> Participantes</h3>
+    </div>
+    <div class="panel-body">  
+
+      <%= f.fields_for :reunion_participantes do |p| %>
+        <div class="row">
+          <%= p.label :persona_id, "Participante", class: "col-sm-2 control-label" %>
+          <div class="col-sm-4">
+          <%punto_venta_id = current_user.punto_venta_id%>
+            <%= p.collection_select :persona_id, Vendedor.where(:punto_venta_id => punto_venta_id ), :persona_id, :to_s, {prompt: false}, {:class => "form-control select"} %>
+          </div>
+          <div class="col-sm-2">
+            <%= p.link_to_remove "", :class => "btn btn-sm btn-danger fa fa-trash pull-right" %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.link_to_add "Agregar un Participante", :reunion_participantes , :class => "btn btn-xs btn-success" %>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
+    </div>
+  </div>
+<% end %>
+</div>
+</div>
 </div>
 
-<%= render 'form', reunion: @reunion %>
+<script type="text/javascript">  
+  $('document').ready(function(){
+    $('form').on('nested:fieldAdded', function() {
+      /* apply select2 styling */ 
+      $('select').select2({
+        theme: "bootstrap",
+        language: "es"
+      }); 
+    });
+  });
+
+function myFunction() {
+  $("#mes").val("");
+  $("#sem").val("");
+  var checkBox = document.getElementById("myCheck");
+  if (checkBox.checked == true){
+    $("#mes").show();
+    $("#sem").hide();
+  } else {
+    $("#mes").hide();
+    $("#sem").show();
+  }
+ } 
+</script>
+

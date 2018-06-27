@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180627151241) do
+=======
+ActiveRecord::Schema.define(version: 20180626145112) do
+>>>>>>> 6d8c40f885e7b0ccec70056e50364b492b7b24cf
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -133,8 +137,9 @@ ActiveRecord::Schema.define(version: 20180627151241) do
   create_table "reunion_participantes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "reunion_id"
     t.integer  "persona_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "vendedor_id"
   end
 
   create_table "reunions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

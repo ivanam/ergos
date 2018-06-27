@@ -14,14 +14,11 @@
   <% end %>
 
    <div class="form-group"> 
-        <label class="col-sm-2 control-label">Elija el mes si es una Reunión Mensual</label>
-        <div class="col-sm-3">
-          <div class="form-group">
-          <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
-          </div>
-        </div>
-      </div>
-      </br>
+    <label class="col-sm-2 control-label">Reunión Mensual</label>
+    <div class="col-sm-3">
+      <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
+    </div>
+  </div>
 
   <div class="form-group">
     <%= f.label :fecha, class: "col-sm-2 control-label" %>
@@ -29,18 +26,18 @@
       <%= f.date_field :fecha, class: "form-control" %>
     </div>
   </div>
-    <div class="form-group">
+      <div class="form-group", id="mes" hidden>
+        <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
+         <div class="col-sm-2"> 
+            <%= f.select :mes, options_for_select([["Enero", "Enero"], ["Febrero", "Febrero"], ["Marzo", "Marzo"], ["Abril", "Abril"], ["Mayo", "Mayo"], ["Junio", "Junio"], ["Julio", "Julio"], ["Agosto", "Agosto"], ["Septiembre", "Septiembre"], ["Octubre", "Octubre"], ["Noviembre", "Noviembre"], ["Diciembre", "Diciembre"]], 0,), {:prompt => "Seleccionar Mes"} %> 
+        </div> 
+       </div>
+    <div class="form-group", id="sem">
     <%= f.label :semana, "Semana", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.text_field :semana, class: "form-control" %>
     </div>
   </div>
-      <div class="form-group", id="mes" hidden>
-        <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
-        <div class="col-sm-2"> 
-          <%= select_month(Date.today, field_name: 'mes' , prompt: "Selccione mes") %>
-        </div>
-      </div>
   <div class="form-group">
     <%= f.label :lugar_fisico, "Lugar Físico", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
@@ -50,11 +47,12 @@
   <div class="form-group">
     <%= f.label :persona_id, "Organizador", class: "col-sm-2 control-label" %>
     <div class="col-sm-3">
-      <%= f.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control"} %>
+      <%punto_venta_id = current_user.punto_venta_id%>
+      <%= f.collection_select :persona_id, PersonaPuntoVentum.where(:punto_venta_id => punto_venta_id), :persona_id, :to_s, {prompt: false}, {:class => "col-sm-2 control-label", style: "width: 300px;"} %>
     </div>
   </div>
 
-  <div class="form-group">
+<!--   <div class="form-group">
     <%= f.label :plan_accion, "Plan de Acción", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.text_field :plan_accion, class: "form-control" %>
@@ -66,7 +64,7 @@
     <div class="col-sm-2">
       <%= f.text_field :accion, class: "form-control" %>
     </div>
-  </div>
+  </div> -->
 
    <div class="form-group">
     <%= f.label :adjunto, class: "col-sm-2 control-label" %>
@@ -85,12 +83,14 @@
         <div class="row">
           <%= p.label :persona_id, "Participante", class: "col-sm-2 control-label" %>
           <div class="col-sm-4">
-            <%= p.collection_select :persona_id, Persona.all, :id, :to_s, {prompt: false}, {:class => "form-control select"} %>
+          <%punto_venta_id = current_user.punto_venta_id%>
+            <%= p.collection_select :persona_id, Vendedor.where(punto_venta_id: punto_venta_id, fecha_baja: nil ), :persona_id, :to_s, {prompt: false}, {:class => "form-control select"} %>
           </div>
           <div class="col-sm-2">
             <%= p.link_to_remove "", :class => "btn btn-sm btn-danger fa fa-trash pull-right" %>
           </div>
         </div>
+        <br>
       <% end %>
       <%= f.link_to_add "Agregar un Participante", :reunion_participantes , :class => "btn btn-xs btn-success" %>
 
@@ -117,11 +117,14 @@
 
 function myFunction() {
   $("#mes").val("");
+  $("#sem").val("");
   var checkBox = document.getElementById("myCheck");
   if (checkBox.checked == true){
     $("#mes").show();
+    $("#sem").hide();
   } else {
     $("#mes").hide();
+    $("#sem").show();
   }
  } 
 </script>
