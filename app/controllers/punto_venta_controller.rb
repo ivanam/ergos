@@ -9,7 +9,7 @@ class PuntoVentaController < ApplicationController
   def index
     @bg_gray = true
 
-    @punto_venta = PuntoVentum.where(concesionaria_id: current_user.concesionaria_id)
+    @punto_venta = PuntoVentum.where(concesionaria_id: current_user.concesionaria_id).where(baja: false)
   end
 
   # GET /punto_venta/1
@@ -36,30 +36,14 @@ class PuntoVentaController < ApplicationController
   # POST /punto_venta.json
   def create
     @punto_ventum = PuntoVentum.new(punto_ventum_params)
-    #@conc = Concesionarium.where(:id => @punto_ventum.concesionaria_id).first.cantPv
-    #@cantpuntoventa = PuntoVentum.where(:concesionaria_id => @punto_ventum.concesionaria_id).count
-    #if (@conc <= @cantpuntoventa)
-      # respond_to do |format|
-      #   flash[:notice] = 'No puede crear mas Puntos de Venta'
-      #   format.html {render :new, notice: 'No puede crear mas Puntos de Venta' }
-      #  end
-      #else
-  # =begin  debugger  
-  #   pv = @punto_ventum
-  #   cantPv = pv.concesionaria.cantPv
-  #   cantPvconc = PuntoVentum.where(:concesionaria_id => @punto_ventum.concesionaria_id).count
-  #   if (cantPv < cantPvconc)
-  #     flash[:notice] = 'No puede crear mas puntos de venta, solicite permiso'
-  #   end=end
-        respond_to do |format|
-          if @punto_ventum.save
-            format.html { redirect_to @punto_ventum, notice: 'Punto ventum was successfully created.' }
-            format.json { render :show, status: :created, location: @punto_ventum }
-          else
-            format.html { render :new }
-            format.json { render json: @punto_ventum.errors, status: :unprocessable_entity }
-          end
-        #end
+    respond_to do |format|
+      if @punto_ventum.save
+        format.html { redirect_to @punto_ventum, notice: 'Punto venta creado.' }
+        format.json { render :show, status: :created, location: @punto_ventum }
+      else
+        format.html { render :new }
+        format.json { render json: @punto_ventum.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -68,7 +52,7 @@ class PuntoVentaController < ApplicationController
   def update
     respond_to do |format|
       if @punto_ventum.update(punto_ventum_params)
-        format.html { redirect_to @punto_ventum, notice: 'Punto ventum was successfully updated.' }
+        format.html { redirect_to @punto_ventum, notice: 'Punto de venta actualizado.' }
         format.json { render :show, status: :ok, location: @punto_ventum }
       else
         format.html { render :edit }
@@ -80,9 +64,9 @@ class PuntoVentaController < ApplicationController
   # DELETE /punto_venta/1
   # DELETE /punto_venta/1.json
   def destroy
-    @punto_ventum.destroy
+    @punto_ventum.dar_baja(Date.today)
     respond_to do |format|
-      format.html { redirect_to punto_venta_url, notice: 'Punto ventum was successfully destroyed.' }
+      format.html { redirect_to punto_venta_url, notice: 'Se dio de baja el punto de venta.' }
       format.json { head :no_content }
     end
   end

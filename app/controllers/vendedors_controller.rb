@@ -220,7 +220,7 @@ class VendedorsController < ApplicationController
   # DELETE /vendedors/1
   # DELETE /vendedors/1.json
   def destroy
-    @vendedor.update(fecha_baja: Date.today, baja: true)
+    @vendedor.dar_baja(Date.today)
     respond_to do |format|
       format.html { redirect_to vendedors_url, notice: 'Se dio de baja correctamente.' }
       format.json { head :no_content }

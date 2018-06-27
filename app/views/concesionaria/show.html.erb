@@ -33,7 +33,7 @@
     <p style="margin-left: 15px; color: red;">
       <strong>Cantidad de Puntos de Venta consumidos:</strong>
       <% cantPv = @concesionarium.cantPv %>
-      <% cantPvCons = PuntoVentum.where(concesionaria_id: @concesionarium.id).count %>
+      <% cantPvCons = PuntoVentum.where(concesionaria_id: @concesionarium.id, baja: false).count %>
       <%= cantPvCons %>
     </p>
 
@@ -46,8 +46,8 @@
       <strong>Cantidad de vendedores consumidos:</strong>
       <% cantVend = @concesionarium.cantVend %>
       <% cantVenPv = 0 %>
-      <% pv = PuntoVentum.where(concesionaria_id: @concesionarium.id)%>
-      <% Vendedor.where(punto_venta_id: pv.ids).each do |ppv| %>
+      <% pv = PuntoVentum.where(concesionaria_id: @concesionarium.id, baja: false)%>
+      <% Vendedor.where(punto_venta_id: pv.ids).where('baja is null or baja = false').each do |ppv| %>
       <% cantVenPv = cantVenPv + 1 %>
       <% end %>
       <% cant = cantVend.to_i - cantVenPv.to_i  %>

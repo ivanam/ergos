@@ -44,6 +44,10 @@ class Vendedor < ApplicationRecord
     end
   end
 
+  def dar_baja(fecha)
+    self.update(fecha_baja: fecha, baja: true)
+  end
+
   def next
     self.class.where("id > ?", id).where(:punto_venta_id => self.punto_venta_id).first
   end

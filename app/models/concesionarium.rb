@@ -30,13 +30,13 @@ class Concesionarium < ApplicationRecord
 	end
 
 	def control_punto_venta
-		if (self.cantPv.to_i < self.puntos_venta.count.to_i)
+		if (self.cantPv.to_i < self.puntos_venta.where(baja: false).count.to_i)
           errors.add(:base, "Debe eliminar puntos de venta para poder editar")
         end
 	end
 
 	def nombre_conce
-		descpOb = Concesionarium.where(:nombre => self.nombre).first
+		descpOb = Concesionarium.where(:nombre => self.nombre).where.not(id: self.id).first
 		if (descpOb  != nil)
           errors.add(:base, "Ya existe una concesionaria con ese nombre")
         end
@@ -44,8 +44,8 @@ class Concesionarium < ApplicationRecord
 
 	def control_vendedores
 		cant_vendedores = 0
-		self.puntos_venta.each do |pv|
-			cant_vendedores = cant_vendedores + pv.vendedors.count
+		self.puntos_venta.where(baja: false).each do |pv|
+			cant_vendedores = cant_vendedores + pv.vendedors.where('baja is null or baja = false').count
 		end
 		if (self.cantVend.to_i < cant_vendedores)
           errors.add(:base, "Debe eliminar vendedores para poder editar")
