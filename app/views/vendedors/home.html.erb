@@ -18,12 +18,18 @@
         <%else%>
           <div class="medal-text"><%= @vendedor.avance %></div> <!-- variable con la posición que tiene en la tabla -->
         <% end %>
+        <%  vendid = current_user.persona.vendedors.ids %>
+        <% estadoVend = EstadoPersona.where(:vendedor_id => vendid).where('fecha_fin >= ?',Date.today).first%>
+         <%  if (estadoVend != nil) %>
+         <%  estado = Estado.where(:id => estadoVend.estado_id).first %>
+         <% end %>
+        <%  if (estadoVend == nil) %>
         <div class="buttons">
           <a data-toggle="modal" data-target="#exampleModalCenter"><span class="fa fa-plus-circle"></span></a>
         </div>
+         <% end %>
       <% end %>
     </div>
-    
   </div>
 </div>
 <div class="content">
@@ -147,8 +153,11 @@
       </tr>
     </tbody>
   </table>
-
-
+  <%  if (estado != nil) %>
+    <div class="alert  alert-danger">
+    <center> Ud. está en estado <%=estado.descripcion%> desde el día <%=estadoVend.fecha_inicio%> al día <%=estadoVend.fecha_fin%>, por favor, consulte al Administrador.</center>
+    </div>
+  <% end %>
 	<h1>Conversión</h1>
 	<div class="row">
 		<div class="col-xs-4">
