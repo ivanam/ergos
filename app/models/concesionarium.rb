@@ -53,4 +53,17 @@ class Concesionarium < ApplicationRecord
           errors.add(:base, "Debe eliminar vendedores para poder editar")
         end
 	end
+
+	def dar_baja(fecha)
+    self.update(fecha_baja: fecha, baja: true)
+    self.puntos_venta.where(baja: false).each do |pv|
+      pv.dar_baja(fecha)
+    end
+    PersonaConcesionarium.where(concesionaria_id: self.id). each do |pc|
+      pc.destroy
+    end
+    User.where(concesionaria_id: self.id).each do |u|
+      u.update(concesionaria_id: nil)
+    end
+  end
 end
