@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180627151241) do
-=======
-ActiveRecord::Schema.define(version: 20180626145112) do
->>>>>>> 6d8c40f885e7b0ccec70056e50364b492b7b24cf
+ActiveRecord::Schema.define(version: 20180628134003) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -33,14 +29,15 @@ ActiveRecord::Schema.define(version: 20180626145112) do
     t.integer  "user_id"
     t.integer  "empresa_id"
     t.integer  "persona_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "cantPv"
     t.integer  "cantVend"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.boolean  "baja",                            default: false
   end
 
   create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
