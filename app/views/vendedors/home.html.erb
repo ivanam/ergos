@@ -18,9 +18,13 @@
         <%else%>
           <div class="medal-text"><%= @vendedor.avance %></div> <!-- variable con la posición que tiene en la tabla -->
         <% end %>
+        <%  vendid = current_user.persona.vendedors.ids %>
+        <% estadoVend = EstadoPersona.where(:vendedor_id => vendid).where('fecha_inicio >= ?',Date.today).where('fecha_fin >= ?',Date.today).first%>
+        <%  if (estadoVend == nil) %>
         <div class="buttons">
           <a data-toggle="modal" data-target="#exampleModalCenter"><span class="fa fa-plus-circle"></span></a>
         </div>
+         <% end %>
       <% end %>
     </div>
     
