@@ -38,7 +38,7 @@ class PuntoVentum < ApplicationRecord
   def dar_baja(fecha)
     self.update(fecha_baja: fecha, baja: true)
     self.vendedors.where('baja is null or baja = false').each do |v|
-      v.dar_baja(Date.today)
+      v.dar_baja(fecha)
     end
     PersonaPuntoVentum.where(punto_venta_id: self.id). each do |ppv|
       ppv.destroy

@@ -235,12 +235,12 @@ class CargaDiarium < ApplicationRecord
   end
 
   	def self.calcularSemana(anio,mes,dia)
-  		 semana = Date.new(2018,6,13).week_of_month
+  		 semana = Date.new(anio,mes,dia).week_of_month
   		return semana
   	end
   	def self.obtenerDiasSemanasegunFecha(anio,mes,dia)
-  		 semana = Date.new(2018,6,13).week_of_month
-  		 semana_split = Date.new(2018,6,13).week_split
+  		 semana = Date.new(anio,mes,dia).week_of_month
+  		 semana_split = Date.new(anio,mes,dia).week_split
   		 dias = semana_split[semana - 1]
   		 dias.delete(nil)
   		return dias

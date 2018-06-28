@@ -61,8 +61,7 @@ class ConcesionariaController < ApplicationController
   # DELETE /concesionaria/1
   # DELETE /concesionaria/1.json
   def destroy
-    @concesionarium.persona_concesionaria.destroy_all
-    @concesionarium.destroy
+    @concesionarium.dar_baja(Date.today)
     respond_to do |format|
       format.html { redirect_to concesionaria_url, notice: 'Concesionaria eliminada con exito.' }
       format.json { head :no_content }
@@ -71,8 +70,8 @@ class ConcesionariaController < ApplicationController
 
   def select
     current_user.update(concesionaria_id: @concesionarium.id)
-    if !@concesionarium.puntos_venta.blank?
-      current_user.update(punto_venta_id: @concesionarium.puntos_venta.first.id)
+    if !@concesionarium.puntos_venta.where(baja: false).blank?
+      current_user.update(punto_venta_id: @concesionarium.puntos_venta.where(baja: false).first.id)
     end
     respond_to do |format|
       format.html { redirect_to @concesionarium, notice: 'Concesionaria seleccionada' }

@@ -3,7 +3,7 @@ class PersonaPuntoVentum < ApplicationRecord
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
 
 
-  validates :persona_id, uniqueness: { message: "ya existe usuario para esa persona" }
+  validates :persona_id, uniqueness: { message: "Ya es jefe de ventas" }
 
   before_create :habilitar_user
   before_destroy :deshabilitar_user
