@@ -101,9 +101,11 @@ class PuntoVentaController < ApplicationController
       @dia=di.to_i
       sem =CargaDiarium.calcularSemana(@anio,@mes,@dia)
       @semana = sem.to_i
+      @arr_semana = (1..@semana).to_a
     else
       sem=params[:semana]
       @semana = sem.to_i
+      @arr_semana = (1..@semana).to_a
     end
     #preguntar si es principio de mes...lamar a ranking
 
