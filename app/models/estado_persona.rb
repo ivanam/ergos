@@ -12,7 +12,6 @@ class EstadoPersona < ApplicationRecord
   def fechaLic
     agenteLic = EstadoPersona.where(:vendedor_id => self.vendedor_id).first
     agenteLic1 = EstadoPersona.where(:vendedor_id => self.vendedor_id).where.not(id: self.id).first
-    debugger
     if (agenteLic1 != nil)
 	    if (agenteLic != nil)
 	      if (agenteLic.fecha_fin == nil)
