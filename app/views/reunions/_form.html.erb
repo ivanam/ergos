@@ -13,29 +13,28 @@
     </div>
   <% end %>
 
-   <div class="form-group"> 
-    <label class="col-sm-2 control-label">Reunión Mensual</label>
-    <div class="col-sm-3">
-      <input type="checkbox" id="myCheck"  onclick="myFunction()"> 
+  <div class="form-group">
+    <%= f.label :mensual, "Reunión Mensual", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+      <%= f.check_box :mensual, { class: 'form-control2', id: 'mensual'}, "true", "false" %>      
     </div>
   </div>
-
   <div class="form-group">
     <%= f.label :fecha, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.date_field :fecha, class: "form-control" %>
     </div>
   </div>
-      <div class="form-group", id="mes" hidden>
-        <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
-         <div class="col-sm-2"> 
-            <%= f.select :mes, options_for_select([["Enero", "Enero"], ["Febrero", "Febrero"], ["Marzo", "Marzo"], ["Abril", "Abril"], ["Mayo", "Mayo"], ["Junio", "Junio"], ["Julio", "Julio"], ["Agosto", "Agosto"], ["Septiembre", "Septiembre"], ["Octubre", "Octubre"], ["Noviembre", "Noviembre"], ["Diciembre", "Diciembre"]], 0,), {:prompt => "Seleccionar Mes"} %> 
-        </div> 
-       </div>
-    <div class="form-group", id="sem">
+  <div class="form-group", id="mes">
+    <%= f.label :mes, "Mes", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2"> 
+      <%= select_month(Date.today, field_name: 'mes', prompt: "Seleccione mes") %>
+    </div> 
+  </div>
+  <div class="form-group", id="sem">
     <%= f.label :semana, "Semana", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
-      <%= f.text_field :semana, class: "form-control" %>
+      <%= f.select :semana, options_for_select(['1','2','3','4','5']), prompt: "Seleccione semana" %>
     </div>
   </div>
   <div class="form-group">
@@ -51,22 +50,7 @@
       <%= f.collection_select :persona_id, PersonaPuntoVentum.where(:punto_venta_id => punto_venta_id), :persona_id, :to_s, {prompt: false}, {:class => "col-sm-2 control-label", style: "width: 300px;"} %>
     </div>
   </div>
-
-<!--   <div class="form-group">
-    <%= f.label :plan_accion, "Plan de Acción", class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :plan_accion, class: "form-control" %>
-    </div>
-  </div>
-
   <div class="form-group">
-    <%= f.label :accion, "Accion", class: "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :accion, class: "form-control" %>
-    </div>
-  </div> -->
-
-   <div class="form-group">
     <%= f.label :adjunto, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
        <%= f.file_field :adjunto, :class => "select_foto" %>
@@ -96,7 +80,6 @@
 
     </div>
   </div>
-
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit class: "btn btn-primary" ,value: "Guardar"%>
@@ -113,18 +96,20 @@
         language: "es"
       }); 
     });
+    <% if !@reunion.reunion_semanal?%>
+      $("#sem").hide();
+    <% end %>
   });
 
-function myFunction() {
-  $("#mes").val("");
-  $("#sem").val("");
-  var checkBox = document.getElementById("myCheck");
-  if (checkBox.checked == true){
-    $("#mes").show();
-    $("#sem").hide();
-  } else {
-    $("#mes").hide();
-    $("#sem").show();
-  }
- } 
+  $('#mensual').click(function() {
+    $("#mes").val("");
+    $("#sem").val("");
+    if (this.checked){
+      $("#mes").show();
+      $("#sem").hide();
+    } else {
+      $("#mes").show();
+      $("#sem").show();
+    }
+  });
 </script>

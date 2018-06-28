@@ -4,7 +4,7 @@
 <div class="page-header">
 <h2 style="text-align: center;font-weight: 600;">Reuniones</h2>
   <%= link_to new_reunion_path, class: 'btn btn-primary' do %>
-    <%= fa_icon "plus", text: "Nueva Reunion" %>
+    <%= fa_icon "plus", text: "Nueva Reunión" %>
   <% end %>
   <br><br>
 <!--   <%= link_to "#{reunions_path}.pdf", class: 'btn btn-danger' do %>
@@ -16,12 +16,10 @@
     <thead>
       <tr>
         <th>Fecha</th>
-        <th>Semana</th>
         <th>Mes</th>
+        <th>Semana</th>
         <th>Lugar fisico</th>
         <th>Organizador</th>
-  <!--       <th>Plan de acción</th>
-        <th>Acción</th> -->
         <th>Documento</th>
         <th class="col-md-2">&nbsp;</th>
       </tr>
@@ -30,13 +28,11 @@
     <tbody>
       <% @reunions.each do |reunion| %>
         <tr>
-          <td><%= reunion.fecha %></td>
-          <td><%= reunion.semana %></td>
+          <td><%= reunion.fecha.strftime("%d/%m/%Y") %></td>
           <td><%= reunion.mes %></td>
+          <td><%= reunion.semana %></td>          
           <td><%= reunion.lugar_fisico %></td>
           <td><%= reunion.persona %></td>
-      <!--     <td><%= reunion.plan_accion %></td>
-          <td><%= reunion.accion %></td> -->
           <td><a href="<%= reunion.adjunto %>"><%=reunion.adjunto_file_name%></a></td>
           <td class="text-center">
             <%= link_to reunion, class: 'btn btn-sm btn-default' do %>
