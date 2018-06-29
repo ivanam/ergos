@@ -8,7 +8,7 @@
 		}
 	</style>
 	
-	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
+	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) || (current_user.has_role? :punto_venta) %>
 	
 
 		<div class="col-xs-12 row"  style="">
@@ -143,28 +143,33 @@
 	  	<tbody>
 				<% @vendedores.each do |v|%>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
-		    	<% if @semana == 1 %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
+		    	<% if @arr_semana.include? 1 
+		    	@dias1 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias1)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 2 %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
+		    	<% if @arr_semana.include? 2 
+		    	@dias2 = CargaDiarium.obtenerDiasSemana(@anio,@mes,2)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias2)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 3 %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
+		    	<% if @arr_semana.include? 3 
+		    	@dias3 = CargaDiarium.obtenerDiasSemana(@anio,@mes,3)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias3)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 4 %>
-			 			<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
+		    	<% if @arr_semana.include? 4 
+		    	@dias4 = CargaDiarium.obtenerDiasSemana(@anio,@mes,4)%>
+			 	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias4)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 5  %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias)%></td>
+		    	<% if @arr_semana.include? 5  
+		    	@dias5 = CargaDiarium.obtenerDiasSemana(@anio,@mes,5)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"OPORTUNIDADES",@dias5)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>	
@@ -180,28 +185,33 @@
 		      
 		    </tr>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
-		    	<% if @semana == 1 or @semana == "1" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
+		    	<% if @arr_semana.include? 1 
+		    	@dias6 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias6)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 2 or @semana == "2" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
+		    	<% if @arr_semana.include? 2
+		    	@dias7 = CargaDiarium.obtenerDiasSemana(@anio,@mes,2)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias7)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 3 or @semana == "3" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
+		    	<% if @arr_semana.include? 3
+		    	@dias8 = CargaDiarium.obtenerDiasSemana(@anio,@mes,3)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias8)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 4 or @semana == "4" %>
-			 			<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
+		    	<% if @arr_semana.include? 4
+		    	@dias9 = CargaDiarium.obtenerDiasSemana(@anio,@mes,4)%>
+			 	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias9)%></td>
 	    		<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 5 or @semana == "5" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias)%></td>
+		    	<% if @arr_semana.include? 5
+		    	@dias10 = CargaDiarium.obtenerDiasSemana(@anio,@mes,5)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"PRUEBA DE MANEJO",@dias10)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>	
@@ -215,28 +225,33 @@
 		      
 		    </tr>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
-	    		<% if @semana == 1 or @semana == "1" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
+	    		<% if @arr_semana.include? 1 
+	    		@dias12 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias12)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 2 or @semana == "2" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
+		    	<% if @arr_semana.include? 2
+		    	@dias13 = CargaDiarium.obtenerDiasSemana(@anio,@mes,2)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias13)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 3 or @semana == "3" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
+		    	<% if @arr_semana.include? 3
+		    	@dias14 = CargaDiarium.obtenerDiasSemana(@anio,@mes,3)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias14)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 4 or @semana == "4" %>
-			 			<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
+		    	<% if @arr_semana.include? 4
+		    	@dias15 = CargaDiarium.obtenerDiasSemana(@anio,@mes,4)%>
+			 	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias15)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>
-		    	<% if @semana == 5 or @semana == "5" %>
-		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias)%></td>
+		    	<% if @arr_semana.include? 5
+		    	@dias16 = CargaDiarium.obtenerDiasSemana(@anio,@mes,5)%>
+		      	<td><%=CargaDiarium.sumaCantSemVenOb(@anio,@mes,v,"VENTAS",@dias16)%></td>
 		    	<%else%>
 		   	  	<td></td>
 		    	<%end%>	
@@ -253,28 +268,33 @@
 		  </tbody>
 	   	<tfoot>
 		    <tr>
-		      <% if @semana == 1 or @semana == "1" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
+		      <% if @arr_semana.include? 1
+		    	@dias17 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias17)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 2 or @semana == "2" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
+		      <% if  @arr_semana.include? 2
+		    	@dias18 = CargaDiarium.obtenerDiasSemana(@anio,@mes,2)%>		
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias18)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 3 or @semana == "3" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
+		      <% if @arr_semana.include? 3
+		    	@dias19 = CargaDiarium.obtenerDiasSemana(@anio,@mes,3)%>		
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias19)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 4 or @semana == "4" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
+		      <% if @arr_semana.include? 4
+		    	@dias20 = CargaDiarium.obtenerDiasSemana(@anio,@mes,4)%>		
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias20)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 5 or @semana == "5" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias)%></th>
+		      <% if @arr_semana.include? 5
+		    	@dias21 = CargaDiarium.obtenerDiasSemana(@anio,@mes,5)%>		
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"OPORTUNIDADES",@dias21)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
@@ -288,28 +308,33 @@
 		      <th rowspan="3" style="text-align: center;vertical-align: middle;"><%=CargaDiarium.obtenerCompromisoDeVentasPromedio(@anio,@mes,@semana,@vendedores)%></th>
 		    </tr>
 		    <tr>
-		     <% if @semana == 1 or @semana == "1" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
+		     <% if @arr_semana.include? 1
+		    	@dias22 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias22)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 2 or @semana == "2" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
+		      <% if @arr_semana.include? 2
+		    	@dias23 = CargaDiarium.obtenerDiasSemana(@anio,@mes,2)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias23)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 3 or @semana == "3" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
+		      <% if  @arr_semana.include? 3
+		    	@dias24 = CargaDiarium.obtenerDiasSemana(@anio,@mes,3)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias24)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 4 or @semana == "4" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
+		      <% if  @arr_semana.include? 4
+		    	@dias25 = CargaDiarium.obtenerDiasSemana(@anio,@mes,4)%>
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias25)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 5 or @semana == "5" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias)%></th>
+		      <% if  @arr_semana.include? 5
+		    	@dias26 = CargaDiarium.obtenerDiasSemana(@anio,@mes,5)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"PRUEBA DE MANEJO",@dias26)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
@@ -323,28 +348,33 @@
 		      
 		    </tr>
 		    <tr>
-		      <% if @semana == 1 or @semana == "1" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
+		      <% if  @arr_semana.include? 1
+		    	@dias27 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias27)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 2 or @semana == "2" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
+		      <% if  @arr_semana.include? 2
+		    	@dias28 = CargaDiarium.obtenerDiasSemana(@anio,@mes,2)%>
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias28)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 3 or @semana == "3" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
+		      <% if  @arr_semana.include? 3
+		    	@dias29 = CargaDiarium.obtenerDiasSemana(@anio,@mes,3)%>	
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias29)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 4 or @semana == "4" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
+		      <% if  @arr_semana.include? 4
+		    	@dias30 = CargaDiarium.obtenerDiasSemana(@anio,@mes,4)%>
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias30)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>
-		      <% if @semana == 5 or @semana == "5" %>	
-		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias)%></th>
+		      <% if  @arr_semana.include? 5
+		    	@dias31 = CargaDiarium.obtenerDiasSemana(@anio,@mes,5)%>
+		      	<th><%=CargaDiarium.sumaCantSem(@anio,@mes,@vendedores,"VENTAS",@dias31)%></th>
 		      <%else%>
 		      	<th>0</th>
 		      <%end%>

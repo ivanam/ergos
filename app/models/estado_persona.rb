@@ -14,7 +14,6 @@ class EstadoPersona < ApplicationRecord
     agenteLic = EstadoPersona.where(:vendedor_id => self.vendedor_id).last
     agenteSelf = EstadoPersona.where(:vendedor_id => self.vendedor_id).where(id: self.id).first
     agenteLic1 = EstadoPersona.where(:vendedor_id => self.vendedor_id).where.not(id: self.id).first
-    debugger
     if (agenteSelf == nil)
      if (agenteLic1 != nil)
 	    if (agenteLic != nil)
