@@ -11,6 +11,7 @@ class EstadoPersona < ApplicationRecord
   validate  :fechaLic
 
   def fechaLic
+  	hayCarga = CargaDiarium.where('fecha >= ?', self.fecha_inicio).where('fecha <= ?', self.fecha_fin).where(vendedor_id: self.vendedor_id).count 
     agenteLic = EstadoPersona.where(:vendedor_id => self.vendedor_id).last
     agenteSelf = EstadoPersona.where(:vendedor_id => self.vendedor_id).where(id: self.id).first
     agenteLic1 = EstadoPersona.where(:vendedor_id => self.vendedor_id).where.not(id: self.id).first
@@ -45,7 +46,11 @@ class EstadoPersona < ApplicationRecord
 	  if (self.fecha_inicio.to_i > self.fecha_fin.to_i)
 	    	 errors.add(:base, "la fecha de inicio no puede ser mayor a la de fin")
 	  end
-	end
+	 end
   	end
+  	if (hayCarga != 0)
+	  	errors.add(:base,  "No se puede crear el registro de inasistencia retroactivo porque el vendedor ha cargado datos en ese período")
+    end
   end
+
 end
