@@ -14,6 +14,9 @@ class ConcesionariaController < ApplicationController
   # GET /concesionaria/1.json
   def show
     @bg_gray = true;
+    if @concesionarium.baja
+      raise CanCan::AccessDenied.new("Concesionaria dada de baja")
+    end
   end
 
   # GET /concesionaria/new
