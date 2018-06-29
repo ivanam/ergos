@@ -28,7 +28,7 @@
         <tbody>
           <% @concesionaria.each do |concesionarium| %>
             <tr>
-              <td><%= image_tag concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:50px;" %></td>
+              <td><%= image_tag concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:25px;" %></td>
               <td><%= concesionarium.id %></td>
               <td><%= concesionarium.nombre %></td>
               <td><%= concesionarium.cantPv %></td>
