@@ -280,7 +280,7 @@ class VendedorsController < ApplicationController
       @vendedor = current_user.persona.vendedors.first
     else
       if (current_user.has_role? :punto_venta) && (!params[:vendedor].nil?) && (params[:vendedor] != "Mis datos como vendedor" )
-        @vendedor = Vendedor.find_by(numero: params[:vendedor])
+        @vendedor = Vendedor.find_by(numero: params[:vendedor], punto_venta_id: current_user.punto_venta_id)
       else
         @vendedor = current_user.persona.vendedors.first
       end

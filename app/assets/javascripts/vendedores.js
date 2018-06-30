@@ -15,7 +15,7 @@ $(document).ready(function($) {
 
 
 
-   $("#input_cuil").bind("propertychange change click keyup input paste",function(){
+   $("#input_cuil").bind("propertychange change keyup input paste",function(){
       var cuit = parseInt($("#input_cuil").val(),10);
          $("#datos_persona").show();
           $.ajax({
