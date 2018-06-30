@@ -130,8 +130,19 @@ class VendedorsController < ApplicationController
           @errores[:oportunidades] = objetivo_op.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 7, user_id: current_user.id, cantidad_propuesta: cantidad_op)
-        msj += ' Oportunidades '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes
+        objetivo.anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_op
+        if objetivo.save
+          msj += ' Oportunidades '
+        else
+          @errores[:oportunidades] = objetivo_op.errors.full_messages.first
+        end
       end
     end
     objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 4)
@@ -144,8 +155,19 @@ class VendedorsController < ApplicationController
           @errores[:pruebas_de_manejo] = objetivo_pm.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 4, user_id: current_user.id, cantidad_propuesta: cantidad_pm)
-        msj += ' Pruebas de manejo '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes
+        objetivo.anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_pm
+        if objetivo.save
+          msj += ' Pruebas de manejo '
+        else
+          @errores[:pruebas_de_manejo] = objetivo_pm.errors.full_messages.first
+        end
       end
     end
     objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 5)
@@ -172,8 +194,19 @@ class VendedorsController < ApplicationController
           @errores[:financiaciones] = objetivo_f.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 8, user_id: current_user.id, cantidad_propuesta: cantidad_f)  
-        msj += ' Financiaciones '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes
+        objetivo.anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_f
+        if objetivo.save
+          msj += ' Financiaciones '
+        else
+          @errores[:financiaciones] = objetivo_f.errors.full_messages.first
+        end
       end
     end
     objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 3)
@@ -186,8 +219,19 @@ class VendedorsController < ApplicationController
           @errores[:calidad] = objetivo_c.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 3, user_id: current_user.id, cantidad_propuesta: cantidad_c)  
-        msj += ' Calidad '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes
+        objetivo.anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_c
+        if objetivo.save
+          msj += ' Calidad '
+        else
+          @errores[:calidad] = objetivo_c.errors.full_messages.first
+        end
       end
     end
 
