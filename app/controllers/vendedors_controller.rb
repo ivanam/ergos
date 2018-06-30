@@ -158,8 +158,8 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.mes
-        objetivo.anio
+        objetivo.mes = mes
+        objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
         objetivo.tipo_objetivo_id = tipo_objetivo_id
@@ -184,8 +184,8 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.mes
-        objetivo.anio
+        objetivo.mes = mes
+        objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
         objetivo.tipo_objetivo_id = tipo_objetivo_id
@@ -210,8 +210,8 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.mes
-        objetivo.anio
+        objetivo.mes = mes
+        objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
         objetivo.tipo_objetivo_id = tipo_objetivo_id
@@ -236,8 +236,8 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.mes
-        objetivo.anio
+        objetivo.mes = mes
+        objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
         objetivo.tipo_objetivo_id = tipo_objetivo_id
