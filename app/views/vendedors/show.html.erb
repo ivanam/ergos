@@ -357,7 +357,7 @@
             <div class="btn-group" role="group" aria-label="...">
             <% valor_csi = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 3)%>
               <button type="button" data-field="calidad" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
-              <input id="input_calidad" type="text" class="btn btn-default" style="max-width:70px; " name="calidad" value="<%= valor_csi %>"></input>
+              <input id="input_calidad" readonly type="text" class="btn btn-default" style="max-width:70px;" value="<%= valor_csi %>"></input>
               <button type="button" data-field="calidad" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
