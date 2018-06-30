@@ -132,7 +132,6 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.fecha = Date.today
         objetivo.mes = mes
         objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
@@ -159,7 +158,6 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
@@ -186,7 +184,6 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
@@ -213,7 +210,6 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
@@ -240,7 +236,6 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
