@@ -35,21 +35,14 @@
         <%= bootstrap_flash %>
         <%= yield %>
         </div>
-    <!--% if !@footer.nil? %>
-        <% if @footer == true %>
-          <%= render "layouts/footer"%>
-        <% end %>
-    <% else %>
-      <%= render "layouts/footer"%>
-    <% end %-->
-    <script type="text/javascript">
-      $('document').ready(function() { 
-        $('select').select2({
-          theme: "bootstrap",
-          language: "es"
-        }); 
-      });
-    </script>
+        <script type="text/javascript">
+          $('document').ready(function() { 
+            $('select').select2({
+              theme: "bootstrap",
+              language: "es"
+            }); 
+          });
+        </script>
   </body>
 </html>
 
