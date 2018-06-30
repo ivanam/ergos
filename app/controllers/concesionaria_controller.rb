@@ -75,6 +75,8 @@ class ConcesionariaController < ApplicationController
     current_user.update(concesionaria_id: @concesionarium.id)
     if !@concesionarium.puntos_venta.where(baja: false).blank?
       current_user.update(punto_venta_id: @concesionarium.puntos_venta.where(baja: false).first.id)
+    else
+      current_user.update(punto_venta_id: nil)
     end
     respond_to do |format|
       format.html { redirect_to @concesionarium, notice: 'Concesionaria seleccionada' }
