@@ -8,7 +8,20 @@ class ReunionsController < ApplicationController
   # GET /reunions.json
   def index
     @bg_white = true
-    @reunions = Reunion.all
+    @anio = Date.today.year
+    @mes = Date.today.month
+    nombre_mes = I18n.t("date.month_names")[@mes]
+    if !params[:date].blank?
+      @anio = params[:date][:anio].to_i
+      @mes = params[:date][:mes].to_i
+      nombre_mes = I18n.t("date.month_names")[@mes]
+    end
+    if !params[:semana].blank?
+      @semana = params[:semana].to_i
+      @reunions = Reunion.where("YEAR(fecha) = ?", @anio).where(mes: nombre_mes, semana: @semana)
+    else
+      @reunions = Reunion.where("YEAR(fecha) = ?", @anio).where(mes: nombre_mes)
+    end    
     respond_to do |format|
       format.html
       format.pdf do

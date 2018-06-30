@@ -64,7 +64,10 @@
           <% end %>
         <% end %>
       <% else %>
-        <div class="alert fade in alert-info alert-dismissable"><button class="close" data-dismiss="alert" aria-hidden="true" type="button">&times;</button>Aún no se agregaron <b>participantes</b>. Haga click con el botón Editar si desea agregarlos.</div>
+        <div class="alert alert-info">
+        <%= fa_icon "exclamation-circle" %> Aún no se agregaron <b>participantes</b>. Haga click con el botón 
+        <b>Editar</b> si desea agregarlos.
+        </div>
       <% end %>
     </dl>
   </div>
