@@ -45,7 +45,7 @@ $(document).ready(function($) {
 
   
 
-   $("#input_cuil").bind("propertychange change click keyup input paste",function(){
+   $("#input_cuil").bind("propertychange change keyup input paste",function(){
       var cuit = parseInt($("#input_cuil").val(),10);
           $.ajax({
             url: '/personas/buscar_persona_completa/'+cuit,
