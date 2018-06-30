@@ -111,15 +111,15 @@ class VendedorsController < ApplicationController
 
   def actualizar_objetivos
     mes = params[:mes]
-    anio = params[:anio]
-    tipo_objetivo_id = 7
+    anio = params[:anio]    
     @vendedor = Vendedor.find(params[:vendedor][:id])
     cantidad_op = params[:oportunidades]
     cantidad_pm = params[:pruebas_manejo]
     cantidad_v = params[:ventas]
     cantidad_f = params[:financiaciones]
     cantidad_c = params[:calidad]    
-    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 7)
+    tipo_objetivo_id = 7
+    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     msj = 'Se actualizaron los valores de '
     @errores = Hash.new
     if cantidad_op.to_i != 0
@@ -132,6 +132,7 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
+        objetivo.fecha = Date.today
         objetivo.mes = mes
         objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
@@ -146,7 +147,8 @@ class VendedorsController < ApplicationController
         end
       end
     end
-    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 4)
+    tipo_objetivo_id = 4
+    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_pm.to_i != 0 
       if objetivo_pm != nil
         objetivo_pm.cantidad_propuesta = cantidad_pm
@@ -157,11 +159,12 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
+        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
-        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
         objetivo.user_id = current_user.id
         objetivo.cantidad_propuesta = cantidad_pm
         if objetivo.save
@@ -171,7 +174,8 @@ class VendedorsController < ApplicationController
         end
       end
     end
-    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 5)
+    tipo_objetivo_id = 5
+    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_v.to_i != 0 
       if objetivo_v != nil
         objetivo_v.cantidad_propuesta = cantidad_v
@@ -181,11 +185,24 @@ class VendedorsController < ApplicationController
           @errores[:ventas] = objetivo_v.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 5, user_id: current_user.id, cantidad_propuesta: cantidad_v)
-        msj += ' Ventas '
+        objetivo = ObjetivoMensual.new()
+        objetivo.fecha = Date.today
+        objetivo.mes
+        objetivo.anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_v
+        if objetivo.save
+          msj += ' Ventas '
+        else
+          @errores[:ventas] = objetivo.errors.full_messages.first
+        end
       end
     end
-    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 8)
+    tipo_objetivo_id = 5
+    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_f.to_i != 0 
       if objetivo_f != nil
         objetivo_f.cantidad_propuesta = cantidad_f
@@ -196,11 +213,12 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
+        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
-        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
         objetivo.user_id = current_user.id
         objetivo.cantidad_propuesta = cantidad_f
         if objetivo.save
@@ -210,7 +228,8 @@ class VendedorsController < ApplicationController
         end
       end
     end
-    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 3)
+    tipo_objetivo_id = 5
+    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_c.to_i != 0 
       if objetivo_c != nil
         objetivo_c.cantidad_propuesta = cantidad_c
@@ -221,11 +240,12 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
+        objetivo.fecha = Date.today
         objetivo.mes
         objetivo.anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
-        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
         objetivo.user_id = current_user.id
         objetivo.cantidad_propuesta = cantidad_c
         if objetivo.save
