@@ -112,6 +112,7 @@ class VendedorsController < ApplicationController
   def actualizar_objetivos
     mes = params[:mes]
     anio = params[:anio]
+    tipo_objetivo_id = 7
     @vendedor = Vendedor.find(params[:vendedor][:id])
     cantidad_op = params[:oportunidades]
     cantidad_pm = params[:pruebas_manejo]
@@ -131,17 +132,17 @@ class VendedorsController < ApplicationController
         end
       else
         objetivo = ObjetivoMensual.new()
-        objetivo.mes
-        objetivo.anio
+        objetivo.mes = mes
+        objetivo.anio = anio
         objetivo.vendedor_id = @vendedor.id
         objetivo.punto_venta_id = @vendedor.punto_venta_id
-        objetivo.tipo_objetivo_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
         objetivo.user_id = current_user.id
         objetivo.cantidad_propuesta = cantidad_op
         if objetivo.save
           msj += ' Oportunidades '
         else
-          @errores[:oportunidades] = objetivo_op.errors.full_messages.first
+          @errores[:oportunidades] = objetivo.errors.full_messages.first
         end
       end
     end
@@ -166,7 +167,7 @@ class VendedorsController < ApplicationController
         if objetivo.save
           msj += ' Pruebas de manejo '
         else
-          @errores[:pruebas_de_manejo] = objetivo_pm.errors.full_messages.first
+          @errores[:pruebas_de_manejo] = objetivo.errors.full_messages.first
         end
       end
     end
@@ -205,7 +206,7 @@ class VendedorsController < ApplicationController
         if objetivo.save
           msj += ' Financiaciones '
         else
-          @errores[:financiaciones] = objetivo_f.errors.full_messages.first
+          @errores[:financiaciones] = objetivo.errors.full_messages.first
         end
       end
     end
@@ -230,7 +231,7 @@ class VendedorsController < ApplicationController
         if objetivo.save
           msj += ' Calidad '
         else
-          @errores[:calidad] = objetivo_c.errors.full_messages.first
+          @errores[:calidad] = objetivo.errors.full_messages.first
         end
       end
     end
