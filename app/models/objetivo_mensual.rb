@@ -19,8 +19,8 @@ class ObjetivoMensual < ApplicationRecord
 
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
-
-  validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil)}
+  validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil, vendedor_id: "is not null")}
+  validates_uniqueness_of :mes, scope: [:punto_venta_id,  :vendedor_id,:tipo_objetivo_id ] , :message=>"Ya posee un tipo de objetivo para ese punto de venta para ese mes", conditions: -> {where(vendedor_id:nil)}
 
 
   def vendedor_activo
@@ -126,11 +126,9 @@ class ObjetivoMensual < ApplicationRecord
   def validarCantidades
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first
+    @obMenSelf = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).where(:id => self.id)
     @obmPv = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).group("id").first # Performs a COUNT(id)
     @obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).group("id").first
-    if ((self.vendedor_id != nil) and (@obmPv == nil))
-     errors.add(:base, 'Debe crear primero un Objetivo Mensual para el punto de venta')
-    end 
     if ((@obmVend != nil) and (@obmPv != nil))
       @obResto =  @obmPv.cantidadPV.to_i - @obmVend.cantidadVend.to_i
     elsif (@obmPv != nil)
@@ -146,8 +144,8 @@ class ObjetivoMensual < ApplicationRecord
          end
       end
     end
-    if (descpOb != nil) && (descpOb.descripcion != "CSI")
-      if ((@obMen == nil) && (self.vendedor_id != nil))
+    if (descpOb.descripcion != "CSI")
+      if ((@obMen == nil) and (self.vendedor_id != nil))
         errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
       end
       
