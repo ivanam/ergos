@@ -13,7 +13,7 @@ class ObjetivoSemanal < ApplicationRecord
 	#validates :user_id, :presence => { :message => "Debe completar el campo User" }
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo tipo de objetivo semanal" }
 	#validates :objetivo_mensual_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" }
-	validates_uniqueness_of :numero_semana, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id] ,  :message=>"%{value}Ya posee un tipo de objetivo para ese pv para esa semana" 
+	validates_uniqueness_of :numero_semana, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id] ,  :message=>"%{value} Ya posee un tipo de objetivo para ese pv para esa semana" 
 
     validate :validarCantidadesSem
 
@@ -47,14 +47,16 @@ class ObjetivoSemanal < ApplicationRecord
     @obsemPv = ObjetivoSemanal.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).group("id").first # Performs a COUNT(id)
     #@obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).group("id").first
     if ((@obMen != nil) && (descpOb.descripcion != 'COMPROMISO DE VENTAS SEMANAL'))
-    	@obMenCantProp = @obMen.cantidad_propuesta.to_i
+    	@obMenCantProp = @obMen.cantidad_propuesta.to_i - self.cantidad_propuesta.to_i
          if (@obMen.cantidad_propuesta.to_i < self.cantidad_propuesta.to_i)
-           errors.add(:base, 'EL objetivo semanal no puede superar al objetivo mensual del punto de venta, el valor maximo deberia ser: '+@obMenCantProp.to_s+' repartido en las semanas restantes')
+           @obsMaximo = @obMen.cantidad_propuesta.to_i / 2
+           errors.add(:base, 'EL objetivo semanal no puede superar al objetivo mensual del punto de venta, el valor maximo deberia ser: '+@obsMaximo.to_s+' repartido en las semanas restantes')
          end
          if (@obsemPv != nil)
     	    @obResto = @obMen.cantidad_propuesta.to_i - self.cantidad_propuesta.to_i
            if (@obResto < self.cantidad_propuesta.to_i)
-              errors.add(:base, 'El objetivo para esa semana deberia ser como maximo: '+@obResto.to_s+'')	
+            @obsMaximo = @obMen.cantidad_propuesta.to_i / 2
+              errors.add(:base, 'El objetivo para esa semana deberia ser como maximo: '+@obsMaximo.to_s+'')	
            end 
          end
         if (descpOb.id != @obMen.tipo_objetivo_id) 
@@ -67,7 +69,9 @@ class ObjetivoSemanal < ApplicationRecord
     if  ((descpOb.descripcion == 'COMPROMISO DE VENTAS SEMANAL') && (self.vendedor_id == nil))
     	errors.add(:base, 'Los compromisos de venta son para los vendedores, no pueden ser asignados a los Puntos de Venta')
     end
-
-
-  end  
+    if (descpOb.descripcion == 'CSI')
+      errors.add(:base, 'EL objetivo CSI es solo mensual no semanal')
+    end
+  end 
+   
 end

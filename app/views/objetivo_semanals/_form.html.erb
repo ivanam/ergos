@@ -35,7 +35,7 @@
     <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
       <div class="col-sm-3">
         <div class="form-group">
-         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id" %>
+         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.where.not(:periodo => 'M'), :id , :descripcion, ""), :id => "tipo_objetivo_id" %>
          </div>
     </div>
     </div>
