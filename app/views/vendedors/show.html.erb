@@ -225,7 +225,7 @@
       </div>
       <%= form_tag("/vendedors/actualizar_objetivos", method: "post") do %>
       <div class="btn-horizontal-list bg-light-gray" style="margin-bottom: 15px;">
-        <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos', :formtarget => "_blank" do %>
+        <%= link_to "#{vendedors_path}/#{@vendedor.id}.pdf", class: 'btn btn-xs btn-default btn-ergos', :target => "_blank" do %>
         <%= fa_icon "file-pdf-o", text: "Imprimir Objetivos" %>
         <% end %>   
         <%= button_tag(type: "submit", class: "btn btn-xs btn-default btn-ergos") do %>
