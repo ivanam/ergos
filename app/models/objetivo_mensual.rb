@@ -144,11 +144,14 @@ class ObjetivoMensual < ApplicationRecord
          end
       end
     end
-    if (descpOb.descripcion != "CSI")
-      if ((@obMen == nil) and (self.vendedor_id != nil))
+    if (descpOb != nil)
         errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
-      end
-      
+       if (descpOb.descripcion != "CSI")
+         if ((@obMen == nil) and (self.vendedor_id != nil))
+          errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
+         end  
+       end
+       errors.add(:base,'Tipo Objetivo Vacio')
     end
   end
 

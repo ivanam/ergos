@@ -59,16 +59,24 @@ class ObjetivoMensualsController < ApplicationController
   # PATCH/PUT /objetivo_mensuals/1
   # PATCH/PUT /objetivo_mensuals/1.json
   def update
-    respond_to do |format|
-      if @objetivo_mensual.update(objetivo_mensual_params)
-        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual modificado con exito.' }
-        format.json { render :show, status: :ok, location: @objetivo_mensual }
-      else
-        format.html { render :edit }
-        format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
-      end
+    debugger
+     descpOb = TipoObjetivo.find(@objetivo_mensual.tipo_objetivo_id).descripcion
+     vendedores = Vendedor.where(punto_venta_id: @objetivo_mensual.punto_venta_id)
+     respond_to do |format|
+       if (descpOb == "CSI" && @objetivo_mensual.csi_real == nil)
+            vendedores.each do |vendedores|
+            @objetivo_mensual.update(objetivo_mensual_params)
+            end
+        end
+       if @objetivo_mensual.update(objetivo_mensual_params)
+          format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual modificado con exito.' }
+          format.json { render :show, status: :created, location: @objetivo_mensual }
+       else
+          format.html { render :new }
+          format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
+       end
     end
-  end
+   end
 
   # DELETE /objetivo_mensuals/1
   # DELETE /objetivo_mensuals/1.json
