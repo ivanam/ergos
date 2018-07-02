@@ -338,7 +338,7 @@
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" data-field="financiaciones" class="btn btn-default btn-menos minus"><%= fa_icon ("minus")%></button>
               <% valor_f = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 8)%>    
-              <input type="text" class="btn btn-default" style="max-width:70px;" name="financiaciones" value="<%= valor_f %>"></input>
+              <input id="input_financiaciones" type="text" class="btn btn-default" style="max-width:70px;" name="financiaciones" value="<%= valor_f %>"></input>
               <button type="button" data-field="financiaciones" class="btn btn-default btn-mas plus"><%= fa_icon ("plus")%></button>
             </div>
           </div> 
@@ -431,10 +431,12 @@
     $('#pruebas_manejo').text('de '+response.ob_pruebas_manejo);
     $('#ventas').text('de '+response.ob_ventas);
     $('#calidad').text('de '+response.ob_csi);
+    $('#financiaciones').text('de '+response.ob_fin);
     $('#input_oportunidades').val(response.oportunidades);
     $('#input_pruebas_manejo').val(response.pruebas_manejo);
     $('#input_ventas').val(response.ventas);
     $('#input_calidad').val(response.calidad);
+    $('#input_financiaciones ').val(response.financiaciones);
   }
   </script>
 

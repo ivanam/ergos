@@ -202,7 +202,7 @@ class VendedorsController < ApplicationController
         end
       end
     end
-    tipo_objetivo_id = 5
+    tipo_objetivo_id = 8
     objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_f.to_i != 0 
       if objetivo_f != nil
@@ -228,7 +228,7 @@ class VendedorsController < ApplicationController
         end
       end
     end
-    tipo_objetivo_id = 5
+    tipo_objetivo_id = 3
     objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_c.to_i != 0 
       if objetivo_c != nil
@@ -317,18 +317,22 @@ class VendedorsController < ApplicationController
     total_ob_pm = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 4)
     total_ob_v = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 5)
     total_ob_csi = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 3)
+    total_ob_fin = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 8)
     total_op = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 7)
     total_pm = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 4)
     total_v = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 5)
     total_csi = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 3)
+    total_fin = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 8)
     totales[:ob_oportunidades] = total_ob_op
     totales[:ob_pruebas_manejo] = total_ob_pm
     totales[:ob_ventas] = total_ob_v
     totales[:ob_csi] = total_ob_csi
+    totales[:ob_fin] = total_ob_fin
     totales[:oportunidades] = total_op
     totales[:pruebas_manejo] = total_pm
     totales[:ventas] = total_v
     totales[:calidad] = total_csi
+    totales[:financiaciones] = total_fin
     render json: totales.to_json
   end
 
