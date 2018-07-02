@@ -140,18 +140,17 @@ class ObjetivoMensual < ApplicationRecord
             errors.add(:base, 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta')
          end
           if (self.cantidad_propuesta.to_i > @obResto)
-            errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual para el punto de venta, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
+            @obMaximo = self.cantidad_propuesta.to_i - @obResto
+            errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual para el punto de venta, el valor esperado debe ser menor o igual a: '+@obMaximo.to_s+'')
          end
       end
     end
-    if (descpOb != nil)
-        errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
-       if (descpOb.descripcion != "CSI")
-         if ((@obMen == nil) and (self.vendedor_id != nil))
+    if !descpOb.nil?
+      if (descpOb.descripcion != "CSI")
+        if ((@obMen == nil) and (self.vendedor_id != nil))
           errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
-         end  
-       end
-       errors.add(:base,'Tipo Objetivo Vacio')
+        end
+      end
     end
   end
 
