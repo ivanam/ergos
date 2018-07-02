@@ -120,7 +120,11 @@ class VendedorsController < ApplicationController
     cantidad_c = params[:calidad]    
     tipo_objetivo_id = 7
     objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
-    msj = 'Se actualizaron los valores de '
+    if cantidad_op.to_i == 0 and cantidad_pm.to_i == 0 and cantidad_v.to_i == 0 and cantidad_f.to_i == 0 and cantidad_c.to_i == 0
+      msj = "no hay datos para actualizar"
+    else
+      msj = 'Se actualizaron los valores de '
+    end
     @errores = Hash.new
     if cantidad_op.to_i != 0
       if objetivo_op != nil

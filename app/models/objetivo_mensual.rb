@@ -1,7 +1,7 @@
 class ObjetivoMensual < ApplicationRecord
 	belongs_to :punto_venta, :class_name => 'PuntoVentum', :foreign_key => 'punto_venta_id'
   belongs_to :vendedor, optional: true
-	#belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
+	belongs_to :user, :class_name => 'User', :foreign_key => 'user_id', optional: true
 
   validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
   validates :anio, :presence => { :message => "Debe completar el campo Fecha de creacion" }
@@ -140,7 +140,7 @@ class ObjetivoMensual < ApplicationRecord
             errors.add(:base, 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta')
          end
           if (self.cantidad_propuesta.to_i > @obResto)
-            errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual de vendedores, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
+            errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual para el punto de venta, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
          end
       end
     end
