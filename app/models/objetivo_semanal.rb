@@ -44,19 +44,16 @@ class ObjetivoSemanal < ApplicationRecord
   def validarCantidadesSem
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first
-    @obsemPv = ObjetivoSemanal.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).group("id").first # Performs a COUNT(id)
-    #@obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).group("id").first
+    @obsemPv = ObjetivoSemanal.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil) # Performs a COUNT(id)
     if ((@obMen != nil) && (descpOb.descripcion != 'COMPROMISO DE VENTAS SEMANAL'))
-    	@obMenCantProp = @obMen.cantidad_propuesta.to_i - self.cantidad_propuesta.to_i
+    	@obMenCantProp = @obMen.cantidad_propuesta.to_i - @obsemPv.sum(:cantidad_propuesta).to_i
          if (@obMen.cantidad_propuesta.to_i < self.cantidad_propuesta.to_i)
-           @obsMaximo = @obMen.cantidad_propuesta.to_i / 2
-           errors.add(:base, 'EL objetivo semanal no puede superar al objetivo mensual del punto de venta, el valor maximo deberia ser: '+@obsMaximo.to_s+' repartido en las semanas restantes')
+           errors.add(:base, 'EL objetivo semanal no puede superar al objetivo mensual del punto de venta, el valor maximo deberia ser: '+@obMenCantProp.to_s+' repartido en las semanas restantes')
          end
          if (@obsemPv != nil)
-    	    @obResto = @obMen.cantidad_propuesta.to_i - self.cantidad_propuesta.to_i
+    	    @obResto = @obMen.cantidad_propuesta.to_i - @obsemPv.sum(:cantidad_propuesta).to_i
            if (@obResto < self.cantidad_propuesta.to_i)
-            @obsMaximo = @obMen.cantidad_propuesta.to_i / 2
-              errors.add(:base, 'El objetivo para esa semana deberia ser como maximo: '+@obsMaximo.to_s+'')	
+              errors.add(:base, 'El objetivo para esa semana deberia ser como maximo: '+@obResto.to_s+'')	
            end 
          end
         if (descpOb.id != @obMen.tipo_objetivo_id) 
