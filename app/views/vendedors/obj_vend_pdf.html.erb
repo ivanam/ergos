@@ -20,17 +20,21 @@
         <th>Oportunidades</th>
         <th>Ventas</th>
         <th>Prueba de Manejo</th>
+        <th>Financiaciones</th>
         <th>Calidad</th>
       </tr>
     <tr>
-        <td> <%carga_total_ob_mes_op = CargaDiarium.carga_total_ob_mes_op(Date.today.year, Date.today.month, @vendedor, 7)%>
+        <td> <%carga_total_ob_mes_op = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 7)%>
           <%=carga_total_ob_mes_op%>
           </td>
-          <td><%carga_total_ob_mes_v = CargaDiarium.carga_total_ob_mes_v(Date.today.year, Date.today.month, @vendedor, 5)%>
+          <td><%carga_total_ob_mes_v = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 5)%>
             <%=carga_total_ob_mes_v%>
           </td>
-          <td><%carga_total_ob_mes_pm = CargaDiarium.carga_total_ob_mes_pm(Date.today.year, Date.today.month, @vendedor, 4)%>
+          <td><%carga_total_ob_mes_pm = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 4)%>
            <%=carga_total_ob_mes_pm%>
+          </td>
+          <td><%carga_total_ob_mes_f = ObjetivoMensual.asignado_o_proyeccion(Date.today.year, Date.today.month, @vendedor, 8)%>
+          <%=carga_total_ob_mes_f%>
           </td>
           <td><%objetivo_csi = ObjetivoMensual.objetivo_v(Date.today.year, Date.today.month, @vendedor, 3)%>
            <%=objetivo_csi%>
