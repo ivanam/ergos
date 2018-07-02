@@ -105,7 +105,7 @@
           <center>
             <a href="/vendedors/<%=primero%>"> << </a> 
             <a href="/vendedors/<%=anterior%>"> < </a> 
-            <%= @vendedor.avance %> de <%=cant%> 
+            <%= Vendedor.where(:punto_venta_id => punto_venta_id).where('baja is null or baja = false').order(:avance).map(&:id).index(@vendedor.id) + 1 %> de <%=cant%> 
             <a href="/vendedors/<%=siguiente%>"> > </a>
             <a href="/vendedors/<%=ultimo%>"> >> </a>
           </center>
@@ -217,7 +217,8 @@
           <center>
             <a href="/vendedors/<%=primero%>"> << </a> 
             <a href="/vendedors/<%=anterior%>"> < </a> 
-            <%= @vendedor.avance%> de <%=cant%> 
+            <% %>
+            <%= Vendedor.where(:punto_venta_id => punto_venta_id).where('baja is null or baja = false').order(:avance).map(&:id).index(@vendedor.id) + 1 %> de <%=cant%> 
             <a href="/vendedors/<%=siguiente%>"> > </a>
             <a href="/vendedors/<%=ultimo%>"> >> </a>
           </center>
