@@ -97,6 +97,7 @@ class NotificationsController < ApplicationController
 		        if notificacion2 == nil
 		           	if Concesionarium.where(:id => ve.punto_venta_id).first != nil
 		            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
+		            	hora = hora + 2
 		            else
 		            	hora = 22
 		           	end
@@ -116,6 +117,7 @@ class NotificationsController < ApplicationController
 		     	if (Time.now.hour >= 22)
 		     			if (Concesionarium.where(:id => ve.punto_venta_id).first != nil)
 			            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
+			            	hora = hora + 2
 			            else
 			            	hora = 22
 			           	end
@@ -133,6 +135,7 @@ class NotificationsController < ApplicationController
 			     if (Time.now.hour >= 20)
 			     		if Concesionarium.where(:id => ve.punto_venta_id).first != nil
 			            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
+
 			            else
 			            	hora = 20
 			           	end
