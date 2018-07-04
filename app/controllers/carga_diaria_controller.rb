@@ -64,14 +64,16 @@ class CargaDiariaController < ApplicationController
             carga_diaria.cantidad = value
             carga_diaria.vendedor_id = vendedor.id
             carga_diaria.save
+            flash[:notice] = 'Se ha creado una nueva carga diaria'
+            render json: { carga_diaria: carga_diaria }
           else
             cargaExis.cantidad = value 
             cargaExis.save
+            flash[:notice] = 'Se ha actualizado la carga diaria'
+            render json: { carga_diaria: cargaExis }
           end
         end   
       end
-
-      redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
     else
       render json: invalido.to_json
     end
