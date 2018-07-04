@@ -3,10 +3,12 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
+
   self.responder = ApplicationResponder
   respond_to :html
 
   protect_from_forgery with: :exception
+  before_action :set_notifications, if: :user_signed_in?
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user.has_role? :dashboard
@@ -27,6 +29,12 @@ class ApplicationController < ActionController::Base
     else
       root_url
     end
+  end
+
+
+
+  def set_notifications
+    @notifications = Notification.where(recipient: current_user, read_at: nil).limit(50)
   end
 
 end

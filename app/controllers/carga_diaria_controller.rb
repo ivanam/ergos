@@ -50,6 +50,7 @@ class CargaDiariaController < ApplicationController
     if cantidades_invalidas
       invalido[:cantidades] = 'La cantidad debe ser mayor a 0'
     end
+
     if invalido.empty?
       tipos_objetivos.each do | id, value |
         if value.to_i > 0
@@ -69,6 +70,7 @@ class CargaDiariaController < ApplicationController
           end
         end   
       end
+
       redirect_to :home_vendedor, notice: 'Se ha creado una nueva carga diaria'
     else
       render json: invalido.to_json

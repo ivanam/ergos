@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180628134003) do
+ActiveRecord::Schema.define(version: 20180703204435) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20180628134003) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.boolean  "baja",                            default: false
+    t.integer  "fin_jornada"
+    t.integer  "inicio_jornada"
   end
 
   create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -56,6 +58,19 @@ ActiveRecord::Schema.define(version: 20180628134003) do
     t.string   "descripcion"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.date     "fecha"
+    t.integer  "hora"
   end
 
   create_table "objetivo_mensuals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -15,6 +15,13 @@ tmp/*
 !/log/.keep
 !/tmp/.keep
 
+bin/bundle
+bin/rails
+bin/rake
+bin/setup
+bin/update
+
+
 # Ignore Byebug command history file.
 .byebug_history
 

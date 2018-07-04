@@ -21,6 +21,13 @@ Rails.application.routes.draw do
   resources :tipo_documentos
   devise_for :users
 
+  
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
+
   get 'home/index'
   
   get 'admin', to: 'home#admin', as:'admin_index'
@@ -63,5 +70,8 @@ Rails.application.routes.draw do
 
   post "/vendedors/actualizar_objetivos" , to: 'vendedors#actualizar_objetivos', as: :actualizar_objetivos
 
+  post "notifications/verificar", to: 'notifications#verificar', as: :notifications_verificar 
+
+  post "notifications/verificarReuniones", to: 'notifications#verificarReuniones', as: :notifications_verificarReuniones
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
