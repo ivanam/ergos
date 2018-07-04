@@ -87,7 +87,7 @@ class NotificationsController < ApplicationController
 		            else
 		            	hora = 20
 		           	end
-		            fecha = actual
+		            fecha = actual + 1
 		            recipients.each do |recipient|
 		                if actor != nil and recipient != nil and carga_diaria != nil
 		                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
@@ -101,7 +101,7 @@ class NotificationsController < ApplicationController
 		            else
 		            	hora = 22
 		           	end
-		            fecha = actual
+		            fecha = actual + 1
 		            recipients.each do |recipient|
 		                if actor != nil and recipient != nil and carga_diaria != nil
 		                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
