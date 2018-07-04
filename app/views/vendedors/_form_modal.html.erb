@@ -75,13 +75,15 @@
       } 
       else {
         limpiar_campos();
+        url = window.location.href.replace(window.location, "");
+        window.location = url + 'home_vendedor';   
       }   
     });
   });
   function limpiar_campos() {
     $('#fecha').val = '';
     <% @tipos_objetivos.each do |t|%>
-    $('#<%= t.id %>').val = 0;
+    $('#<%= t.id %>').val(0);
     <% end %>
   }
 </script>

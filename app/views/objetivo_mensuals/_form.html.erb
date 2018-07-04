@@ -5,8 +5,10 @@
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <h4>No se pudo guardar el formulario, tiene los siguientes errores:</h4>
       <ul>
-      <% @objetivo_mensual.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% @objetivo_mensual.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+          <li><%= m %></li>
+        <%end %>
       <% end %>
       </ul>
     </div>

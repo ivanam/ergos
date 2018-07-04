@@ -121,7 +121,7 @@ class VendedorsController < ApplicationController
     tipo_objetivo_id = 7
     objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_op.to_i == 0 and cantidad_pm.to_i == 0 and cantidad_v.to_i == 0 and cantidad_f.to_i == 0 and cantidad_c.to_i == 0
-      msj = "no hay datos para actualizar"
+      msj = "No hay datos para actualizar"
     else
       msj = 'Se actualizaron los valores de '
     end

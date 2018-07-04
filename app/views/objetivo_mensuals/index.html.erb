@@ -32,19 +32,13 @@
         <td><%= objetivo_mensual.csi_real %></td>
         <td><%= objetivo_mensual.descripcion %></td>
         <td><%= objetivo_mensual.created_at %></td>
-        <% TipoObjetivo.where(:id => objetivo_mensual.tipo_objetivo_id).each do |r| %>
-        <% @tobj = r.descripcion  %>
-        <td><%= @tobj %></td>
-        <% end %>
+        <td><%= objetivo_mensual.tipo_objetivo.descripcion %></td>
         <td><%= objetivo_mensual.cantidad_propuesta %></td>
         <td><%= objetivo_mensual.mes %></td>
         <td><%= objetivo_mensual.anio %></td>
         <td><%= objetivo_mensual.user_id %></td>
         <td><%= objetivo_mensual.vendedor.to_s %></td>
-         <% PuntoVentum.where(:id => objetivo_mensual.punto_venta_id).each do |pv| %>
-        <% @puventa = pv.nombre  %>
-        <td><%= @puventa %></td>
-        <% end %>
+        <td><%= objetivo_mensual.punto_venta.to_s %></td>
           <td class="text-center">
             <%= link_to objetivo_mensual, class: 'btn btn-sm btn-default' do %>
               <span class="fa fa-eye"></span>
