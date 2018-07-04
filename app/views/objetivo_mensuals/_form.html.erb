@@ -21,7 +21,7 @@
       <div id= "tipo" class="form-group">
         <label class="col-sm-2 control-label">Tipo de objetivo</label>  
         <div class="col-sm-10">
-          <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.where.not(:periodo => 'S'), :id, :descripcion, {:prompt => "Seleccione un Tipo de objetivo"},:style=>"width:50%" , :class => "form-control", :id =>"select_tipo") %>
+          <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.all, :id, :descripcion, {:prompt => "Seleccione un Tipo de objetivo"},:style=>"width:50%" , :class => "form-control", :id =>"select_tipo") %>
         </div>
       </div>
       </br>

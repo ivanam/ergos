@@ -23,6 +23,7 @@ class Reunion < ApplicationRecord
 
   #Valida que no se pueda repetir el vendedor al crear una nueva reunion
   def evitar_duplicados
+
     personas_ids = self.reunion_participantes.map(&:persona_id)
     personas_ids_unicas = personas_ids.uniq
     if (personas_ids.length != personas_ids_unicas.length)
