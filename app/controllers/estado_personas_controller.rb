@@ -6,8 +6,13 @@ class EstadoPersonasController < ApplicationController
   # GET /estado_personas
   # GET /estado_personas.json
   def index
-    vendedores = current_user.punto_venta.vendedors
-    @estado_personas = EstadoPersona.where(vendedor_id: vendedores)
+    if params[:vendedor].blank?
+      vendedores = current_user.punto_venta.vendedors
+      @estado_personas = EstadoPersona.where(vendedor_id: vendedores)
+    else
+      @vendedor = Vendedor.where(numero: params[:vendedor]).first
+      @estado_personas = EstadoPersona.where(vendedor_id: @vendedor.id)
+    end
     @bg_gray = true
 
   end
@@ -40,7 +45,7 @@ class EstadoPersonasController < ApplicationController
 
     respond_to do | format|
       if @estado_persona.save
-        format.html { redirect_to @estado_persona, notice: 'Estado persona was successfully created.' }
+        format.html { redirect_to @estado_persona, notice: 'Estado creado con exito.' }
         format.json { render :show, status: :created, location: @estado_persona }
       else
         format.html { render :new }
@@ -54,7 +59,7 @@ class EstadoPersonasController < ApplicationController
   def update
     respond_to do |format|
       if @estado_persona.update(estado_persona_params)
-        format.html { redirect_to @estado_persona, notice: 'Estado persona was successfully updated.' }
+        format.html { redirect_to @estado_persona, notice: 'Se ha editado el Estado con exito.' }
         format.json { render :show, status: :ok, location: @estado_persona }
       else
         format.html { render :edit }
@@ -68,7 +73,7 @@ class EstadoPersonasController < ApplicationController
   def destroy
     @estado_persona.destroy
     respond_to do |format|
-      format.html { redirect_to estado_personas_url, notice: 'Estado persona was successfully destroyed.' }
+      format.html { redirect_to estado_personas_url, notice: 'Se ha eliminado el estado.' }
       format.json { head :no_content }
     end
   end

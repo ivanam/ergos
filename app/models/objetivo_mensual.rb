@@ -1,7 +1,7 @@
 class ObjetivoMensual < ApplicationRecord
 	belongs_to :punto_venta, :class_name => 'PuntoVentum', :foreign_key => 'punto_venta_id'
   belongs_to :vendedor, optional: true
-	#belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
+	belongs_to :user, :class_name => 'User', :foreign_key => 'user_id', optional: true
 
   validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
   validates :anio, :presence => { :message => "Debe completar el campo Fecha de creacion" }
@@ -19,12 +19,12 @@ class ObjetivoMensual < ApplicationRecord
 
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
-
-  validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil)}
+  validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>" %{value}  Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil, vendedor_id: "is not null")}
+  validates_uniqueness_of :mes, scope: [:punto_venta_id,  :vendedor_id,:tipo_objetivo_id ] , :message=>"%{value}  Ya posee un tipo de objetivo para ese punto de venta para ese mes", conditions: -> {where(vendedor_id:nil)}
 
 
   def vendedor_activo
-    if self.vendedor.baja
+    if !self.vendedor.nil? and self.vendedor.baja
       errors.add(:base, "El vendedor se encuentra de baja")
     end
   end
@@ -126,10 +126,11 @@ class ObjetivoMensual < ApplicationRecord
   def validarCantidades
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first
+    @obMenSelf = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).where(:id => self.id)
     @obmPv = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadPV", "id", "cantidad_propuesta", "punto_venta_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).group("id").first # Performs a COUNT(id)
-    @obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil).group("id").first
-    if (@obmVend != nil)
-      @obResto =  @obmPv.cantidadPV.to_i - @obmVend.cantidadVend.to_i
+    @obmVend = ObjetivoMensual.select("sum(cantidad_propuesta) as cantidadVend", "id", "cantidad_propuesta", "vendedor_id").where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where.not(vendedor_id: nil)
+    if ((@obmVend != nil) and (@obmPv != nil))
+      @obResto =  @obmPv.cantidadPV.to_i -  @obmVend.sum(:cantidad_propuesta).to_i
     elsif (@obmPv != nil)
       @obResto =  @obmPv.cantidadPV.to_i
     end 
@@ -139,15 +140,16 @@ class ObjetivoMensual < ApplicationRecord
             errors.add(:base, 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta')
          end
           if (self.cantidad_propuesta.to_i > @obResto)
-            errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual de vendedores, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
+            errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual para el punto de venta, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
          end
       end
     end
-    if (descpOb != nil) && (descpOb.descripcion != "CSI")
-      if ((@obMen == nil) && (self.vendedor_id != nil))
-        errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
+    if !descpOb.nil?
+      if (descpOb.descripcion != "CSI")
+        if ((@obMen == nil) and (self.vendedor_id != nil))
+          errors.add(:base,'Primero debe crear un objetivo mensual para el punto de venta seleccionado')
+        end
       end
-      
     end
   end
 

@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20180703204435) do
     t.integer  "adjunto_file_size"
     t.datetime "adjunto_updated_at"
     t.string   "mes"
+    t.boolean  "mensual"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -14,6 +14,9 @@ class ConcesionariaController < ApplicationController
   # GET /concesionaria/1.json
   def show
     @bg_gray = true;
+    if @concesionarium.baja
+      raise CanCan::AccessDenied.new("Concesionaria dada de baja")
+    end
   end
 
   # GET /concesionaria/new
@@ -72,6 +75,8 @@ class ConcesionariaController < ApplicationController
     current_user.update(concesionaria_id: @concesionarium.id)
     if !@concesionarium.puntos_venta.where(baja: false).blank?
       current_user.update(punto_venta_id: @concesionarium.puntos_venta.where(baja: false).first.id)
+    else
+      current_user.update(punto_venta_id: nil)
     end
     respond_to do |format|
       format.html { redirect_to @concesionarium, notice: 'Concesionaria seleccionada' }

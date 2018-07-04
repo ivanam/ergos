@@ -35,7 +35,7 @@
     <label class="col-sm-2 control-label">Tipo de Objetivo Semanal</label>  
       <div class="col-sm-3">
         <div class="form-group">
-         <%= select_tag 'tipo_objetivo_id', options_from_collection_for_select(TipoObjetivo.all, :id , :descripcion, ""), :id => "tipo_objetivo_id" %>
+         <%= f.collection_select(:tipo_objetivo_id, TipoObjetivo.all, :id, :descripcion, {:prompt => "Seleccione un Tipo de objetivo"},:style=>"width:100%" , :class => "form-control", :id =>"select_tipo") %>
          </div>
     </div>
     </div>
@@ -80,7 +80,7 @@
       </div>
       </br>
    
-<div class="form-group"> 
+<div class="form-group" style="display:none"> 
 <label class="col-sm-2 control-label">Asignar a Vendedor o Punto de venta</label>
  <div class="col-sm-3">
    <div class="form-group">
@@ -90,7 +90,7 @@
 </div>
 </br>   
      
-<div id="vendedor" style="display:none" >
+<div id="vendedor" class="form-group" hidden>
   <div class="form-group">
     <label class="col-sm-2 control-label">Vendedor</label>  
       <div class="col-sm-10">
@@ -151,19 +151,17 @@
 </script>
 
 <script>
-function myFunction() {
-  $("#vendedor").val("");
-  $("#pventa").val("");
-    var checkBox = document.getElementById("myCheck");
-    if (checkBox.checked == true){
-         $("#vendedor").show();
-         $("#pventa").hide();
-         $("#pventa").val("");
-    } else {
-       $("#vendedor").hide();
-        $("#pventa").show();
-        $("#vendedor").val("");
+$(document).ready(function($) {
+  $("#vendedor").hide();
+});
 
-    }
-}
+
+$("#select_tipo").bind("propertychange change click keyup input paste",function(){
+  if ($("#select_tipo").val() == "6"){
+    $("#vendedor").show();
+  }else{
+    $("#vendedor").hide();
+  }
+
+});
 </script>

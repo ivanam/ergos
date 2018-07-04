@@ -40,7 +40,7 @@
         <td><%= objetivo_mensual.mes %></td>
         <td><%= objetivo_mensual.anio %></td>
         <td><%= objetivo_mensual.user_id %></td>
-        <td><%= objetivo_mensual.vendedor_id.to_s %></td>
+        <td><%= objetivo_mensual.vendedor.to_s %></td>
          <% PuntoVentum.where(:id => objetivo_mensual.punto_venta_id).each do |pv| %>
         <% @puventa = pv.nombre  %>
         <td><%= @puventa %></td>

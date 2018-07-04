@@ -16,25 +16,23 @@
   <div class="form-group">
     <%= f.label :estado, class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
-       <%= f.collection_select(:estado_id, Estado.all, :id, :descripcion, {:prompt => true},:style=>"width:100%") %>
+       <%= f.collection_select(:estado_id, Estado.all, :id, :descripcion, {:prompt => "Seleccione estado"},:style=>"width:100%") %>
     </div>
   </div>
   <div class="form-group">
-  <label class="col-sm-2 control-label">Vendedor</label>
-    <div class="col-sm-10"> 
-      <%punto_venta_id = current_user.punto_venta_id%>
-          <%= f.collection_select(:vendedor_id, Vendedor.where(:punto_venta_id => punto_venta_id ).where('baja is null or baja = false'), :id, :to_s, {:prompt => true},:style=>"width:50%") %>
+    <label class="col-sm-2 control-label">Vendedor</label>
+    <div class="col-sm-4"> 
+      <%= f.collection_select(:vendedor_id, Vendedor.where(punto_venta_id: current_user.punto_venta_id).where('baja is null or baja = false'), :id, :to_s, {:prompt => "Seleccione vendedor"}) %>
     </div>
   </div>
-  </br>
-   <div class="form-group">
-    <%= f.label :fecha_inicio, class: "col-sm-2 control-label" %>
+  <div class="form-group">
+    <%= f.label "Fecha de inicio", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.date_field :fecha_inicio, class: "form-control" %>
     </div>
   </div>
    <div class="form-group">
-    <%= f.label :fecha_fin, class: "col-sm-2 control-label" %>
+    <%= f.label "Fecha de finalizción", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.date_field :fecha_fin, class: "form-control" %>
     </div>
@@ -49,12 +47,17 @@
 
 <script type="text/javascript">    
   $('document').ready(function(){
-    $('form').on('nested:fieldAdded', function() {
-      /* apply select2 styling */ 
-      $('select').select2({
-        theme: "bootstrap",
-        language: "es"
-      }); 
+    $('#estado_persona_fecha_inicio').attr('max', $('#estado_persona_fecha_fin').val());
+    $('#estado_persona_fecha_fin').attr('min', $('#estado_persona_fecha_inicio').val());
+    $('#estado_persona_fecha_inicio').change(function(){
+      if ($(this).val()) {
+        $('#estado_persona_fecha_fin').attr('min', $(this).val());
+      }  
+    });
+    $('#estado_persona_fecha_fin').change(function(){
+      if ($(this).val()) {
+        $('#estado_persona_fecha_inicio').attr('max', $(this).val());
+      }  
     });
   });
 </script>

@@ -59,16 +59,16 @@ class ObjetivoMensualsController < ApplicationController
   # PATCH/PUT /objetivo_mensuals/1
   # PATCH/PUT /objetivo_mensuals/1.json
   def update
-    respond_to do |format|
+  respond_to do |format|
       if @objetivo_mensual.update(objetivo_mensual_params)
-        format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual modificado con exito.' }
-        format.json { render :show, status: :ok, location: @objetivo_mensual }
-      else
-        format.html { render :edit }
-        format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
-      end
+          format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual modificado con exito.' }
+          format.json { render :show, status: :created, location: @objetivo_mensual }
+       else
+          format.html { render :new }
+          format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
+       end
     end
-  end
+   end
 
   # DELETE /objetivo_mensuals/1
   # DELETE /objetivo_mensuals/1.json

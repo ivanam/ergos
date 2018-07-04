@@ -7,18 +7,30 @@
     <span class="fa fa-pencil"></span>
     Editar
   <% end %>
-  <h4>Reunion</h4>
+  <h4>Reunión</h4>
 </div>
 
 <p>
   <strong>Fecha:</strong>
-  <%= @reunion.fecha %>
+  <%= @reunion.fecha.strftime("%d/%m/%Y") %>
+</p>
+
+<% if @reunion.reunion_semanal?%>
+<p>
+  <strong>Mes:</strong>
+  <%= @reunion.mes %>
 </p>
 
 <p>
   <strong>Semana:</strong>
   <%= @reunion.semana %>
 </p>
+<%else%>
+<p>
+  <strong>Mes:</strong>
+  <%= @reunion.mes %>
+</p>
+<%end%>
 
 <p>
   <strong>Lugar Físico:</strong>
@@ -30,6 +42,11 @@
   <%= @reunion.persona.to_s %>
 </p>
 
+<p>
+  <strong>Documento:</strong>
+  <a href="<%= @reunion.adjunto %>"><%=@reunion.adjunto_file_name%></a>
+</p>
+
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -37,18 +54,19 @@
   </div>
   <div class="panel-body">  
     <dl class="dl-horizontal">
-      <% if @reunion.id != nil %>
-      <% ReunionParticipante.where(reunion_id: @reunion.id).each do |pe| %>
-      <% perid = pe.persona_id  %>
-         <% Persona.where(id: perid).each do |pv| %>
-          <dt>Participante:</dt>
-          <dd><%= pv.nombre %> - <%= pv.apellido %></dd>
+      <% participantes = ReunionParticipante.where(reunion_id: @reunion.id) %>
+      <% if !participantes.empty? %>
+        <% participantes.each do |pe| %>
+          <% perid = pe.persona_id  %>
+          <% Persona.where(id: perid).each do |pv| %>
+            <dt>Participante:</dt>
+            <dd><%= pv.nombre %> - <%= pv.apellido %></dd>
+          <% end %>
         <% end %>
-      <% end %>
       <% else %>
-        <div class="alert alert-warning" role="alert">
-          <b><%= fa_icon "exclamation-circle" %></b>
-          Aún no se han asignado Participantes!
+        <div class="alert alert-info">
+        <%= fa_icon "exclamation-circle" %> Aún no se agregaron <b>participantes</b>. Haga click con el botón 
+        <b>Editar</b> si desea agregarlos.
         </div>
       <% end %>
     </dl>

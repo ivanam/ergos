@@ -18,12 +18,12 @@ TipoDocumento.create(descripcion: 'CI')#4
 # Tipo de objetivo
 # ===================
 
-TipoObjetivo.create(id: 3, descripcion: 'CSI')#5
-TipoObjetivo.create(id: 4, descripcion: 'PRUEBA DE MANEJO', tipo: 'KPI')#1
-TipoObjetivo.create(id: 5, descripcion: 'VENTAS', tipo: 'KPI')#2
+TipoObjetivo.create(id: 3, descripcion: 'CSI', periodo: 'M')#5
+TipoObjetivo.create(id: 4, descripcion: 'PRUEBA DE MANEJO', tipo: 'KPI', periodo: 'SM')#1
+TipoObjetivo.create(id: 5, descripcion: 'VENTAS', tipo: 'KPI', periodo: 'SM')#2
 TipoObjetivo.create(id: 6, descripcion: 'COMPROMISO DE VENTAS SEMANAL', periodo: 'S')#3
-TipoObjetivo.create(id: 7, descripcion: 'OPORTUNIDADES', tipo: 'KPI')
-TipoObjetivo.create(id: 8, descripcion: 'FINANCIACIONES', tipo: 'KPI')
+TipoObjetivo.create(id: 7, descripcion: 'OPORTUNIDADES', tipo: 'KPI', periodo: 'SM')
+TipoObjetivo.create(id: 8, descripcion: 'FINANCIACIONES', tipo: 'KPI', periodo: 'SM')
 
 
 # Personas

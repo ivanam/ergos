@@ -8,7 +8,20 @@ class ReunionsController < ApplicationController
   # GET /reunions.json
   def index
     @bg_white = true
-    @reunions = Reunion.all
+    @anio = Date.today.year
+    @mes = Date.today.month
+    nombre_mes = I18n.t("date.month_names")[@mes]
+    if !params[:date].blank?
+      @anio = params[:date][:anio].to_i
+      @mes = params[:date][:mes].to_i
+      nombre_mes = I18n.t("date.month_names")[@mes]
+    end
+    if !params[:semana].blank?
+      @semana = params[:semana].to_i
+      @reunions = Reunion.where("YEAR(fecha) = ?", @anio).where(mes: nombre_mes, semana: @semana)
+    else
+      @reunions = Reunion.where("YEAR(fecha) = ?", @anio).where(mes: nombre_mes)
+    end    
     respond_to do |format|
       format.html
       format.pdf do
@@ -53,6 +66,7 @@ class ReunionsController < ApplicationController
   # POST /reunions.json
   def create
     @reunion = Reunion.new(reunion_params)
+    @reunion.mes = I18n.t("date.month_names")[params[:date][:mes].to_i]
     respond_to do |format|
       if @reunion.save
         format.html { redirect_to @reunion, notice: 'Se ha creado una nueva Reunion.' }
@@ -68,6 +82,7 @@ class ReunionsController < ApplicationController
   # PATCH/PUT /reunions/1.json
   def update
     respond_to do |format|
+      @reunion.mes = I18n.t("date.month_names")[params[:date][:mes].to_i]
       if @reunion.update(reunion_params)
         format.html { redirect_to @reunion, notice: 'Se ha actualizado la Reunion.' }
         format.json { render :show, status: :ok, location: @reunion }
@@ -97,6 +112,6 @@ class ReunionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reunion_params
-      params.require(:reunion).permit(:fecha, :semana, :mes, :lugar_fisico, :persona_id, :plan_accion, :accion, :adjunto, :adjunto_file_name, reunion_participantes_attributes: [:id, :persona_id, :_destroy])
+      params.require(:reunion).permit(:fecha, :semana, :mes, :lugar_fisico, :persona_id, :plan_accion, :accion, :adjunto, :adjunto_file_name, :mensual, reunion_participantes_attributes: [:id, :persona_id, :_destroy])
     end
 end

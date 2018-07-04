@@ -1,22 +1,26 @@
 <div class="col-sm-12" style="margin-top: 15px;">
   <div class="content-box h-100">
 
+  <div class="page-header">
+    <h2 style="text-align: center;font-weight: 600;">Estado de los Vendedores</h2>
+    <%= link_to new_estado_persona_path, class: 'btn btn-primary' do %>
+      <%= fa_icon "plus", text: "Nuevo Estado" %>
+    <% end %>      
+  </div>
 
- <div class="page-header">
-      <h2 style="text-align: center;font-weight: 600;">Estado de los Vendedores</h2>
-      <%= link_to new_estado_persona_path, class: 'btn btn-primary' do %>
-        <%= fa_icon "plus", text: "Nuevo Estado" %>
-      <% end %>
-      
-    </div>
+  <div class="select-vendedores">
+    Seleccione Vendedor: <%=select("vendedor", "numero", ['Seleccione']+Vendedor.where(punto_venta_id: current_user.punto_venta_id).where('baja is null or baja = false').collect {|v| [ "Vendedor Numero: #{v.numero} - #{v.persona.to_s}", v.numero ]})%>    
+  </div>
+
+  <% if !@estado_personas.blank? %>
 
     <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
             <th>Estado</th>
-            <th>Fecha inicio</th>
-            <th>Fecha fin</th>
+            <th>Fecha de inicio</th>
+            <th>Fecha de finalización</th>
             <th>Vendedor</th>
             <th class="col-md-2">&nbsp;</th>
           </tr>
@@ -26,8 +30,8 @@
           <% @estado_personas.each do |estado_persona|  %>
             <tr>
                <td><%= estado_persona.estado %></td>
-               <td><%= estado_persona.fecha_inicio %></td>
-               <td><%= estado_persona.fecha_fin %></td>
+               <td><%= estado_persona.fecha_inicio.strftime("%d/%m/%Y") %></td>
+               <td><%= estado_persona.fecha_fin.strftime("%d/%m/%Y") %></td>
                <td><%= estado_persona.vendedor.to_s %></td>
               <td class="text-center">
                 <%= link_to estado_persona, class: 'btn btn-sm btn-default' do %>
@@ -49,5 +53,19 @@
       </table>
     </div>
 
+  <% else %>
+    <div class="alert alert-info" role="alert">
+      <%= fa_icon "exclamation-circle" %> No se encontraron <b>Estados</b>.
+    </div>
+  <% end %>
+
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function($) {
+    $('#vendedor_numero').change(function(){
+      url = window.location.href.replace(window.location, "");
+      window.location = url + 'estado_personas?vendedor=' + $(this).val();    
+    });
+  });
+</script>

@@ -28,7 +28,7 @@
         <tbody>
           <% @concesionaria.each do |concesionarium| %>
             <tr>
-              <td><%= image_tag concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:50px;" %></td>
+              <td><%= image_tag concesionarium.logo.url(:medium), :class=>"img-fluid", :style=>"width: auto; max-height:25px;" %></td>
               <td><%= concesionarium.id %></td>
               <td><%= concesionarium.nombre %></td>
               <td><%= concesionarium.cantPv %></td>
@@ -36,7 +36,9 @@
               <td><%= concesionarium.fecha_alta %></td>
               <td><%= concesionarium.fecha_baja %></td>
               <td><%= concesionarium.user.email %></td>
+              
               <td class="text-center">
+              <% if !concesionarium.baja %>
                 <%= link_to select_concesionaria_path(id: concesionarium), class: 'btn btn-sm btn-default' do %>
                   <span class="fa fa-eye"></span>
                 <% end %>
@@ -46,8 +48,9 @@
                 <%= link_to concesionarium, class: 'btn btn-sm btn-danger',method: :delete, data: { confirm: '¿Está seguro?' } do %>
                   <span class="fa fa-trash"></span>
                 <% end %>
-                
+              <% end %>  
               </td>
+              
             </tr>
           <% end %>
         </tbody>

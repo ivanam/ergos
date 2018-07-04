@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 <div class="col-sm-12" style="margin-top: 15px;">
   <div class="content-box h-100">
     
@@ -15,7 +15,7 @@
     </div>
 
     
-    <h4>Estado de la persona</h4>
+    <h4>Estado del Vendedor</h4>
     <p style="margin-left: 15px;">
      <strong>Estado:</strong>
       <%= @estado_persona.estado.to_s %>
@@ -23,13 +23,17 @@
 
 
     <p style="margin-left: 15px;">
-      <strong>Fecha:</strong>
+      <strong>Fecha de inicio:</strong>
       <%= @estado_persona.fecha_inicio %>
     </p>
 
+    <p style="margin-left: 15px;">
+      <strong>Fecha de finalización:</strong>
+      <%= @estado_persona.fecha_fin %>
+    </p>
 
     <p style="margin-left: 15px;">
-      <strong>Persona:</strong>
+      <strong>Vendedor:</strong>
       <% persona_id = Vendedor.where(:id => @estado_persona.vendedor_id).first.persona_id 
         persona = Persona.where(:id => persona_id).first%>
       <%= persona.to_s%>

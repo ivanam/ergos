@@ -111,15 +111,20 @@ class VendedorsController < ApplicationController
 
   def actualizar_objetivos
     mes = params[:mes]
-    anio = params[:anio]
+    anio = params[:anio]    
     @vendedor = Vendedor.find(params[:vendedor][:id])
     cantidad_op = params[:oportunidades]
     cantidad_pm = params[:pruebas_manejo]
     cantidad_v = params[:ventas]
     cantidad_f = params[:financiaciones]
     cantidad_c = params[:calidad]    
-    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 7)
-    msj = 'Se actualizaron los valores de '
+    tipo_objetivo_id = 7
+    objetivo_op = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
+    if cantidad_op.to_i == 0 and cantidad_pm.to_i == 0 and cantidad_v.to_i == 0 and cantidad_f.to_i == 0 and cantidad_c.to_i == 0
+      msj = "no hay datos para actualizar"
+    else
+      msj = 'Se actualizaron los valores de '
+    end
     @errores = Hash.new
     if cantidad_op.to_i != 0
       if objetivo_op != nil
@@ -130,11 +135,23 @@ class VendedorsController < ApplicationController
           @errores[:oportunidades] = objetivo_op.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 7, user_id: current_user.id, cantidad_propuesta: cantidad_op)
-        msj += ' Oportunidades '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes = mes
+        objetivo.anio = anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_op
+        if objetivo.save
+          msj += ' Oportunidades '
+        else
+          @errores[:oportunidades] = objetivo.errors.full_messages.first
+        end
       end
     end
-    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 4)
+    tipo_objetivo_id = 4
+    objetivo_pm = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_pm.to_i != 0 
       if objetivo_pm != nil
         objetivo_pm.cantidad_propuesta = cantidad_pm
@@ -144,11 +161,23 @@ class VendedorsController < ApplicationController
           @errores[:pruebas_de_manejo] = objetivo_pm.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 4, user_id: current_user.id, cantidad_propuesta: cantidad_pm)
-        msj += ' Pruebas de manejo '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes = mes
+        objetivo.anio = anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_pm
+        if objetivo.save
+          msj += ' Pruebas de manejo '
+        else
+          @errores[:pruebas_de_manejo] = objetivo.errors.full_messages.first
+        end
       end
     end
-    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 5)
+    tipo_objetivo_id = 5
+    objetivo_v = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_v.to_i != 0 
       if objetivo_v != nil
         objetivo_v.cantidad_propuesta = cantidad_v
@@ -158,11 +187,23 @@ class VendedorsController < ApplicationController
           @errores[:ventas] = objetivo_v.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 5, user_id: current_user.id, cantidad_propuesta: cantidad_v)
-        msj += ' Ventas '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes = mes
+        objetivo.anio = anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_v
+        if objetivo.save
+          msj += ' Ventas '
+        else
+          @errores[:ventas] = objetivo.errors.full_messages.first
+        end
       end
     end
-    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 8)
+    tipo_objetivo_id = 8
+    objetivo_f = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_f.to_i != 0 
       if objetivo_f != nil
         objetivo_f.cantidad_propuesta = cantidad_f
@@ -172,11 +213,23 @@ class VendedorsController < ApplicationController
           @errores[:financiaciones] = objetivo_f.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 8, user_id: current_user.id, cantidad_propuesta: cantidad_f)  
-        msj += ' Financiaciones '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes = mes
+        objetivo.anio = anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_f
+        if objetivo.save
+          msj += ' Financiaciones '
+        else
+          @errores[:financiaciones] = objetivo.errors.full_messages.first
+        end
       end
     end
-    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: 3)
+    tipo_objetivo_id = 3
+    objetivo_c = ObjetivoMensual.find_by(mes: mes, anio: anio, vendedor_id: @vendedor.id, tipo_objetivo_id: tipo_objetivo_id)
     if cantidad_c.to_i != 0 
       if objetivo_c != nil
         objetivo_c.cantidad_propuesta = cantidad_c
@@ -186,8 +239,19 @@ class VendedorsController < ApplicationController
           @errores[:calidad] = objetivo_c.errors.full_messages.first
         end
       else
-        ObjetivoMensual.create(mes: mes, anio: anio, vendedor_id: @vendedor.id, punto_venta_id: @vendedor.punto_venta_id, tipo_objetivo_id: 3, user_id: current_user.id, cantidad_propuesta: cantidad_c)  
-        msj += ' Calidad '
+        objetivo = ObjetivoMensual.new()
+        objetivo.mes = mes
+        objetivo.anio = anio
+        objetivo.vendedor_id = @vendedor.id
+        objetivo.punto_venta_id = @vendedor.punto_venta_id
+        objetivo.tipo_objetivo_id = tipo_objetivo_id
+        objetivo.user_id = current_user.id
+        objetivo.cantidad_propuesta = cantidad_c
+        if objetivo.save
+          msj += ' Calidad '
+        else
+          @errores[:calidad] = objetivo.errors.full_messages.first
+        end
       end
     end
 
@@ -236,7 +300,7 @@ class VendedorsController < ApplicationController
       @vendedor = current_user.persona.vendedors.first
     else
       if (current_user.has_role? :punto_venta) && (!params[:vendedor].nil?) && (params[:vendedor] != "Mis datos como vendedor" )
-        @vendedor = Vendedor.find_by(numero: params[:vendedor])
+        @vendedor = Vendedor.find_by(numero: params[:vendedor], punto_venta_id: current_user.punto_venta_id)
       else
         @vendedor = current_user.persona.vendedors.first
       end
@@ -253,18 +317,22 @@ class VendedorsController < ApplicationController
     total_ob_pm = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 4)
     total_ob_v = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 5)
     total_ob_csi = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 3)
+    total_ob_fin = ObjetivoMensual.total_objetivos_punto_venta(anio, mes, vendedor, 8)
     total_op = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 7)
     total_pm = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 4)
     total_v = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 5)
     total_csi = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 3)
+    total_fin = ObjetivoMensual.asignado_o_proyeccion(anio, mes, vendedor, 8)
     totales[:ob_oportunidades] = total_ob_op
     totales[:ob_pruebas_manejo] = total_ob_pm
     totales[:ob_ventas] = total_ob_v
     totales[:ob_csi] = total_ob_csi
+    totales[:ob_fin] = total_ob_fin
     totales[:oportunidades] = total_op
     totales[:pruebas_manejo] = total_pm
     totales[:ventas] = total_v
     totales[:calidad] = total_csi
+    totales[:financiaciones] = total_fin
     render json: totales.to_json
   end
 

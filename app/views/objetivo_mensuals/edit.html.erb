@@ -25,23 +25,39 @@
         </div>
       </div>
       </br>
-  
+      <%if @objetivo_mensual.tipo_objetivo_id == 3 and @objetivo_mensual.vendedor_id !=nil%> 
       <div class="form-group">
         <label class="col-sm-2 control-label">Cantidad Objetivo</label>  
         <div class="col-sm-2">
-          <%= f.number_field :cantidad_propuesta, :class => "form-control", :readonly => :true %>
+          <%= f.number_field :cantidad_propuesta, :class => "form-control", :disabled => true%>
         </div>
       </div>
-      </br>
+      <%else%>
+        <div class="form-group">
+        <label class="col-sm-2 control-label">Cantidad Objetivo</label>  
+        <div class="col-sm-2">
+          <%= f.number_field :cantidad_propuesta, :class => "form-control"%>
+        </div>
+      </div>
+      <%end%>
 
+     <%if @objetivo_mensual.tipo_objetivo_id == 3%> 
       <div id="csi" class="form-group">
         <label class="col-sm-2 control-label">Cantidad de CSI Real</label>  
         <div class="col-sm-2">
           <%= f.number_field :csi_real, :class => "form-control"%>
         </div>
       </div>
-      </br>
+      <%else%>
+       <div id="csi" class="form-group" hidden>
+        <label class="col-sm-2 control-label">Cantidad de CSI Real</label>  
+        <div class="col-sm-2">
+          <%= f.number_field :csi_real, :class => "form-control"%>
+        </div>
+      </div>
+      <%end%>
 
+       </br>
       <div class="form-group">
         <label class="col-sm-2 control-label">Mes de objetivo</label>
         <div class="col-sm-10"> 
