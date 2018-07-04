@@ -28,6 +28,9 @@ class NotificationsController < ApplicationController
 
 
 	 end
+	 respond_to do |format|
+	 	format.json { head :no_content }
+	 end
 
   end
   def verificar
@@ -47,7 +50,7 @@ class NotificationsController < ApplicationController
 			end
 		end
 
-		carga_diaria = CargaDiarium.where(vendedor_id: ve.id).last
+		carga_diaria = CargaDiarium.all.last
 
 		persona = Persona.where(id: ve.persona_id).first
 		user = User.where(email: persona.email).first
@@ -147,6 +150,9 @@ class NotificationsController < ApplicationController
 
 
 	     end
+	 end
+	 respond_to do |format|
+	 	format.json { head :no_content }
 	 end
 
   end
