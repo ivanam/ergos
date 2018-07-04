@@ -12,7 +12,14 @@ class User < ApplicationRecord
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum', optional: true
 
   before_update :consistencia_mail
+
+  has_many :notifications, foreign_key: :recipient_id
+
+  #has_many :carga_diaria
   
+  def notification_to_s
+      ""
+  end
   def admin?
 		has_role?(:admin)
 	end

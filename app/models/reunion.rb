@@ -15,6 +15,8 @@ class Reunion < ApplicationRecord
 
   validate :check_duplicados
 
+
+
   def check_duplicados
     personas_ids = self.reunion_participantes.map(&:persona_id)
     personas_ids_unicas = personas_ids.uniq

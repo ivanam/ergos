@@ -14,6 +14,18 @@
     
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+          <li class="nav-item btn-group" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+            <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= fa_icon "bell" %> <span data-behavior="unread-count"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items" style="width:900%">
+              <!--
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              -->
+            </div>
+          </li>
           <li><%= link_to current_user.email, edit_user_registration_path %></li>
           <li><%= link_to (fa_icon "sign-out", text: "Salir"), destroy_user_session_path, method: :delete %></li>
         <% else %>

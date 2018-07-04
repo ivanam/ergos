@@ -24,9 +24,11 @@ test:
 
 production:
   <<: *default
+  host: 127.0.0.1
   database: ergos
   username: root
-  password: finan2
+  password: root
+
 
 #8102sogre
 #unix:/run/DigitalOceanOneClick/unicorn.sock

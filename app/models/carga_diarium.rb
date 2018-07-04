@@ -3,6 +3,7 @@ class CargaDiarium < ApplicationRecord
 	belongs_to :user, :foreign_key => 'vendedor_id'
 	belongs_to :vendedor
 
+
 	validates :fecha, :presence => { :message => "Debe completar el campo Fecha" }
 	validates :cantidad, :presence => { :message => "Debe completar el campo Cantidad" }
 	validates :cantidad, numericality: { only_integer: true, :message => "El campo Cantidad debe ser un valor entero"}
@@ -12,6 +13,10 @@ class CargaDiarium < ApplicationRecord
 	validate :estado_vend
 
 	validate :vendedor_activo
+
+	def notification_to_s
+	    ""
+	end
 
 	def estado_vend
 		self.vendedor.estado_personas.each do |e_p|
