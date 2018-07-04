@@ -3,7 +3,7 @@ class Notifications
     @notifications = $("[data-behavior='notifications']")
     setInterval (=>
         @crearNotificaciones()
-      ), 5000
+      ), 100000
 
     if @notifications.length > 0
       @handleSuccess @notifications.data("notifications")
@@ -12,7 +12,7 @@ class Notifications
       setInterval (=>
         @getNewNotifications()
         @crearNotificacionesReuniones()
-      ), 5000
+      ), 10000
 
 
 
@@ -25,11 +25,11 @@ class Notifications
     )
 
   crearNotificaciones: ->
-    $.post '/notifications/verificar', { data: "some text"}
+    $.post '/notifications/verificar'
 
 
   crearNotificacionesReuniones: ->
-    $.post '/notifications/verificarReuniones', { data: "some text"}
+    $.post '/notifications/verificarReuniones'
 
   handleClick: (e) =>
     $.ajax(
