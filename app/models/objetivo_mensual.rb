@@ -18,8 +18,8 @@ class ObjetivoMensual < ApplicationRecord
   validate :vendedor_activo
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
-  validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>" %{value}  Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil, vendedor_id: "is not null")}
-  validates_uniqueness_of :mes, scope: [:punto_venta_id,  :vendedor_id,:tipo_objetivo_id ] , :message=>"%{value}  Ya posee un tipo de objetivo para ese punto de venta para ese mes", conditions: -> {where(vendedor_id:nil)}
+  validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil, vendedor_id: "is not null")}
+  validates_uniqueness_of :mes, scope: [:punto_venta_id,  :vendedor_id,:tipo_objetivo_id ] , :message=>"Ya posee un tipo de objetivo para ese punto de venta para ese mes", conditions: -> {where(vendedor_id:nil)}
 
 
   def vendedor_activo
@@ -96,9 +96,9 @@ class ObjetivoMensual < ApplicationRecord
   def self.proyeccion(anio, mes, v, ob)
     total_ventas_arbitrario = ObjetivoMensual.objetivo_v(anio, mes, v, 5)
     ventas_promedio = CargaDiarium.total_trimestral(anio, mes, v, 5) / 3
-    promedio = CargaDiarium.total_trimestral(anio, mes, v, ob) / 3
+    numerador = CargaDiarium.total_trimestral(anio, mes, v, ob) / 3
     denominador = (ventas_promedio == 0) ? 1 : ventas_promedio
-    porcentaje = promedio / denominador
+    porcentaje = numerador / denominador
     return total_ventas_arbitrario * porcentaje / 100
   end
 
@@ -115,7 +115,7 @@ class ObjetivoMensual < ApplicationRecord
 
   def self.asignado_o_proyeccion(anio, mes, v, ob)
     total_asignado = ObjetivoMensual.objetivo_v(anio, mes, v, ob)
-    if total_asignado != nil
+    if total_asignado != 0
       return total_asignado
     else
       return ObjetivoMensual.proyeccion(anio, mes, v, ob)
