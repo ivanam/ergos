@@ -45,8 +45,6 @@ class ObjetivoSemanalsController < ApplicationController
   # PATCH/PUT /objetivo_semanals/1.json
   def update
     respond_to do |format|
-      @objetivo_semanal.mes = params[:date][:mes]
-      @objetivo_semanal.anio = params[:date][:anio]
       if @objetivo_semanal.update(objetivo_semanal_params)
         format.html { redirect_to @objetivo_semanal, notice: 'Objetivo semanal modificado con exito.' }
         format.json { render :show, status: :ok, location: @objetivo_semanal }
