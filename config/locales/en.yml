@@ -273,16 +273,4 @@ es:
       short: "%-d de %b "
     pm: pm
 
-en:
-  errors:
-    messages:
-      invalid_date: "No es una fecha válido"
-      invalid_time: "Horario fin jornada es un horario válido"
-      invalid_datetime: "Horario fin jornada es un horario válido"
-      is_at: "debe ser %{restriction}"
-      before: "debe ser antes de %{restriction}"
-      on_or_before: "debe ser  %{restriction}"
-      after: "debe ser después de %{restriction}"
-      on_or_after: "debe ser  %{restriction}"
-
 
