@@ -43,11 +43,7 @@
 		<div class="col-xs-8">
 			<h1 class="text-center"><%=@hoy%></h1>
 		</div>
-		<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
-	    	<div class="col-xs-2">
-				<button type="button" id="boton" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-star"> Ranking</span></button>
-	    	</div>
-    	<% end %>
+		
 	</div>
 	<div class="col-xs-12 row">
 		<div class="col-xs-6">
@@ -399,6 +395,13 @@
 		</table>
 		</div>
 	</div>
+<center>
+	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) %>
+    	<div style="padding: 30px;" >
+			<button type="button" id="boton" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-star"><p style="font-style: arial;"><b> Ranking </b></p></span></button>
+    	</div>
+	<% end %>
+</center>
 	
 
 
