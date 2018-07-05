@@ -27,9 +27,9 @@
   </div>
   <div class="form-group">
     <%= f.label :tipo_objetivo_id, "Tipo de objetivo", class: "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <%= f.text_field :tipo_objetivo_id, class: "form-control", :readonly => true, value: carga_diarium.tipo_objetivo %>
-    </div>
+    
+    <%= f.label :tipo_objetivo_id, carga_diarium.tipo_objetivo, class: "col-sm-2 control-label" %>
+    
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
