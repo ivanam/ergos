@@ -1,6 +1,7 @@
   <%punto_venta_id = current_user.punto_venta_id
-  @punto_venta= PuntoVentum.where(id: punto_venta_id).first.nombre
-  concesionaria_id = PuntoVentum.where(:id => punto_venta_id ).first.concesionaria_id
+  pvid = @vendedor.punto_venta_id
+  @punto_venta= PuntoVentum.where(id: pvid).first.nombre
+  concesionaria_id = PuntoVentum.where(:id => pvid ).first.concesionaria_id
   @concesionaria = Concesionarium.where(:id => concesionaria_id).first.nombre
   %>
 
