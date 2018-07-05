@@ -76,7 +76,7 @@ class NotificationsController < ApplicationController
 		            	hora = 20
 		           	end
 		            fecha = actual + 1
-		            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first != nil
+		            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first == nil
 
 			            recipients.each do |recipient|
 			                if actor != nil and recipient != nil and carga_diaria != nil
@@ -88,7 +88,7 @@ class NotificationsController < ApplicationController
 		       		end
 
 		            hora = hora + 2
-		            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first != nil
+		            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first == nil
 			            recipients.each do |recipient|
 			                if actor != nil and recipient != nil and carga_diaria != nil
 			                	if  Notification.where(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora).first == nil
@@ -113,7 +113,7 @@ class NotificationsController < ApplicationController
 			     if (Time.now.hour >= 20)
 
 			            fecha = Date.today
-			            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first != nil
+			            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first == nil
 				            recipients.each do |recipient|
 				                if actor != nil and recipient != nil and carga_diaria != nil
 				                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
@@ -127,7 +127,7 @@ class NotificationsController < ApplicationController
 		    if (Time.now.hour >= 22)
 			           	fecha = Date.today
 			           	hora = hora + 2
-			           	if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first != nil
+			           	if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first == nil
 				            recipients.each do |recipient|
 				                if actor != nil and recipient != nil and carga_diaria != nil
 					                if ( Notification.where(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora) == nil)
