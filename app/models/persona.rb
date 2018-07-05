@@ -22,7 +22,7 @@ class Persona < ApplicationRecord
   validates :cuit, :presence => { :message => "Debe completar el campo CUIL" }
 
   validates_uniqueness_of :cuit, :message=>"el cuit ya fue utilizado por otra persona" 
-  validates_uniqueness_of :email, :message=>"el email ya fue utilizado por otra persona" 
+  validates_uniqueness_of :email, :message=>"el email ya fue utilizado por otra persona", on: :create
 
 
   before_destroy :deshabilitar_user

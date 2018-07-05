@@ -11,7 +11,7 @@ class User < ApplicationRecord
   
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum', optional: true
 
-  before_update :consistencia_mail
+  after_update :consistencia_mail
 
   has_many :notifications, foreign_key: :recipient_id
 
@@ -33,7 +33,12 @@ class User < ApplicationRecord
 	end
 
   def consistencia_mail
-    Persona.where(id: self.persona_id).first.update(email: self.email)
+    persona = Persona.where(id: self.persona_id).first
+    if !persona.nil?
+      if persona.email != self.email
+        Persona.where(id: self.persona_id).first.update(email: self.email)
+      end
+    end
   end
 
   def to_s
