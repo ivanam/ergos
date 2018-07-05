@@ -62,15 +62,15 @@
 		      
   			</tr>
 	      <tr>
-	        <th class="visible-xs" style="font-size: 8px;">Res.</th>
-	        <th class="hidden-xs">Reserva</th>
+	        <th class="visible-xs" style="font-size: 8px;">Fact.o Conc.</th>
+	        <th class="hidden-xs" style="font-size: 10px;">Facturados o <br>Concretados</br></th>
 		    <th class="visible-xs"  style="font-size: 8px;">Meta</th>
-		    <th class="hidden-xs">Meta</th>
+		    <th class="hidden-xs" style="font-size: 12px">Meta</th>
 		    <th>%</th>
 		    <th class="visible-xs"  style="font-size: 8px;">Soli.</th>
-		    <th class="hidden-xs">Solicitados</th>
+		    <th class="hidden-xs" style="font-size: 10px;">Solicitados</th>
 		    <th class="visible-xs"  style="font-size: 8px;">Meta</th>
-		    <th class="hidden-xs">Meta</th>
+		    <th class="hidden-xs" style="font-size: 12px;">Meta</th>
 		    <th>%</th>
 		    <th>%</th>
 	      </tr>
@@ -121,7 +121,7 @@
 					<th class="hidden-xs hidden-sm" colspan="5">Actividad Semanal</th>
 		      <th colspan="7">Actividad Diaria</th>
 		      <th class="visible-xs" rowspan="2" style="font-size: 10px;">C. de Ventas</th>
-		      <th class="hidden-xs" rowspan="2" style="font-size: 10px;">Compromiso de Ventas</th>
+		      <th class="hidden-xs" rowspan="2" style="font-size: 10px;">Compromiso <br> de Ventas</br></th>
 				</tr>
 	      <tr>
 	        <th>S1</th>
@@ -460,6 +460,6 @@
 </script>
 
 <% if current_user.has_role? :dashboard %>
-	<script>setTimeout('document.location.reload()', 10000); </script>
+	<script>setTimeout('document.location.reload()', 3600000); </script>
 <% end %>
 

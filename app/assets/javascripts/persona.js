@@ -45,7 +45,7 @@ $(document).ready(function($) {
 
   
 
-   $("#input_cuil").bind("propertychange change keyup input paste",function(){
+   /**$("#input_cuil").bind("propertychange change keyup input paste",function(){
       var cuit = parseInt($("#input_cuil").val(),10);
           $.ajax({
             url: '/personas/buscar_persona_completa/'+cuit,
@@ -54,7 +54,7 @@ $(document).ready(function($) {
           .done(function(data) {
             if (data != null) {
              
-              /*$("#input_nombres").val(data.nombres); */ //Comentar para no repetir apellido y nombre al buscar y guardar
+              //$("#input_nombres").val(data.nombres); //Comentar para no repetir apellido y nombre al buscar y guardar
               $("#input_apellidos").val(data.apellido);
               $("#input_dni").val(data.numero_documento);
               $("#input_nombre").val(data.nombre);
@@ -77,7 +77,7 @@ $(document).ready(function($) {
               $("#input_email").val("");
             }
           })
-    });
+    }); **/
 
 });
 function validarCUIT (expresion, dni) {
