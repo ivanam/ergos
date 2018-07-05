@@ -98,7 +98,7 @@ class ObjetivoMensual < ApplicationRecord
     ventas_promedio = CargaDiarium.total_trimestral(anio, mes, v, 5) / 3
     numerador = CargaDiarium.total_trimestral(anio, mes, v, ob) / 3
     denominador = (ventas_promedio == 0) ? 1 : ventas_promedio
-    porcentaje = numerador / denominador
+    porcentaje = numerador / denominador * 100
     return total_ventas_arbitrario * porcentaje / 100
   end
 
