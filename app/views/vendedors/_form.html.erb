@@ -178,10 +178,21 @@
     <label class="col-sm-2 control-label">Fecha Alta</label>  
     <div class="col-sm-2">
       <div class="form-group">
-        <%= v_form.date_field :fecha_alta, :id => "datepicker2", :placeholder => "Fecha Alta", :class => "form-fecha-nac form-control"%>
+        <%= v_form.date_field :fecha_alta, :id => "datepicker2", :placeholder => "Fecha Alta", :class => "form-fecha-nac form-control" %>
       </div>
     </div>
   </div>
+
+  <% if !v_form.object.persisted? %>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Punto Venta</label>  
+      <div class="col-sm-2">
+        <div class="form-group">
+            <%= v_form.collection_select :punto_venta_id, PuntoVentum.where(concesionaria_id: current_user.concesionaria_id), :id, :nombre, {prompt: false} ,{:style=>"width:50%"} %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   </br>
 
 
