@@ -40,6 +40,7 @@
 		<%I18n.locale = :es%>
 		<%fechaSeleccionada = Date.new(@anio,@mes,1) %>
 		<%@hoy = I18n.l(fechaSeleccionada.to_time, format: "%B %Y")%>
+		<br>
 		<div class="col-xs-8">
 			<h1 class="text-center"><%=@hoy%></h1>
 		</div>

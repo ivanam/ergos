@@ -34,7 +34,7 @@
   <div class="form-group", id="sem">
     <%= f.label :semana, "Semana", class: "col-sm-2 control-label" %>
     <div class="col-sm-2">
-      <%= f.select :semana, options_for_select(['1','2','3','4','5']), prompt: "Seleccione semana", class: 'form-control' %>
+      <%= f.select :semana, options_for_select(['1','2','3','4','5'], selected: reunion.semana.to_s), prompt: "Seleccione semana" %>
     </div>
   </div>
   <div class="form-group">

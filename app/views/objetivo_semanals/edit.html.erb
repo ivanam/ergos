@@ -53,7 +53,7 @@
     <label class="col-sm-2 control-label">Número semana</label>  
       <div class="col-sm-3">
         <div class="form-group">
-           <%= f.select :numero_semana, options_for_select(['1','2','3','4','5'], :disabled => true), :readonly => true%>
+           <%= f.select :numero_semana, options_for_select(['1','2','3','4','5'], selected: @objetivo_semanal.numero_semana.to_s , :disabled => true), :readonly => true%>
             </div>
         </div>
     </div>

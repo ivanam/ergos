@@ -37,6 +37,12 @@
       <%= f.text_field :cantVend, class: "form-control" %>
     </div>
   </div>
+  <div class="form-group">
+    <%= f.label "Horario fin de jornada", class: "col-sm-2 control-label" %>
+    <div class="col-sm-2">
+    <%= f.time_select :fin_jornada %>
+    </div>
+  </div>
   
    <div class="form-group">
     <%= f.label :fecha_alta, class: "col-sm-2 control-label" %>

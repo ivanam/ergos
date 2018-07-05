@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180703204435) do
+ActiveRecord::Schema.define(version: 20180705210323) do
 
   create_table "carga_diaria", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "fecha"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20180703204435) do
     t.boolean  "baja",                            default: false
     t.integer  "fin_jornada"
     t.integer  "inicio_jornada"
+    t.integer  "hora"
+    t.integer  "minutos"
   end
 
   create_table "estado_personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

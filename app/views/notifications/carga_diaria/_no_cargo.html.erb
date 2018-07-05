@@ -1,2 +1,5 @@
-
-  <li><center><%=notification.actor.email%> Notificar falta de carga de datos diarios - <%=notification.hora%> hs  <%=notification.fecha%> </center></li>
+<% if (current_user.has_role? :punto_venta) %>
+  	<li><center><%=notification.actor.email%> No realizó carga diaria - <%=notification.hora%> hs  <%=notification.fecha%> </center></li>
+  <%else%>
+  	<li><center>Notificación por falta de carga diaria - <%=notification.hora%> hs  <%=notification.fecha%> </center></li>
+  <%end%>

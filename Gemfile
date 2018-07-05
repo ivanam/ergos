@@ -55,6 +55,7 @@ gem 'bootstrap-editable-rails'
 # gem 'capistrano-rails', group: :development
 
 
+
 gem 'wicked_pdf'
 
 gem 'responders'
