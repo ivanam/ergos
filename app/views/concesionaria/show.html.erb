@@ -60,6 +60,11 @@
     </p>
 
     <p style="margin-left: 15px;">
+      <strong>Horario fin de jornada:</strong>
+      <%= @concesionarium.hora.to_s  + ":" + @concesionarium.minutos.to_s %>
+    </p>
+
+    <p style="margin-left: 15px;">
       <strong>Fecha baja:</strong>
       <%= @concesionarium.fecha_baja %>
     </p>
@@ -68,6 +73,8 @@
       <strong>Usuario creador:</strong>
       <%= @concesionarium.user.email %>
     </p>
+
+
 
     <% if current_user.admin? %>
       <h4>Usuarios administradores concesionaria<%= link_to fa_icon("plus"), new_persona_concesionarium_path(concesionaria: @concesionarium.id), style: "margin-left: 5px;" %></h4>

@@ -15,6 +15,7 @@ class Concesionarium < ApplicationRecord
 	validates :cantPv , :presence => { :message => "Debe completar la cantidad de Puntos de Venta" }
 	validates :cantVend , :presence => { :message => "Debe completar la cantidad de PVendedores" }
 
+
     validates :cantPv, numericality: { only_integer: true, :message => "El campo Cantidad de Puntos de venta debe ser un valor entero"}
 
     validates :cantVend, numericality: { only_integer: true, :message => "El campo Cantidad de Vendedores debe ser un valor entero"}
