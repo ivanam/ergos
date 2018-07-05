@@ -71,7 +71,7 @@ class NotificationsController < ApplicationController
 		        actual = Date.today - diferencia_fechas
 		       		hora = 20
 		           	if Concesionarium.where(:id => ve.punto_venta_id).first != nil
-		            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
+		            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.hora
 		            else
 		            	hora = 20
 		           	end
@@ -105,7 +105,7 @@ class NotificationsController < ApplicationController
 	     	
 	     	pun = PuntoVentum.where(:id => ve.punto_venta_id).first
 	     	if (Concesionarium.where(:id => pun.concesionaria_id).first != nil)
-	     		hora = Concesionarium.where(:id => pun.concesionaria_id).first.fin_jornada
+	     		hora = Concesionarium.where(:id => pun.concesionaria_id).first.hora
 	     	else
 				hora = 20
 			end
