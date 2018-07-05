@@ -40,11 +40,11 @@ class NotificationsController < ApplicationController
   	vendedores.each do |ve|
 
 		if CargaDiarium.where(vendedor_id: ve.id).last == nil
-			ultima_carga = Date.today -2  
+			ultima_carga = Date.today - 1
 		else
 			ultima_carga = CargaDiarium.where(vendedor_id: ve.id).last.updated_at
 			if diferencia_fechas = ( Date.today - ultima_carga.to_date ).round > 4
-				ultima_carga = Date.today - 3
+				ultima_carga = Date.today - 1
 			else
 				ultima_carga = CargaDiarium.where(vendedor_id: ve.id).last.updated_at
 			end
@@ -67,11 +67,12 @@ class NotificationsController < ApplicationController
 
 		while diferencia_fechas > 1 
 		        #preguntar si estaba activo
-		        actual = Date.today - diferencia_fechas + 1
+		        actual = Date.today - diferencia_fechas
 		        notifications = Notification.where(:fecha => actual, :recipient_id => user, :actor_id => user, action: 'no_cargo')
 		        notificacion1 = nil
 		        notificacion2 = nil
 		        if notifications != nil 
+		        
 		          cant = Notification.where(:fecha => actual, :recipient_id => user, :actor_id => user, action: 'no_cargo').count
 		          lista = Notification.where(:fecha => actual, :recipient_id => user, :actor_id => user, action: 'no_cargo')
 		          if cant > 1
@@ -82,12 +83,13 @@ class NotificationsController < ApplicationController
 			      end
 		        end
 		        if notificacion1 == nil
+		        	
 		           	if Concesionarium.where(:id => ve.punto_venta_id).first != nil
 		            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
 		            else
 		            	hora = 20
 		           	end
-		            fecha = actual
+		            fecha = actual + 1
 		            recipients.each do |recipient|
 		                if actor != nil and recipient != nil and carga_diaria != nil
 		                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
@@ -95,12 +97,14 @@ class NotificationsController < ApplicationController
 		            end
 		        end
 		        if notificacion2 == nil
+		        	
 		           	if Concesionarium.where(:id => ve.punto_venta_id).first != nil
 		            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
+		            	hora = hora + 2
 		            else
 		            	hora = 22
 		           	end
-		            fecha = actual
+		            fecha = actual + 1
 		            recipients.each do |recipient|
 		                if actor != nil and recipient != nil and carga_diaria != nil
 		                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
@@ -111,31 +115,14 @@ class NotificationsController < ApplicationController
 	        diferencia_fechas = diferencia_fechas - 1 
 	     end
 	     if diferencia_fechas == 1
-	     	if (Notification.where(:fecha => Date.today, :recipient_id => user, :actor_id => user, action: 'no_cargo', hora: 22).first == nil)
-
-		     	if (Time.now.hour >= 22)
-		     			if (Concesionarium.where(:id => ve.punto_venta_id).first != nil)
-			            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
-			            else
-			            	hora = 22
-			           	end
-			           	fecha = Date.today
-			            recipients.each do |recipient|
-			                if actor != nil and recipient != nil and carga_diaria != nil
-			                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
-			                end
-			            end
-			     end
-			 
-			 elsif(Notification.where(:fecha => Date.today, :recipient_id => user, :actor_id => user, action: 'no_cargo', hora: 20).first == nil)
-
-
+	     	pun = PuntoVentum.where(:id => ve.punto_venta_id).first
+	     	if (Concesionarium.where(:id => pun.concesionaria_id).first != nil)
+	     		hora = Concesionarium.where(:id => pun.concesionaria_id).first.fin_jornada
+	     	else
+				hora = 20
+			end
+			if (Notification.where(:fecha => Date.today, :recipient_id => user, :actor_id => user, action: 'no_cargo', hora: hora).first == nil)
 			     if (Time.now.hour >= 20)
-			     		if Concesionarium.where(:id => ve.punto_venta_id).first != nil
-			            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.fin_jornada
-			            else
-			            	hora = 20
-			           	end
 
 			            fecha = Date.today
 			            recipients.each do |recipient|
@@ -146,6 +133,18 @@ class NotificationsController < ApplicationController
 			      end
 
 			end
+			hora = hora + 2
+	     	if (Notification.where(:fecha => Date.today, :recipient_id => user, :actor_id => user, action: 'no_cargo', hora: hora).first == nil)
+
+		     	if (Time.now.hour >= 22)
+			           	fecha = Date.today
+			            recipients.each do |recipient|
+			                if actor != nil and recipient != nil and carga_diaria != nil
+			                  Notification.create!(recipient: recipient, actor: actor, action: 'no_cargo', notifiable: carga_diaria, fecha: fecha, hora: hora)
+			                end
+			            end
+			     end
+			 end
 
 
 

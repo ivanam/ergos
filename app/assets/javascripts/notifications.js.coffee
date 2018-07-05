@@ -3,7 +3,7 @@ class Notifications
     @notifications = $("[data-behavior='notifications']")
     setInterval (=>
         @crearNotificaciones()
-      ), 100000
+      ), 10000
 
     if @notifications.length > 0
       @handleSuccess @notifications.data("notifications")
