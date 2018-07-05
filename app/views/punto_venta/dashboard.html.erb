@@ -11,7 +11,7 @@
 	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) || (current_user.has_role? :punto_venta) %>
 	
 
-		<div class="col-xs-12 row"  style="">
+		<div class="col-xs-12 row hidden-xs"  style="">
 			<div class="center-block" style="width: 550px;">
 				<div class="form-inline" style="margin-top: 25px;margin-bottom: 25px;">
 					<% label_tag "Seleccione año", nil,  :class => "control-label" %>
