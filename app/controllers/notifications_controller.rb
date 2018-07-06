@@ -75,6 +75,9 @@ class NotificationsController < ApplicationController
 		            else
 		            	hora = 20
 		           	end
+		           	if hora == nil
+		           		hora = 20
+		           	end
 		            fecha = actual + 1
 		            if EstadoPersona.where(:vendedor_id => ve.id, :fecha_inicio => fecha).first == nil
 
@@ -90,7 +93,7 @@ class NotificationsController < ApplicationController
 		           	if Concesionarium.where(:id => ve.punto_venta_id).first != nil
 		            	hora = Concesionarium.where(:id => ve.punto_venta_id).first.hora
 		            else
-		            	hora = 20
+		            	hora = 22
 		           	end
 		           	if hora == nil
 		           		hora = 22
