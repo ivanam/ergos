@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
 
   def set_notifications
-    @notifications = Notification.where(recipient: current_user, read_at: nil).limit(50)
+    @notifications = Notification.where(recipient: current_user, read_at: nil).limit(50).order(:fecha)
   end
 
 end
