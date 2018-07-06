@@ -61,11 +61,12 @@
 
     <p style="margin-left: 15px;">
       <strong>Horario fin de jornada:</strong>
-      <%if (@concesionarium.hora =! nil and @concesionarium.minutos != nil) %>
-        <%= @concesionarium.hora.to_s  + ":" + @concesionarium.minutos.to_s %>
-      <%else%>
-        <%= ""%>
-      <%end%>
+
+
+
+
+    <%= @concesionarium.hora.to_s + ":"+ @concesionarium.minutos.to_s%>
+
     </p>
 
     <p style="margin-left: 15px;">

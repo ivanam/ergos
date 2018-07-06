@@ -36,10 +36,9 @@ class ConcesionariaController < ApplicationController
      
     @concesionarium = Concesionarium.new(concesionarium_params)
     @concesionarium.fecha_alta = DateTime.now
-
-    @concesionarium.hora = params[:concesionarium]["fin_jornada(4i)"]
-    @concesionarium.minutos = params[:concesionarium]["fin_jornada(5i)"]
-    @concesionarium.fin_jornada = params[:concesionarium]["fin_jornada(4i)"]
+    @concesionarium.hora = params[:concesionarium]["fin_jornada(4i)"].to_i
+    @concesionarium.minutos = params[:concesionarium]["fin_jornada(5i)"].to_i
+    @concesionarium.fin_jornada = params[:concesionarium]["fin_jornada(4i)"].to_i
     @concesionarium.user_id = current_user.id
 
     respond_to do |format|
@@ -57,7 +56,11 @@ class ConcesionariaController < ApplicationController
   # PATCH/PUT /concesionaria/1.json
   def update
     respond_to do |format|
+        @concesionarium.hora = params[:concesionarium]["fin_jornada(4i)"].to_i
+        @concesionarium.minutos = params[:concesionarium]["fin_jornada(5i)"].to_i
+        @concesionarium.fin_jornada = params[:concesionarium]["fin_jornada(4i)"].to_i 
       if @concesionarium.update(concesionarium_params)
+
         format.html { redirect_to @concesionarium, notice: 'Concesionaria modificada con exito.' }
         format.json { render :show, status: :ok, location: @concesionarium }
       else
