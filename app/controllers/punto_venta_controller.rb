@@ -113,7 +113,9 @@ class PuntoVentaController < ApplicationController
     @footer = false
     @bg_gray = false
     @punto_venta = PuntoVentum.where(:id => current_user.punto_venta_id).first
-
+    if @punto_venta.nil?
+      raise CanCan::AccessDenied.new("No posee punto de venta")
+    end
     @vendedores = Vendedor.where(:punto_venta_id => @punto_venta.id).where("baja is null or fecha_baja >= '" + Date.new(@anio,@mes,1).to_s + "'") #solo vendedores activos
     @v = Vendedor.where(:punto_venta_id => @punto_venta.id).first
     
