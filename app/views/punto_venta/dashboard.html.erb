@@ -145,7 +145,7 @@
 	      </tr>
 			</thead>
 	  	<tbody>
-				<% @vendedores.each do |v|%>
+				<% @rankingVendedores.each do |v|%>
 		    <tr class= "<%= cycle('list_line_odd', 'list_line_odd', 'list_line_odd', 'list_line_even','list_line_even','list_line_even') -%>">
 		    	<% if @arr_semana.include? 1 
 		    	@dias1 = CargaDiarium.obtenerDiasSemana(@anio,@mes,1)%>

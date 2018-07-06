@@ -1,5 +1,28 @@
+<style>
+table, th, td {
+    border: 0px solid black;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+</style>
+
 <% if (current_user.has_role? :punto_venta) %>
-  	<li><center><%=notification.actor.email%> No realizó carga diaria - <%=notification.hora%> hs  <%=notification.fecha%> </center></li>
-  <%else%>
-  	<li><center>Notificación por falta de carga diaria - <%=notification.hora%> hs  <%=notification.fecha%> </center></li>
-  <%end%>
+
+	<table style="width:100%">
+	  <tr>
+	    <td><%=notification.actor.email%> No realizó carga diaria </td>
+	    <td align="right"><%=notification.hora%> hs  <%=notification.fecha%></td>
+	  </tr>
+	</table>
+
+<%else%>
+	<table style="width:100%">
+	  <tr>
+	    <td>Notificación por falta de carga diaria</td>
+	    <td align="right"><%=notification.hora%> hs  <%=notification.fecha%></td>
+	  </tr>
+	</table>
+
+<%end%>
