@@ -64,7 +64,7 @@ class ObjetivoMensualsController < ApplicationController
           format.html { redirect_to @objetivo_mensual, notice: 'Objetivo mensual modificado con exito.' }
           format.json { render :show, status: :created, location: @objetivo_mensual }
        else
-          format.html { render :new }
+          format.html { render :edit }
           format.json { render json: @objetivo_mensual.errors, status: :unprocessable_entity }
        end
     end
