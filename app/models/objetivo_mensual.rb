@@ -133,12 +133,11 @@ class ObjetivoMensual < ApplicationRecord
     elsif (@obmPv != nil)
       @obResto =  @obmPv.cantidadPV.to_i
     end 
-    if ((@obMen != nil)  && (descpOb.descripcion != "CSI") && (self.vendedor_id))
+    if ((@obMen != nil)  && (descpOb.descripcion != "CSI") && (!self.vendedor_id.nil?))
       if (@obmPv.cantidad_propuesta.to_i != nil)
          if (@obmPv.cantidadPV < self.cantidad_propuesta.to_i)
             errors.add(:base, 'No puede asignarle un numero de venta mayor al vendedor que al punto de venta')
-         end
-          if (self.cantidad_propuesta.to_i > @obResto)
+         elsif (self.cantidad_propuesta.to_i > @obResto)
             errors.add(:base, 'El valor del objetivo para el vendedor supera al mensual para el punto de venta, el valor esperado debe ser menor o igual a: '+@obResto.to_s+'')
          end
       end
