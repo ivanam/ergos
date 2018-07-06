@@ -6,6 +6,11 @@
 		.list_line_odd {
 		  background: #FFF;
 		}
+		.table-bordered > thead > tr > th,
+		.table-bordered > thead > tr > td
+ 		{
+		   border: 0.2px solid #b3b3b3;
+		}
 	</style>
 	
 	<% if (current_user.has_role? :concesionaria) || (current_user.has_role? :admin) || (current_user.has_role? :punto_venta) %>
@@ -50,6 +55,7 @@
 		<div class="col-xs-6">
 		<table class="table table-bordered thead-dark table-condensed table-left">
 		  <thead>
+
   			<tr>
 
   			  <th class="visible-sm visible-xs" rowspan="2" style="font-size: 10px;">Pos.</th>
