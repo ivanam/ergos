@@ -271,10 +271,9 @@ class CargaDiarium < ApplicationRecord
 				  	 if CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first != nil
 				  	 	@cantidad = CargaDiarium.where(:vendedor_id => vendedor, :tipo_objetivo_id => ob, :fecha => fecha ).first.cantidad
 				  	 else
-				  	 	if EstadoPersona.where(:vendedor_id => vendedor, :fecha_inicio => fecha.to_s).first != nil
-				  	 		
-				  	 		estado_id = EstadoPersona.where(:vendedor_id => vendedor, :fecha_inicio => fecha.to_s ).first.estado_id
-				  	 		@cantidad = Estado.where(:id => estado_id).first.nombre
+				  	 	if EstadoPersona.where(:vendedor_id => vendedor).where('fecha_inicio <= ?',fecha).where('fecha_fin >= ?',fecha).first != nil
+				              estado_id = EstadoPersona.where(:vendedor_id => vendedor).where('fecha_inicio <= ?',fecha).where('fecha_fin >= ?',fecha).first.estado_id
+				  	 		  @cantidad = Estado.where(:id => estado_id).first.nombre
 				  	 	else
 				  	 		@cantidad = 0
 				  	 	end

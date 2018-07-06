@@ -75,9 +75,10 @@
 
       <div class="description">
         <h4 style=""><%=v.persona.apellido%> <%=v.persona.nombre %></h4> 
-        <% if EstadoPersona.where(:vendedor_id => v.id, :fecha_inicio => Date.today.to_s).first != nil
-            estado_id = EstadoPersona.where(:vendedor_id => v, :fecha_inicio => Date.today.to_s ).first.estado_id
-            @estadoPersona = Estado.where(:id => estado_id).first.descripcion
+        <% if EstadoPersona.where(:vendedor_id => v).where('fecha_inicio <= ?',Date.today).where('fecha_fin >= ?',Date.today).first != nil
+
+              estado_id = EstadoPersona.where(:vendedor_id => v).where('fecha_inicio <= ?',Date.today).where('fecha_fin >= ?',Date.today).first.estado_id
+              @estadoPersona = Estado.where(:id => estado_id).first.descripcion
            else
             @estadoPersona = "Activo"
           end
