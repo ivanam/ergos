@@ -111,6 +111,9 @@ class VendedorsController < ApplicationController
     end
   end
 
+  # POST /vendedors/actualizar_objetivos
+  # Metodo para crear nuevos Objetivos Mensuales de un Vendedor o editar su valor (Ajax request)
+  # Parametros: Mes, Anio, Vendedor, cantidad para cada Objetivo Mensual
   def actualizar_objetivos
     mes = params[:mes]
     anio = params[:anio]    
@@ -293,6 +296,12 @@ class VendedorsController < ApplicationController
     end
   end
 
+  # GET  /home_vendedor
+  # Metodo que renderiza el layout del home para el usuario con rol vendedor y punto_venta
+  # Si el usuario actual tiene el rol vendedor se muestran los datos referidos a su carga y la posibilidad de abrir
+  # un modal para ingresar la carga diaria
+  # Si el usuario actual tiene el rol punto_venta se muestra un desplegable con los vendedores con la posibilidad
+  # de seleccionar uno y ver su carga
   def home
     @sidebar = false
     @footer = false
@@ -309,6 +318,9 @@ class VendedorsController < ApplicationController
     end
   end
 
+  # POST /objetivos_y_carga_diaria
+  # Metodo para mostrar el valor de los Objetivos Mensuales asignados a un Vendedor en cada mes de cada anio (Ajax request)
+  # Parametros: Mes, anio, vendedor
   def objetivos_y_carga_diaria
     mes = params[:mes].to_i
     anio = params[:anio].to_i
@@ -338,9 +350,8 @@ class VendedorsController < ApplicationController
     render json: totales.to_json
   end
 
-
+  # GET /vendedor/cambiar_rol
   def cambiar_rol
-
       @persona = Persona.where(id: params[:persona]).first
       @vendedor = Vendedor.new
   end
