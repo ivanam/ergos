@@ -4,7 +4,7 @@ class ObjetivoSemanal < ApplicationRecord
 	belongs_to :vendedor, optional: true
 	belongs_to :tipo_objetivo, optional: true
 	#belongs_to :objetivo_mensual
-
+  #validaciones de campos para la creacioón de objetivos semanales
 	validates :fecha_creacion, :presence => { :message => "Debe completar el campo Fecha de creacion" }
 	validates :cantidad_propuesta, :presence => { :message => "Debe completar el campo Cantidad" }
 	validates :cantidad_propuesta, numericality: { only_integer: true, :message => "El campo Cantidad debe ser un valor entero"}	
@@ -13,8 +13,11 @@ class ObjetivoSemanal < ApplicationRecord
 	#validates :user_id, :presence => { :message => "Debe completar el campo User" }
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo tipo de objetivo semanal" }
 	#validates :objetivo_mensual_id, :presence => { :message => "Debe completar el campo Objetivo Mensual" }
-	validates_uniqueness_of :numero_semana, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :mes, :anio] ,  :message=>"Ya posee un tipo de objetivo para ese pv para esa semana %{value}" 
+	 #validaciones de unicidad de semana para PV
+  validates_uniqueness_of :numero_semana, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :mes, :anio] ,  :message=>"Ya posee un tipo de objetivo para ese pv para esa semana %{value}" 
 
+  #valida cantidades de las semanas por objetivo y por semana contra los objetivos creados para el mismo tipo y fecha
+  #la suma de las cantidades semanales no puede superar la cantidad mensual
   validate :validarCantidadesSem, on: :create
 
   validate :validarCantidadesSemEdit, on: :update
