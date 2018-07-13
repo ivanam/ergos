@@ -34,12 +34,14 @@
 <% end %>
 
 <script type="text/javascript">
+  //Accion al clickear boton +
   $('.plus').click(function(){
     input = $(this).attr('data-field');
     $("input[name='"+input+"']").val(function(i, oldval) {
       return ++oldval;
     });
   });
+  //Accion al clickear boton -
   $('.minus').click(function(){
     input = $(this).attr('data-field');
     if ($("input[name='"+input+"']").val() >0) {
@@ -48,9 +50,11 @@
       });
     }
   });
+  //Cerrar notificacion de errores
   $('#close_errors').click(function(){
     $('#errors').hide();
   });
+  //Accion clickear boton guardar
   $('#guardar').click(function(){
     $.ajax({
       url: '/carga_diaria',
@@ -66,6 +70,8 @@
         }
       }
     }).done(function(response){
+      //response contiene el mensaje de error para el caso en que no se ingrese fecha o las cantidades sean menores a 0
+      //Si no existen mensajes para estos dos casos de error no hay errores
       if (response.fecha != undefined || response.cantidades != undefined) {
         $('#errors').show();
         $('#error').empty();
@@ -74,12 +80,14 @@
         }
       } 
       else {
+        //Recargo
         /*limpiar_campos();*/
         url = window.location.href.replace(window.location, "");
         window.location = url + 'home_vendedor';   
       }   
     });
   });
+  //Funcion para borrar el valor de los campos
   function limpiar_campos() {
     $('#fecha').val = '';
     <% @tipos_objetivos.each do |t|%>

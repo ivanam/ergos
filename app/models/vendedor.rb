@@ -1,16 +1,17 @@
 class Vendedor < ApplicationRecord
+  #Relaciones
   belongs_to :persona
   belongs_to :punto_venta, :foreign_key => 'punto_venta_id', :class_name => 'PuntoVentum'
   has_many :estado_personas
 
-
+  #Validaciones relacionadas con el archivo adjunto
   #validates_attachment_presence :foto
   has_attached_file :foto, styles: { medium: "200x250>", thumb: "100x100#" }, default_url: "/assets/:style/missing.png"
   validates_attachment_content_type :foto, content_type: /\Aimage/
   validates_attachment :foto, content_type: { content_type: ['image/jpeg', 'image/png', 'image/jpg'] } 
   validates_attachment_size :foto, less_than_or_equal_to: 4.megabytes
 
-
+  #Validaciones del modelo
   validates :numero, :uniqueness => {:message => "Alias debe ser único"}
   validates :numero, :presence => { :message => "Ya existe un vendedor con ese alias, asignarle otro alias." }
   validates :fecha_alta, :presence => { :message => "Debe completar el campo Fecha" }
