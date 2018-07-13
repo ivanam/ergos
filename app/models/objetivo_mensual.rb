@@ -3,21 +3,25 @@ class ObjetivoMensual < ApplicationRecord
   belongs_to :vendedor, optional: true
 	belongs_to :user, optional: true
   belongs_to :tipo_objetivo, optional: true
-
+  #validaciones de campos para la creacioón de objetivos mensuales
   validates :mes, :presence => { :message => "Debe completar el campo Fecha de creacion" }
   validates :anio, :presence => { :message => "Debe completar el campo Fecha de creacion" }
 	validates :punto_venta_id, :presence => { :message => "Debe completar el campo Punto de venta" }
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo Tipo de Objetivo Mensual" } 
 
-	validate :validarCantidades
-
+	#valida las cantidades ingresadas tanto para los vendedores como para los puntos de venta
+  validate :validarCantidades
+  #valida las cantidades del tipo de objetivo CSI, ya que este puede ser mayor al del punto de venta y no  se comporta
+  #igual a los demas objetivos
   validate :validarCantidadCsi
 
   validate :validarCSI
 
+  #validad si el vendedor esta activo, sino tiene fecha de baja
   validate :vendedor_activo
 
   #validate :validar_csi, if self.tipo_objetivo.to_s == "CSI"
+  #validaciones de unicidad para el mes y el punto de venta en la creacion de objetivos
   validates_uniqueness_of :mes, scope: [:punto_venta_id, :vendedor_id, :tipo_objetivo_id, :csi_real] , :message=>"Ya posee un tipo de objetivo para ese vendedor para ese mes", conditions: -> {where(csi_real:nil, vendedor_id: "is not null")}
   validates_uniqueness_of :mes, scope: [:punto_venta_id,  :vendedor_id,:tipo_objetivo_id ] , :message=>"Ya posee un tipo de objetivo para ese punto de venta para ese mes", conditions: -> {where(vendedor_id:nil)}
 
@@ -94,6 +98,7 @@ class ObjetivoMensual < ApplicationRecord
   end
 
   def self.proyeccion(anio, mes, v, ob)
+    #metodo que calcula la proyección mensual, los defaults para los vendedores 
     total_ventas_arbitrario = ObjetivoMensual.objetivo_v(anio, mes, v, 5)
     ventas_promedio = CargaDiarium.total_trimestral(anio, mes, v, 5) / 3
     numerador = CargaDiarium.total_trimestral(anio, mes, v, ob) / 3
@@ -103,6 +108,7 @@ class ObjetivoMensual < ApplicationRecord
   end
 
   def self.total_objetivos_punto_venta(anio, mes, v, ob)
+    #calculo para el objetivo para ese mes y ese tipo de objetivo
      total = 0
     if v.nil?
       punto_venta_id = 0
@@ -123,6 +129,11 @@ class ObjetivoMensual < ApplicationRecord
   end
 
   def validarCantidades
+     #validaciones entre los cargado para el punto de venta y lo que se quiere cargar para el 
+     #vendedor, las validaciones que estan en este metodo fueron las conversadas con el cliente, ya que no se encuentran documentadas en ningun lado
+     # la suma de la cantidad  de x objetivo no puede ser mayor al total del PV al cual pertenece
+     # la cantidad para el vendedor y el objetivo no puede superar al del PV
+     # no puede agregarle una cantidad sin previamente agregarle  objetivos al PV
   	descpOb = TipoObjetivo.where(:id => self.tipo_objetivo_id).first
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).first
     @obMenSelf = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio).where(vendedor_id: nil).where(:id => self.id)
@@ -153,6 +164,8 @@ class ObjetivoMensual < ApplicationRecord
 
 
   def validarCSI
+     # valida que la cantidad ingresada al campo CSI real sea solo para un vendedor
+     # validad que no se cree uno nuevo sino que se edite el mismo que ya posee
     @obMen = ObjetivoMensual.where(:punto_venta_id => self.punto_venta_id, :tipo_objetivo_id => self.tipo_objetivo_id, :mes  => self.mes ,:anio=> self.anio, :csi_real=> self.csi_real).where(vendedor_id: nil).first
     if(@obMen != nil)
        if(self.tipo_objetivo_id == 3 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
@@ -166,6 +179,7 @@ class ObjetivoMensual < ApplicationRecord
   end
 
   def validarCantidadCsi
+        # validad que no se cree uno nuevo sino que se edite el mismo que ya posee
     if(self.tipo_objetivo_id == 3 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
       errors.add(:base,'Debe completar el campo Cantidad ya que el CSI real es para un vendedor')
     end
