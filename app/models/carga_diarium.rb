@@ -1,17 +1,16 @@
 class CargaDiarium < ApplicationRecord
+	#Relaciones
 	belongs_to :tipo_objetivo
 	belongs_to :user, :foreign_key => 'vendedor_id'
 	belongs_to :vendedor
 
-
+	#Validaciones del modelo
 	validates :fecha, :presence => { :message => "Debe completar el campo Fecha" }
 	validates :cantidad, :presence => { :message => "Debe completar el campo Cantidad" }
 	validates :cantidad, numericality: { only_integer: true, :message => "El campo Cantidad debe ser un valor entero"}
 	validates :tipo_objetivo_id, :presence => { :message => "Debe completar el campo Tipo de Objetivo" }
 	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
-
 	validate :estado_vend
-
 	validate :vendedor_activo
 
 	def notification_to_s
@@ -204,6 +203,10 @@ class CargaDiarium < ApplicationRecord
     	return total
 	end
 
+	# Metodo de clase que devuelve el valor total trimestral de la carga de un determinado Tipo de Objetivo Mensual
+	# asignado a un vendedor.
+  	# Se considera como trimestre a los tres meses anteriores a un determinado Mes de un determinado Anio
+  	# Parametros: Anio, Mes, Vendedor, Tipo de Objetivo Mensual
 	def self.total_trimestral(anio, mes, v, ob)
 	    mes_actual = mes
         primer_mes = mes_actual - 3

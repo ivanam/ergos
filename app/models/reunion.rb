@@ -1,7 +1,9 @@
 class Reunion < ApplicationRecord
+  #Relaciones
 	belongs_to :persona
 	has_many :reunion_participantes, :foreign_key => 'reunion_id', :class_name => 'ReunionParticipante'
 
+  #Validaciones del modelo
 	validates :fecha, :presence => { :message => "Debe completar el campo Fecha" }
 	validates :semana, :presence => { :message => "Debe completar el campo Semana" }, :if => :reunion_semanal?
   validates :mes, :presence => { :message => "Debe completar el campo Mes" }
@@ -9,6 +11,7 @@ class Reunion < ApplicationRecord
   validate :reunion_mensual_o_semanal
   validate :evitar_duplicados
 
+  #Validaciones relacionadas con el archivo adjunto
   has_attached_file :adjunto
   validates_attachment_presence :adjunto, message: "Debe adjuntar un archivo"
   validates_attachment :adjunto, 
@@ -23,7 +26,6 @@ class Reunion < ApplicationRecord
 
   #Valida que no se pueda repetir el vendedor al crear una nueva reunion
   def evitar_duplicados
-
     personas_ids = self.reunion_participantes.map(&:persona_id)
     personas_ids_unicas = personas_ids.uniq
     if (personas_ids.length != personas_ids_unicas.length)

@@ -1,5 +1,5 @@
 class Concesionarium < ApplicationRecord
-	belongs_to :user
+	belongs_to :user, optional: true
 	has_many :persona_concesionaria, :foreign_key => 'concesionaria_id', :class_name => 'PersonaConcesionarium'
 	has_many :personas, :through => :persona_concesionaria 
 
@@ -24,7 +24,7 @@ class Concesionarium < ApplicationRecord
 
 	validate :control_punto_venta
 	validate :control_vendedores
-	validate :nombre_conce
+	validates :nombre, uniqueness: {message: "Ya existe una concesionaria con ese nombre"}, if: :debe_validar_nombre?
 
 	def to_s
 		"#{self.nombre}"
@@ -36,13 +36,9 @@ class Concesionarium < ApplicationRecord
         end
 	end
 
-	def nombre_conce
+	def debe_validar_nombre?
 		conCant = Concesionarium.where(:nombre => self.nombre).where.not(id: self.id).first
-		if (conCant  != nil)
-		  if (fecha_baja == nil)
-           errors.add(:base, "Ya existe una concesionaria con ese nombre")
-          end
-        end
+		return (new_record?) && (conCant  != nil) && (fecha_baja == nil)
 	end
 
 	def control_vendedores

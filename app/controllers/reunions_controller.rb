@@ -34,6 +34,8 @@ class ReunionsController < ApplicationController
     end
   end
 
+  # GET /reunionsm.pdf
+  # Genera el template de Reuniones mensuales
   def reunion_mensual
     @reunions = Reunion.all
     respond_to do |format|

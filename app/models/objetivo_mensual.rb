@@ -97,6 +97,9 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  # Metodo de clase que devuelve el valor de la proyeccion mensual para un Objetivo Mensual asignado a un vendedor
+  # en un determinado mes y anio
+  # Parametros: Anio, Mes, Vendedor, Tipo de Objetivo Mensual
   def self.proyeccion(anio, mes, v, ob)
     #metodo que calcula la proyección mensual, los defaults para los vendedores 
     total_ventas_arbitrario = ObjetivoMensual.objetivo_v(anio, mes, v, 5)
@@ -119,6 +122,8 @@ class ObjetivoMensual < ApplicationRecord
     (objetivo_mensual != nil) ? objetivo_mensual.cantidad_propuesta.to_i : 0
   end
 
+  # Metodo de clase que devuelve el valor asignado a un Objetivo Mensual de un vendedor en caso de que exista 
+  # o el valor correspondiente a la proyeccion mensual en caso contrario
   def self.asignado_o_proyeccion(anio, mes, v, ob)
     total_asignado = ObjetivoMensual.objetivo_v(anio, mes, v, ob)
     if total_asignado != 0
