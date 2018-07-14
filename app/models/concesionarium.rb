@@ -31,6 +31,7 @@ class Concesionarium < ApplicationRecord
 	end
 
 	def control_punto_venta
+		#No permite reducir la cantidad de puntos de ventas activos, si los que se encuentran activos actualmente superan ese valor
 		if (self.cantPv.to_i < self.puntos_venta.where(baja: false).count.to_i)
           errors.add(:base, "Debe eliminar puntos de venta para poder editar")
         end
@@ -42,6 +43,7 @@ class Concesionarium < ApplicationRecord
 	end
 
 	def control_vendedores
+		#No permite reducir la cantidad de vendedores activos, si los que se encuentran activos actualmente superan ese valor
 		cant_vendedores = 0
 		self.puntos_venta.where(baja: false).each do |pv|
 			cant_vendedores = cant_vendedores + pv.vendedors.where('baja is null or baja = false').count
@@ -52,15 +54,16 @@ class Concesionarium < ApplicationRecord
 	end
 
 	def dar_baja(fecha)
-    self.update(fecha_baja: fecha, baja: true)
-    self.puntos_venta.where(baja: false).each do |pv|
-      pv.dar_baja(fecha)
-    end
-    PersonaConcesionarium.where(concesionaria_id: self.id). each do |pc|
-      pc.destroy
-    end
-    User.where(concesionaria_id: self.id).each do |u|
-      u.update(concesionaria_id: nil)
-    end
-  end
+		#Da de baja a la concesesionaria a una fecha dada, pone en el mismo estado a todos los puntos de venta y usuarios relacionados
+	    self.update(fecha_baja: fecha, baja: true)
+	    self.puntos_venta.where(baja: false).each do |pv|
+	      pv.dar_baja(fecha)
+	    end
+	    PersonaConcesionarium.where(concesionaria_id: self.id). each do |pc|
+	      pc.destroy
+	    end
+	    User.where(concesionaria_id: self.id).each do |u|
+	      u.update(concesionaria_id: nil)
+	    end
+  	end
 end

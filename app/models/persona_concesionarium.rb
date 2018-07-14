@@ -8,6 +8,8 @@ class PersonaConcesionarium < ApplicationRecord
   before_destroy :deshabilitar_user
 
   def habilitar_user
+    #Cuando se crea la relacion de la persona con la concesionaria se le genera un usuario y se le asigna el rol CONCESIONARIA
+    #Si el usuario existe le agrega el rol CONCESIONARIA
   	usuario = User.new(email: self.persona.email, password: "12345678", persona_id: self.persona.id, concesionaria_id: self.concesionaria_id)
   	if usuario.save
   		usuario.add_role("concesionaria")
@@ -19,6 +21,7 @@ class PersonaConcesionarium < ApplicationRecord
   end
 
   def deshabilitar_user
+    #Cuando se borra la relacion se quita el rol CONCESIONARIA al usuario
     usuario = User.where(email: self.persona.email).first
     usuario.remove_role("concesionaria")
   end

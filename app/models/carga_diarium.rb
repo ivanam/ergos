@@ -18,6 +18,7 @@ class CargaDiarium < ApplicationRecord
 	end
 
 	def estado_vend
+		"Si el vendedor esta de vacaciones, franco, ausente, etc. no puede realizar la carga"
 		self.vendedor.estado_personas.each do |e_p|
 			f_i = e_p.fecha_inicio
 			if e_p.fecha_fin == nil
@@ -33,6 +34,7 @@ class CargaDiarium < ApplicationRecord
 	end
 
 	def vendedor_activo
+		#Da error si el vendedor es esta de baja
 		if self.vendedor.baja && (self.fecha >= self.vendedor.fecha_baja)
 			errors.add(:base, "El vendedor se encuentra de baja")
 		end
@@ -222,23 +224,23 @@ class CargaDiarium < ApplicationRecord
 		return total_mes1 + total_mes2 + total_mes3
   	end
 
-	  def self.diaSemana(fecha)
-	  	
-	  	if fecha.strftime("%A") == "Monday"
-	  		dia = "L"
-	  	elsif fecha.strftime("%A") == "Tuesday"
-	  		dia = "Ma"
-	  	elsif fecha.strftime("%A") == "Wednesday"
-	  		dia = "Mi"
-    	elsif fecha.strftime("%A") == "Thursday"
-    		dia = "J"
-    	elsif fecha.strftime("%A") == "Friday"
-    		dia = "V"
-    	elsif fecha.strftime("%A") == "Saturday"
-    		dia = "S"
-    	elsif fecha.strftime("%A") == "Sunday"
-    		dia = "D"
-    	end
+  def self.diaSemana(fecha)
+  	
+  	if fecha.strftime("%A") == "Monday"
+  		dia = "L"
+  	elsif fecha.strftime("%A") == "Tuesday"
+  		dia = "Ma"
+  	elsif fecha.strftime("%A") == "Wednesday"
+  		dia = "Mi"
+	elsif fecha.strftime("%A") == "Thursday"
+		dia = "J"
+	elsif fecha.strftime("%A") == "Friday"
+		dia = "V"
+	elsif fecha.strftime("%A") == "Saturday"
+		dia = "S"
+	elsif fecha.strftime("%A") == "Sunday"
+		dia = "D"
+	end
     return dia
   end
 
