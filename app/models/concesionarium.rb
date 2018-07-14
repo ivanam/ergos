@@ -24,7 +24,7 @@ class Concesionarium < ApplicationRecord
 
 	validate :control_punto_venta
 	validate :control_vendedores
-	validates :nombre, uniqueness: {message: "Ya existe una concesionaria con ese nombre"}, if: :debe_validar_nombre?
+	validates :nombre, uniqueness: {message: "Ya existe una concesionaria con ese nombre"}, on: :create, if: :debe_validar_nombre?
 
 	def to_s
 		"#{self.nombre}"
@@ -37,8 +37,8 @@ class Concesionarium < ApplicationRecord
 	end
 
 	def debe_validar_nombre?
-		conCant = Concesionarium.where(:nombre => self.nombre).where.not(id: self.id).first
-		return (new_record?) && (conCant  != nil) && (fecha_baja == nil)
+		conCant = Concesionarium.find_by(nombre: self.nombre)
+		return (conCant  != nil) && (fecha_baja == nil)
 	end
 
 	def control_vendedores

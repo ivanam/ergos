@@ -56,11 +56,10 @@ class ConcesionariaController < ApplicationController
   # PATCH/PUT /concesionaria/1.json
   def update
     respond_to do |format|
-        @concesionarium = Concesionarium.new(concesionarium_params)
         @concesionarium.fecha_alta = DateTime.now
         @concesionarium.fin_jornada = params[:concesionarium][:fin_jornada]
         horac =  params[:concesionarium][:fin_jornada][0] + params[:concesionarium][:fin_jornada][1]
-        @concesionarium.hora = horac.to_i 
+        @concesionarium.hora = horac.to_i
       if @concesionarium.update(concesionarium_params)
 
         format.html { redirect_to @concesionarium, notice: 'Concesionaria modificada con exito.' }
