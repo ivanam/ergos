@@ -43,7 +43,6 @@ class ObjetivoSemanal < ApplicationRecord
        else
        	validates :vendedor_id, :presence => { :message => "Debe completar el campo Vendedor" }
       end
-
   end
 
   def validarCantidadesSem

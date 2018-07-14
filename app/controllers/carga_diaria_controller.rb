@@ -9,18 +9,6 @@ class CargaDiariaController < ApplicationController
   def index
     @vendedor = Vendedor.where(numero: params[:vendedor]).first
     @carga_diaria = CargaDiarium.where(vendedor_id: @vendedor)
-
-#    carga_personal = CargaDiarium.select('tipo_objetivos.descripcion as descripcion, SUM(carga_diaria.cantidad) as cantidad').joins(:tipo_objetivo).where(vendedor_id: current_user.id).group('tipo_objetivos.descripcion')
-#    @data_personal = chart_data(carga_personal)
-#    @options_personal = chart_options('Yo')
-
-#    persona = Persona.find(current_user.persona_id)
-#    vendedor = Vendedor.find_by(persona_id: persona.id)
-#    personas_id = Vendedor.where(punto_venta_id: vendedor.punto_venta_id).map(&:persona_id)
-#    users_id = User.where(persona_id: personas_id)
-#    carga_equipo = CargaDiarium.select('tipo_objetivos.descripcion as descripcion, SUM(carga_diaria.cantidad) as cantidad').joins(:tipo_objetivo).where(vendedor_id: users_id).group('tipo_objetivos.descripcion')
-#    @data_equipo = chart_data(carga_equipo)
-#    @options_equipo = chart_options('Equipo')
   end
 
   # GET /carga_diaria/1

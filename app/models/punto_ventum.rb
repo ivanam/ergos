@@ -15,7 +15,8 @@ class PuntoVentum < ApplicationRecord
 		"#{self.nombre}"
 	end
 
-  def validarCantPV     
+  def validarCantPV
+    #Valida que la cantidad de puntos de venta activos no supere la cantidad permitida
     self.concesionaria.cantPv.to_i
     cantPvconc = PuntoVentum.where(:concesionaria_id => self.concesionaria_id, baja: false).count
     if (self.concesionaria.cantPv.to_i <= cantPvconc.to_i)
@@ -24,6 +25,7 @@ class PuntoVentum < ApplicationRecord
   end 
 
   def validar_cantidad_pv
+    #Valida que la cantidad de puntos de venta activos no supere la cantidad permitida
     self.concesionaria.cantPv.to_i
     cantPvconc = PuntoVentum.where(:concesionaria_id => self.concesionaria_id, baja: false).count
     if (self.concesionaria.cantPv.to_i < cantPvconc.to_i)
@@ -36,6 +38,7 @@ class PuntoVentum < ApplicationRecord
   end
 
   def dar_baja(fecha)
+    #Da de baja al punto de venta en  una fecha dada, pone en el mismo estado a todos los vendedores y usuarios relacionados
     self.update(fecha_baja: fecha, baja: true)
     self.vendedors.where('baja is null or baja = false').each do |v|
       v.dar_baja(fecha)

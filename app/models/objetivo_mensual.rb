@@ -27,6 +27,7 @@ class ObjetivoMensual < ApplicationRecord
 
 
   def vendedor_activo
+    #No permite cargar objetivos mensuales a un vendedor dado de baja
     if !self.vendedor.nil? and self.vendedor.baja
       errors.add(:base, "El vendedor se encuentra de baja")
     end
@@ -97,11 +98,11 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
-  # Metodo de clase que devuelve el valor de la proyeccion mensual para un Objetivo Mensual asignado a un vendedor
-  # en un determinado mes y anio
-  # Parametros: Anio, Mes, Vendedor, Tipo de Objetivo Mensual
+  
   def self.proyeccion(anio, mes, v, ob)
-    #metodo que calcula la proyección mensual, los defaults para los vendedores 
+    # Metodo de clase que devuelve el valor de la proyeccion mensual para un Objetivo Mensual asignado a un vendedor
+    # en un determinado mes y anio
+    # Parametros: Anio, Mes, Vendedor, Tipo de Objetivo Mensual
     total_ventas_arbitrario = ObjetivoMensual.objetivo_v(anio, mes, v, 5)
     ventas_promedio = CargaDiarium.total_trimestral(anio, mes, v, 5) / 3
     numerador = CargaDiarium.total_trimestral(anio, mes, v, ob) / 3
@@ -122,9 +123,9 @@ class ObjetivoMensual < ApplicationRecord
     (objetivo_mensual != nil) ? objetivo_mensual.cantidad_propuesta.to_i : 0
   end
 
-  # Metodo de clase que devuelve el valor asignado a un Objetivo Mensual de un vendedor en caso de que exista 
-  # o el valor correspondiente a la proyeccion mensual en caso contrario
   def self.asignado_o_proyeccion(anio, mes, v, ob)
+    # Metodo de clase que devuelve el valor asignado a un Objetivo Mensual de un vendedor en caso de que exista 
+    # o el valor correspondiente a la proyeccion mensual en caso contrario
     total_asignado = ObjetivoMensual.objetivo_v(anio, mes, v, ob)
     if total_asignado != 0
       return total_asignado
@@ -184,7 +185,7 @@ class ObjetivoMensual < ApplicationRecord
   end
 
   def validarCantidadCsi
-        # validad que no se cree uno nuevo sino que se edite el mismo que ya posee
+    # validad que no se cree uno nuevo sino que se edite el mismo que ya posee
     if(self.tipo_objetivo_id == 3 && self.csi_real != nil && self.punto_venta_id != nil && self.vendedor_id == nil)
       errors.add(:base,'Debe completar el campo Cantidad ya que el CSI real es para un vendedor')
     end
