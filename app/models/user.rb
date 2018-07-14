@@ -20,14 +20,18 @@ class User < ApplicationRecord
   def notification_to_s
       ""
   end
+
+  #Verifica si el usuario tiene el rol admin
   def admin?
 		has_role?(:admin)
 	end
 
+  #Verifica si el usuario tiene el rol punto de venta
   def punto_venta?
     has_role?(:admin) or has_role?(:punto_venta)
   end
 
+  #Verifica si el usuario tiene el rol concesionaria
 	def concesionaria?
 		has_role?(:admin) or has_role?(:concesionaria)
 	end

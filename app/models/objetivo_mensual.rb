@@ -33,6 +33,8 @@ class ObjetivoMensual < ApplicationRecord
     end
   end
 
+  #Devuelve el total de objetivos mensuales asignados a un vendedor en un determinado anio y mes
+  #Parametros: Anio, mes y vendedor
   def self.objetivo_total_v(anio,mes,v)
     total = 0
     if v.nil?
@@ -46,6 +48,8 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  #Devuelve el total de objetivos mensuales de un determinado tipo asignados a un vendedor en un determinado anio y mes
+  #Parametros: Anio, mes y vendedor
   def self.objetivo_v(anio,mes,v, ob)
     total = 0
     if v.nil?
@@ -59,6 +63,8 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  #Devuelve el total de objetivos mensuales de un determinado tipo asignados a un vendedor en un determinado anio y mes
+  #Parametros: Anio, mes y vendedor
   def self.objetivo_op(anio,mes,v, ob)
     total = 0
     if v.nil?
@@ -72,6 +78,8 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  #Devuelve el total de objetivos mensuales de un determinado tipo asignados a un vendedor en un determinado anio y mes
+  #Parametros: Anio, mes y vendedor
   def self.objetivo_pm(anio,mes,v, ob)
     total = 0
     if v.nil?
@@ -85,6 +93,8 @@ class ObjetivoMensual < ApplicationRecord
     return total
   end
 
+  #Devuelve el total de objetivos mensuales de un determinado tipo asignados a un vendedor en un determinado anio y mes
+  #Parametros: Anio, mes y vendedor
    def self.objetivo_pm_csi_real(anio,mes,v, ob)
     total = 0
     if v.nil?

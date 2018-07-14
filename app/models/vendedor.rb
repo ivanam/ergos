@@ -22,7 +22,7 @@ class Vendedor < ApplicationRecord
   before_create :habilitar_user
   before_update :deshabilitar_user
 
-
+  #Valida la cantidad maxima de vendedor por punto de venta
   def max_vendedor
     pv = self.punto_venta
     cantVend = pv.concesionaria.cantVend
@@ -44,14 +44,17 @@ class Vendedor < ApplicationRecord
     end
   end
 
+  #Baja logica, vendedor
   def dar_baja(fecha)
     self.update(fecha_baja: fecha, baja: true)
   end
 
+  #Controles para navegacion por vendedor
   def next
     self.class.where("id > ?", id).where(:punto_venta_id => self.punto_venta_id).first
   end
 
+  #Controles para navegacion por vendedor
   def previous
     self.class.where("id < ?", id).where(:punto_venta_id => self.punto_venta_id).last
   end
